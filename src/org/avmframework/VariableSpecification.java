@@ -1,11 +1,10 @@
-package uk.ac.shef.avmframework.variable;
+package org.avmframework;
 
 public class VariableSpecification {
 
     public static final int PRECISION_DEFAULT = 0;
     public static final int STEP_DEFAULT = 1;
     public static final int ACCELERATION_BASE_DEFAULT = 2;
-
 
     protected int min = Integer.MIN_VALUE;
     protected int max = Integer.MAX_VALUE;
@@ -15,7 +14,6 @@ public class VariableSpecification {
     
     public VariableSpecification() {
     }
-    
 
     public VariableSpecification(int min, int max) {
         this.min = min;

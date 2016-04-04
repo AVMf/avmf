@@ -1,4 +1,4 @@
-package uk.ac.shef.avmframework.variable;
+package org.avmframework;
 
 public abstract class Variable {
 
