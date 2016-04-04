@@ -1,0 +1,61 @@
+package org.avmframework.objective;
+
+public class NumericObjectiveValue implements ObjectiveValue<NumericObjectiveValue> {
+
+    protected double value;
+    protected boolean higherIsBetter;
+
+    protected boolean haveOptimum = false;
+    protected double optimum;
+
+    public NumericObjectiveValue(double value, boolean higherIsBetter) {
+        this.value = value;
+        this.higherIsBetter = higherIsBetter;
+    }
+
+    public NumericObjectiveValue(double value, boolean higherIsBetter, double optimum) {
+        this(value, higherIsBetter);
+        this.haveOptimum = true;
+        this.optimum = optimum;
+    }
+
+    public static NumericObjectiveValue HigherIsBetterObjectiveValue(double value) {
+        return new NumericObjectiveValue(value, true);
+    }
+
+    public static NumericObjectiveValue HigherIsBetterObjectiveValue(double value, double optimum) {
+        return new NumericObjectiveValue(value, true, optimum);
+    }
+
+    public static NumericObjectiveValue LowerIsBetterObjectiveValue(double value) {
+        return new NumericObjectiveValue(value, false);
+    }
+
+    public static NumericObjectiveValue LowerIsBetterObjectiveValue(double value, double optimum) {
+        return new NumericObjectiveValue(value, false, optimum);
+    }
+
+    @Override
+    public boolean isOptimal() {
+        if (!haveOptimum) {
+            return false;
+        }
+
+        if (higherIsBetter) {
+            return value >= optimum;
+        } else {
+            return value <= optimum;
+        }
+    }
+
+    @Override
+    public int compareTo(NumericObjectiveValue other) {
+        if (value == other.value) {
+            return 0;
+        } else if (value < other.value) {
+            return higherIsBetter ? -1 : 1;
+        } else {
+            return higherIsBetter ? 1 : -1;
+        }
+    }
+}
