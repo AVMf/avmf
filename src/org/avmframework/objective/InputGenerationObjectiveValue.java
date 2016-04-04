@@ -1,6 +1,4 @@
-package org.avmframework.examples.inputgeneration;
-
-import org.avmframework.ObjectiveValue;
+package org.avmframework.objective;
 
 public class InputGenerationObjectiveValue implements ObjectiveValue<InputGenerationObjectiveValue> {
 

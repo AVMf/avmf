@@ -2,7 +2,7 @@ package org.avmframework.examples.inputgeneration;
 
 public class Line {
 
-    private double x1, y1, x2, y2;
+    double x1, y1, x2, y2;
 
     public Line(double x1, double y1, double x2, double y2) {
         this.x1 = x1;

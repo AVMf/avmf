@@ -1,16 +1,22 @@
 package org.avmframework;
 
-import java.util.LinkedList;
+import org.avmframework.variable.Variable;
+
+import java.util.ArrayList;
 import java.util.List;
 
-public class Vector implements Element {
+public class Vector {
 
-    protected List<Element> elements = new LinkedList<>();
+    protected List<Variable> variables = new ArrayList<>();
 
     public Vector() {
     }
 
-    public void addElement(Element element) {
-        elements.add(element);
+    public void addVariable(Variable variable) {
+        variables.add(variable);
+    }
+
+    public Variable getVariable(int index) {
+        return variables.get(index);
     }
 }
