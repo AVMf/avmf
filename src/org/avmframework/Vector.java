@@ -19,4 +19,8 @@ public class Vector {
     public Variable getVariable(int index) {
         return variables.get(index);
     }
+
+    public int size() {
+        return variables.size();
+    }
 }

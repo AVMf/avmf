@@ -1,5 +1,6 @@
 package org.avmframework.variable;
 
+/*
 public class DoubleVariable extends AtomicVariable {
 
     public DoubleVariable() {
@@ -14,11 +15,12 @@ public class DoubleVariable extends AtomicVariable {
         super(new AtomicVariableSpecification(min, max, precision));
     }
 
-    public DoubleVariable(int min, int max, int precision, int step, int accelerationBase) {
-        super(new AtomicVariableSpecification(min, max, precision, step, accelerationBase));
+    public DoubleVariable(int min, int max, int precision, int step, int accelerationFactor) {
+        super(new AtomicVariableSpecification(min, max, precision, step, accelerationFactor));
     }
 
     public double getDoubleValue() {
         return value / Math.pow(10, varSpec.getPrecision());
     }
 }
+*/

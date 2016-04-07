@@ -3,13 +3,15 @@ package org.avmframework.examples.inputgeneration;
 import org.avmframework.objective.InputGenerationObjectiveValue;
 import org.avmframework.objective.ObjectiveFunction;
 import org.avmframework.Vector;
-import static org.avmframework.variable.VariableUtils.doubleValue;
+//import static org.avmframework.variable.VariableUtils.doubleValue;
 
-public class LineIntersectionTargetObjectiveFunction implements ObjectiveFunction {
+public class LineIntersectionTargetObjectiveFunction {
 
     private int approachLevel;
     private double branchDistance;
 
+   // public InputGenerationObjectiveValue compute(Vector vector) { return null; }
+/*
     public InputGenerationObjectiveValue compute(Vector vector) {
 
         Line a = new Line(
@@ -28,7 +30,7 @@ public class LineIntersectionTargetObjectiveFunction implements ObjectiveFunctio
 
         return new InputGenerationObjectiveValue(approachLevel, branchDistance);
     }
-
+*/
     private boolean intersect(Line a, Line b) {
 
         double ua_t = (b.x2 - b.x1) * (a.y1 - b.y1) - (b.y2 - b.y1) * (a.x1 - b.x1);

@@ -1,6 +1,14 @@
 package org.avmframework.objective;
 
-public interface ObjectiveValue<T extends ObjectiveValue> extends Comparable<T> {
+public abstract class ObjectiveValue<T extends ObjectiveValue> implements Comparable<T> {
 
-    boolean isOptimal();
+    public abstract boolean isOptimal();
+
+    public boolean betterThan(T other) {
+        return compareTo(other) > 0;
+    }
+
+    public boolean worseThan(T other) {
+        return compareTo(other) < 0;
+    }
 }

@@ -1,6 +1,6 @@
 package org.avmframework.objective;
 
-public class InputGenerationObjectiveValue implements ObjectiveValue<InputGenerationObjectiveValue> {
+public class InputGenerationObjectiveValue extends ObjectiveValue<InputGenerationObjectiveValue> {
 
     private int approachLevel;
     private double branchDistance;

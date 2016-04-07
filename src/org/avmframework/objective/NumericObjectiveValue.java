@@ -1,6 +1,6 @@
 package org.avmframework.objective;
 
-public class NumericObjectiveValue implements ObjectiveValue<NumericObjectiveValue> {
+public class NumericObjectiveValue extends ObjectiveValue<NumericObjectiveValue> {
 
     protected double value;
     protected boolean higherIsBetter;
