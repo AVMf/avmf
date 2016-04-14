@@ -21,10 +21,6 @@ public abstract class ObjectiveFunction {
         this.monitor = monitor;
     }
 
-    public void setTerminationPolicy(TerminationPolicy terminationPolicy) {
-        this.terminationPolicy = terminationPolicy;
-    }
-
     public ObjectiveValue evaluate(Vector vector) throws TerminationException {
         if (useCache && previousVals.containsKey(vector)) {
             return previousVals.get(vector);
@@ -37,10 +33,7 @@ public abstract class ObjectiveFunction {
         }
 
         if (monitor != null) {
-            monitor.observe(vector, objVal);
-            if (terminationPolicy != null && terminationPolicy.terminate(monitor)) {
-                throw new TerminationException();
-            }
+            monitor.observeVector(vector, objVal);
         }
 
         return objVal;

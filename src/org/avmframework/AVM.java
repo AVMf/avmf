@@ -28,10 +28,8 @@ public class AVM {
 
     public Monitor search(Vector vector, ObjectiveFunction objFun) {
 
-        Monitor monitor = new Monitor();
-
+        Monitor monitor = new Monitor(tp);
         objFun.setMonitor(monitor);
-        objFun.setTerminationPolicy(tp);
 
         try {
             // initialize the vector
@@ -55,12 +53,14 @@ public class AVM {
                 } while (improvement);
 
                 // restart the search
+                monitor.observeRestart();
                 restarter.initialize(vector);
 
             } while (true);
 
         } catch (TerminationException e) {
             // the search has ended
+            // todo: throw this out of the method
         }
 
         return monitor;

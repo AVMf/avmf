@@ -16,7 +16,15 @@ import org.avmframework.variable.FloatingPointVariable;
 
 public class QuadraticExample  {
 
-    public static final int A = 4, B = 10, C = 6;
+    static final int A = 4, B = 10, C = 6;
+
+    static final int PRECISION = 1;
+    static final double INITIAL_VALUE = 0.0, MIN = -100.0, MAX = 100.0;
+
+    static final LocalSearch LOCAL_SEARCH = new IteratedPatternSearch();
+
+    static final int MAX_EVALUATIONS = 100;
+    static final TerminationPolicy TERMINATION_POLICY = TerminationPolicy.maxEvaluations(MAX_EVALUATIONS);
 
     public static void main(String[] args) {
 
@@ -33,11 +41,7 @@ public class QuadraticExample  {
 
         // set up the vector to be optimized
         Vector vector = new Vector();
-        vector.addVariable(new FloatingPointVariable(0.0, 1, -100.0, 100.0));
-
-        // set up the local search to be used
-        LocalSearch ips = new IteratedPatternSearch();
-        TerminationPolicy tp = new TerminationPolicy(true, 1000);
+        vector.addVariable(new FloatingPointVariable(INITIAL_VALUE, PRECISION, MIN, MAX));
 
         // set up the random generator
         RandomGenerator rg = new MersenneTwister();
@@ -46,7 +50,7 @@ public class QuadraticExample  {
         RandomInitializer ri = new RandomInitializer(rg);
 
         // set up the AVM
-        AVM avm = new AVM(ips, tp, ri);
+        AVM avm = new AVM(LOCAL_SEARCH, TERMINATION_POLICY, ri);
 
         // perform the search
         Monitor monitor = avm.search(vector, objFun);

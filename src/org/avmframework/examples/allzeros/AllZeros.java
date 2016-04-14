@@ -8,7 +8,6 @@ import org.avmframework.TerminationPolicy;
 import org.avmframework.Vector;
 import org.avmframework.initialization.RandomInitializer;
 import org.avmframework.localsearch.GeometricSearch;
-import org.avmframework.localsearch.IteratedPatternSearch;
 import org.avmframework.localsearch.LocalSearch;
 import org.avmframework.objective.NumericObjectiveValue;
 import org.avmframework.objective.ObjectiveFunction;
@@ -18,7 +17,12 @@ import org.avmframework.variable.Variable;
 
 public class AllZeros {
 
-    static final int NUM_VARS = 10, INIT = 0, MIN = -1000000, MAX = 1000000, MAX_EVALUATIONS = 1000;
+    static final int NUM_VARS = 10;
+    static final int INIT = 0, MIN = -1000000, MAX = 1000000;
+    static final int MAX_EVALUATIONS = 1000;
+
+    static final LocalSearch LOCAL_SEARCH = new GeometricSearch();
+    static final TerminationPolicy TERMINATION_POLICY = TerminationPolicy.maxEvaluations(MAX_EVALUATIONS);
 
     public static void main(String[] args) {
 
@@ -40,10 +44,6 @@ public class AllZeros {
             vector.addVariable(new IntegerVariable(INIT, MIN, MAX));
         }
 
-        // set up the local search to be used
-        LocalSearch ls = new GeometricSearch();
-        TerminationPolicy tp = new TerminationPolicy(true, MAX_EVALUATIONS);
-
         // set up the random generator
         RandomGenerator rg = new MersenneTwister();
 
@@ -51,7 +51,7 @@ public class AllZeros {
         RandomInitializer ri = new RandomInitializer(rg);
 
         // set up the AVM
-        AVM avm = new AVM(ls, tp, ri);
+        AVM avm = new AVM(LOCAL_SEARCH, TERMINATION_POLICY, ri);
 
         // perform the search
         Monitor monitor = avm.search(vector, objFun);
