@@ -6,7 +6,6 @@ import org.avmframework.AVM;
 import org.avmframework.Monitor;
 import org.avmframework.TerminationPolicy;
 import org.avmframework.Vector;
-import org.avmframework.initialization.DefaultInitializer;
 import org.avmframework.initialization.RandomInitializer;
 import org.avmframework.localsearch.IteratedPatternSearch;
 import org.avmframework.localsearch.LocalSearch;

@@ -1,6 +1,5 @@
 TODO
 
-- vectors of length more than 1
 - Geometric search
 - Lattice search
 - doubles

@@ -32,9 +32,6 @@ public class Monitor {
         if (bestObjVal == null || objVal.betterThan(bestObjVal)) {
             bestObjVal = objVal;
             bestVector = vector.deepCopy();
-
-            System.out.println("Monitor: new best" + intVectorAsString(bestVector));
-
         }
         numEvaluations ++;
     }

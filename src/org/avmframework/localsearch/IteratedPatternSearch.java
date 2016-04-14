@@ -35,11 +35,6 @@ public class IteratedPatternSearch extends LocalSearch {
             last = next;
             next = objFun.evaluate(vector);
         } while (next.betterThan(last));
-
-        System.out.println("IPS finished: vector is " + intVectorAsString(vector));
-
-        //System.out.println("IPS: terminating...");
-        //System.exit(1);
     }
 
     public void search(VectorVariable variable, Vector vector, ObjectiveFunction objFun) {
