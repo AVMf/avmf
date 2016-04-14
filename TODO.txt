@@ -5,6 +5,8 @@ TODO
 - Lattice search
 - doubles
 
+- library of obj values
+
 - strings
 
 - tests

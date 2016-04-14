@@ -2,6 +2,8 @@ package org.avmframework;
 
 import org.avmframework.objective.ObjectiveValue;
 
+import static org.avmframework.variable.VariableUtils.intVectorAsString;
+
 public class Monitor {
 
     protected ObjectiveValue bestObjVal;
@@ -29,8 +31,10 @@ public class Monitor {
     public void observe(Vector vector, ObjectiveValue objVal) {
         if (bestObjVal == null || objVal.betterThan(bestObjVal)) {
             bestObjVal = objVal;
-            // TODO: clone the vector
-            bestVector = vector;
+            bestVector = vector.deepCopy();
+
+            System.out.println("Monitor: new best" + intVectorAsString(bestVector));
+
         }
         numEvaluations ++;
     }

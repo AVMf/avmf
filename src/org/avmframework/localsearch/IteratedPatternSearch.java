@@ -8,6 +8,8 @@ import org.avmframework.objective.ObjectiveFunction;
 import org.avmframework.objective.ObjectiveValue;
 import org.avmframework.variable.*;
 
+import static org.avmframework.variable.VariableUtils.intVectorAsString;
+
 public class IteratedPatternSearch extends LocalSearch {
 
     public final static TiedDirectionPolicy DEFAULT_TIED_DIRECTION_POLICY = new UseLeft();
@@ -24,34 +26,23 @@ public class IteratedPatternSearch extends LocalSearch {
         this.tdp = tdp;
     }
 
-    public void search(Variable var, Vector vector, ObjectiveFunction objFun) throws TerminationException {
-
-        var.accept(new VariableTypeVisitor<TerminationException>() {
-
-            @Override
-            public void visit(AtomicVariable av) throws TerminationException {
-                searchAV((AtomicVariable) var, vector, objFun);
-            }
-
-            @Override
-            public void visit(VectorVariable vv) throws TerminationException {
-                searchVV((VectorVariable) var, vector, objFun);
-            }
-        });
-     }
-
-    protected void searchAV(AtomicVariable var, Vector vector, ObjectiveFunction objFun) throws TerminationException {
+    public void search(AtomicVariable var, Vector vector, ObjectiveFunction objFun) throws TerminationException {
         PatternSearch ps = new PatternSearch(vector, objFun, tdp);
-        ObjectiveValue next = objFun.evaluate(vector), last = null;
+        ObjectiveValue next = objFun.evaluate(vector), last;
 
         do {
             ps.search(var);
             last = next;
             next = objFun.evaluate(vector);
         } while (next.betterThan(last));
+
+        System.out.println("IPS finished: vector is " + intVectorAsString(vector));
+
+        //System.out.println("IPS: terminating...");
+        //System.exit(1);
     }
 
-    protected void searchVV(VectorVariable variable, Vector vector, ObjectiveFunction objFun) {
+    public void search(VectorVariable variable, Vector vector, ObjectiveFunction objFun) {
 
     }
 }

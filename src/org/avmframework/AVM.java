@@ -1,9 +1,14 @@
 package org.avmframework;
 
+import com.sun.tools.doclets.formats.html.SourceToHTMLConverter;
 import org.avmframework.initialization.Initializer;
 import org.avmframework.localsearch.LocalSearch;
 import org.avmframework.objective.ObjectiveFunction;
+import org.avmframework.objective.ObjectiveValue;
+import org.avmframework.variable.AtomicVariable;
 import org.avmframework.variable.Variable;
+import org.avmframework.variable.VariableTypeVisitor;
+import org.avmframework.variable.VectorVariable;
 
 public class AVM {
 
@@ -32,35 +37,49 @@ public class AVM {
         try {
             // initialize the vector
             initializer.initialize(vector);
-/*
 
-
-        do {
-
-            boolean improvement = false;
             do {
-                for (int i = 0; i < vector.size(); i++) {
-*/
-            Variable variable = vector.getVariable(0);
+                boolean improvement;
+                do {
+                    improvement = false;
+                    ObjectiveValue original = objFun.evaluate(vector);
 
+                    // alternate through the variables
+                    System.out.println("AVM: starting a cycle");
+                    for (Variable variable : vector.getVariables()) {
+                        localSearch(variable, vector, objFun);
 
-            localSearch.search(variable, vector, objFun);
+                        ObjectiveValue current = objFun.evaluate(vector);
+                        if (current.betterThan(original)) {
+                            improvement = true;
+                        }
+                    }
+                } while (improvement);
 
-            // if fitness improves
-            // improvement = true;
+                // restart the search
+                restarter.initialize(vector);
 
-/*
-                }
-            } while (improvement);
+            } while (true);
 
-            // restart
-
-        } while (true);
-*/
         } catch (TerminationException e) {
-
+            // the search has ended
         }
 
         return monitor;
+    }
+
+    protected void localSearch(Variable var, Vector vector, ObjectiveFunction objFun) throws TerminationException {
+        var.accept(new VariableTypeVisitor<TerminationException>() {
+
+            @Override
+            public void visit(AtomicVariable av) throws TerminationException {
+                localSearch.search(av, vector, objFun);
+            }
+
+            @Override
+            public void visit(VectorVariable vv) throws TerminationException {
+                localSearch.search(vv, vector, objFun);
+            }
+        });
     }
 }
