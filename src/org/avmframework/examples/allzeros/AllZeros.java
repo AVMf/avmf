@@ -6,7 +6,6 @@ import org.avmframework.AVM;
 import org.avmframework.Monitor;
 import org.avmframework.TerminationPolicy;
 import org.avmframework.Vector;
-import org.avmframework.initialization.DefaultInitializer;
 import org.avmframework.initialization.RandomInitializer;
 import org.avmframework.localsearch.IteratedPatternSearch;
 import org.avmframework.localsearch.LocalSearch;
@@ -16,12 +15,9 @@ import org.avmframework.objective.ObjectiveValue;
 import org.avmframework.variable.IntegerVariable;
 import org.avmframework.variable.Variable;
 
-import static org.avmframework.variable.VariableUtils.intValue;
-import static org.avmframework.variable.VariableUtils.intVectorAsString;
-
 public class AllZeros {
 
-    static final int NUM_VARS = 10, INIT = 0, MIN = -1000, MAX = 1000, MAX_EVALUATIONS = 1000;
+    static final int NUM_VARS = 10, INIT = 0, MIN = -1000000, MAX = 1000000, MAX_EVALUATIONS = 1000;
 
     public static void main(String[] args) {
 
@@ -31,7 +27,7 @@ public class AllZeros {
             protected ObjectiveValue computeObjectiveValue(Vector vector) {
                 int distance = 0;
                 for (Variable var : vector.getVariables()) {
-                    distance += Math.abs(intValue(var));
+                    distance += Math.abs(((IntegerVariable) var).getValue());
                 }
                 return NumericObjectiveValue.LowerIsBetterObjectiveValue(distance, 0);
             }
@@ -40,14 +36,8 @@ public class AllZeros {
         // set up the vector to be optimized
         Vector vector = new Vector();
         for (int i=0; i < NUM_VARS; i++) {
-        //    vector.addVariable(new IntegerVariable(INIT, MIN, MAX));
+            vector.addVariable(new IntegerVariable(INIT, MIN, MAX));
         }
-        vector.addVariable(new IntegerVariable(300, MIN, MAX));
-        vector.addVariable(new IntegerVariable(-400, MIN, MAX));
-        vector.addVariable(new IntegerVariable(1000, MIN, MAX));
-        vector.addVariable(new IntegerVariable(699, MIN, MAX));
-        vector.addVariable(new IntegerVariable(423, MIN, MAX));
-
 
         // set up the local search to be used
         LocalSearch ls = new IteratedPatternSearch();
@@ -60,16 +50,13 @@ public class AllZeros {
         RandomInitializer ri = new RandomInitializer(rg);
 
         // set up the AVM
-        AVM avm = new AVM(ls, tp, new DefaultInitializer(), ri);
+        AVM avm = new AVM(ls, tp, ri);
 
         // perform the search
         Monitor monitor = avm.search(vector, objFun);
 
         // output the results
-        Vector bestVector = monitor.getBestVector();
-        int numEvaluations = monitor.getNumEvaluations();
-
-        System.out.println("Best solution: " + intVectorAsString(bestVector));
-        System.out.println("Number of objective function evaluations: " + numEvaluations);
+        System.out.println("Best solution: " + monitor.getBestVector());
+        System.out.println("Number of objective function evaluations: " + monitor.getNumEvaluations());
     }
 }

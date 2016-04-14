@@ -28,7 +28,6 @@ public class IteratedPatternSearch extends LocalSearch {
         //GeometricSearch gs = new GeometricSearch(vector, objFun, tdp);
         //gs.search(var);
 
-
         PatternSearch ps = new PatternSearch(vector, objFun, tdp);
         ObjectiveValue next = objFun.evaluate(vector), last;
 
@@ -37,8 +36,6 @@ public class IteratedPatternSearch extends LocalSearch {
             last = next;
             next = objFun.evaluate(vector);
         } while (next.betterThan(last));
-
-
     }
 
     public void search(VectorVariable variable, Vector vector, ObjectiveFunction objFun) {

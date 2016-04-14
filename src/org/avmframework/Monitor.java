@@ -2,8 +2,6 @@ package org.avmframework;
 
 import org.avmframework.objective.ObjectiveValue;
 
-import static org.avmframework.variable.VariableUtils.intVectorAsString;
-
 public class Monitor {
 
     protected ObjectiveValue bestObjVal;

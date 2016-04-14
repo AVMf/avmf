@@ -12,10 +12,11 @@ import org.avmframework.Vector;
 import org.avmframework.objective.NumericObjectiveValue;
 import org.avmframework.objective.ObjectiveFunction;
 import org.avmframework.objective.ObjectiveValue;
-import org.avmframework.variable.IntegerVariable;
-import org.avmframework.variable.VariableUtils;
+import org.avmframework.variable.FloatingPointVariable;
 
 public class QuadraticExample  {
+
+    public static final int A = 4, B = 10, C = 6;
 
     public static void main(String[] args) {
 
@@ -23,16 +24,16 @@ public class QuadraticExample  {
         ObjectiveFunction objFun = new ObjectiveFunction() {
             @Override
             protected ObjectiveValue computeObjectiveValue(Vector vector) {
-                int x = VariableUtils.intValue(vector, 0);
-                int y = (x * x)- x - 30;
-                int distance = Math.abs(y);
+                double x = ((FloatingPointVariable) vector.getVariable(0)).getValueAsDouble();
+                double y = (A * x * x) + (B * x) + C;
+                double distance = Math.abs(y);
                 return NumericObjectiveValue.LowerIsBetterObjectiveValue(distance, 0);
             }
         };
 
         // set up the vector to be optimized
         Vector vector = new Vector();
-        vector.addVariable(new IntegerVariable(0, -1000, 1000));
+        vector.addVariable(new FloatingPointVariable(0.0, 1, -100.0, 100.0));
 
         // set up the local search to be used
         LocalSearch ips = new IteratedPatternSearch();
@@ -51,11 +52,7 @@ public class QuadraticExample  {
         Monitor monitor = avm.search(vector, objFun);
 
         // output the results
-        Vector bestVector = monitor.getBestVector();
-        int bestSolution = VariableUtils.intValue(bestVector, 0);
-        int numEvaluations = monitor.getNumEvaluations();
-
-        System.out.println("Best solution: " + bestSolution);
-        System.out.println("Number of objective function evaluations: " + numEvaluations);
+        System.out.println("Best solution: " + monitor.getBestVector().getVariable(0));
+        System.out.println("Number of objective function evaluations: " + monitor.getNumEvaluations());
     }
 }

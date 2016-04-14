@@ -50,4 +50,20 @@ public class Vector {
     public int hashCode() {
         return variables != null ? variables.hashCode() : 0;
     }
+
+    @Override
+    public String toString() {
+        boolean first = true;
+        String out = "[";
+        for (Variable var : variables) {
+            if (first) {
+                first = false;
+            } else {
+                out += ", ";
+            }
+            out += var;
+        }
+        out += "]";
+        return out;
+    }
 }

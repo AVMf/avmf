@@ -28,7 +28,7 @@ public class GeometricSearch extends PatternSearch {
 
         while (min < max) {
             int mid = (int) Math.floor((min + max) / 2.0);
-            int midPlusStep = mid + var.getStepSize();
+            int midPlusStep = mid + 1;
 
             var.setValue(mid);
             ObjectiveValue midObjVal = objFun.evaluate(vector);

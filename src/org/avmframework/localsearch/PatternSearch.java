@@ -32,7 +32,7 @@ public class PatternSearch {
 
     protected void initialize() throws TerminationException {
         initial = objFun.evaluate(vector);
-        k = var.getStepSize();
+        k = 1;
         x = var.getValue();
         dir = 0;
     }
