@@ -6,6 +6,7 @@ import org.avmframework.AVM;
 import org.avmframework.Monitor;
 import org.avmframework.TerminationPolicy;
 import org.avmframework.Vector;
+import org.avmframework.initialization.DefaultInitializer;
 import org.avmframework.initialization.RandomInitializer;
 import org.avmframework.localsearch.IteratedPatternSearch;
 import org.avmframework.localsearch.LocalSearch;
@@ -43,7 +44,7 @@ public class AllZeros {
         }
 
         // set up the local search to be used
-        LocalSearch ips = new IteratedPatternSearch();
+        LocalSearch ls = new IteratedPatternSearch();
         TerminationPolicy tp = new TerminationPolicy(true, MAX_EVALUATIONS);
 
         // set up the random generator
@@ -53,7 +54,7 @@ public class AllZeros {
         RandomInitializer ri = new RandomInitializer(rg);
 
         // set up the AVM
-        AVM avm = new AVM(ips, tp, ri);
+        AVM avm = new AVM(ls, tp, ri);
 
         // perform the search
         Monitor monitor = avm.search(vector, objFun);

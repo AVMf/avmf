@@ -35,4 +35,19 @@ public class Vector {
         }
         return copy;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Vector vector = (Vector) o;
+
+        return variables != null ? variables.equals(vector.variables) : vector.variables == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return variables != null ? variables.hashCode() : 0;
+    }
 }

@@ -1,12 +1,14 @@
 TODO
 
-- Geometric search
+- TO DO neaten up PS and GS searches and how they integrate as a local search method
+
 - Lattice search
+
 - doubles
 
-- library of obj values
-
 - strings
+
+////
 
 - tests
 

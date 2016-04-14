@@ -45,7 +45,6 @@ public class AVM {
                     ObjectiveValue original = objFun.evaluate(vector);
 
                     // alternate through the variables
-                    System.out.println("AVM: starting a cycle");
                     for (Variable variable : vector.getVariables()) {
                         localSearch(variable, vector, objFun);
 
