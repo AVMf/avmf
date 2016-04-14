@@ -2,7 +2,6 @@ package org.avmframework.objective;
 
 import org.avmframework.Monitor;
 import org.avmframework.TerminationException;
-import org.avmframework.TerminationPolicy;
 import org.avmframework.Vector;
 
 import java.util.HashMap;
