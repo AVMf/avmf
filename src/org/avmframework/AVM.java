@@ -60,7 +60,6 @@ public class AVM {
 
         } catch (TerminationException e) {
             // the search has ended
-            // todo: throw this out of the method
         }
 
         return monitor;

@@ -15,7 +15,6 @@ public abstract class ObjectiveFunction {
     protected boolean useCache = USE_CACHE_DEFAULT;
     protected Map<Vector, ObjectiveValue> previousVals = new HashMap<>();
     protected Monitor monitor;
-    protected TerminationPolicy terminationPolicy;
 
     public void setMonitor(Monitor monitor) {
         this.monitor = monitor;
