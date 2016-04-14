@@ -27,4 +27,12 @@ public class Vector {
     public int size() {
         return variables.size();
     }
+
+    public Vector deepCopy() {
+        Vector copy = new Vector();
+        for (Variable var : variables) {
+            copy.addVariable(var.deepCopy());
+        }
+        return copy;
+    }
 }

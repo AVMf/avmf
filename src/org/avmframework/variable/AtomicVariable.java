@@ -87,7 +87,6 @@ public abstract class AtomicVariable extends Variable {
             value = min;
         }
 
-        System.out.println("value is " + value);
         this.value = value;
     }
 

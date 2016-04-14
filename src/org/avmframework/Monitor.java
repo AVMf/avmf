@@ -30,6 +30,7 @@ public class Monitor {
         if (bestObjVal == null || objVal.betterThan(bestObjVal)) {
             bestObjVal = objVal;
             // TODO: clone the vector
+            bestVector = vector;
         }
         numEvaluations ++;
     }

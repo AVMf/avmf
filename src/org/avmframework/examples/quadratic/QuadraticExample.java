@@ -18,6 +18,8 @@ import org.avmframework.variable.VariableUtils;
 public class QuadraticExample  {
 
     public static void main(String[] args) {
+
+        // define the objective function
         ObjectiveFunction objFun = new ObjectiveFunction() {
             @Override
             protected ObjectiveValue computeObjectiveValue(Vector vector) {
@@ -28,19 +30,29 @@ public class QuadraticExample  {
             }
         };
 
-        LocalSearch ips = new IteratedPatternSearch();
-        TerminationPolicy tp = new TerminationPolicy(true, 1000);
-
+        // set up the vector to be optimized
         Vector vector = new Vector();
         vector.addVariable(new IntegerVariable(0, -1000, 1000));
 
+        // set up the local search to be used
+        LocalSearch ips = new IteratedPatternSearch();
+        TerminationPolicy tp = new TerminationPolicy(true, 1000);
+
+        // set up the random generator
         RandomGenerator rg = new MersenneTwister();
+
+        // set up the initializer
         RandomInitializer ri = new RandomInitializer(rg);
 
+        // set up the AVM
         AVM avm = new AVM(ips, tp, ri);
+
+        // perform the search
         Monitor monitor = avm.search(vector, objFun);
+
+        // output the results
         Vector bestVector = monitor.getBestVector();
-        int bestSolution = VariableUtils.intValue(vector, 0);
+        int bestSolution = VariableUtils.intValue(bestVector, 0);
         int numEvaluations = monitor.getNumEvaluations();
 
         System.out.println("Best solution: " + bestSolution);
