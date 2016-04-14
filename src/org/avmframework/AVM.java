@@ -77,7 +77,7 @@ public class AVM {
 
             @Override
             public void visit(VectorVariable vv) throws TerminationException {
-                localSearch.search(vv, vector, objFun);
+
             }
         });
     }

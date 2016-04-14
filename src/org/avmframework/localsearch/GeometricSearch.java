@@ -9,12 +9,15 @@ import org.avmframework.variable.AtomicVariable;
 
 public class GeometricSearch extends PatternSearch {
 
-    public GeometricSearch(Vector vector, ObjectiveFunction objFun, TiedDirectionPolicy tdp) {
-        super(vector, objFun, tdp);
+    public GeometricSearch() {
     }
 
-    public void search(AtomicVariable var) throws TerminationException {
-        super.search(var);
+    public GeometricSearch(TiedDirectionPolicy tdp) {
+        super(tdp);
+    }
+
+    public void search(AtomicVariable var, Vector vector, ObjectiveFunction objFun) throws TerminationException {
+        super.search(var, vector, objFun);
 
         if (dir == 0) {
             return;

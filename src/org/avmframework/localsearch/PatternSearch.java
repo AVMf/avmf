@@ -3,28 +3,34 @@ package org.avmframework.localsearch;
 import org.avmframework.TerminationException;
 import org.avmframework.Vector;
 import org.avmframework.localsearch.tiebreaking.TiedDirectionPolicy;
+import org.avmframework.localsearch.tiebreaking.UseLeft;
 import org.avmframework.objective.ObjectiveFunction;
 import org.avmframework.objective.ObjectiveValue;
 import org.avmframework.variable.AtomicVariable;
 
-public class PatternSearch {
+public class PatternSearch extends LocalSearch {
+
+    public final static TiedDirectionPolicy DEFAULT_TIED_DIRECTION_POLICY = new UseLeft();
 
     protected AtomicVariable var;
     protected Vector vector;
     protected ObjectiveFunction objFun;
-    protected TiedDirectionPolicy tdp;
+    protected TiedDirectionPolicy tdp = DEFAULT_TIED_DIRECTION_POLICY;
 
     protected ObjectiveValue initial, last, next;
     protected int k, x, dir;
 
-    public PatternSearch(Vector vector, ObjectiveFunction objFun, TiedDirectionPolicy tdp) {
-        this.objFun = objFun;
-        this.vector = vector;
+    public PatternSearch() {
+    }
+
+    public PatternSearch(TiedDirectionPolicy tdp) {
         this.tdp = tdp;
     }
 
-    public void search(AtomicVariable var) throws TerminationException {
+    public void search(AtomicVariable var, Vector vector, ObjectiveFunction objFun) throws TerminationException {
         this.var = var;
+        this.objFun = objFun;
+        this.vector = vector;
         initialize();
         establishDirection();
         doPatternMoves();
