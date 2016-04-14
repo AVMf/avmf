@@ -1,4 +1,4 @@
-package org.avmframework.localsearch;
+package org.avmframework.localsearch.tiebreaking;
 
 import org.avmframework.objective.ObjectiveValue;
 

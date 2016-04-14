@@ -21,9 +21,11 @@ public abstract class ObjectiveFunction {
     public ObjectiveValue evaluate(Vector vector) throws TerminationException {
         ObjectiveValue objVal = computeObjectiveValue(vector);
 
-        monitor.observe(vector, objVal);
-        if (terminationPolicy.terminate(monitor)) {
-            throw new TerminationException();
+        if (monitor != null) {
+            monitor.observe(vector, objVal);
+            if (terminationPolicy != null && terminationPolicy.terminate(monitor)) {
+                throw new TerminationException();
+            }
         }
 
         return objVal;

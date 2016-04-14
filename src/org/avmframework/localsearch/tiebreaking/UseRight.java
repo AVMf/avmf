@@ -1,11 +1,11 @@
-package org.avmframework.localsearch;
+package org.avmframework.localsearch.tiebreaking;
 
 import org.avmframework.objective.ObjectiveValue;
 
-public class UseLeft extends TiedDirectionPolicy {
+public class UseRight extends TiedDirectionPolicy {
 
     @Override
     public int resolveDirection(ObjectiveValue left, ObjectiveValue right) {
-        return -1;
+        return 1;
     }
 }

@@ -2,6 +2,7 @@ package org.avmframework.localsearch;
 
 import org.avmframework.TerminationException;
 import org.avmframework.Vector;
+import org.avmframework.localsearch.tiebreaking.TiedDirectionPolicy;
 import org.avmframework.objective.ObjectiveFunction;
 import org.avmframework.objective.ObjectiveValue;
 import org.avmframework.variable.AtomicVariable;

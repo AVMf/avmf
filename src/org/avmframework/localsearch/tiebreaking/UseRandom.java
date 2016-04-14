@@ -1,4 +1,4 @@
-package org.avmframework.localsearch;
+package org.avmframework.localsearch.tiebreaking;
 
 import org.apache.commons.math3.random.RandomGenerator;
 import org.avmframework.objective.ObjectiveValue;

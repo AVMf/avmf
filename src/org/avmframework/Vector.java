@@ -20,6 +20,10 @@ public class Vector {
         return variables.get(index);
     }
 
+    public List<Variable> getVariables() {
+        return new ArrayList<>(variables);
+    }
+
     public int size() {
         return variables.size();
     }

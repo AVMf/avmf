@@ -19,14 +19,14 @@ public abstract class AtomicVariable extends Variable {
 
     public AtomicVariable(int initialValue) {
         this.initialValue = initialValue;
-        reset();
+        setValueToInitial();
     }
 
     public AtomicVariable(int initialValue, int min, int max) {
         this.initialValue = initialValue;
         this.min = min;
         this.max = max;
-        reset();
+        setValueToInitial();
     }
 
     public AtomicVariable(int initialValue, int min, int max, int precision) {
@@ -66,11 +66,13 @@ public abstract class AtomicVariable extends Variable {
         return accelerationFactor;
     }
 
-    public void reset() {
+    @Override
+    public void setValueToInitial() {
         setValue(initialValue);
     }
 
-    public void setRandom(RandomGenerator randomGenerator) {
+    @Override
+    public void setValueToRandom(RandomGenerator randomGenerator) {
         int range = max - min + 1;
         int randomValue = randomGenerator.nextInt(range);
         setValue(min + randomValue);
@@ -91,6 +93,11 @@ public abstract class AtomicVariable extends Variable {
 
     public int getValue() {
         return value;
+    }
+
+    @Override
+    public <T extends Throwable> void accept(VariableTypeVisitor<T> vtv) throws T {
+        vtv.visit(this);
     }
 
     @Override

@@ -1,6 +1,6 @@
 package org.avmframework;
 
-import com.sun.xml.internal.xsom.impl.Ref;
+import org.avmframework.initialization.Initializer;
 import org.avmframework.localsearch.LocalSearch;
 import org.avmframework.objective.ObjectiveFunction;
 import org.avmframework.variable.Variable;
@@ -9,10 +9,17 @@ public class AVM {
 
     protected LocalSearch localSearch;
     protected TerminationPolicy tp;
+    protected Initializer initializer, restarter;
 
-    public AVM(LocalSearch localSearch, TerminationPolicy tp) {
+    public AVM(LocalSearch localSearch, TerminationPolicy tp, Initializer initializer) {
+        this(localSearch, tp, initializer, initializer);
+    }
+
+    public AVM(LocalSearch localSearch, TerminationPolicy tp, Initializer initializer, Initializer restarter) {
         this.localSearch = localSearch;
         this.tp = tp;
+        this.initializer = initializer;
+        this.restarter = restarter;
     }
 
     public Monitor search(Vector vector, ObjectiveFunction objFun) {
@@ -23,8 +30,10 @@ public class AVM {
         objFun.setTerminationPolicy(tp);
 
         try {
+            // initialize the vector
+            initializer.initialize(vector);
 /*
-        // initialize the vector
+
 
         do {
 

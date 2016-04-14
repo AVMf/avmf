@@ -1,8 +1,5 @@
 package org.avmframework.examples.inputgeneration;
 
-import org.avmframework.objective.InputGenerationObjectiveValue;
-import org.avmframework.objective.ObjectiveFunction;
-import org.avmframework.Vector;
 //import static org.avmframework.variable.VariableUtils.doubleValue;
 
 public class LineIntersectionTargetObjectiveFunction {
