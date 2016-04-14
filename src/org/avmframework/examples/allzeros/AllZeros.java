@@ -57,6 +57,7 @@ public class AllZeros {
 
         // output the results
         System.out.println("Best solution: " + monitor.getBestVector());
+        System.out.println("Best objective value: " + monitor.getBestObjVal());
         System.out.println("Number of objective function evaluations: " + monitor.getNumEvaluations());
     }
 }

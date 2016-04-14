@@ -19,20 +19,8 @@ public class NumericObjectiveValue extends ObjectiveValue<NumericObjectiveValue>
         this.optimum = optimum;
     }
 
-    public static NumericObjectiveValue HigherIsBetterObjectiveValue(double value) {
-        return new NumericObjectiveValue(value, true);
-    }
-
-    public static NumericObjectiveValue HigherIsBetterObjectiveValue(double value, double optimum) {
-        return new NumericObjectiveValue(value, true, optimum);
-    }
-
-    public static NumericObjectiveValue LowerIsBetterObjectiveValue(double value) {
-        return new NumericObjectiveValue(value, false);
-    }
-
-    public static NumericObjectiveValue LowerIsBetterObjectiveValue(double value, double optimum) {
-        return new NumericObjectiveValue(value, false, optimum);
+    public double getValue() {
+        return value;
     }
 
     @Override
@@ -57,5 +45,26 @@ public class NumericObjectiveValue extends ObjectiveValue<NumericObjectiveValue>
         } else {
             return higherIsBetter ? 1 : -1;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "" + getValue();
+    }
+
+    public static NumericObjectiveValue HigherIsBetterObjectiveValue(double value) {
+        return new NumericObjectiveValue(value, true);
+    }
+
+    public static NumericObjectiveValue HigherIsBetterObjectiveValue(double value, double optimum) {
+        return new NumericObjectiveValue(value, true, optimum);
+    }
+
+    public static NumericObjectiveValue LowerIsBetterObjectiveValue(double value) {
+        return new NumericObjectiveValue(value, false);
+    }
+
+    public static NumericObjectiveValue LowerIsBetterObjectiveValue(double value, double optimum) {
+        return new NumericObjectiveValue(value, false, optimum);
     }
 }
