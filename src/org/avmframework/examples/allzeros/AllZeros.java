@@ -7,6 +7,7 @@ import org.avmframework.Monitor;
 import org.avmframework.TerminationPolicy;
 import org.avmframework.Vector;
 import org.avmframework.initialization.RandomInitializer;
+import org.avmframework.localsearch.GeometricSearch;
 import org.avmframework.localsearch.IteratedPatternSearch;
 import org.avmframework.localsearch.LocalSearch;
 import org.avmframework.objective.NumericObjectiveValue;
@@ -40,7 +41,7 @@ public class AllZeros {
         }
 
         // set up the local search to be used
-        LocalSearch ls = new IteratedPatternSearch();
+        LocalSearch ls = new GeometricSearch();
         TerminationPolicy tp = new TerminationPolicy(true, MAX_EVALUATIONS);
 
         // set up the random generator
