@@ -1,6 +1,5 @@
 package org.avmframework;
 
-import com.sun.tools.doclets.formats.html.SourceToHTMLConverter;
 import org.avmframework.initialization.Initializer;
 import org.avmframework.localsearch.LocalSearch;
 import org.avmframework.objective.ObjectiveFunction;
@@ -46,7 +45,7 @@ public class AVM {
 
                     // alternate through the variables
                     for (Variable variable : vector.getVariables()) {
-                        localSearch(variable, vector, objFun);
+                        variableSearch(variable, vector, objFun);
 
                         ObjectiveValue current = objFun.evaluate(vector);
                         if (current.betterThan(original)) {
@@ -67,18 +66,25 @@ public class AVM {
         return monitor;
     }
 
-    protected void localSearch(Variable var, Vector vector, ObjectiveFunction objFun) throws TerminationException {
+    protected void variableSearch(Variable var, Vector vector, ObjectiveFunction objFun) throws TerminationException {
         var.accept(new VariableTypeVisitor<TerminationException>() {
 
             @Override
             public void visit(AtomicVariable av) throws TerminationException {
-                localSearch.search(av, vector, objFun);
+                atomicVariableSearch(av, vector, objFun);
             }
 
             @Override
             public void visit(VectorVariable vv) throws TerminationException {
-
+                vectorVariableSearch(vv, vector, objFun);
             }
         });
+    }
+
+    protected void atomicVariableSearch(AtomicVariable av, Vector vector, ObjectiveFunction objFun) throws TerminationException {
+        localSearch.search(av, vector, objFun);
+    }
+
+    protected void vectorVariableSearch(VectorVariable vv, Vector vector, ObjectiveFunction objFun) throws TerminationException {
     }
 }

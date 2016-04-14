@@ -1,10 +1,6 @@
 TODO
 
-- TO DO neaten up PS and GS searches and how they integrate as a local search method
-
 - Lattice search
-
-- doubles
 
 - strings
 
