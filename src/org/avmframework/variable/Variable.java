@@ -10,6 +10,4 @@ public abstract class Variable {
 
     public abstract Variable deepCopy();
 
-    public abstract <T extends Throwable> void accept(VariableTypeVisitor<T> vtv) throws T;
-
 }

@@ -6,7 +6,6 @@ import org.avmframework.objective.ObjectiveFunction;
 import org.avmframework.objective.ObjectiveValue;
 import org.avmframework.variable.AtomicVariable;
 import org.avmframework.variable.Variable;
-import org.avmframework.variable.VariableTypeVisitor;
 import org.avmframework.variable.VectorVariable;
 
 public class AVM {
@@ -42,8 +41,9 @@ public class AVM {
                     ObjectiveValue original = objFun.evaluate(vector);
 
                     // alternate through the variables
-                    for (Variable variable : vector.getVariables()) {
-                        variableSearch(variable, vector, objFun);
+                    for (Variable var : vector.getVariables()) {
+
+                        variableSearch(var, vector, objFun);
 
                         ObjectiveValue current = objFun.evaluate(vector);
                         if (current.betterThan(original)) {
@@ -66,18 +66,11 @@ public class AVM {
     }
 
     protected void variableSearch(Variable var, Vector vector, ObjectiveFunction objFun) throws TerminationException {
-        var.accept(new VariableTypeVisitor<TerminationException>() {
-
-            @Override
-            public void visit(AtomicVariable av) throws TerminationException {
-                atomicVariableSearch(av, vector, objFun);
-            }
-
-            @Override
-            public void visit(VectorVariable vv) throws TerminationException {
-                vectorVariableSearch(vv, vector, objFun);
-            }
-        });
+        if (var instanceof AtomicVariable) {
+            atomicVariableSearch((AtomicVariable) var, vector, objFun);
+        } else if (var instanceof VectorVariable) {
+            vectorVariableSearch((VectorVariable) var, vector, objFun);
+        }
     }
 
     protected void atomicVariableSearch(AtomicVariable av, Vector vector, ObjectiveFunction objFun) throws TerminationException {

@@ -39,9 +39,4 @@ public class VectorVariable extends Variable {
     public VectorVariable deepCopy() {
         return null;
     }
-
-    @Override
-    public <T extends Throwable> void accept(VariableTypeVisitor<T> vtv) throws T {
-        vtv.visit(this);
-    }
 }

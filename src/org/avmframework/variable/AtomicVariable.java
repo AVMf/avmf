@@ -74,11 +74,6 @@ public abstract class AtomicVariable extends Variable {
     }
 
     @Override
-    public <T extends Throwable> void accept(VariableTypeVisitor<T> vtv) throws T {
-        vtv.visit(this);
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
