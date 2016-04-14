@@ -25,10 +25,10 @@ public class IteratedPatternSearch extends LocalSearch {
     }
 
     public void search(AtomicVariable var, Vector vector, ObjectiveFunction objFun) throws TerminationException {
-        GeometricSearch gs = new GeometricSearch(vector, objFun, tdp);
-        gs.search(var);
+        //GeometricSearch gs = new GeometricSearch(vector, objFun, tdp);
+        //gs.search(var);
 
-        /*
+
         PatternSearch ps = new PatternSearch(vector, objFun, tdp);
         ObjectiveValue next = objFun.evaluate(vector), last;
 
@@ -38,7 +38,7 @@ public class IteratedPatternSearch extends LocalSearch {
             next = objFun.evaluate(vector);
         } while (next.betterThan(last));
 
-        */
+
     }
 
     public void search(VectorVariable variable, Vector vector, ObjectiveFunction objFun) {

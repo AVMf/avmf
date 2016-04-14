@@ -40,8 +40,14 @@ public class AllZeros {
         // set up the vector to be optimized
         Vector vector = new Vector();
         for (int i=0; i < NUM_VARS; i++) {
-            vector.addVariable(new IntegerVariable(INIT, MIN, MAX));
+        //    vector.addVariable(new IntegerVariable(INIT, MIN, MAX));
         }
+        vector.addVariable(new IntegerVariable(300, MIN, MAX));
+        vector.addVariable(new IntegerVariable(-400, MIN, MAX));
+        vector.addVariable(new IntegerVariable(1000, MIN, MAX));
+        vector.addVariable(new IntegerVariable(699, MIN, MAX));
+        vector.addVariable(new IntegerVariable(423, MIN, MAX));
+
 
         // set up the local search to be used
         LocalSearch ls = new IteratedPatternSearch();
@@ -54,7 +60,7 @@ public class AllZeros {
         RandomInitializer ri = new RandomInitializer(rg);
 
         // set up the AVM
-        AVM avm = new AVM(ls, tp, ri);
+        AVM avm = new AVM(ls, tp, new DefaultInitializer(), ri);
 
         // perform the search
         Monitor monitor = avm.search(vector, objFun);
