@@ -46,28 +46,32 @@ public class PatternSearch {
         var.setValue(x + k);
         ObjectiveValue right = objFun.evaluate(vector);
 
+        // find the best direction
         boolean leftBetter = left.betterThan(initial);
         boolean rightBetter = right.betterThan(initial);
-
-        last = initial;
-
         if (leftBetter && rightBetter) {
             dir = tdp.resolveDirection(left, right);
-            next = (dir == -1) ? left : right;
         } else if (leftBetter) {
             dir = -1;
-            next = left;
         } else if (rightBetter) {
             dir = 1;
-            next = right;
         } else {
             dir = 0;
-            next = initial;
         }
 
         // set x and the variable according to the best outcome
         x += dir * k;
         var.setValue(x);
+
+        // set last and next objective values
+        last = initial;
+        if (dir == -1) {
+            next = left;
+        } else if (dir == 1) {
+            next = right;
+        } else if (dir == 0) {
+            next = initial;
+        }
     }
 
     protected void doPatternMoves() throws TerminationException {
