@@ -6,7 +6,6 @@ import org.avmframework.objective.ObjectiveFunction;
 import org.avmframework.objective.ObjectiveValue;
 import org.avmframework.variable.AtomicVariable;
 import org.avmframework.variable.Variable;
-import org.avmframework.variable.VectorVariable;
 
 public class AVM {
 
@@ -68,15 +67,10 @@ public class AVM {
     protected void variableSearch(Variable var, Vector vector, ObjectiveFunction objFun) throws TerminationException {
         if (var instanceof AtomicVariable) {
             atomicVariableSearch((AtomicVariable) var, vector, objFun);
-        } else if (var instanceof VectorVariable) {
-            vectorVariableSearch((VectorVariable) var, vector, objFun);
         }
     }
 
     protected void atomicVariableSearch(AtomicVariable av, Vector vector, ObjectiveFunction objFun) throws TerminationException {
         localSearch.search(av, vector, objFun);
-    }
-
-    protected void vectorVariableSearch(VectorVariable vv, Vector vector, ObjectiveFunction objFun) throws TerminationException {
     }
 }
