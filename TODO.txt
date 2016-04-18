@@ -1,7 +1,5 @@
 TODO
-
-- part way through: terminate by number of restarts (use factory methods to get hold of a termination policy)
---- need to test.
+====
 
 - Lattice search
 
@@ -11,9 +9,7 @@ TODO
 
 - tests
 
-- mavern
-
 ////
 
-- nice logging
+- logging
 
