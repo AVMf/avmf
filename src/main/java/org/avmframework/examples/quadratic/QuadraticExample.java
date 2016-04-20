@@ -21,10 +21,7 @@ public class QuadraticExample  {
     static final int PRECISION = 1;
     static final double INITIAL_VALUE = 0.0, MIN = -100.0, MAX = 100.0;
 
-    static final LocalSearch LOCAL_SEARCH = new IteratedPatternSearch();
-
     static final int MAX_EVALUATIONS = 100;
-    static final TerminationPolicy TERMINATION_POLICY = TerminationPolicy.maxEvaluations(MAX_EVALUATIONS);
 
     public static void main(String[] args) {
 
@@ -43,14 +40,18 @@ public class QuadraticExample  {
         Vector vector = new Vector();
         vector.addVariable(new FloatingPointVariable(INITIAL_VALUE, PRECISION, MIN, MAX));
 
-        // set up the random generator
-        RandomGenerator rg = new MersenneTwister();
+        // set up the local search
+        LocalSearch ls = new IteratedPatternSearch();
 
-        // set up the initializer
+        // set up the termination policy
+        TerminationPolicy tp = TerminationPolicy.maxEvaluations(MAX_EVALUATIONS);
+
+        // set up random initialization of vectors
+        RandomGenerator rg = new MersenneTwister();
         RandomInitializer ri = new RandomInitializer(rg);
 
         // set up the AVM
-        AVM avm = new AVM(LOCAL_SEARCH, TERMINATION_POLICY, ri);
+        AVM avm = new AVM(ls, tp, ri);
 
         // perform the search
         Monitor monitor = avm.search(vector, objFun);

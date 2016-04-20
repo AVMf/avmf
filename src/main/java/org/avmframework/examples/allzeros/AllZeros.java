@@ -21,9 +21,6 @@ public class AllZeros {
     static final int INIT = 0, MIN = -1000000, MAX = 1000000;
     static final int MAX_EVALUATIONS = 1000;
 
-    static final LocalSearch LOCAL_SEARCH = new GeometricSearch();
-    static final TerminationPolicy TERMINATION_POLICY = TerminationPolicy.maxEvaluations(MAX_EVALUATIONS);
-
     public static void main(String[] args) {
 
         // define the objective function
@@ -44,14 +41,18 @@ public class AllZeros {
             vector.addVariable(new IntegerVariable(INIT, MIN, MAX));
         }
 
-        // set up the random generator
-        RandomGenerator rg = new MersenneTwister();
+        // set up the local search
+        LocalSearch ls = new GeometricSearch();
 
-        // set up the initializer
+        // set up the termination policy
+        TerminationPolicy tp = TerminationPolicy.maxEvaluations(MAX_EVALUATIONS);
+
+        // set up random initialization of vectors
+        RandomGenerator rg = new MersenneTwister();
         RandomInitializer ri = new RandomInitializer(rg);
 
         // set up the AVM
-        AVM avm = new AVM(LOCAL_SEARCH, TERMINATION_POLICY, ri);
+        AVM avm = new AVM(ls, tp, ri);
 
         // perform the search
         Monitor monitor = avm.search(vector, objFun);

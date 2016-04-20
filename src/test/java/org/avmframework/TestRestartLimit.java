@@ -23,7 +23,7 @@ public class TestRestartLimit {
     };
 
     Initializer initializer = new DefaultInitializer();
-    LocalSearch ls = new IteratedPatternSearch();
+    LocalSearch ls = new IteratedPatternSearch(null);
 
     @Test
     public void testNoRestart() {

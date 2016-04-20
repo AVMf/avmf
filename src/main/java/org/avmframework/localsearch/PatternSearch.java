@@ -1,21 +1,19 @@
 package org.avmframework.localsearch;
 
+import org.apache.commons.math3.random.RandomGenerator;
 import org.avmframework.TerminationException;
 import org.avmframework.Vector;
-import org.avmframework.localsearch.tiebreaking.TiedDirectionPolicy;
-import org.avmframework.localsearch.tiebreaking.UseLeft;
 import org.avmframework.objective.ObjectiveFunction;
 import org.avmframework.objective.ObjectiveValue;
 import org.avmframework.variable.AtomicVariable;
 
 public class PatternSearch extends LocalSearch {
 
-    public final static TiedDirectionPolicy DEFAULT_TIED_DIRECTION_POLICY = new UseLeft();
+    protected RandomGenerator rg = null;
 
     protected AtomicVariable var;
     protected Vector vector;
     protected ObjectiveFunction objFun;
-    protected TiedDirectionPolicy tdp = DEFAULT_TIED_DIRECTION_POLICY;
 
     protected ObjectiveValue initial, last, next;
     protected int k, x, dir;
@@ -23,8 +21,8 @@ public class PatternSearch extends LocalSearch {
     public PatternSearch() {
     }
 
-    public PatternSearch(TiedDirectionPolicy tdp) {
-        this.tdp = tdp;
+    public PatternSearch(RandomGenerator rg) {
+        this.rg = rg;
     }
 
     public void search(AtomicVariable var, Vector vector, ObjectiveFunction objFun) throws TerminationException {
@@ -56,7 +54,11 @@ public class PatternSearch extends LocalSearch {
         boolean leftBetter = left.betterThan(initial);
         boolean rightBetter = right.betterThan(initial);
         if (leftBetter && rightBetter) {
-            dir = tdp.resolveDirection(left, right);
+            if (rg == null) {
+                dir = -1;
+            } else {
+                dir = rg.nextBoolean() ? -1 : 1;
+            }
         } else if (leftBetter) {
             dir = -1;
         } else if (rightBetter) {

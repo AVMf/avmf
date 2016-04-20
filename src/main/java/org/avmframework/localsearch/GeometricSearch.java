@@ -1,8 +1,8 @@
 package org.avmframework.localsearch;
 
+import org.apache.commons.math3.random.RandomGenerator;
 import org.avmframework.TerminationException;
 import org.avmframework.Vector;
-import org.avmframework.localsearch.tiebreaking.TiedDirectionPolicy;
 import org.avmframework.objective.ObjectiveFunction;
 import org.avmframework.objective.ObjectiveValue;
 import org.avmframework.variable.AtomicVariable;
@@ -12,8 +12,8 @@ public class GeometricSearch extends PatternSearch {
     public GeometricSearch() {
     }
 
-    public GeometricSearch(TiedDirectionPolicy tdp) {
-        super(tdp);
+    public GeometricSearch(RandomGenerator rg) {
+        super(rg);
     }
 
     public void search(AtomicVariable var, Vector vector, ObjectiveFunction objFun) throws TerminationException {
@@ -26,23 +26,23 @@ public class GeometricSearch extends PatternSearch {
         int xPrev = x - k / var.getAccelerationFactor();
         int xNext = x + k;
 
-        int min = Math.min(xPrev, xNext);
-        int max = Math.max(xPrev, xNext);
+        int l = Math.min(xPrev, xNext);
+        int r = Math.max(xPrev, xNext);
 
-        while (min < max) {
-            int mid = (int) Math.floor((min + max) / 2.0);
-            int midPlusStep = mid + 1;
+        while (l < r) {
+            int mid = (int) Math.floor((l + r) / 2.0);
+            int midPlusOne = mid + 1;
 
             var.setValue(mid);
             ObjectiveValue midObjVal = objFun.evaluate(vector);
 
-            var.setValue(midPlusStep);
+            var.setValue(midPlusOne);
             ObjectiveValue midPlusStepObjVal = objFun.evaluate(vector);
 
             if (midObjVal.betterThan(midPlusStepObjVal)) {
-                max = mid;
+                r = mid;
             } else {
-                min = midPlusStep;
+                l = midPlusOne;
             }
         }
     }
