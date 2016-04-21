@@ -2,7 +2,6 @@ package org.avmframework;
 
 import org.avmframework.initialization.Initializer;
 import org.avmframework.localsearch.LocalSearch;
-import org.avmframework.objective.NumericObjectiveValue;
 import org.avmframework.objective.ObjectiveFunction;
 import org.avmframework.objective.ObjectiveValue;
 import org.avmframework.variable.AtomicVariable;
@@ -30,6 +29,9 @@ public class AVM {
     }
 
     public Monitor search(Vector vector, ObjectiveFunction objFun) {
+        // set up the monitor
+        monitor = new Monitor(tp);
+
         // set up the vector
         this.vector = vector;
         if (vector.size() == 0) {
@@ -39,8 +41,10 @@ public class AVM {
 
         // set up the objective function
         this.objFun = objFun;
-        monitor = new Monitor(tp);
         objFun.setMonitor(monitor);
+
+        // initialize the monitor
+        monitor.initialize();
 
         try {
             performSearch();
@@ -56,22 +60,24 @@ public class AVM {
         // initialize the vector
         initializer.initialize(vector);
 
-        do {
+        // the loop terminates when a TerminationException is thrown
+        while (true) {
+            // set up last improvement info
             ObjectiveValue lastImprovement = objFun.evaluate(vector);
             int nonImprovement = 0;
 
-            do {
-                // log this vector cycle
+            while (nonImprovement < vector.size()) {
+                // log this vector cycle);
                 monitor.observeVectorCycle();
 
                 // alternate through the variables
-                int index = 0;
-                while (index < vector.size() && nonImprovement < vector.size()) {
+                int variableIndex = 0;
+                while (variableIndex < vector.size() && nonImprovement < vector.size()) {
                     // log this variable search
                     monitor.observeVariable();
 
                     // perform a local search on this variable
-                    Variable var = vector.getVariable(index);
+                    Variable var = vector.getVariable(variableIndex);
                     localSearch(var);
 
                     // check if the current objective value has improved on last
@@ -83,16 +89,14 @@ public class AVM {
                         nonImprovement ++;
                     }
 
-                    index ++;
+                    variableIndex ++;
                 }
-            } while (nonImprovement < vector.size());
+            }
 
             // restart the search
             monitor.observeRestart();
             restarter.initialize(vector);
-
-        // the loop terminates when a TerminationException is thrown
-        } while (true);
+        }
     }
 
 

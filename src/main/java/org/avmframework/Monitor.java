@@ -14,14 +14,17 @@ public class Monitor {
 
     public Monitor(TerminationPolicy tp) {
         this.tp = tp;
+    }
+
+    public void initialize() {
         bestObjVal = null;
         bestVector = null;
         numEvaluations = 0;
         numUniqueEvaluations = 0;
         numRestarts = 0;
+        numVariablesSearched = 0;
+        numVectorCycles = 0;
         startTime = System.currentTimeMillis();
-        int numVariablesSearched = 0;
-        int numVectorCycles = 0;
     }
 
     public ObjectiveValue getBestObjVal() {
