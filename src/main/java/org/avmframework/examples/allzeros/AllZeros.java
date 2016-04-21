@@ -6,8 +6,11 @@ import org.avmframework.AVM;
 import org.avmframework.Monitor;
 import org.avmframework.TerminationPolicy;
 import org.avmframework.Vector;
+import org.avmframework.initialization.Initializer;
 import org.avmframework.initialization.RandomInitializer;
 import org.avmframework.localsearch.GeometricSearch;
+import org.avmframework.localsearch.IteratedPatternSearch;
+import org.avmframework.localsearch.LatticeSearch;
 import org.avmframework.localsearch.LocalSearch;
 import org.avmframework.objective.NumericObjectiveValue;
 import org.avmframework.objective.ObjectiveFunction;
@@ -18,7 +21,7 @@ import org.avmframework.variable.Variable;
 public class AllZeros {
 
     static final int NUM_VARS = 10;
-    static final int INIT = 0, MIN = -1000000, MAX = 1000000;
+    static final int INIT = 0, MIN = -100000, MAX = 100000;
     static final int MAX_EVALUATIONS = 1000;
 
     public static void main(String[] args) {
@@ -42,17 +45,19 @@ public class AllZeros {
         }
 
         // set up the local search
-        LocalSearch ls = new GeometricSearch();
+        //LocalSearch localSearch = new IteratedPatternSearch();
+        LocalSearch localSearch = new GeometricSearch();
+        //LocalSearch localSearch = new LatticeSearch();
 
         // set up the termination policy
-        TerminationPolicy tp = TerminationPolicy.maxEvaluations(MAX_EVALUATIONS);
+        TerminationPolicy terminationPolicy = TerminationPolicy.maxEvaluations(MAX_EVALUATIONS);
 
         // set up random initialization of vectors
-        RandomGenerator rg = new MersenneTwister();
-        RandomInitializer ri = new RandomInitializer(rg);
+        RandomGenerator randomGenerator = new MersenneTwister();
+        Initializer initializer = new RandomInitializer(randomGenerator);
 
         // set up the AVM
-        AVM avm = new AVM(ls, tp, ri);
+        AVM avm = new AVM(localSearch, terminationPolicy, initializer);
 
         // perform the search
         Monitor monitor = avm.search(vector, objFun);

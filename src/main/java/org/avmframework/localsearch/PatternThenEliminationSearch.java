@@ -3,12 +3,12 @@ package org.avmframework.localsearch;
 import org.apache.commons.math3.random.RandomGenerator;
 import org.avmframework.TerminationException;
 
-public abstract class PatternEliminationSearch extends PatternSearch {
+public abstract class PatternThenEliminationSearch extends PatternSearch {
 
-    public PatternEliminationSearch() {
+    public PatternThenEliminationSearch() {
     }
 
-    public PatternEliminationSearch(RandomGenerator rg) {
+    public PatternThenEliminationSearch(RandomGenerator rg) {
         super(rg);
     }
 
@@ -21,8 +21,8 @@ public abstract class PatternEliminationSearch extends PatternSearch {
     }
 
     protected void eliminationSearch() throws TerminationException {
-        int xPrev = x - k / var.getAccelerationFactor();
-        int xNext = x + k;
+        int xPrev = x - (k * dir / var.getAccelerationFactor());
+        int xNext = x + (k * dir);
 
         int l = Math.min(xPrev, xNext);
         int r = Math.max(xPrev, xNext);

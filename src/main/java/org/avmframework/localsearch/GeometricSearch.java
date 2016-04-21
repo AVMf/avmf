@@ -2,12 +2,9 @@ package org.avmframework.localsearch;
 
 import org.apache.commons.math3.random.RandomGenerator;
 import org.avmframework.TerminationException;
-import org.avmframework.Vector;
-import org.avmframework.objective.ObjectiveFunction;
 import org.avmframework.objective.ObjectiveValue;
-import org.avmframework.variable.AtomicVariable;
 
-public class GeometricSearch extends PatternEliminationSearch {
+public class GeometricSearch extends PatternThenEliminationSearch {
 
     public GeometricSearch() {
     }
@@ -18,20 +15,22 @@ public class GeometricSearch extends PatternEliminationSearch {
 
     protected void performEliminationSearch(int l, int r) throws TerminationException {
         while (l < r) {
-            int m = (int) Math.floor((l + r) / 2.0);
-            int n = m + 1;
+            int mid = (int) Math.floor((l + r) / 2.0);
+            int midRight = mid + 1;
 
-            var.setValue(m);
-            ObjectiveValue mObj = objFun.evaluate(vector);
+            var.setValue(mid);
+            ObjectiveValue midObjVal = objFun.evaluate(vector);
 
-            var.setValue(n);
-            ObjectiveValue nObjVal = objFun.evaluate(vector);
+            var.setValue(midRight);
+            ObjectiveValue midRightObjVal = objFun.evaluate(vector);
 
-            if (mObj.betterThan(nObjVal)) {
-                r = m;
+            if (midObjVal.betterThan(midRightObjVal)) {
+                r = mid;
             } else {
-                l = n;
+                l = midRight;
             }
         }
+
+        var.setValue(l);
     }
 }

@@ -36,6 +36,8 @@ public class AVM {
             do {
                 boolean improvement;
                 do {
+                    // TODO: improvement should be an integer (last time since improvement)
+                    // so that doesn't evaluate last few variables unnecessarily
                     improvement = false;
                     ObjectiveValue original = objFun.evaluate(vector);
 

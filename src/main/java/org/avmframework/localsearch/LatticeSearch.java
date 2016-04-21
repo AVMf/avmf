@@ -2,10 +2,7 @@ package org.avmframework.localsearch;
 
 import org.apache.commons.math3.random.RandomGenerator;
 import org.avmframework.TerminationException;
-import org.avmframework.Vector;
-import org.avmframework.objective.ObjectiveFunction;
 import org.avmframework.objective.ObjectiveValue;
-import org.avmframework.variable.AtomicVariable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +10,7 @@ import java.util.List;
 import static org.avmframework.localsearch.IntegerFibonacciNumbers.fibonacci;
 import static org.avmframework.localsearch.IntegerFibonacciNumbers.positionOfSmallestFibonacciNumberGreaterOrEqualTo;
 
-public class LatticeSearch extends PatternEliminationSearch {
+public class LatticeSearch extends PatternThenEliminationSearch {
 
     public LatticeSearch() {
     }
@@ -24,26 +21,31 @@ public class LatticeSearch extends PatternEliminationSearch {
 
     protected void performEliminationSearch(int l, int r) throws TerminationException {
 
-        int n = positionOfSmallestFibonacciNumberGreaterOrEqualTo(r - l + 2);
-        int minN = positionOfSmallestFibonacciNumberGreaterOrEqualTo(2);
+        int interval = r - l + 2;
+        int n = positionOfSmallestFibonacciNumberGreaterOrEqualTo(interval);
 
-        while (n > 2) { // is this constant 2 or 3?
+        while (n > 3) {
 
-            int nMinus1 = l + fibonacci(n - 1) - 1;
-            int nMinus2 = l + fibonacci(n - 2) - 1;
+            int mid = l + fibonacci(n - 2) - 1;
+            int midRight = l + fibonacci(n - 1) - 1;
 
-            var.setValue(nMinus1);
-            ObjectiveValue nMinus1ObjVal = objFun.evaluate(vector);
+            if (midRight <= r) {
 
-            var.setValue(nMinus2);
-            ObjectiveValue nMinus2ObjVal = objFun.evaluate(vector);
+                var.setValue(mid);
+                ObjectiveValue midObjVal = objFun.evaluate(vector);
 
-            if (l + fibonacci(n - 1) - 1 <= r && nMinus1ObjVal.worseThan(nMinus2ObjVal)) {
-                l += fibonacci(n - 2);
+                var.setValue(midRight);
+                ObjectiveValue midRightObjVal = objFun.evaluate(vector);
+
+                if (midObjVal.worseThan(midRightObjVal)) {
+                    l = mid + 1;
+                }
             }
 
             n --;
         }
+
+        var.setValue(l);
     }
 }
 

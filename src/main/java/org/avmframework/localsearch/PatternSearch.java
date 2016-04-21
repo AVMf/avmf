@@ -9,7 +9,7 @@ public class PatternSearch extends LocalSearch {
     protected RandomGenerator rg = null;
 
     protected ObjectiveValue initial, last, next;
-    protected int k, x, dir;
+    protected int k, x, dir, lastX, nextX;
 
     public PatternSearch() {
     }
