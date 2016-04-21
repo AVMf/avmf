@@ -16,20 +16,28 @@ public class TerminationPolicy {
         this.runningTime = runningTime;
     }
 
-    public boolean checkFoundOptimal(Monitor monitor) {
-        return terminateOnOptimal && monitor.getBestObjVal() != null && monitor.getBestObjVal().isOptimal();
+    public void checkFoundOptimal(Monitor monitor) throws TerminationException {
+        if (terminateOnOptimal && monitor.getBestObjVal() != null && monitor.getBestObjVal().isOptimal()) {
+            throw new TerminationException();
+        }
     }
 
-    public boolean checkExhaustedEvaluations(Monitor monitor) {
-        return maxEvaluations != NO_LIMIT && monitor.getNumEvaluations() >= maxEvaluations;
+    public void checkExhaustedEvaluations(Monitor monitor) throws TerminationException {
+        if (maxEvaluations != NO_LIMIT && monitor.getNumEvaluations() >= maxEvaluations) {
+            throw new TerminationException();
+        }
     }
 
-    public boolean checkExhaustedRestarts(Monitor monitor) {
-        return maxRestarts != NO_LIMIT && monitor.getNumRestarts() >= maxRestarts;
+    public void checkExhaustedRestarts(Monitor monitor) throws TerminationException {
+        if (maxRestarts != NO_LIMIT && monitor.getNumRestarts() >= maxRestarts) {
+            throw new TerminationException();
+        }
     }
 
-    public boolean checkExhaustedTime(Monitor monitor) {
-        return runningTime != NO_LIMIT && System.currentTimeMillis() - monitor.startTime > runningTime;
+    public void checkExhaustedTime(Monitor monitor) throws TerminationException {
+        if (runningTime != NO_LIMIT && System.currentTimeMillis() - monitor.startTime > runningTime) {
+            throw new TerminationException();
+        }
     }
 
     public static TerminationPolicy maxEvaluations(int maxEvaluations) {

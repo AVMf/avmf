@@ -6,7 +6,7 @@ import org.avmframework.objective.ObjectiveValue;
 public class PatternSearch extends LocalSearch {
 
     protected ObjectiveValue initial, last, next;
-    protected int k, x, dir, lastX, nextX;
+    protected int k, x, dir;
 
     protected void performSearch() throws TerminationException {
         initialize();
