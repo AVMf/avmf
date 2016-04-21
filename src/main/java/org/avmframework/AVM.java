@@ -105,9 +105,29 @@ public class AVM {
     }
 
     protected void vectorVariableSearch(VectorVariable vectorVar) throws TerminationException {
-        // TODO
-        // try increase and decrease size moves
-        
+        ObjectiveValue current, next = objFun.evaluate(vector);
+
+        // try moves of increasing the vector size
+        do {
+            current = next;
+            vectorVar.increaseSize();
+            next = objFun.evaluate(vector);
+        } while (next.betterThan(current));
+
+        // reverse the last move
+        vectorVar.decreaseSize();
+
+        // try moves of decreasing the vector size
+        do {
+            current = next;
+            vectorVar.decreaseSize();
+            next = objFun.evaluate(vector);
+        } while (next.betterThan(current));
+
+        // reverse the last move
+        vectorVar.increaseSize();
+
+        // now for the alternating variable search...
         alternatingVariableSearch(vectorVar);
     }
 }
