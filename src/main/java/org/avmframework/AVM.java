@@ -105,7 +105,21 @@ public class AVM {
     }
 
     protected void vectorVariableSearch(VectorVariable vectorVar) throws TerminationException {
-        ObjectiveValue current, next = objFun.evaluate(vector);
+        ObjectiveValue current = null, next = objFun.evaluate(vector);
+
+        // try moves that increase the vector size
+        changeVectorVariableSize(vectorVar, current, next, true);
+
+        // try moves that decrease the vector size
+        changeVectorVariableSize(vectorVar, current, next, false);
+
+        // now for the alternating variable search...
+        alternatingVariableSearch(vectorVar);
+    }
+
+    protected void changeVectorVariableSize(VectorVariable vectorVar,
+                                            ObjectiveValue current, ObjectiveValue next,
+                                            boolean increase) throws TerminationException {
         int currentSize, nextSize = vectorVar.size();
 
         // try moves that increase the vector size
@@ -113,7 +127,11 @@ public class AVM {
             current = next;
             currentSize = nextSize;
 
-            vectorVar.increaseSize();
+            if (increase) {
+                vectorVar.increaseSize();
+            } else {
+                vectorVar.decreaseSize();
+            }
 
             next = objFun.evaluate(vector);
             nextSize = currentSize;
@@ -121,26 +139,11 @@ public class AVM {
 
         // reverse the last move, if there was a change
         if (nextSize > currentSize) {
-            vectorVar.decreaseSize();
+            if (increase) {
+                vectorVar.decreaseSize();
+            } else {
+                vectorVar.increaseSize();
+            }
         }
-
-        // try moves that decrease the vector size
-        do {
-            current = next;
-            currentSize = nextSize;
-
-            vectorVar.decreaseSize();
-
-            next = objFun.evaluate(vector);
-            nextSize = currentSize;
-        } while (next.betterThan(current));
-
-        // reverse the last move, if there was a change
-        if (nextSize > currentSize) {
-            vectorVar.increaseSize();
-        }
-
-        // now for the alternating variable search...
-        alternatingVariableSearch(vectorVar);
     }
 }
