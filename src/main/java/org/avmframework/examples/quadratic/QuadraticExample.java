@@ -21,7 +21,7 @@ public class QuadraticExample  {
     static final int PRECISION = 1;
     static final double INITIAL_VALUE = 0.0, MIN = -100000.0, MAX = 100000.0;
 
-    static final int MAX_EVALUATIONS = 100;
+    static final int MAX_EVALUATIONS = 1000;
 
     public static void main(String[] args) {
 
