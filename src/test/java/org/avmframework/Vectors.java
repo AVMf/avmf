@@ -9,8 +9,14 @@ public class Vectors {
     }
 
     public static Vector singleIntegerVector() {
+        return integerVector(1);
+    }
+
+    public static Vector integerVector(int length) {
         Vector vector = new Vector();
-        vector.addVariable(new IntegerVariable(0, -100, 100));
+        for (int i=0; i < length; i++) {
+            vector.addVariable(new IntegerVariable(0, -100, 100));
+        }
         return vector;
     }
 

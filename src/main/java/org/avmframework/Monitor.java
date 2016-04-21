@@ -8,12 +8,9 @@ public class Monitor {
     protected ObjectiveValue bestObjVal;
     protected Vector bestVector;
 
-    protected int numEvaluations;
-    protected int numUniqueEvaluations;
-    protected int numRestarts;
-
+    protected int numEvaluations, numUniqueEvaluations, numRestarts;
     protected long startTime, endTime;
-
+    protected int numVariablesSearched, numVectorCycles;
 
     public Monitor(TerminationPolicy tp) {
         this.tp = tp;
@@ -23,6 +20,8 @@ public class Monitor {
         numUniqueEvaluations = 0;
         numRestarts = 0;
         startTime = System.currentTimeMillis();
+        int numVariablesSearched = 0;
+        int numVectorCycles = 0;
     }
 
     public ObjectiveValue getBestObjVal() {
@@ -49,8 +48,24 @@ public class Monitor {
         return endTime - startTime;
     }
 
+    public int getNumVariablesSearched() {
+        return numVariablesSearched;
+    }
+
+    public int getNumVectorCycles() {
+        return numVectorCycles;
+    }
+
+    public void observeVariable() {
+        numVariablesSearched ++;
+    }
+
+    public void observeVectorCycle() {
+        numVectorCycles ++;
+    }
+
     public void observeVector() throws TerminationException {
-        if (tp.checkTermination(this)) {
+        if (tp.checkExhaustedEvaluations(this) || tp.checkExhaustedTime(this)) {
             throw new TerminationException();
         }
         numEvaluations ++;
@@ -62,12 +77,14 @@ public class Monitor {
             bestVector = vector.deepCopy();
         }
         numUniqueEvaluations ++;
+
+        if (tp.checkFoundOptimal(this)) {
+            throw new TerminationException();
+        }
     }
 
     public void observeRestart() throws TerminationException {
-
-        if (tp.checkTermination(this)) {
-
+        if (tp.checkExhaustedRestarts(this) || tp.checkExhaustedTime(this)) {
             throw new TerminationException();
         }
         numRestarts ++;

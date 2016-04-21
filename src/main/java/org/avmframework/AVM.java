@@ -2,6 +2,7 @@ package org.avmframework;
 
 import org.avmframework.initialization.Initializer;
 import org.avmframework.localsearch.LocalSearch;
+import org.avmframework.objective.NumericObjectiveValue;
 import org.avmframework.objective.ObjectiveFunction;
 import org.avmframework.objective.ObjectiveValue;
 import org.avmframework.variable.AtomicVariable;
@@ -56,19 +57,33 @@ public class AVM {
         initializer.initialize(vector);
 
         do {
+            ObjectiveValue lastImprovement = objFun.evaluate(vector);
             int nonImprovement = 0;
+
             do {
-                ObjectiveValue original = objFun.evaluate(vector);
+                // log this vector cycle
+                monitor.observeVectorCycle();
 
                 // alternate through the variables
-                for (Variable var : vector.getVariables()) {
+                int index = 0;
+                while (index < vector.size() && nonImprovement < vector.size()) {
+                    // log this variable search
+                    monitor.observeVariable();
 
                     // perform a local search on this variable
+                    Variable var = vector.getVariable(index);
                     localSearch(var);
 
-                    // check if the current objective value has improvement
+                    // check if the current objective value has improved on last
                     ObjectiveValue current = objFun.evaluate(vector);
-                    nonImprovement = current.betterThan(original) ? 0 : nonImprovement + 1;
+                    if (current.betterThan(lastImprovement)) {
+                        lastImprovement = current;
+                        nonImprovement = 0;
+                    } else {
+                        nonImprovement ++;
+                    }
+
+                    index ++;
                 }
             } while (nonImprovement < vector.size());
 
