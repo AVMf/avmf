@@ -36,8 +36,6 @@ public class AVM {
             do {
                 int nonImprovement = 0;
                 do {
-                    // TODO: improvement should be an integer (last time since improvement)
-                    // so that doesn't evaluate last few variables unnecessarily
                     ObjectiveValue original = objFun.evaluate(vector);
 
                     // alternate through the variables
