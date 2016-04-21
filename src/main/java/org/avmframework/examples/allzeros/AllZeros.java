@@ -8,9 +8,6 @@ import org.avmframework.TerminationPolicy;
 import org.avmframework.Vector;
 import org.avmframework.initialization.Initializer;
 import org.avmframework.initialization.RandomInitializer;
-import org.avmframework.localsearch.GeometricSearch;
-import org.avmframework.localsearch.IteratedPatternSearch;
-import org.avmframework.localsearch.LatticeSearch;
 import org.avmframework.localsearch.LocalSearch;
 import org.avmframework.objective.NumericObjectiveValue;
 import org.avmframework.objective.ObjectiveFunction;
@@ -44,10 +41,12 @@ public class AllZeros {
             vector.addVariable(new IntegerVariable(INIT, MIN, MAX));
         }
 
-        // set up the local search
-        //LocalSearch localSearch = new IteratedPatternSearch();
-        LocalSearch localSearch = new GeometricSearch();
-        //LocalSearch localSearch = new LatticeSearch();
+        // set up the local search ("IteratedPatternSearch" / "GeometricSearch" / "LatticeSearch")
+        String localSearchName = "IteratedPatternSearch";
+        if (args.length > 0) {
+            localSearchName = args[0];
+        }
+        LocalSearch localSearch = LocalSearch.instantiate(localSearchName);
 
         // set up the termination policy
         TerminationPolicy terminationPolicy = TerminationPolicy.maxEvaluations(MAX_EVALUATIONS);
