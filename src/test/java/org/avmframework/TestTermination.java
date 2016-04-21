@@ -2,6 +2,7 @@ package org.avmframework;
 
 import org.junit.*;
 
+import static junit.framework.TestCase.assertTrue;
 import static org.avmframework.AVMs.anyAVMWithTerminationPolicy;
 import static org.avmframework.ObjectiveFunctions.flatObjectiveFunction;
 import static org.avmframework.Vectors.singleIntegerVector;
@@ -25,15 +26,10 @@ public class TestTermination {
     }
 
     protected void testRestarts(int limit) {
-        int numRestarts = limit - 1;
-        if (numRestarts < 0) {
-            numRestarts = 0;
-        }
-
         TerminationPolicy tp = TerminationPolicy.maxRestarts(limit);
         AVM avm = anyAVMWithTerminationPolicy(tp);
         Monitor monitor = avm.search(singleIntegerVector(), flatObjectiveFunction());
-        assertEquals(numRestarts, monitor.getNumRestarts());
+        assertEquals(limit, monitor.getNumRestarts());
     }
 
     @Test
@@ -56,5 +52,14 @@ public class TestTermination {
         AVM avm = anyAVMWithTerminationPolicy(tp);
         Monitor monitor = avm.search(singleIntegerVector(), flatObjectiveFunction());
         assertEquals(limit, monitor.getNumEvaluations());
+    }
+
+    @Test
+    public void testTimeLimit() {
+        int minTime = 5;
+        TerminationPolicy tp = TerminationPolicy.runningTime(minTime);
+        AVM avm = anyAVMWithTerminationPolicy(tp);
+        Monitor monitor = avm.search(singleIntegerVector(), flatObjectiveFunction());
+        assertTrue(minTime <= monitor.getRunningTime());
     }
 }

@@ -20,6 +20,8 @@ public abstract class ObjectiveFunction {
     }
 
     public ObjectiveValue evaluate(Vector vector) throws TerminationException {
+        monitor.observeVector();
+
         if (useCache && previousVals.containsKey(vector)) {
             return previousVals.get(vector);
         }
@@ -31,7 +33,7 @@ public abstract class ObjectiveFunction {
         }
 
         if (monitor != null) {
-            monitor.observeVector(vector, objVal);
+            monitor.observePreviouslyUnseenVector(vector, objVal);
         }
 
         return objVal;

@@ -45,6 +45,7 @@ public class AVM {
             performSearch();
         } catch (TerminationException e) {
             // the search has ended
+            monitor.observeTermination();
         }
 
         return monitor;
@@ -74,8 +75,6 @@ public class AVM {
             // restart the search
             monitor.observeRestart();
             restarter.initialize(vector);
-
-            System.out.println(monitor.getNumEvaluations());
 
         // the loop terminates when a TerminationException is thrown
         } while (true);

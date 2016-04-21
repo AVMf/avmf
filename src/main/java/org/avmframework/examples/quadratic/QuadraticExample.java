@@ -63,6 +63,10 @@ public class QuadraticExample  {
         // output the results
         System.out.println("Best solution: " + monitor.getBestVector().getVariable(0));
         System.out.println("Best objective value: " + monitor.getBestObjVal());
-        System.out.println("Number of objective function evaluations: " + monitor.getNumEvaluations());
+        System.out.println(
+                "Number of objective function evaluations: " + monitor.getNumEvaluations() +
+                        " (unique: " + monitor.getNumUniqueEvaluations() + ")"
+        );
+        System.out.println("Running time: " + monitor.getRunningTime() + "ms");
     }
 }
