@@ -34,11 +34,10 @@ public class AVM {
             initializer.initialize(vector);
 
             do {
-                boolean improvement;
+                int nonImprovement = 0;
                 do {
                     // TODO: improvement should be an integer (last time since improvement)
                     // so that doesn't evaluate last few variables unnecessarily
-                    improvement = false;
                     ObjectiveValue original = objFun.evaluate(vector);
 
                     // alternate through the variables
@@ -48,10 +47,12 @@ public class AVM {
 
                         ObjectiveValue current = objFun.evaluate(vector);
                         if (current.betterThan(original)) {
-                            improvement = true;
+                            nonImprovement = 0;
+                        } else {
+                            nonImprovement ++;
                         }
                     }
-                } while (improvement);
+                } while (nonImprovement < vector.size());
 
                 // restart the search
                 monitor.observeRestart();

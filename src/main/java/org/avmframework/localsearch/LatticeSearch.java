@@ -15,10 +15,6 @@ public class LatticeSearch extends PatternThenEliminationSearch {
     public LatticeSearch() {
     }
 
-    public LatticeSearch(RandomGenerator rg) {
-        super(rg);
-    }
-
     protected void performEliminationSearch(int l, int r) throws TerminationException {
 
         int interval = r - l + 2;

@@ -1,16 +1,8 @@
 package org.avmframework.localsearch;
 
-import org.apache.commons.math3.random.RandomGenerator;
 import org.avmframework.TerminationException;
 
 public abstract class PatternThenEliminationSearch extends PatternSearch {
-
-    public PatternThenEliminationSearch() {
-    }
-
-    public PatternThenEliminationSearch(RandomGenerator rg) {
-        super(rg);
-    }
 
     protected void performSearch() throws TerminationException {
         initialize();

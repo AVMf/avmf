@@ -8,6 +8,10 @@ public abstract class ObjectiveValue<T extends ObjectiveValue> implements Compar
         return compareTo(other) > 0;
     }
 
+    public boolean sameAs(T other) {
+        return compareTo(other) == 0;
+    }
+
     public boolean worseThan(T other) {
         return compareTo(other) < 0;
     }
