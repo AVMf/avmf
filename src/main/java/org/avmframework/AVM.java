@@ -49,7 +49,7 @@ public class AVM {
             while (true) {
 
                 // search over the vector's variables
-                vectorVariableSearch(vector);
+                alternatingVariableSearch(vector);
 
                 // restart the search
                 monitor.observeRestart();
@@ -64,19 +64,7 @@ public class AVM {
         return monitor;
     }
 
-    protected void variableSearch(Variable var) throws TerminationException {
-        if (var instanceof AtomicVariable) {
-            atomicVariableSearch((AtomicVariable) var);
-        } else if (var instanceof VectorVariable) {
-            vectorVariableSearch((VectorVariable) var);
-        }
-    }
-
-    protected void atomicVariableSearch(AtomicVariable atomicVar) throws TerminationException {
-        localSearch.search(atomicVar, vector, objFun);
-    }
-
-    protected void vectorVariableSearch(VectorVariable vectorVar) throws TerminationException {
+    protected void alternatingVariableSearch(VectorVariable vectorVar) throws TerminationException {
         ObjectiveValue lastImprovement = objFun.evaluate(vector);
         int nonImprovement = 0;
 
@@ -102,5 +90,24 @@ public class AVM {
                 variableIndex++;
             }
         }
+    }
+
+    protected void variableSearch(Variable var) throws TerminationException {
+        if (var instanceof AtomicVariable) {
+            atomicVariableSearch((AtomicVariable) var);
+        } else if (var instanceof VectorVariable) {
+            vectorVariableSearch((VectorVariable) var);
+        }
+    }
+
+    protected void atomicVariableSearch(AtomicVariable atomicVar) throws TerminationException {
+        localSearch.search(atomicVar, vector, objFun);
+    }
+
+    protected void vectorVariableSearch(VectorVariable vectorVar) throws TerminationException {
+        // TODO
+        // try increase and decrease size moves
+        
+        alternatingVariableSearch(vectorVar);
     }
 }
