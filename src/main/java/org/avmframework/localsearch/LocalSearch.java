@@ -20,4 +20,14 @@ public abstract class LocalSearch {
     }
 
     protected abstract void performSearch() throws TerminationException;
+
+    public static LocalSearch instantiate(String name) {
+        try {
+            String localSearchClassName = "org.avmframework.localsearch." + name;
+            Class<?> localSearchClass = Class.forName(localSearchClassName);
+            return (LocalSearch) localSearchClass.newInstance();
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

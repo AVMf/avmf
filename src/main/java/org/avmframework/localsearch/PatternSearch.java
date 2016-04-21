@@ -34,7 +34,6 @@ public class PatternSearch extends LocalSearch {
         // find the best direction
         boolean leftBetter = left.betterThan(initial);
         boolean rightBetter = right.betterThan(initial);
-
         if (leftBetter) {
             dir = -1;
         } else if (rightBetter) {
