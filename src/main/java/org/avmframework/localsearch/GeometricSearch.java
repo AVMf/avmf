@@ -1,17 +1,9 @@
 package org.avmframework.localsearch;
 
-import org.apache.commons.math3.random.RandomGenerator;
 import org.avmframework.TerminationException;
 import org.avmframework.objective.ObjectiveValue;
 
 public class GeometricSearch extends PatternThenEliminationSearch {
-
-    public GeometricSearch() {
-    }
-
-    public GeometricSearch(RandomGenerator rg) {
-        super(rg);
-    }
 
     protected void performEliminationSearch(int l, int r) throws TerminationException {
         while (l < r) {

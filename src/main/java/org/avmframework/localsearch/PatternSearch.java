@@ -1,22 +1,12 @@
 package org.avmframework.localsearch;
 
-import org.apache.commons.math3.random.RandomGenerator;
 import org.avmframework.TerminationException;
 import org.avmframework.objective.ObjectiveValue;
 
 public class PatternSearch extends LocalSearch {
 
-    protected RandomGenerator rg = null;
-
     protected ObjectiveValue initial, last, next;
     protected int k, x, dir, lastX, nextX;
-
-    public PatternSearch() {
-    }
-
-    public PatternSearch(RandomGenerator rg) {
-        this.rg = rg;
-    }
 
     protected void performSearch() throws TerminationException {
         initialize();
@@ -44,13 +34,8 @@ public class PatternSearch extends LocalSearch {
         // find the best direction
         boolean leftBetter = left.betterThan(initial);
         boolean rightBetter = right.betterThan(initial);
-        if (leftBetter && rightBetter) {
-            if (rg == null) {
-                dir = -1;
-            } else {
-                dir = rg.nextBoolean() ? -1 : 1;
-            }
-        } else if (leftBetter) {
+
+        if (leftBetter) {
             dir = -1;
         } else if (rightBetter) {
             dir = 1;
