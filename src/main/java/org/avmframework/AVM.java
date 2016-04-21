@@ -13,7 +13,6 @@ public class AVM {
     protected TerminationPolicy tp;
     protected Initializer initializer, restarter;
 
-    protected Vector vector;
     protected ObjectiveFunction objFun;
     protected Monitor monitor;
 
@@ -32,22 +31,15 @@ public class AVM {
         // set up the monitor
         monitor = new Monitor(tp);
 
-        // set up the vector
-        this.vector = vector;
-        if (vector.size() == 0) {
-            // the vector contains no variables to optimize
-            throw new EmptyVectorException();
-        }
-
         // set up the objective function
         this.objFun = objFun;
         objFun.setMonitor(monitor);
 
-        // initialize the monitor
-        monitor.initialize();
+        // initialize the vector
+        initializer.initialize(vector);
 
         try {
-            performSearch();
+            vectorSearch(vector);
         } catch (TerminationException e) {
             // the search has ended
             monitor.observeTermination();
@@ -56,9 +48,11 @@ public class AVM {
         return monitor;
     }
 
-    protected void performSearch() throws TerminationException {
-        // initialize the vector
-        initializer.initialize(vector);
+    protected void vectorSearch(Vector vector) throws TerminationException {
+        // no variables to optimize, return
+        if (vector.size() == 0) {
+            return;
+        }
 
         // the loop terminates when a TerminationException is thrown
         while (true) {
@@ -67,18 +61,14 @@ public class AVM {
             int nonImprovement = 0;
 
             while (nonImprovement < vector.size()) {
-                // log this vector cycle);
-                monitor.observeVectorCycle();
 
                 // alternate through the variables
                 int variableIndex = 0;
                 while (variableIndex < vector.size() && nonImprovement < vector.size()) {
-                    // log this variable search
-                    monitor.observeVariable();
 
                     // perform a local search on this variable
                     Variable var = vector.getVariable(variableIndex);
-                    localSearch(var);
+                    variableSearch(var, vector);
 
                     // check if the current objective value has improved on last
                     ObjectiveValue current = objFun.evaluate(vector);
@@ -100,14 +90,14 @@ public class AVM {
     }
 
 
-    protected void localSearch(Variable var) throws TerminationException {
+    protected void variableSearch(Variable var, Vector vector) throws TerminationException {
         if (var instanceof AtomicVariable) {
-            atomicVariableSearch((AtomicVariable) var);
+            atomicVariableSearch((AtomicVariable) var, vector);
         } // else
         // TODO: vector variables
     }
 
-    protected void atomicVariableSearch(AtomicVariable av) throws TerminationException {
+    protected void atomicVariableSearch(AtomicVariable av, Vector vector) throws TerminationException {
         localSearch.search(av, vector, objFun);
     }
 }
