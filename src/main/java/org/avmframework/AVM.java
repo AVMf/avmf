@@ -49,7 +49,7 @@ public class AVM {
             while (true) {
 
                 // search over the vector's variables
-                vectorVariableSearch(vector);
+                alternatingVariableSearch(vector);
 
                 // restart the search
                 monitor.observeRestart();
@@ -64,19 +64,7 @@ public class AVM {
         return monitor;
     }
 
-    protected void variableSearch(Variable var) throws TerminationException {
-        if (var instanceof AtomicVariable) {
-            atomicVariableSearch((AtomicVariable) var);
-        } else if (var instanceof VectorVariable) {
-            vectorVariableSearch((VectorVariable) var);
-        }
-    }
-
-    protected void atomicVariableSearch(AtomicVariable atomicVar) throws TerminationException {
-        localSearch.search(atomicVar, vector, objFun);
-    }
-
-    protected void vectorVariableSearch(VectorVariable vectorVar) throws TerminationException {
+    protected void alternatingVariableSearch(VectorVariable vectorVar) throws TerminationException {
         ObjectiveValue lastImprovement = objFun.evaluate(vector);
         int nonImprovement = 0;
 
@@ -100,6 +88,61 @@ public class AVM {
                 }
 
                 variableIndex++;
+            }
+        }
+    }
+
+    protected void variableSearch(Variable var) throws TerminationException {
+        if (var instanceof AtomicVariable) {
+            atomicVariableSearch((AtomicVariable) var);
+        } else if (var instanceof VectorVariable) {
+            vectorVariableSearch((VectorVariable) var);
+        }
+    }
+
+    protected void atomicVariableSearch(AtomicVariable atomicVar) throws TerminationException {
+        localSearch.search(atomicVar, vector, objFun);
+    }
+
+    protected void vectorVariableSearch(VectorVariable vectorVar) throws TerminationException {
+        ObjectiveValue current = null, next = objFun.evaluate(vector);
+
+        // try moves that increase the vector size
+        changeVectorVariableSize(vectorVar, current, next, true);
+
+        // try moves that decrease the vector size
+        changeVectorVariableSize(vectorVar, current, next, false);
+
+        // now for the alternating variable search...
+        alternatingVariableSearch(vectorVar);
+    }
+
+    protected void changeVectorVariableSize(VectorVariable vectorVar,
+                                            ObjectiveValue current, ObjectiveValue next,
+                                            boolean increase) throws TerminationException {
+        int currentSize, nextSize = vectorVar.size();
+
+        // try moves that increase the vector size
+        do {
+            current = next;
+            currentSize = nextSize;
+
+            if (increase) {
+                vectorVar.increaseSize();
+            } else {
+                vectorVar.decreaseSize();
+            }
+
+            next = objFun.evaluate(vector);
+            nextSize = currentSize;
+        } while (next.betterThan(current));
+
+        // reverse the last move, if there was a change
+        if (nextSize > currentSize) {
+            if (increase) {
+                vectorVar.decreaseSize();
+            } else {
+                vectorVar.increaseSize();
             }
         }
     }
