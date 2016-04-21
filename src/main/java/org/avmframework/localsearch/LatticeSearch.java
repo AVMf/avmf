@@ -13,7 +13,7 @@ import java.util.List;
 import static org.avmframework.localsearch.IntegerFibonacciNumbers.fibonacci;
 import static org.avmframework.localsearch.IntegerFibonacciNumbers.positionOfSmallestFibonacciNumberGreaterOrEqualTo;
 
-public class LatticeSearch extends PatternSearch {
+public class LatticeSearch extends PatternEliminationSearch {
 
     public LatticeSearch() {
     }
@@ -22,18 +22,7 @@ public class LatticeSearch extends PatternSearch {
         super(rg);
     }
 
-    public void search(AtomicVariable var, Vector vector, ObjectiveFunction objFun) throws TerminationException {
-        super.search(var, vector, objFun);
-
-        if (dir == 0) {
-            return;
-        }
-
-        int xPrev = x - k / var.getAccelerationFactor();
-        int xNext = x + k;
-
-        int l = Math.min(xPrev, xNext);
-        int r = Math.max(xPrev, xNext);
+    protected void performEliminationSearch(int l, int r) throws TerminationException {
 
         int n = positionOfSmallestFibonacciNumberGreaterOrEqualTo(r - l + 2);
         int minN = positionOfSmallestFibonacciNumberGreaterOrEqualTo(2);

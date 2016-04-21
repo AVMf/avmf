@@ -7,7 +7,7 @@ import org.avmframework.objective.ObjectiveFunction;
 import org.avmframework.objective.ObjectiveValue;
 import org.avmframework.variable.AtomicVariable;
 
-public class GeometricSearch extends PatternSearch {
+public class GeometricSearch extends PatternEliminationSearch {
 
     public GeometricSearch() {
     }
@@ -16,33 +16,21 @@ public class GeometricSearch extends PatternSearch {
         super(rg);
     }
 
-    public void search(AtomicVariable var, Vector vector, ObjectiveFunction objFun) throws TerminationException {
-        super.search(var, vector, objFun);
-
-        if (dir == 0) {
-            return;
-        }
-
-        int xPrev = x - k / var.getAccelerationFactor();
-        int xNext = x + k;
-
-        int l = Math.min(xPrev, xNext);
-        int r = Math.max(xPrev, xNext);
-
+    protected void performEliminationSearch(int l, int r) throws TerminationException {
         while (l < r) {
-            int mid = (int) Math.floor((l + r) / 2.0);
-            int midPlusOne = mid + 1;
+            int m = (int) Math.floor((l + r) / 2.0);
+            int n = m + 1;
 
-            var.setValue(mid);
-            ObjectiveValue midObjVal = objFun.evaluate(vector);
+            var.setValue(m);
+            ObjectiveValue mObj = objFun.evaluate(vector);
 
-            var.setValue(midPlusOne);
-            ObjectiveValue midPlusStepObjVal = objFun.evaluate(vector);
+            var.setValue(n);
+            ObjectiveValue nObjVal = objFun.evaluate(vector);
 
-            if (midObjVal.betterThan(midPlusStepObjVal)) {
-                r = mid;
+            if (mObj.betterThan(nObjVal)) {
+                r = m;
             } else {
-                l = midPlusOne;
+                l = n;
             }
         }
     }

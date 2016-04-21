@@ -2,10 +2,7 @@ package org.avmframework.localsearch;
 
 import org.apache.commons.math3.random.RandomGenerator;
 import org.avmframework.TerminationException;
-import org.avmframework.Vector;
-import org.avmframework.objective.ObjectiveFunction;
 import org.avmframework.objective.ObjectiveValue;
-import org.avmframework.variable.*;
 
 public class IteratedPatternSearch extends PatternSearch {
 
@@ -16,11 +13,15 @@ public class IteratedPatternSearch extends PatternSearch {
         super(rg);
     }
 
-    public void search(AtomicVariable var, Vector vector, ObjectiveFunction objFun) throws TerminationException {
+    protected void performSearch() throws TerminationException {
         ObjectiveValue next = objFun.evaluate(vector), last;
 
         do {
-            super.search(var, vector, objFun);
+            initialize();
+            if (establishDirection()) {
+                patternSearch();
+            }
+
             last = next;
             next = objFun.evaluate(vector);
         } while (next.betterThan(last));
