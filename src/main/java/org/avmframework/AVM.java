@@ -6,6 +6,7 @@ import org.avmframework.objective.ObjectiveFunction;
 import org.avmframework.objective.ObjectiveValue;
 import org.avmframework.variable.AtomicVariable;
 import org.avmframework.variable.Variable;
+import org.avmframework.variable.VectorVariable;
 
 public class AVM {
 
@@ -13,8 +14,9 @@ public class AVM {
     protected TerminationPolicy tp;
     protected Initializer initializer, restarter;
 
-    protected ObjectiveFunction objFun;
     protected Monitor monitor;
+    protected ObjectiveFunction objFun;
+    protected Vector vector;
 
     public AVM(LocalSearch localSearch, TerminationPolicy tp, Initializer initializer) {
         this(localSearch, tp, initializer, initializer);
@@ -29,17 +31,31 @@ public class AVM {
 
     public Monitor search(Vector vector, ObjectiveFunction objFun) {
         // set up the monitor
-        monitor = new Monitor(tp);
+        this.monitor = new Monitor(tp);
 
         // set up the objective function
         this.objFun = objFun;
         objFun.setMonitor(monitor);
 
         // initialize the vector
+        this.vector = vector;
         initializer.initialize(vector);
+        if (vector.size() == 0) {
+            throw new EmptyVectorException();
+        }
 
         try {
-            vectorSearch(vector);
+            // the loop terminates when a TerminationException is thrown
+            while (true) {
+
+                // search over the vector's variables
+                vectorVariableSearch(vector);
+
+                // restart the search
+                monitor.observeRestart();
+                restarter.initialize(vector);
+            }
+
         } catch (TerminationException e) {
             // the search has ended
             monitor.observeTermination();
@@ -48,56 +64,43 @@ public class AVM {
         return monitor;
     }
 
-    protected void vectorSearch(Vector vector) throws TerminationException {
-        // no variables to optimize, return
-        if (vector.size() == 0) {
-            return;
-        }
-
-        // the loop terminates when a TerminationException is thrown
-        while (true) {
-            // set up last improvement info
-            ObjectiveValue lastImprovement = objFun.evaluate(vector);
-            int nonImprovement = 0;
-
-            while (nonImprovement < vector.size()) {
-
-                // alternate through the variables
-                int variableIndex = 0;
-                while (variableIndex < vector.size() && nonImprovement < vector.size()) {
-
-                    // perform a local search on this variable
-                    Variable var = vector.getVariable(variableIndex);
-                    variableSearch(var, vector);
-
-                    // check if the current objective value has improved on last
-                    ObjectiveValue current = objFun.evaluate(vector);
-                    if (current.betterThan(lastImprovement)) {
-                        lastImprovement = current;
-                        nonImprovement = 0;
-                    } else {
-                        nonImprovement ++;
-                    }
-
-                    variableIndex ++;
-                }
-            }
-
-            // restart the search
-            monitor.observeRestart();
-            restarter.initialize(vector);
-        }
-    }
-
-
-    protected void variableSearch(Variable var, Vector vector) throws TerminationException {
+    protected void variableSearch(Variable var) throws TerminationException {
         if (var instanceof AtomicVariable) {
-            atomicVariableSearch((AtomicVariable) var, vector);
-        } // else
-        // TODO: vector variables
+            atomicVariableSearch((AtomicVariable) var);
+        } else if (var instanceof VectorVariable) {
+            vectorVariableSearch((VectorVariable) var);
+        }
     }
 
-    protected void atomicVariableSearch(AtomicVariable av, Vector vector) throws TerminationException {
-        localSearch.search(av, vector, objFun);
+    protected void atomicVariableSearch(AtomicVariable atomicVar) throws TerminationException {
+        localSearch.search(atomicVar, vector, objFun);
+    }
+
+    protected void vectorVariableSearch(VectorVariable vectorVar) throws TerminationException {
+        ObjectiveValue lastImprovement = objFun.evaluate(vector);
+        int nonImprovement = 0;
+
+        while (nonImprovement < vectorVar.size()) {
+
+            // alternate through the variables
+            int variableIndex = 0;
+            while (variableIndex < vectorVar.size() && nonImprovement < vectorVar.size()) {
+
+                // perform a local search on this variable
+                Variable var = vectorVar.getVariable(variableIndex);
+                variableSearch(var);
+
+                // check if the current objective value has improved on the last
+                ObjectiveValue current = objFun.evaluate(vector);
+                if (current.betterThan(lastImprovement)) {
+                    lastImprovement = current;
+                    nonImprovement = 0;
+                } else {
+                    nonImprovement++;
+                }
+
+                variableIndex++;
+            }
+        }
     }
 }

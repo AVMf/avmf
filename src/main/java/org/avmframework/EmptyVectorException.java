@@ -1,7 +1,8 @@
 package org.avmframework;
 
-/**
- * Created by phil on 21/04/2016.
- */
-public class EmptyVectorException {
+public class EmptyVectorException extends RuntimeException {
+
+    public EmptyVectorException() {
+        super("The vector to be optimized does not contain any variables");
+    }
 }

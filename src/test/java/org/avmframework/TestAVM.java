@@ -15,11 +15,9 @@ import static org.junit.Assert.assertEquals;
 
 public class TestAVM {
 
-    @Test
+    @Test(expected=EmptyVectorException.class)
     public void testUsingEmptyVector() {
-        AVM avm = anyAVM();
-        Monitor monitor = avm.search(emptyVector(), flat());
-        assertEquals(0, monitor.getNumEvaluations());
+        anyAVM().search(emptyVector(), flat());
     }
 
     @Test
