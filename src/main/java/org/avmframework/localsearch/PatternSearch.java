@@ -1,39 +1,28 @@
 package org.avmframework.localsearch;
 
+import org.apache.commons.math3.random.RandomGenerator;
 import org.avmframework.TerminationException;
-import org.avmframework.Vector;
-import org.avmframework.localsearch.tiebreaking.TiedDirectionPolicy;
-import org.avmframework.localsearch.tiebreaking.UseLeft;
-import org.avmframework.objective.ObjectiveFunction;
 import org.avmframework.objective.ObjectiveValue;
-import org.avmframework.variable.AtomicVariable;
 
 public class PatternSearch extends LocalSearch {
 
-    public final static TiedDirectionPolicy DEFAULT_TIED_DIRECTION_POLICY = new UseLeft();
-
-    protected AtomicVariable var;
-    protected Vector vector;
-    protected ObjectiveFunction objFun;
-    protected TiedDirectionPolicy tdp = DEFAULT_TIED_DIRECTION_POLICY;
+    protected RandomGenerator rg = null;
 
     protected ObjectiveValue initial, last, next;
-    protected int k, x, dir;
+    protected int k, x, dir, lastX, nextX;
 
     public PatternSearch() {
     }
 
-    public PatternSearch(TiedDirectionPolicy tdp) {
-        this.tdp = tdp;
+    public PatternSearch(RandomGenerator rg) {
+        this.rg = rg;
     }
 
-    public void search(AtomicVariable var, Vector vector, ObjectiveFunction objFun) throws TerminationException {
-        this.var = var;
-        this.objFun = objFun;
-        this.vector = vector;
+    protected void performSearch() throws TerminationException {
         initialize();
-        establishDirection();
-        doPatternMoves();
+        if (establishDirection()) {
+            patternSearch();
+        }
     }
 
     protected void initialize() throws TerminationException {
@@ -43,7 +32,7 @@ public class PatternSearch extends LocalSearch {
         dir = 0;
     }
 
-    protected void establishDirection() throws TerminationException {
+    protected boolean establishDirection() throws TerminationException {
         // evaluate left move
         var.setValue(x - k);
         ObjectiveValue left = objFun.evaluate(vector);
@@ -56,7 +45,11 @@ public class PatternSearch extends LocalSearch {
         boolean leftBetter = left.betterThan(initial);
         boolean rightBetter = right.betterThan(initial);
         if (leftBetter && rightBetter) {
-            dir = tdp.resolveDirection(left, right);
+            if (rg == null) {
+                dir = -1;
+            } else {
+                dir = rg.nextBoolean() ? -1 : 1;
+            }
         } else if (leftBetter) {
             dir = -1;
         } else if (rightBetter) {
@@ -78,9 +71,11 @@ public class PatternSearch extends LocalSearch {
         } else if (dir == 0) {
             next = initial;
         }
+
+        return dir != 0;
     }
 
-    protected void doPatternMoves() throws TerminationException {
+    protected void patternSearch() throws TerminationException {
 
         while (next.betterThan(last)) {
             last = next;
