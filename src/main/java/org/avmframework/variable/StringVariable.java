@@ -9,6 +9,12 @@ public class StringVariable extends VectorVariable {
 
     protected String initialValue;
 
+    public static StringVariable createPrintableASCIICharacterVariable(
+            String initialValue, int maxSize, char charInitialValue) {
+        return new StringVariable(initialValue, maxSize, charInitialValue,
+                CharacterVariable.MIN_PRINTABLE_ASCII, CharacterVariable.MAX_PRINTABLE_ASCII);
+    }
+
     public StringVariable(String initialValue, int maxSize,
                           char charInitialValue, char charMin, char charMax) {
         this.initialValue = initialValue;
@@ -20,6 +26,8 @@ public class StringVariable extends VectorVariable {
         if (charMin > charMax) {
             throw new MinGreaterThanMaxException(charMin, charMax);
         }
+
+        setValueToInitial();
     }
 
     @Override
@@ -48,14 +56,15 @@ public class StringVariable extends VectorVariable {
     @Override
     public StringVariable deepCopy() {
         StringVariable copy = new StringVariable(initialValue, maxSize, charInitialValue, charMin, charMax);
+        copy.size = size;
         deepCopyVariables(copy);
         return copy;
     }
 
-    public String getValueAsString() {
+    public String asString() {
         String str = "";
         for (int i=0; i < size; i++) {
-            str += getVariable(i).getValueAsChar();
+            str += getVariable(i).asChar();
         }
         return str;
     }
@@ -89,6 +98,6 @@ public class StringVariable extends VectorVariable {
 
     @Override
     public String toString() {
-        return "\"" + getValueAsString() + "\"";
+        return "\"" + asString() + "\"";
     }
 }

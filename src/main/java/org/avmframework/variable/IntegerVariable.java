@@ -7,9 +7,10 @@ public class IntegerVariable extends AtomicVariable {
         if (min > max) {
             throw new MinGreaterThanMaxException(min, max);
         }
+        setValueToInitial();
     }
 
-    public double getValueAsInt() {
+    public int asInt() {
         return value;
     }
 
@@ -22,6 +23,6 @@ public class IntegerVariable extends AtomicVariable {
 
     @Override
     public String toString() {
-        return "" + getValueAsInt();
+        return "" + asInt();
     }
 }
