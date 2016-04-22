@@ -2,16 +2,8 @@ package org.avmframework.variable;
 
 public class IntegerVariable extends AtomicVariable {
 
-    public IntegerVariable(int initialValue) {
-        super(initialValue);
-    }
-
     public IntegerVariable(int initialValue, int min, int max) {
         super(initialValue, min, max);
-    }
-
-    public IntegerVariable(int initialValue, int min, int max, int accelerationFactor) {
-        super(initialValue, min, max, accelerationFactor);
     }
 
     public double getValueAsInt() {
@@ -20,7 +12,7 @@ public class IntegerVariable extends AtomicVariable {
 
     @Override
     public IntegerVariable deepCopy() {
-        IntegerVariable copy = new IntegerVariable(initialValue, min, max, accelerationFactor);
+        IntegerVariable copy = new IntegerVariable(initialValue, min, max);
         copy.value = value;
         return copy;
     }
@@ -29,5 +21,4 @@ public class IntegerVariable extends AtomicVariable {
     public String toString() {
         return "" + getValueAsInt();
     }
-
 }

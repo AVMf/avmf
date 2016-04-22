@@ -5,8 +5,19 @@ import org.avmframework.objective.ObjectiveValue;
 
 public class PatternSearch extends LocalSearch {
 
+    public static int ACCELERATION_FACTOR_DEFAULT = 2;
+
+    protected int accelerationFactor = ACCELERATION_FACTOR_DEFAULT;
+
     protected ObjectiveValue initial, last, next;
     protected int k, x, dir;
+
+    public PatternSearch() {
+    }
+
+    public PatternSearch(int accelerationFactor) {
+        this.accelerationFactor = accelerationFactor;
+    }
 
     protected void performSearch() throws TerminationException {
         initialize();
@@ -65,7 +76,7 @@ public class PatternSearch extends LocalSearch {
             last = next;
 
             // make the pattern move
-            k *= var.getAccelerationFactor();
+            k *= accelerationFactor;
             x += k * dir;
             var.setValue(x);
 

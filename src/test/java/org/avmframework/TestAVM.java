@@ -31,7 +31,7 @@ public class TestAVM {
             }
         };
 
-        AVM avm = new AVM(mockLocalSearch, TerminationPolicy.maxRestarts(0), new DefaultInitializer());
+        AVM avm = new AVM(mockLocalSearch, TerminationPolicy.createMaxRestartsTerminationPolicy(0), new DefaultInitializer());
         Monitor monitor = avm.search(vector, objFun);
 
         // 1 initial evaluation plus 10 following each variable search (of non-improvement)
@@ -57,7 +57,7 @@ public class TestAVM {
             }
         };
 
-        AVM avm = new AVM(mockLocalSearch, TerminationPolicy.maxRestarts(0), new DefaultInitializer());
+        AVM avm = new AVM(mockLocalSearch, TerminationPolicy.createMaxRestartsTerminationPolicy(0), new DefaultInitializer());
         Monitor monitor = avm.search(vector, objFun);
 
         // 1 initial evaluation plus 5 following each variable search improvement, plus 10 non-improvement.

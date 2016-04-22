@@ -1,6 +1,5 @@
 package org.avmframework.localsearch;
 
-import org.apache.commons.math3.random.RandomGenerator;
 import org.avmframework.TerminationException;
 import org.avmframework.objective.ObjectiveValue;
 
@@ -13,6 +12,10 @@ import static org.avmframework.localsearch.IntegerFibonacciNumbers.positionOfSma
 public class LatticeSearch extends PatternThenEliminationSearch {
 
     public LatticeSearch() {
+    }
+
+    public LatticeSearch(int accelerationFactor) {
+        super(accelerationFactor);
     }
 
     protected void performEliminationSearch(int l, int r) throws TerminationException {
