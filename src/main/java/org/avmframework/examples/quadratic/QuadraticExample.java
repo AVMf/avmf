@@ -29,7 +29,7 @@ public class QuadraticExample  {
         ObjectiveFunction objFun = new ObjectiveFunction() {
             @Override
             protected ObjectiveValue computeObjectiveValue(Vector vector) {
-                double x = ((FloatingPointVariable) vector.getVariable(0)).getValueAsDouble();
+                double x = ((FloatingPointVariable) vector.getVariable(0)).asDouble();
                 double y = (A * x * x) + (B * x) + C;
                 double distance = Math.abs(y);
                 return NumericObjectiveValue.LowerIsBetterObjectiveValue(distance, 0);

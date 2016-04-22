@@ -14,9 +14,10 @@ public class CharacterVariable extends AtomicVariable {
         if (min > max) {
             throw new MinGreaterThanMaxException(min, max);
         }
+        setValueToInitial();
     }
 
-    public char getValueAsChar() {
+    public char asChar() {
         return (char) value;
     }
 
@@ -29,7 +30,7 @@ public class CharacterVariable extends AtomicVariable {
 
     @Override
     public String toString() {
-        return "" + getValueAsChar();
+        return "" + asChar();
     }
 }
 

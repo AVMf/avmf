@@ -11,24 +11,26 @@ public class TestStringVariable {
 
     @Test
     public void testInitialValue() {
-        strVar.setValueToInitial();
         assertEquals(4, strVar.size());
-        assertEquals("test", strVar.getValueAsString());
+        assertEquals("test", strVar.asString());
     }
 
     @Test
     public void testIncreaseSize() {
-        strVar.setValueToInitial();
         strVar.increaseSize();
         assertEquals(5, strVar.size());
-        assertEquals("test ", strVar.getValueAsString());
+        assertEquals("test ", strVar.asString());
     }
 
     @Test
     public void testDecreaseSize() {
-        strVar.setValueToInitial();
         strVar.decreaseSize();
         assertEquals(3, strVar.size());
-        assertEquals("tes", strVar.getValueAsString());
+        assertEquals("tes", strVar.asString());
+    }
+
+    @Test
+    public void testAsString() {
+        assertEquals("test", strVar.asString());
     }
 }

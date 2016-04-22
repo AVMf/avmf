@@ -10,9 +10,10 @@ public class FloatingPointVariable extends AtomicVariable {
         if (min > max) {
             throw new MinGreaterThanMaxException(min, max);
         }
+        setValueToInitial();
     }
 
-    public double getValueAsDouble() {
+    public double asDouble() {
         return intToDouble(value, precision);
     }
 
@@ -43,7 +44,7 @@ public class FloatingPointVariable extends AtomicVariable {
 
     @Override
     public String toString() {
-        return "" + getValueAsDouble();
+        return "" + asDouble();
     }
 
     private static int doubleToInt(double value, int precision) {

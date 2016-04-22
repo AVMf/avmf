@@ -40,6 +40,7 @@ public class AVM {
         // initialize the vector
         this.vector = vector;
         initializer.initialize(vector);
+
         if (vector.size() == 0) {
             throw new EmptyVectorException();
         }
