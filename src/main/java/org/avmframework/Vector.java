@@ -10,7 +10,6 @@ public class Vector extends VectorVariable {
 
     public void addVariable(Variable variable) {
         variables.add(variable);
-        size ++; // TODO ?
     }
 
     public List<Variable> getVariables() {
