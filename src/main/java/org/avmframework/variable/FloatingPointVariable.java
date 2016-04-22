@@ -4,9 +4,6 @@ public class FloatingPointVariable extends AtomicVariable {
 
     protected int precision;
 
-    protected FloatingPointVariable() {
-    }
-
     public FloatingPointVariable(double initialValue, int precision) {
         super(doubleToInt(initialValue, precision));
         this.precision = precision;
@@ -17,8 +14,9 @@ public class FloatingPointVariable extends AtomicVariable {
         this.precision = precision;
     }
 
-    public FloatingPointVariable(double initialValue, int precision, double min, double max, int accelerationBase) {
-        super(doubleToInt(initialValue, precision), doubleToInt(min, precision), doubleToInt(max, precision), accelerationBase);
+    public FloatingPointVariable(double initialValue, int precision, double min, double max, int accelerationFactor) {
+        super(doubleToInt(initialValue, precision), doubleToInt(min, precision),
+                doubleToInt(max, precision), accelerationFactor);
         this.precision = precision;
     }
 
@@ -28,13 +26,8 @@ public class FloatingPointVariable extends AtomicVariable {
 
     @Override
     public FloatingPointVariable deepCopy() {
-        FloatingPointVariable copy = new FloatingPointVariable();
-        copy.initialValue = initialValue;
-        copy.min = min;
-        copy.max = max;
-        copy.accelerationFactor = accelerationFactor;
+        FloatingPointVariable copy = new FloatingPointVariable(initialValue, precision, min, max, accelerationFactor);
         copy.value = value;
-        copy.precision = precision;
         return copy;
     }
 
