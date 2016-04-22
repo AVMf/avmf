@@ -7,6 +7,9 @@ public class FloatingPointVariable extends AtomicVariable {
     public FloatingPointVariable(double initialValue, int precision, double min, double max) {
         super(doubleToInt(initialValue, precision), doubleToInt(min, precision), doubleToInt(max, precision));
         this.precision = precision;
+        if (min > max) {
+            throw new MinGreaterThanMaxException(min, max);
+        }
     }
 
     public double getValueAsDouble() {

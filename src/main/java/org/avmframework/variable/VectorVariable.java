@@ -24,8 +24,8 @@ public class VectorVariable extends Variable {
 
     public void increaseSize() {
         size ++;
-        if (size >= variables.size()) {
-            size = variables.size() - 1;
+        if (size > variables.size()) {
+            size = variables.size();
         }
     }
 

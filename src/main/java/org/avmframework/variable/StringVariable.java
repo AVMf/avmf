@@ -15,11 +15,35 @@ public class StringVariable extends VectorVariable {
         this.charInitialValue = charInitialValue;
         this.charMin = charMin;
         this.charMax = charMax;
+
+        if (minLength > maxLength) {
+            throw new MinGreaterThanMaxException(minLength, maxLength);
+        }
+
+        if (charMin > charMax) {
+            throw new MinGreaterThanMaxException(charMin, charMax);
+        }
     }
 
     @Override
     public CharacterVariable getVariable(int index) {
         return (CharacterVariable) variables.get(index);
+    }
+
+    @Override
+    public void increaseSize() {
+        size ++;
+        if (size > maxLength) {
+            size = maxLength;
+        }
+    }
+
+    @Override
+    public void decreaseSize() {
+        size --;
+        if (size < minLength) {
+            size = minLength;
+        }
     }
 
     @Override
@@ -29,9 +53,9 @@ public class StringVariable extends VectorVariable {
         for (int i=0; i < maxLength; i++) {
             char charValue = i < size ? initialValue.charAt(i) : charInitialValue;
             CharacterVariable charVar = new CharacterVariable(charValue, charMin, charMax);
+            charVar.setValueToInitial();
             variables.add(charVar);
         }
-
     }
 
     public String getValueAsString() {

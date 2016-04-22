@@ -11,6 +11,9 @@ public class CharacterVariable extends AtomicVariable {
 
     public CharacterVariable(char initialValue, char min, char max) {
         super(initialValue, min, max);
+        if (min > max) {
+            throw new MinGreaterThanMaxException(min, max);
+        }
     }
 
     public char getValueAsChar() {

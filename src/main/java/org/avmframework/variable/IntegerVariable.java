@@ -4,6 +4,9 @@ public class IntegerVariable extends AtomicVariable {
 
     public IntegerVariable(int initialValue, int min, int max) {
         super(initialValue, min, max);
+        if (min > max) {
+            throw new MinGreaterThanMaxException(min, max);
+        }
     }
 
     public double getValueAsInt() {
