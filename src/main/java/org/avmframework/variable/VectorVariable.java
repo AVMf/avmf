@@ -5,7 +5,7 @@ import org.apache.commons.math3.random.RandomGenerator;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VectorVariable extends Variable {
+public abstract class VectorVariable extends Variable {
 
     protected List<Variable> variables = new ArrayList<>();
     protected int size = 0;
@@ -51,9 +51,7 @@ public class VectorVariable extends Variable {
     }
 
     @Override
-    public VectorVariable deepCopy() {
-        return doDeepCopy(new VectorVariable());
-    }
+    public abstract VectorVariable deepCopy();
 
     protected VectorVariable doDeepCopy(VectorVariable copy) {
         for (Variable var : variables) {

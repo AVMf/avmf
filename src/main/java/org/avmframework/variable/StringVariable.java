@@ -1,5 +1,7 @@
 package org.avmframework.variable;
 
+import org.apache.commons.math3.random.RandomGenerator;
+
 public class StringVariable extends VectorVariable {
 
     protected int minLength, maxLength;
@@ -56,6 +58,18 @@ public class StringVariable extends VectorVariable {
             charVar.setValueToInitial();
             variables.add(charVar);
         }
+    }
+
+    @Override
+    public void setValueToRandom(RandomGenerator rg) {
+        // TODO: what to do about size here and in the parent
+        super.setValueToRandom(rg);
+    }
+
+    @Override
+    public StringVariable deepCopy() {
+        return (StringVariable) doDeepCopy(
+                new StringVariable(initialValue, minLength, maxLength, charInitialValue, charMin, charMax));
     }
 
     public String getValueAsString() {
