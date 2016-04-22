@@ -1,24 +1,36 @@
 package org.avmframework;
 
+import org.apache.commons.math3.random.RandomGenerator;
 import org.avmframework.variable.Variable;
-import org.avmframework.variable.VectorVariable;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Vector extends VectorVariable {
+public class Vector extends AbstractVector {
 
     public void addVariable(Variable variable) {
         variables.add(variable);
-        size ++;
     }
 
     public List<Variable> getVariables() {
         return new ArrayList<>(variables);
     }
 
-    @Override
+    public void setVariablesToInitial() {
+        for (Variable var : variables) {
+            var.setValueToInitial();
+        }
+    }
+
+    public void setVariablesToRandom(RandomGenerator rg) {
+        for (Variable var : variables) {
+            var.setValueToRandom(rg);
+        }
+    }
+
     public Vector deepCopy() {
-        return (Vector) doDeepCopy(new Vector());
+        Vector copy = new Vector();
+        deepCopyVariables(copy);
+        return copy;
     }
 }

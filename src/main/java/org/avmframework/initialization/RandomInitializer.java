@@ -13,6 +13,6 @@ public class RandomInitializer extends Initializer {
 
     @Override
     public void initialize(Vector vector) {
-        vector.setValueToRandom(rg);
+        vector.setVariablesToRandom(rg);
     }
 }

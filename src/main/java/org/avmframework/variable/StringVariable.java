@@ -4,23 +4,18 @@ import org.apache.commons.math3.random.RandomGenerator;
 
 public class StringVariable extends VectorVariable {
 
-    protected int minLength, maxLength;
+    protected int maxSize;
     protected char charInitialValue, charMin, charMax;
 
     protected String initialValue;
 
-    public StringVariable(String initialValue, int minLength, int maxLength,
+    public StringVariable(String initialValue, int maxSize,
                           char charInitialValue, char charMin, char charMax) {
         this.initialValue = initialValue;
-        this.minLength = minLength;
-        this.maxLength = maxLength;
+        this.maxSize = maxSize;
         this.charInitialValue = charInitialValue;
         this.charMin = charMin;
         this.charMax = charMax;
-
-        if (minLength > maxLength) {
-            throw new MinGreaterThanMaxException(minLength, maxLength);
-        }
 
         if (charMin > charMax) {
             throw new MinGreaterThanMaxException(charMin, charMax);
@@ -33,26 +28,10 @@ public class StringVariable extends VectorVariable {
     }
 
     @Override
-    public void increaseSize() {
-        size ++;
-        if (size > maxLength) {
-            size = maxLength;
-        }
-    }
-
-    @Override
-    public void decreaseSize() {
-        size --;
-        if (size < minLength) {
-            size = minLength;
-        }
-    }
-
-    @Override
     public void setValueToInitial() {
         variables.clear();
         size = initialValue.length();
-        for (int i=0; i < maxLength; i++) {
+        for (int i = 0; i < maxSize; i++) {
             char charValue = i < size ? initialValue.charAt(i) : charInitialValue;
             CharacterVariable charVar = new CharacterVariable(charValue, charMin, charMax);
             charVar.setValueToInitial();
@@ -62,14 +41,15 @@ public class StringVariable extends VectorVariable {
 
     @Override
     public void setValueToRandom(RandomGenerator rg) {
-        // TODO: what to do about size here and in the parent
+        size = rg.nextInt(maxSize);
         super.setValueToRandom(rg);
     }
 
     @Override
     public StringVariable deepCopy() {
-        return (StringVariable) doDeepCopy(
-                new StringVariable(initialValue, minLength, maxLength, charInitialValue, charMin, charMax));
+        StringVariable copy = new StringVariable(initialValue, maxSize, charInitialValue, charMin, charMax);
+        deepCopyVariables(copy);
+        return copy;
     }
 
     public String getValueAsString() {
@@ -88,20 +68,18 @@ public class StringVariable extends VectorVariable {
 
         StringVariable that = (StringVariable) o;
 
-        if (minLength != that.minLength) return false;
-        if (maxLength != that.maxLength) return false;
+        if (maxSize != that.maxSize) return false;
         if (charInitialValue != that.charInitialValue) return false;
         if (charMin != that.charMin) return false;
         if (charMax != that.charMax) return false;
-        return initialValue.equals(that.initialValue);
 
+        return initialValue.equals(that.initialValue);
     }
 
     @Override
     public int hashCode() {
         int result = super.hashCode();
-        result = 31 * result + minLength;
-        result = 31 * result + maxLength;
+        result = 31 * result + maxSize;
         result = 31 * result + (int) charInitialValue;
         result = 31 * result + (int) charMin;
         result = 31 * result + (int) charMax;

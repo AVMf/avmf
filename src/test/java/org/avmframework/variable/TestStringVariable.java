@@ -6,7 +6,7 @@ import static org.junit.Assert.assertEquals;
 
 public class TestStringVariable {
 
-    StringVariable strVar = new StringVariable("test", 0, 5, ' ',
+    StringVariable strVar = new StringVariable("test", 5, ' ',
             CharacterVariable.MIN_PRINTABLE_ASCII, CharacterVariable.MAX_PRINTABLE_ASCII);
 
     @Test

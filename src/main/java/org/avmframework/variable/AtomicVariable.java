@@ -2,7 +2,7 @@ package org.avmframework.variable;
 
 import org.apache.commons.math3.random.RandomGenerator;
 
-public abstract class AtomicVariable extends Variable {
+public abstract class AtomicVariable implements Variable {
 
     protected int min;
     protected int max;
