@@ -4,6 +4,13 @@ import org.avmframework.TerminationException;
 
 public abstract class PatternThenEliminationSearch extends PatternSearch {
 
+    public PatternThenEliminationSearch() {
+    }
+
+    public PatternThenEliminationSearch(int accelerationFactor) {
+        super(accelerationFactor);
+    }
+
     protected void performSearch() throws TerminationException {
         initialize();
         if (establishDirection()) {
@@ -13,7 +20,7 @@ public abstract class PatternThenEliminationSearch extends PatternSearch {
     }
 
     protected void eliminationSearch() throws TerminationException {
-        int xPrev = x - (k * dir / var.getAccelerationFactor());
+        int xPrev = x - (k * dir / accelerationFactor);
         int xNext = x + (k * dir);
 
         int l = Math.min(xPrev, xNext);

@@ -5,6 +5,13 @@ import org.avmframework.objective.ObjectiveValue;
 
 public class GeometricSearch extends PatternThenEliminationSearch {
 
+    public GeometricSearch() {
+    }
+
+    public GeometricSearch(int accelerationFactor) {
+        super(accelerationFactor);
+    }
+
     protected void performEliminationSearch(int l, int r) throws TerminationException {
         while (l < r) {
             int mid = (int) Math.floor((l + r) / 2.0);

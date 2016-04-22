@@ -5,6 +5,13 @@ import org.avmframework.objective.ObjectiveValue;
 
 public class IteratedPatternSearch extends PatternSearch {
 
+    public IteratedPatternSearch() {
+    }
+
+    public IteratedPatternSearch(int accelerationFactor) {
+        super(accelerationFactor);
+    }
+
     protected void performSearch() throws TerminationException {
         ObjectiveValue next = objFun.evaluate(vector), last;
 

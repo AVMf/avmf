@@ -26,7 +26,7 @@ public class TestTermination {
     }
 
     protected void testRestarts(int limit) {
-        TerminationPolicy tp = TerminationPolicy.maxRestarts(limit);
+        TerminationPolicy tp = TerminationPolicy.createMaxRestartsTerminationPolicy(limit);
         AVM avm = anyAVMWithTerminationPolicy(tp);
         Monitor monitor = avm.search(singleIntegerVector(), flat());
         assertEquals(limit, monitor.getNumRestarts());
@@ -48,7 +48,7 @@ public class TestTermination {
     }
 
     protected void testEvaluations(int limit) {
-        TerminationPolicy tp = TerminationPolicy.maxEvaluations(limit);
+        TerminationPolicy tp = TerminationPolicy.createMaxEvaluationsTerminationPolicy(limit);
         AVM avm = anyAVMWithTerminationPolicy(tp);
         Monitor monitor = avm.search(singleIntegerVector(), flat());
         assertEquals(limit, monitor.getNumEvaluations());
@@ -57,7 +57,7 @@ public class TestTermination {
     @Test
     public void testTimeLimit() {
         int minTime = 5;
-        TerminationPolicy tp = TerminationPolicy.runningTime(minTime);
+        TerminationPolicy tp = TerminationPolicy.createRunningTimeTerminationPolicy(minTime);
         AVM avm = anyAVMWithTerminationPolicy(tp);
         Monitor monitor = avm.search(singleIntegerVector(), flat());
         assertTrue(minTime <= monitor.getRunningTime());

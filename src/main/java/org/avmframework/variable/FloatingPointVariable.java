@@ -4,22 +4,12 @@ public class FloatingPointVariable extends AtomicVariable {
 
     protected int precision;
 
-    protected FloatingPointVariable() {
-    }
-
-    public FloatingPointVariable(double initialValue, int precision) {
-        super(doubleToInt(initialValue, precision));
-        this.precision = precision;
-    }
-
     public FloatingPointVariable(double initialValue, int precision, double min, double max) {
         super(doubleToInt(initialValue, precision), doubleToInt(min, precision), doubleToInt(max, precision));
         this.precision = precision;
-    }
-
-    public FloatingPointVariable(double initialValue, int precision, double min, double max, int accelerationBase) {
-        super(doubleToInt(initialValue, precision), doubleToInt(min, precision), doubleToInt(max, precision), accelerationBase);
-        this.precision = precision;
+        if (min > max) {
+            throw new MinGreaterThanMaxException(min, max);
+        }
     }
 
     public double getValueAsDouble() {
@@ -28,13 +18,8 @@ public class FloatingPointVariable extends AtomicVariable {
 
     @Override
     public FloatingPointVariable deepCopy() {
-        FloatingPointVariable copy = new FloatingPointVariable();
-        copy.initialValue = initialValue;
-        copy.min = min;
-        copy.max = max;
-        copy.accelerationFactor = accelerationFactor;
+        FloatingPointVariable copy = new FloatingPointVariable(initialValue, precision, min, max);
         copy.value = value;
-        copy.precision = precision;
         return copy;
     }
 
@@ -61,11 +46,11 @@ public class FloatingPointVariable extends AtomicVariable {
         return "" + getValueAsDouble();
     }
 
-    protected static int doubleToInt(double value, int precision) {
+    private static int doubleToInt(double value, int precision) {
         return (int) Math.round(value * Math.pow(10, precision));
     }
 
-    protected static double intToDouble(int value, int precision) {
+    private static double intToDouble(int value, int precision) {
         return ((double) value) * Math.pow(10, -precision);
     }
 }

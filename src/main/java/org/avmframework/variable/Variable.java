@@ -2,12 +2,11 @@ package org.avmframework.variable;
 
 import org.apache.commons.math3.random.RandomGenerator;
 
-public abstract class Variable {
+public interface Variable {
 
-    public abstract void setValueToInitial();
+    void setValueToInitial();
 
-    public abstract void setValueToRandom(RandomGenerator randomGenerator);
+    void setValueToRandom(RandomGenerator randomGenerator);
 
-    public abstract Variable deepCopy();
-
+    Variable deepCopy();
 }

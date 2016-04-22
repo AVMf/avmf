@@ -48,7 +48,7 @@ public class QuadraticExample  {
         LocalSearch localSearch = LocalSearch.instantiate(localSearchName);
 
         // set up the termination policy
-        TerminationPolicy terminationPolicy = TerminationPolicy.maxEvaluations(MAX_EVALUATIONS);
+        TerminationPolicy terminationPolicy = TerminationPolicy.createMaxEvaluationsTerminationPolicy(MAX_EVALUATIONS);
 
         // set up random initialization of vectors
         RandomGenerator randomGenerator = new MersenneTwister();
