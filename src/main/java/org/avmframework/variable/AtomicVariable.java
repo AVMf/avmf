@@ -14,7 +14,6 @@ public abstract class AtomicVariable extends Variable {
         this.initialValue = initialValue;
         this.min = min;
         this.max = max;
-        setValueToInitial();
     }
 
     public int getMin() {
