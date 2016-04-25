@@ -43,7 +43,7 @@ public class Quadratic {
         // set up the local search
         // Geometric or lattice search can be used if "GeometricSearch" or "LatticeSearch" are provided as a parameter
         java.lang.String localSearchName = "IteratedPatternSearch";
-        if (args.length > 0 && args[0].equals("GeometricSearch") || args[0].equals("LatticeSearch")) {
+        if (args.length > 0 && (args[0].equals("GeometricSearch") || args[0].equals("LatticeSearch"))) {
             localSearchName = args[0];
         }
         LocalSearch localSearch = LocalSearch.instantiate(localSearchName);
