@@ -1,4 +1,4 @@
-package org.avmframework.examples.stringexample;
+package org.avmframework.examples;
 
 import org.apache.commons.math3.random.MersenneTwister;
 import org.apache.commons.math3.random.RandomGenerator;
@@ -16,23 +16,23 @@ import org.avmframework.variable.StringVariable;
 
 import static org.avmframework.variable.StringVariable.createPrintableASCIICharacterVariable;
 
-public class StringExample {
+public class String {
 
-    static final String TARGET_STRING = "Alternating Variable Method";
+    static final java.lang.String TARGET_STRING = "Alternating Variable Method";
     static final int MAX_EVALUATIONS = 100000;
 
-    public static void main(String[] args) {
+    public static void main(java.lang.String[] args) {
 
         // define the objective function
         ObjectiveFunction objFun = new ObjectiveFunction() {
             @Override
             protected ObjectiveValue computeObjectiveValue(Vector vector) {
-                String string = ((StringVariable) vector.getVariable(0)).asString();
+                java.lang.String string = ((StringVariable) vector.getVariable(0)).asString();
                 double distance = stringEqualsDistance(string, TARGET_STRING);
                 return NumericObjectiveValue.LowerIsBetterObjectiveValue(distance, 0);
             }
 
-            protected double stringEqualsDistance(String str, String target) {
+            protected double stringEqualsDistance(java.lang.String str, java.lang.String target) {
                 double distance = 0;
                 for (int i=0; i < Math.min(str.length(), target.length()); i++ ) {
                     distance += charEqualsDistance(str.charAt(i), target.charAt(i));
@@ -53,9 +53,10 @@ public class StringExample {
         Vector vector = new Vector();
         vector.addVariable(strVar);
 
-        // set up the local search ("IteratedPatternSearch" / "GeometricSearch" / "LatticeSearch")
-        String localSearchName = "LatticeSearch";
-        if (args.length > 0) {
+        // set up the local search
+        // Geometric or lattice search can be used if "GeometricSearch" or "LatticeSearch" are provided as a parameter
+        java.lang.String localSearchName = "IteratedPatternSearch";
+        if (args.length > 0 && args[0].equals("GeometricSearch") || args[0].equals("LatticeSearch")) {
             localSearchName = args[0];
         }
         LocalSearch localSearch = LocalSearch.instantiate(localSearchName);
