@@ -70,21 +70,21 @@ AVMf includes various examples of the AVM optimizing different problems. `Quadra
 
 If you have already installed and built AVMf as detailed in the previous sections, you can run these examples from the command line as follows:
 
-```
+``
 java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.Quadratic
-```
+``
 
-```
+``
 java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.AllZeros
-```
+``
 
-```
+``
 java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.String
-```
+``
 
 In each of these examples, the AVM is configured to use "Iterated Pattern Search", as initially described by Korel (1990). To use "Geometric" or "Lattice" search instead, as defined by Kempka et al. (2015), provide the option "GeometricSearch" or "LatticeSearch" to one of the above commands as follows:
 
-```
+``
 java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.AllZeros GeometricSearch
 ```
 
