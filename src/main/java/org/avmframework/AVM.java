@@ -8,6 +8,11 @@ import org.avmframework.variable.AtomicVariable;
 import org.avmframework.variable.Variable;
 import org.avmframework.variable.VectorVariable;
 
+/**
+ * The main class for instantiating and running an AVM search
+ * @author Phil McMinn
+ *
+ */
 public class AVM {
 
     protected LocalSearch localSearch;
@@ -18,10 +23,23 @@ public class AVM {
     protected ObjectiveFunction objFun;
     protected Vector vector;
 
+    /**
+     * Constructs an AVM instance.
+     * @param localSearch A local search instance.
+     * @param tp The termination policy to be used by the search.
+     * @param initializer The initializer to be used to initialize variables at the start <i>and</i> to restart the search.
+     */
     public AVM(LocalSearch localSearch, TerminationPolicy tp, Initializer initializer) {
         this(localSearch, tp, initializer, initializer);
     }
 
+    /**
+     * Constructs an AVM instance.
+     * @param localSearch A local search instance.
+     * @param tp The termination policy to be used by the search.
+     * @param initializer The initializer to be used to initialize variables at the start of the search.
+     * @param restarter  The initializer to be used to initialize variables when restarting the search.
+     */
     public AVM(LocalSearch localSearch, TerminationPolicy tp, Initializer initializer, Initializer restarter) {
         this.localSearch = localSearch;
         this.tp = tp;
@@ -29,6 +47,12 @@ public class AVM {
         this.restarter = restarter;
     }
 
+    /**
+     * Performs the AVM search.
+     * @param vector The vector of variables to be optimized.
+     * @param objFun The objective function to optimize the variables against.
+     * @return A Monitor instance detailing the progression statistics of the completed search process.
+     */
     public Monitor search(Vector vector, ObjectiveFunction objFun) {
         // set up the monitor
         this.monitor = new Monitor(tp);
@@ -41,6 +65,7 @@ public class AVM {
         this.vector = vector;
         initializer.initialize(vector);
 
+        // is there anything to optimize?
         if (vector.size() == 0) {
             throw new EmptyVectorException();
         }
