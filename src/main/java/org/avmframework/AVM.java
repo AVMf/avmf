@@ -9,18 +9,46 @@ import org.avmframework.variable.Variable;
 import org.avmframework.variable.VectorVariable;
 
 /**
- * The main class for instantiating and running an AVM search
+ * The main class for instantiating and running an AVM search.
  * @author Phil McMinn
  *
  */
 public class AVM {
 
+    /**
+     * The local search to be used by this AVM instance.
+     */
     protected LocalSearch localSearch;
-    protected TerminationPolicy tp;
-    protected Initializer initializer, restarter;
 
+    /**
+     * The termination policy to be used by this AVM instance.
+     */
+    protected TerminationPolicy tp;
+
+    /**
+     * The initializer used to initialize the values of variables at the start of the AVM search.
+     */
+    protected Initializer initializer;
+
+    /**
+     * The initializer used to initialize the values of variables following the restarting of the search (after
+     * it has become trapped in a local optimum.
+     */
+    protected Initializer restarter;
+
+    /**
+     * The monitor instance being used by a search that is currently in progress.
+     */
     protected Monitor monitor;
+
+    /**
+     * The objective function being used by a search that is currently in progress.
+     */
     protected ObjectiveFunction objFun;
+
+    /**
+     * The vector being optimized by a search that is currently in progress.
+     */
     protected Vector vector;
 
     /**
@@ -90,6 +118,14 @@ public class AVM {
         return monitor;
     }
 
+    /**
+     * Conducts an AVM search over an arbitrary vector --- either the complete vector being optimized,
+     * or a variable that it is itself a vector (e.g., a string).
+     * @param abstractVector The vector to be optimized.
+     * @throws TerminationException If the search terminates (as dictated by the TerminationPolicy this instance
+     * was constructed with).
+     */
+
     protected void alternatingVariableSearch(AbstractVector abstractVector) throws TerminationException {
         ObjectiveValue lastImprovement = objFun.evaluate(vector);
         int nonImprovement = 0;
@@ -118,6 +154,12 @@ public class AVM {
         }
     }
 
+    /**
+     * Invoke a search over a particular variable.
+     * @param var The variable to be optimized.
+     * @throws TerminationException If the search terminates (as dictated by the TerminationPolicy this instance
+     * was constructed with).
+     */
     protected void variableSearch(Variable var) throws TerminationException {
         if (var instanceof AtomicVariable) {
             atomicVariableSearch((AtomicVariable) var);
@@ -126,32 +168,54 @@ public class AVM {
         }
     }
 
+    /**
+     * Invoke a search over a variable of type AtomicVariable.
+     * @param atomicVar The variable to be optimized.
+     * @throws TerminationException If the search terminates (as dictated by the TerminationPolicy this instance
+     * was constructed with).
+     */
     protected void atomicVariableSearch(AtomicVariable atomicVar) throws TerminationException {
         localSearch.search(atomicVar, vector, objFun);
     }
 
+    /**
+     * Invoke a search over a variable of type VectorVariable.
+     * @param vectorVar The variable to be optimized.
+     * @throws TerminationException If the search terminates (as dictated by the TerminationPolicy this instance
+     * was constructed with).
+     */
     protected void vectorVariableSearch(VectorVariable vectorVar) throws TerminationException {
-        ObjectiveValue next = objFun.evaluate(vector);
+        ObjectiveValue current = objFun.evaluate(vector);
 
         // try moves that increase the vector size
-        progressivelyChangeVectorVariableSize(vectorVar, next, true);
+        progressivelyChangeVectorVariableSize(vectorVar, current, true);
 
         // try moves that decrease the vector size
-        progressivelyChangeVectorVariableSize(vectorVar, next, false);
+        progressivelyChangeVectorVariableSize(vectorVar, current, false);
 
         // now for the alternating variable search...
         alternatingVariableSearch(vectorVar);
     }
 
-    protected void progressivelyChangeVectorVariableSize(VectorVariable vectorVar,
-                                                         ObjectiveValue next,
-                                                         boolean increase) throws TerminationException {
+    /**
+     * Attempt moves to increase and decrease the size of a VectorVariable in a series of moves until the objective
+     * function value does not improve.
+     * @param vectorVar The vector variable.
+     * @param current The current objective value of the overall vector before moves are attempted.
+     * @param increase Denotes whether to increase (value is true) or decrease (value is false) the size of vectorVar.
+     * @throws TerminationException
+     */
+    private void progressivelyChangeVectorVariableSize(VectorVariable vectorVar,
+                                                       ObjectiveValue current,
+                                                       boolean increase) throws TerminationException {
         int currentSize, nextSize = vectorVar.size();
-        ObjectiveValue current;
+        ObjectiveValue next = null;
 
         // try moves that increase the vector size
         do {
-            current = next;
+            if (next != null) {
+                current = next;
+            }
             currentSize = nextSize;
 
             changeVectorVariableSize(vectorVar, increase);
@@ -166,6 +230,11 @@ public class AVM {
         }
     }
 
+    /**
+     * Perform a single move to increase or decrease the size of a VectorVariable.
+     * @param vectorVar The vector variable.
+     * @param increase Denotes whether to increase (value is true) or decrease (value is false) the size of vectorVar.
+     */
     private void changeVectorVariableSize(VectorVariable vectorVar, boolean increase) {
         if (increase) {
             vectorVar.increaseSize();
