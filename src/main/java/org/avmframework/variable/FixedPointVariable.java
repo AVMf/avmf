@@ -1,10 +1,10 @@
 package org.avmframework.variable;
 
-public class FloatingPointVariable extends AtomicVariable {
+public class FixedPointVariable extends AtomicVariable {
 
     protected int precision;
 
-    public FloatingPointVariable(double initialValue, int precision, double min, double max) {
+    public FixedPointVariable(double initialValue, int precision, double min, double max) {
         super(doubleToInt(initialValue, precision), doubleToInt(min, precision), doubleToInt(max, precision));
         this.precision = precision;
         if (min > max) {
@@ -18,8 +18,8 @@ public class FloatingPointVariable extends AtomicVariable {
     }
 
     @Override
-    public FloatingPointVariable deepCopy() {
-        FloatingPointVariable copy = new FloatingPointVariable(initialValue, precision, min, max);
+    public FixedPointVariable deepCopy() {
+        FixedPointVariable copy = new FixedPointVariable(initialValue, precision, min, max);
         copy.value = value;
         return copy;
     }
@@ -27,10 +27,10 @@ public class FloatingPointVariable extends AtomicVariable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof FloatingPointVariable)) return false;
+        if (!(o instanceof FixedPointVariable)) return false;
         if (!super.equals(o)) return false;
 
-        FloatingPointVariable that = (FloatingPointVariable) o;
+        FixedPointVariable that = (FixedPointVariable) o;
 
         return precision == that.precision;
     }
