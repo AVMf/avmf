@@ -95,7 +95,9 @@ java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.All
 ## Problems or Other Comments?
 
 If you have any problems with building, installing, or executing AVM<i>f</i>, then please feel free to create an issue
-associated with this Git repository using the "Issues" link at the top of this site. The contributors to the repository will do all that they can to resolve your issue and ensure that the entire tool works well in your development environment and for your web site. If you find that AVM<i>f</i> works well, then we also encourage you to "star" and "watch" the project.
+associated with this Git repository using the "Issues" link at the top of this site. The contributors to the repository will do all that they can to resolve your issue and ensure that the entire tool works well in your development environment and for your web site. 
+
+If you find that AVM<i>f</i> works well, then we also encourage you to "star" and "watch" the project. We would also love to know that you are using the framework. Please drop Phil McMinn an email at <a href="mailto:p.mcminn@sheffield.ac.uk">p.mcminn@sheffield.ac.uk</a>.
 
 Thank you for your interest in the framework.
 
