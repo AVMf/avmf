@@ -12,7 +12,7 @@ import org.avmframework.Vector;
 import org.avmframework.objective.NumericObjectiveValue;
 import org.avmframework.objective.ObjectiveFunction;
 import org.avmframework.objective.ObjectiveValue;
-import org.avmframework.variable.FloatingPointVariable;
+import org.avmframework.variable.FixedPointVariable;
 
 public class Quadratic {
 
@@ -29,7 +29,7 @@ public class Quadratic {
         ObjectiveFunction objFun = new ObjectiveFunction() {
             @Override
             protected ObjectiveValue computeObjectiveValue(Vector vector) {
-                double x = ((FloatingPointVariable) vector.getVariable(0)).asDouble();
+                double x = ((FixedPointVariable) vector.getVariable(0)).asDouble();
                 double y = (A * x * x) + (B * x) + C;
                 double distance = Math.abs(y);
                 return NumericObjectiveValue.LowerIsBetterObjectiveValue(distance, 0);
@@ -38,12 +38,12 @@ public class Quadratic {
 
         // set up the vector to be optimized
         Vector vector = new Vector();
-        vector.addVariable(new FloatingPointVariable(INITIAL_VALUE, PRECISION, MIN, MAX));
+        vector.addVariable(new FixedPointVariable(INITIAL_VALUE, PRECISION, MIN, MAX));
 
         // set up the local search
         // Geometric or lattice search can be used if "GeometricSearch" or "LatticeSearch" are provided as a parameter
         java.lang.String localSearchName = "IteratedPatternSearch";
-        if (args.length > 0 && args[0].equals("GeometricSearch") || args[0].equals("LatticeSearch")) {
+        if (args.length > 0 && (args[0].equals("GeometricSearch") || args[0].equals("LatticeSearch"))) {
             localSearchName = args[0];
         }
         LocalSearch localSearch = LocalSearch.instantiate(localSearchName);
