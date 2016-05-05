@@ -2,7 +2,7 @@
 
 AVM<i>f</i> is a framework and Java implementation of the Alternating Variable Method (AVM), a heuristic local search algorithm originally due to Korel (1990). The AVM was originally designed to optimize the values of integer variables according to an objective function. It has since been extended to handle floating point numbers (Harman and McMinn, 2007) and strings (McMinn et al., 2015), and enhanced with different local search algorithm that are proven to be faster under certain conditions (Kempka et al., 2015).
 
-AVM<i>f</i> was designed to enable researchers and practitioners understand the algorithms behind the AVM and use it in their projects.
+AVM<i>f</i> was designed to enable researchers and practitioners understand the algorithms behind the AVM and use it in their projects, and is freely available for use under the MIT licence.
 
 ## Installing Maven
 
@@ -95,7 +95,7 @@ java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.All
 ## Problems or Other Comments?
 
 If you have any problems with building, installing, or executing AVM<i>f</i>, then please feel free to create an issue
-associated with this Git repository using the "Issues" link at the top of this site. The contributors to the repository will do all that they can to resolve your issue and ensure that the entire tool works well in your development environment and for your web site. 
+associated with this Git repository using the "Issues" link at the top of this site. The contributors to the repository will do all that they can to resolve your issue and ensure that the entire tool works well in your development environment and for your web site.
 
 If you find that AVM<i>f</i> works well, then we also encourage you to "star" and "watch" the project. We would also love to know that you are using the framework. Please drop Phil McMinn an email – p.mcminn@sheffield.ac.uk.
 
