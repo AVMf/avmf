@@ -46,7 +46,7 @@ your operating system or your integrated development environments to accomplish 
 3. Select the root directory of your downloaded copy of AVM<i>f</i>.
 4. Click 'Finish' to complete the import.
 5. To generate the JAR file, select 'Run' &rarr; 'Run As' &rarr; 'maven install'.
-6. A JAR file called `avm-jar-with-dependencies.jar` should have been created in the `target` directory of AVM<i>f</i>'s main directory; if this JAR file does not exist, then the installation with Eclipse failed and you will not yet be able to use AVM<i>f</i>. Please try these steps again or, alternatively, try another IDE or the command-line-based approach.
+6. A JAR file called `avmf-1.0-jar-with-dependencies.jar` should have been created in the `target` directory of AVM<i>f</i>'s main directory; if this JAR file does not exist, then the installation with Eclipse failed and you will not yet be able to use AVM<i>f</i>. Please try these steps again or, alternatively, try another IDE or the command-line-based approach.
 
 #### Installation with IntelliJ
 
@@ -55,14 +55,14 @@ your operating system or your integrated development environments to accomplish 
 3. Select the 'pom.xml' file and click 'Finish'.
 4. Open the Maven Projects toolbar using 'View' &rarr; 'Tool Windows' &rarr; 'Maven Projects'.
 5. Select the AVM<i>f</i> project and click 'package'.
-6. A JAR file called `avm-jar-with-dependencies.jar` should have been created in the `target` directory of AVM<i>f</i>'s main directory; if this JAR file does not exist, then the installation with IntelliJ failed and you will not yet be able to use AVM<i>f</i>. Please try these steps again or, alternatively, try another IDE or the command-line-based approach.
+6. A JAR file called `avmf-1.0-jar-with-dependencies.jar` should have been created in the `target` directory of AVM<i>f</i>'s main directory; if this JAR file does not exist, then the installation with IntelliJ failed and you will not yet be able to use AVM<i>f</i>. Please try these steps again or, alternatively, try another IDE or the command-line-based approach.
 
 #### Installation at the Command Line
 
 1. Navigate to the root directory containing of your installation of AVM<i>f</i>.
 2. Type the following command to build the tool: `mvn package`
 3. Maven will build the project from scratch, downloading all the required dependencies for the project automatically.
-6. A JAR file called `avm-jar-with-dependencies.jar` should have been created in the `target` directory of AVM<i>f</i>'s main directory; if this JAR file does not exist, then the installation with the command line failed and you will not yet be able to use AVM<i>f</i>. Please try these steps again or, alternatively, try one of the methods that uses an IDE.
+6. A JAR file called `avmf-1.0-jar-with-dependencies.jar` should have been created in the `target` directory of AVM<i>f</i>'s main directory; if this JAR file does not exist, then the installation with the command line failed and you will not yet be able to use AVM<i>f</i>. Please try these steps again or, alternatively, try one of the methods that uses an IDE.
 
 ## Running the Provided Examples
 
