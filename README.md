@@ -6,7 +6,7 @@ It has since been extended to handle fixed point numbers (Harman and McMinn, 200
 
 AVM<i>f</i> was designed to enable researchers and practitioners understand the algorithms behind the AVM and use it in their projects, and is freely available for use under the MIT licence.
 
-It is further described in the paper "AVMf: An Open-Source Framework and Implementation of the Alternating Variable Method" (McMinn and Kapfhammer, 2016), which is <a href="http://philmcminn.staff.shef.ac.uk/publications/c43.html">available to read and download online</a>. 
+It is further described in the SSBSE 2016 paper _"AVMf: An Open-Source Framework and Implementation of the Alternating Variable Method"_ (McMinn and Kapfhammer, 2016), which is <a href="http://philmcminn.staff.shef.ac.uk/publications/c43.html">available to read and download online</a>. 
 
 ## Installing Maven
 
