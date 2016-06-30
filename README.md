@@ -110,14 +110,22 @@ We would like to thank Joseph Kempka and Dirk Sudholt for an initial implementat
 
 ## References
 
+- Phil McMinn and Gregory M. Kapfhammer. 
+AVMf: An Open-Source Framework and Implementation of the Alternating Variable Method. 
+International Symposium on Search-Based Software Engineering (SSBSE 2016), To Appear.
+<a href="http://philmcminn.staff.shef.ac.uk/publications/c43.html">Available to read and download online.</a>
+
 - Phil McMinn, Chris J. Wright and Gregory M. Kapfhammer.
 The Effectiveness of Test Coverage Criteria for Relational Database Schema Integrity Constraints.
 ACM Transactions on Software Engineering and Methodology, vol. 25, no. 1, pp. 8:1–8:49, 2015.
+<a href="http://philmcminn.staff.shef.ac.uk/publications/j18.html">Available to read and download online.</a>
 
 - Joseph Kempka, Phil McMinn and Dirk Sudholt.
 Design and Analysis of Different Alternating Variable Searches for Search-Based Software Testing.
 Theoretical Computer Science, vol. 605, pp. 1–20, 2015.
+<a href="http://philmcminn.staff.shef.ac.uk/publications/j17.html">Available to read and download online.</a>
 
 - Mark Harman and Phil McMinn.
 A Theoretical and Empirical Analysis of Evolutionary Testing and Hill Climbing for Structural Test Data Generation.
 International Symposium on Software Testing and Analysis (ISSTA 2007), pp. 73–83, 2007.
+<a href="http://philmcminn.staff.shef.ac.uk/publications/j8.html">Available to read and download online.</a>
