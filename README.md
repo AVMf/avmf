@@ -110,7 +110,7 @@ We would like to thank Joseph Kempka and Dirk Sudholt for an initial implementat
 
 ## References
 
-- Phil McMinn and Gregory M. Kapfhammer.\s\s
+- Phil McMinn and Gregory M. Kapfhammer.  
 AVMf: An Open-Source Framework and Implementation of the Alternating Variable Method.\s\s 
 International Symposium on Search-Based Software Engineering (SSBSE 2016), To Appear.\s\s
 <a href="http://philmcminn.staff.shef.ac.uk/publications/c43.html">Available to read and download online.</a>
