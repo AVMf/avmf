@@ -1,3 +1,5 @@
+<img src="http://philmcminn.staff.shef.ac.uk/images/avmf.png" width="300" />
+
 # Welcome to the AVMFramework (AVM<i>f</i>)
 
 AVM<i>f</i> is a framework and Java implementation of the Alternating Variable Method (AVM), a heuristic local search algorithm, originally applied to automatic test input generation by Korel (1990).
