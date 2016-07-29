@@ -44,7 +44,7 @@ public class FixedPointVariable extends AtomicVariable {
 
     @Override
     public String toString() {
-        return "" + asDouble();
+        return String.format("%." + precision + "f", asDouble());
     }
 
     private static int doubleToInt(double value, int precision) {

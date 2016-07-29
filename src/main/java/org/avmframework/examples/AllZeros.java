@@ -21,7 +21,7 @@ public class AllZeros {
     static final int INIT = 0, MIN = -100000, MAX = 100000;
     static final int MAX_EVALUATIONS = 1000;
 
-    public static void main(java.lang.String[] args) {
+    public static void main(String[] args) {
 
         // define the objective function
         ObjectiveFunction objFun = new ObjectiveFunction() {

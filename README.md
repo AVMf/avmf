@@ -85,7 +85,7 @@ java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.All
 ``
 
 ``
-java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.String
+java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.StringOptimization
 ``
 
 In each of these examples, the AVM is configured to use "Iterated Pattern Search", as initially described by Korel (1990). To use "Geometric" or "Lattice" search instead, as defined by Kempka et al. (2015), provide the option "GeometricSearch" or "LatticeSearch" to one of the above commands as follows:

@@ -16,23 +16,23 @@ import org.avmframework.variable.StringVariable;
 
 import static org.avmframework.variable.StringVariable.createPrintableASCIICharacterVariable;
 
-public class String {
+public class StringOptimization {
 
-    static final java.lang.String TARGET_STRING = "Alternating Variable Method";
+    static final String TARGET_STRING = "Alternating Variable Method";
     static final int MAX_EVALUATIONS = 100000;
 
-    public static void main(java.lang.String[] args) {
+    public static void main(String[] args) {
 
         // define the objective function
         ObjectiveFunction objFun = new ObjectiveFunction() {
             @Override
             protected ObjectiveValue computeObjectiveValue(Vector vector) {
-                java.lang.String string = ((StringVariable) vector.getVariable(0)).asString();
+                String string = ((StringVariable) vector.getVariable(0)).asString();
                 double distance = stringEqualsDistance(string, TARGET_STRING);
                 return NumericObjectiveValue.LowerIsBetterObjectiveValue(distance, 0);
             }
 
-            protected double stringEqualsDistance(java.lang.String str, java.lang.String target) {
+            protected double stringEqualsDistance(String str, String target) {
                 double distance = 0;
                 for (int i=0; i < Math.min(str.length(), target.length()); i++ ) {
                     distance += charEqualsDistance(str.charAt(i), target.charAt(i));
@@ -55,7 +55,7 @@ public class String {
 
         // set up the local search
         // Geometric or lattice search can be used if "GeometricSearch" or "LatticeSearch" are provided as a parameter
-        java.lang.String localSearchName = "IteratedPatternSearch";
+        String localSearchName = "IteratedPatternSearch";
         if (args.length > 0 && (args[0].equals("GeometricSearch") || args[0].equals("LatticeSearch"))) {
             localSearchName = args[0];
         }
