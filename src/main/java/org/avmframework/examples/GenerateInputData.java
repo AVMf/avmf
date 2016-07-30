@@ -1,5 +1,6 @@
 package org.avmframework.examples;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.math3.random.MersenneTwister;
 import org.apache.commons.math3.random.RandomGenerator;
 import org.avmframework.AVM;
@@ -8,7 +9,6 @@ import org.avmframework.TerminationPolicy;
 import org.avmframework.Vector;
 import org.avmframework.examples.inputdatageneration.Branch;
 import org.avmframework.examples.inputdatageneration.TestObject;
-import org.avmframework.examples.inputdatageneration.line.LineTestObject;
 import org.avmframework.initialization.Initializer;
 import org.avmframework.initialization.RandomInitializer;
 import org.avmframework.localsearch.LocalSearch;
@@ -17,6 +17,9 @@ import org.avmframework.objective.ObjectiveFunction;
 import java.lang.*;
 
 public class GenerateInputData {
+
+    static final String[] TEST_OBJECT_OPTIONS = {"calendar", "line", "triangle"};
+    static final String[] SEARCH_OPTIONS = {"iteratedpatternsearch", "geometric", "lattice"};
 
     static final int TEST_OBJECT_ARGS_INDEX = 0, BRANCH_ARGS_INDEX = 1, SEARCH_NAME_ARGS_INDEX = 2;
 
@@ -27,7 +30,7 @@ public class GenerateInputData {
         TestObject testObject = parseTestObjectFromArgs(args);
 
         // instantiate the branch using command line parameters
-        Branch target = parseBranchFromArgs(args);
+        Branch target = parseBranchFromArgs(args, testObject);
 
         // instantiate the local search using command line parameters
         LocalSearch localSearch = parseSearchFromArgs(args);
@@ -63,66 +66,81 @@ public class GenerateInputData {
 
     private static TestObject parseTestObjectFromArgs(String[] args) {
         if (args.length > TEST_OBJECT_ARGS_INDEX) {
-            String testObjectStr = args[TEST_OBJECT_ARGS_INDEX];
-            String errorMessage = "Invalid test object name – \"" + testObjectStr +
-                    "\". Valid options include \"calendar\", \"line\" and \"triangle\".";
-            testObjectStr = testObjectStr.toLowerCase();
+            String testObjectStr = args[TEST_OBJECT_ARGS_INDEX].toLowerCase();
 
             String testObjectName = "";
-            if (testObjectStr.equals("calendar") || testObjectStr.equals("line") || testObjectStr.equals("triangle")) {
-                testObjectName = "org.avmframework.examples.inputdatageneration." +
-                        testObjectStr + "." +
-                        testObjectStr.substring(0, 1).toUpperCase() + testObjectStr.substring(1) +
-                        "TestObject";
+            for (String option: TEST_OBJECT_OPTIONS) {
+                if (testObjectStr.equals(option)) {
+                    testObjectName = option;
+                }
+            }
+
+            if (testObjectName.equals("")) {
+                System.out.println("ERROR: unrecognized test object \"" + args[TEST_OBJECT_ARGS_INDEX] + "\"");
+            } else {
+                String testObjectClassName = "org.avmframework.examples.inputdatageneration." +
+                        testObjectName + "." + StringUtils.capitalize(testObjectName) + "TestObject";
+
                 try {
-                    Class<?> testObjectNameClass = Class.forName(testObjectName);
-                    return (TestObject) testObjectNameClass.newInstance();
+                    Class<?> testObjectClass = Class.forName(testObjectClassName);
+                    return (TestObject) testObjectClass.newInstance();
                 } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
                     throw new RuntimeException(e);
                 }
-            } else {
-                printArgsErrorAndExit(errorMessage);
             }
         } else {
-            printArgsErrorAndExit("Invalid number of arguments");
+            System.out.println("ERROR: wrong number of arguments");
         }
 
+        printUsage();
+        System.exit(1);
         return null;
     }
 
-    private static Branch parseBranchFromArgs(String[] args) {
+    private static Branch parseBranchFromArgs(String[] args, TestObject testObject) {
         if (args.length > BRANCH_ARGS_INDEX) {
             String branchStr = args[BRANCH_ARGS_INDEX];
-            String errorMessage = "Invalid branch ID – \"" + branchStr +
-                    "\". Branch IDs should be of the form (X)(t|f) where X is an integer (e.g., \"1t\")";
 
             if (branchStr.length() >= 2) {
                 String outcomeStr = branchStr.substring(branchStr.length()-1, branchStr.length()).toLowerCase();
+
+                boolean gotOutcome = false;
                 boolean outcome = false;
+
                 if (outcomeStr.equals("t")) {
                     outcome = true;
+                    gotOutcome = true;
                 } else if (outcomeStr.equals("f")){
                     outcome = false;
+                    gotOutcome = true;
+                }
+
+                if (gotOutcome) {
+                    String idStr = branchStr.substring(0, branchStr.length() - 1);
+                    try {
+                        int id = Integer.parseInt(idStr);
+
+                        if (id > 0 && id <= testObject.getNumBranchingNodes()) {
+                            return new Branch(id, outcome);
+                        } else {
+                            System.out.println("ERROR: branch number does not exist for the test object specified");
+                        }
+                    } catch (NumberFormatException e) {
+                        System.out.println("ERROR: branch number not recognized");
+                    }
                 } else {
-                    printArgsErrorAndExit(errorMessage);
+                    System.out.println("ERROR: unrecognized branch type (must be \"t\" or \"f\"");
                 }
 
-                String idStr = branchStr.substring(0, branchStr.length() - 1);
-                int id = 0;
-                try {
-                    id = Integer.parseInt(idStr);
-                } catch (NumberFormatException e) {
-                    printArgsErrorAndExit(errorMessage);
-                }
-
-                return new Branch(id, outcome);
             } else {
-                printArgsErrorAndExit(errorMessage);
+                System.out.println("ERROR: branch should be over two characters long");
             }
         } else {
-            printArgsErrorAndExit("Invalid number of arguments");
+            System.out.println("ERROR: wrong number of arguments");
         }
 
+        printUsage();
+        System.exit(1);
         return null;
     }
 
@@ -143,10 +161,14 @@ public class GenerateInputData {
         return LocalSearch.instantiate(localSearchName);
     }
 
-    private static void printArgsErrorAndExit(String error) {
-        System.out.println("ERROR:   " + error);
-        System.out.println("USAGE:   java org.avmframework.examples.GenerateInputData testobject branch [search_name]");
-        System.out.println("EXAMPLE: java org.avmframework.examples.GenerateInputData line 1t LatticeSearch");
-        System.exit(1);
+    private static void printUsage() {
+        String testObjectOtionsString = "\"" + StringUtils.join(TEST_OBJECT_OPTIONS, "\", \"") + "\"";
+        //String searchOptionsString = "\"" + StringUtils.join(SEARCH_OPTIONS, "\",\"") + "\"";
+
+        System.out.println("USAGE: java org.avmframework.examples.GenerateInputData testobject branch [search]");
+        System.out.println("  where:");
+        System.out.println("  -- testobject is one of " + testObjectOtionsString);
+        System.out.println("  -- branch is of the form X(t|f) where X is a branching node number (e.g., \"5t\")");
+        //System.out.println("-- search (optional) is one of " + searchOptionString);
     }
 }
