@@ -6,15 +6,13 @@ import org.avmframework.variable.FixedPointVariable;
 
 public class LineBranchTargetObjectiveFunction extends BranchTargetObjectiveFunction {
 
-    protected ControlDependencies controlDependencies;
-
     public LineBranchTargetObjectiveFunction(Branch target) {
         super(target);
     }
 
     @Override
     protected ControlDependenceChain getControlDependenceChainForTarget() {
-        controlDependencies = new ControlDependencies();
+        ControlDependencies controlDependencies = new ControlDependencies();
 
         controlDependencies.add(new Branch(1, true), null);
         controlDependencies.add(new Branch(1, false), null);

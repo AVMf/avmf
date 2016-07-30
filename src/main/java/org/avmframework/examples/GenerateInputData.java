@@ -18,25 +18,25 @@ import java.lang.*;
 
 public class GenerateInputData {
 
-    static final int BRANCH_ARGS_INDEX = 0, SEARCH_NAME_ARGS_INDEX = 1;
+    static final int TEST_OBJECT_ARGS_INDEX = 0, BRANCH_ARGS_INDEX = 1, SEARCH_NAME_ARGS_INDEX = 2;
 
     static final int MAX_EVALUATIONS = 100000;
 
     public static void main(String[] args) {
+        // instantiate the test object using command line parameters
+        TestObject testObject = parseTestObjectFromArgs(args);
 
-        TestObject testObject = new LineTestObject();
+        // instantiate the branch using command line parameters
         Branch target = parseBranchFromArgs(args);
 
-        ObjectiveFunction objFun = testObject.getObjectiveFunction(target);
-        Vector vector = testObject.getVector();
+        // instantiate the local search using command line parameters
+        LocalSearch localSearch = parseSearchFromArgs(args);
 
-        // set up the local search
-        // Geometric or lattice search can be used if "GeometricSearch" or "LatticeSearch" are provided as a parameter
-        java.lang.String localSearchName = "IteratedPatternSearch";
-        if (args.length > 1 && (args[1].equals("GeometricSearch") || args[1].equals("LatticeSearch"))) {
-            localSearchName = args[1];
-        }
-        LocalSearch localSearch = LocalSearch.instantiate(localSearchName);
+        // set up the objective function
+        ObjectiveFunction objFun = testObject.getObjectiveFunction(target);
+
+        // set up the vector
+        Vector vector = testObject.getVector();
 
         // set up the termination policy
         TerminationPolicy terminationPolicy = TerminationPolicy.createMaxEvaluationsTerminationPolicy(MAX_EVALUATIONS);
@@ -59,6 +59,35 @@ public class GenerateInputData {
                         " (unique: " + monitor.getNumUniqueEvaluations() + ")"
         );
         System.out.println("Running time: " + monitor.getRunningTime() + "ms");
+    }
+
+    private static TestObject parseTestObjectFromArgs(String[] args) {
+        if (args.length > TEST_OBJECT_ARGS_INDEX) {
+            String testObjectStr = args[TEST_OBJECT_ARGS_INDEX];
+            String errorMessage = "Invalid test object name – \"" + testObjectStr +
+                    "\". Valid options include \"line\" and \"triangle\".";
+            testObjectStr = testObjectStr.toLowerCase();
+
+            String testObjectName = "";
+            if (testObjectStr.equals("line") || testObjectStr.equals("triangle")) {
+                testObjectName = "org.avmframework.examples.inputdatageneration." +
+                        testObjectStr + "." +
+                        testObjectStr.substring(0, 1).toUpperCase() + testObjectStr.substring(1) +
+                        "TestObject";
+                try {
+                    Class<?> testObjectNameClass = Class.forName(testObjectName);
+                    return (TestObject) testObjectNameClass.newInstance();
+                } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+                    throw new RuntimeException(e);
+                }
+            } else {
+                printArgsErrorAndExit(errorMessage);
+            }
+        } else {
+            printArgsErrorAndExit("Invalid number of arguments");
+        }
+
+        return null;
     }
 
     private static Branch parseBranchFromArgs(String[] args) {
@@ -101,13 +130,13 @@ public class GenerateInputData {
         // set up the local search, which can be overridden at the command line
         String localSearchName = "IteratedPatternSearch";
         if (args.length > SEARCH_NAME_ARGS_INDEX)  {
-            String param = args[SEARCH_NAME_ARGS_INDEX].toLowerCase();
+            String localSearchStr = args[SEARCH_NAME_ARGS_INDEX].toLowerCase();
 
-            if (param.equals("iteratedpatternsearch")) {
+            if (localSearchStr.equals("iteratedpatternsearch")) {
                 localSearchName = "IteratedPatternSearch";
-            } else if (param.equals("geometricsearch")) {
+            } else if (localSearchStr.equals("geometricsearch")) {
                 localSearchName = "GeometricSearch";
-            } else if (param.equals("latticesearch")) {
+            } else if (localSearchStr.equals("latticesearch")) {
                 localSearchName = "LatticeSearch";
             }
         }
@@ -116,8 +145,8 @@ public class GenerateInputData {
 
     private static void printArgsErrorAndExit(String error) {
         System.out.println("ERROR:   " + error);
-        System.out.println("USAGE:   java org.avmframework.examples.GenerateInputData branch [search_name]");
-        System.out.println("EXAMPLE: java org.avmframework.examples.GenerateInputData 1t LatticeSearch");
+        System.out.println("USAGE:   java org.avmframework.examples.GenerateInputData testobject branch [search_name]");
+        System.out.println("EXAMPLE: java org.avmframework.examples.GenerateInputData line 1t LatticeSearch");
         System.exit(1);
     }
 }

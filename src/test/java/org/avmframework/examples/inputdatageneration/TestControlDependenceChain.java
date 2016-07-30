@@ -2,15 +2,15 @@ package org.avmframework.examples.inputdatageneration;
 
 import org.junit.Test;
 
-import static org.avmframework.examples.inputdatageneration.ExampleControlDependencies.DEPS;
 import static org.junit.Assert.assertEquals;
 
 public class TestControlDependenceChain {
 
     @Test
     public void TestDivergence() {
+        ExampleControlDependencies example = new ExampleControlDependencies();
 
-        ControlDependenceChain depChain = DEPS.getControlDependenceChain(new Branch(5, true));
+        ControlDependenceChain depChain = example.getControlDependenceChain(new Branch(5, true));
         ExecutionTrace trace = new ExecutionTrace();
         trace.equals(1, 0, 0);
         trace.equals(2, 5, 5);
