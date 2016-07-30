@@ -41,11 +41,18 @@ public class AllZeros {
             vector.addVariable(new IntegerVariable(INIT, MIN, MAX));
         }
 
-        // set up the local search
-        // Geometric or lattice search can be used if "GeometricSearch" or "LatticeSearch" are provided as a parameter
-        java.lang.String localSearchName = "IteratedPatternSearch";
-        if (args.length > 0 && (args[0].equals("GeometricSearch") || args[0].equals("LatticeSearch"))) {
-            localSearchName = args[0];
+        // set up the local search, which can be overridden at the command line
+        String localSearchName = "IteratedPatternSearch";
+        if (args.length > 0)  {
+            String param = args[0].toLowerCase();
+
+            if (param.equals("iteratedpatternsearch")) {
+                localSearchName = "IteratedPatternSearch";
+            } else if (param.equals("geometricsearch")) {
+                localSearchName = "GeometricSearch";
+            } else if (param.equals("latticesearch")) {
+                localSearchName = "LatticeSearch";
+            }
         }
         LocalSearch localSearch = LocalSearch.instantiate(localSearchName);
 
