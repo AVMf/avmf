@@ -7,4 +7,6 @@ public abstract class TestObject {
     public abstract Vector getVector();
 
     public abstract BranchTargetObjectiveFunction getObjectiveFunction(Branch target);
+
+    public abstract int getNumBranchingNodes();
 }

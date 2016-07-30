@@ -6,6 +6,8 @@ import org.avmframework.variable.FixedPointVariable;
 
 public class LineTestObject extends TestObject  {
 
+    static final int NUM_BRANCHING_NODES = 7;
+
     static final int PRECISION = 1;
     static final double INITIAL_VALUE = 0.0, MIN = 0.0, MAX = 100.0;
 
@@ -21,5 +23,10 @@ public class LineTestObject extends TestObject  {
     @Override
     public BranchTargetObjectiveFunction getObjectiveFunction(Branch target) {
         return new LineBranchTargetObjectiveFunction(target);
+    }
+
+    @Override
+    public int getNumBranchingNodes() {
+        return NUM_BRANCHING_NODES;
     }
 }
