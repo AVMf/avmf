@@ -38,6 +38,6 @@ public class Branch {
 
     @Override
     public String toString() {
-        return id + (outcome ? "T" : "F");
+        return id + (outcome ? "t" : "f");
     }
 }

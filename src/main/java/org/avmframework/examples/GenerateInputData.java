@@ -18,14 +18,14 @@ import java.lang.*;
 
 public class GenerateInputData {
 
-    static final int MAX_EVALUATIONS = 100000;
+    static final int BRANCH_ARGS_INDEX = 0, SEARCH_NAME_ARGS_INDEX = 1;
 
-    static final int BRANCH_ARGS_INDEX = 0;
+    static final int MAX_EVALUATIONS = 100000;
 
     public static void main(String[] args) {
 
         TestObject testObject = new LineTestObject();
-        Branch target = parseBranch(args);
+        Branch target = parseBranchFromArgs(args);
 
         ObjectiveFunction objFun = testObject.getObjectiveFunction(target);
         Vector vector = testObject.getVector();
@@ -61,19 +61,18 @@ public class GenerateInputData {
         System.out.println("Running time: " + monitor.getRunningTime() + "ms");
     }
 
-    private static Branch parseBranch(String... args) {
-
+    private static Branch parseBranchFromArgs(String[] args) {
         if (args.length > BRANCH_ARGS_INDEX) {
             String branchStr = args[BRANCH_ARGS_INDEX];
             String errorMessage = "Invalid branch ID – \"" + branchStr +
-                    "\". Branch IDs should be of the form (X)(T|F) where X is an integer (e.g., \"1T\")";
+                    "\". Branch IDs should be of the form (X)(t|f) where X is an integer (e.g., \"1t\")";
 
             if (branchStr.length() >= 2) {
-                String outcomeStr = branchStr.substring(branchStr.length()-1, branchStr.length());
+                String outcomeStr = branchStr.substring(branchStr.length()-1, branchStr.length()).toLowerCase();
                 boolean outcome = false;
-                if (outcomeStr.equals("T")) {
+                if (outcomeStr.equals("t")) {
                     outcome = true;
-                } else if (outcomeStr.equals("F")){
+                } else if (outcomeStr.equals("f")){
                     outcome = false;
                 } else {
                     printArgsErrorAndExit(errorMessage);
@@ -98,10 +97,27 @@ public class GenerateInputData {
         return null;
     }
 
+    private static LocalSearch parseSearchFromArgs(String[] args) {
+        // set up the local search, which can be overridden at the command line
+        String localSearchName = "IteratedPatternSearch";
+        if (args.length > SEARCH_NAME_ARGS_INDEX)  {
+            String param = args[SEARCH_NAME_ARGS_INDEX].toLowerCase();
+
+            if (param.equals("iteratedpatternsearch")) {
+                localSearchName = "IteratedPatternSearch";
+            } else if (param.equals("geometricsearch")) {
+                localSearchName = "GeometricSearch";
+            } else if (param.equals("latticesearch")) {
+                localSearchName = "LatticeSearch";
+            }
+        }
+        return LocalSearch.instantiate(localSearchName);
+    }
+
     private static void printArgsErrorAndExit(String error) {
         System.out.println("ERROR:   " + error);
         System.out.println("USAGE:   java org.avmframework.examples.GenerateInputData branch [search_name]");
-        System.out.println("EXAMPLE: java org.avmframework.examples.GenerateInputData 1T LatticeSearch");
+        System.out.println("EXAMPLE: java org.avmframework.examples.GenerateInputData 1t LatticeSearch");
         System.exit(1);
     }
 }
