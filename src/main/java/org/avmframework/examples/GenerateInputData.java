@@ -65,11 +65,11 @@ public class GenerateInputData {
         if (args.length > TEST_OBJECT_ARGS_INDEX) {
             String testObjectStr = args[TEST_OBJECT_ARGS_INDEX];
             String errorMessage = "Invalid test object name – \"" + testObjectStr +
-                    "\". Valid options include \"line\" and \"triangle\".";
+                    "\". Valid options include \"calendar\", \"line\" and \"triangle\".";
             testObjectStr = testObjectStr.toLowerCase();
 
             String testObjectName = "";
-            if (testObjectStr.equals("line") || testObjectStr.equals("triangle")) {
+            if (testObjectStr.equals("calendar") || testObjectStr.equals("line") || testObjectStr.equals("triangle")) {
                 testObjectName = "org.avmframework.examples.inputdatageneration." +
                         testObjectStr + "." +
                         testObjectStr.substring(0, 1).toUpperCase() + testObjectStr.substring(1) +

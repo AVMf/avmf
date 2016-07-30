@@ -36,6 +36,6 @@ public class BranchTargetObjectiveValue extends ObjectiveValue {
 
     @Override
     public String toString() {
-        return "Approach Level=" + approachLevel + ", Branch DistanceFunctions=" + branchDistance;
+        return "Approach Level=" + approachLevel + ", Branch Distance=" + branchDistance;
     }
 }

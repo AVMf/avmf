@@ -9,6 +9,18 @@ public class ExecutionTrace {
 
     protected List<BranchExection> branchExecutions = new LinkedList<>();
 
+    public boolean isTrue(int id, boolean a) {
+        return equals(id, a, true);
+    }
+
+    public boolean isFalse(int id, boolean a) {
+        return equals(id, a, false);
+    }
+
+    public boolean equals(int id, boolean a, boolean b) {
+        return equals(id, a ? 1.0 : 0, b ? 1.0 : 0);
+    }
+
     public boolean equals(int id, double a, double b) {
         boolean outcome = (a == b);
         double distanceToAlternative;
@@ -19,6 +31,10 @@ public class ExecutionTrace {
         }
         branchExecutions.add(new BranchExection(id, outcome, distanceToAlternative));
         return outcome;
+    }
+
+    public boolean notEquals(int id, boolean a, boolean b) {
+        return equals(id, a ? 1.0 : 0, b ? 1.0 : 0);
     }
 
     public boolean notEquals(int id, double a, double b) {
