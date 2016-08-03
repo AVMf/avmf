@@ -6,6 +6,7 @@ import org.avmframework.AVM;
 import org.avmframework.Monitor;
 import org.avmframework.TerminationPolicy;
 import org.avmframework.Vector;
+import org.avmframework.examples.util.ArgsParser;
 import org.avmframework.initialization.Initializer;
 import org.avmframework.initialization.RandomInitializer;
 import org.avmframework.localsearch.LocalSearch;
@@ -18,8 +19,21 @@ import static org.avmframework.variable.StringVariable.createPrintableASCIIChara
 
 public class StringOptimization {
 
+    // HOW TO RUN:
+    //
+    // java class org.avmframework.examples.StringOptimization [search]
+    //   where:
+    //     - [search] is an optional parameter denoting which search to use
+    //       (e.g., "IteratedPatternSearch", "GeometricSearch" or "LatticeSearch")
+
+    // CHANGE THE FOLLOWING CONSTANTS TO EXPLORE THEIR EFFECT ON THE SEARCH:
+
+    // - string to be searched for:
     static final String TARGET_STRING = "Alternating Variable Method";
-    static final int MAX_EVALUATIONS = 100000;
+
+    // - search constants
+    static final String SEARCH_NAME = "IteratedPatternSearch"; // can also be set at the command line
+    static final int MAX_EVALUATIONS = 1000;
 
     public static void main(String[] args) {
 
@@ -53,20 +67,8 @@ public class StringOptimization {
         Vector vector = new Vector();
         vector.addVariable(strVar);
 
-        // set up the local search, which can be overridden at the command line
-        String localSearchName = "IteratedPatternSearch";
-        if (args.length > 0)  {
-            String param = args[0].toLowerCase();
-
-            if (param.equals("iteratedpatternsearch")) {
-                localSearchName = "IteratedPatternSearch";
-            } else if (param.equals("geometricsearch")) {
-                localSearchName = "GeometricSearch";
-            } else if (param.equals("latticesearch")) {
-                localSearchName = "LatticeSearch";
-            }
-        }
-        LocalSearch localSearch = LocalSearch.instantiate(localSearchName);
+        // instantiate local search from command line, using default (set by the constant SEARCH_NAME) if none supplied
+        LocalSearch localSearch = new ArgsParser(StringOptimization.class, args).parseSearchParam(SEARCH_NAME);
 
         // set up the termination policy
         TerminationPolicy terminationPolicy = TerminationPolicy.createMaxEvaluationsTerminationPolicy(MAX_EVALUATIONS);

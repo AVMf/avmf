@@ -27,7 +27,7 @@ public abstract class LocalSearch {
             Class<?> localSearchClass = Class.forName(localSearchClassName);
             return (LocalSearch) localSearchClass.newInstance();
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Unable to instantiate search \"" + name + "\"");
         }
     }
 }

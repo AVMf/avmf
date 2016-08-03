@@ -8,7 +8,7 @@ import org.avmframework.variable.IntegerVariable;
 
 public class CalendarTestObject extends TestObject {
 
-    static final int NUM_BRANCHING_NODES = 7;
+    static final int NUM_BRANCHING_NODES = 23;
 
     static final int INITIAL_VALUE = 0, MIN = 0, MAX = 1000;
 

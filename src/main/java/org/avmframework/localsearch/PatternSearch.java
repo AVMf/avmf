@@ -53,7 +53,7 @@ public class PatternSearch extends LocalSearch {
             dir = 0;
         }
 
-        // set x and the variable according to the best outcome
+        // set x and the variable according to the best edge
         x += dir * k;
         var.setValue(x);
 

@@ -5,6 +5,7 @@ import org.apache.commons.math3.random.RandomGenerator;
 import org.avmframework.AVM;
 import org.avmframework.Monitor;
 import org.avmframework.TerminationPolicy;
+import org.avmframework.examples.util.ArgsParser;
 import org.avmframework.initialization.Initializer;
 import org.avmframework.initialization.RandomInitializer;
 import org.avmframework.localsearch.LocalSearch;
@@ -16,11 +17,24 @@ import org.avmframework.variable.FixedPointVariable;
 
 public class Quadratic {
 
+    // HOW TO RUN:
+    //
+    // java class org.avmframework.examples.Quadratic [search]
+    //   where:
+    //     - [search] is an optional parameter denoting which search to use
+    //       (e.g., "IteratedPatternSearch", "GeometricSearch" or "LatticeSearch")
+
+    // CHANGE THE FOLLOWING CONSTANTS TO EXPLORE THEIR EFFECT ON THE SEARCH:
+
+    // - problem constants
     static final int A = 4, B = 10, C = 6;
 
+    // - vector constants
     static final int PRECISION = 1;
     static final double INITIAL_VALUE = 0.0, MIN = -100000.0, MAX = 100000.0;
 
+    // - search constants
+    static final String SEARCH_NAME = "IteratedPatternSearch"; // can also be set at the command line
     static final int MAX_EVALUATIONS = 1000;
 
     public static void main(String[] args) {
@@ -40,20 +54,8 @@ public class Quadratic {
         Vector vector = new Vector();
         vector.addVariable(new FixedPointVariable(INITIAL_VALUE, PRECISION, MIN, MAX));
 
-        // set up the local search, which can be overridden at the command line
-        String localSearchName = "IteratedPatternSearch";
-        if (args.length > 0)  {
-            String param = args[0].toLowerCase();
-
-            if (param.equals("iteratedpatternsearch")) {
-                localSearchName = "IteratedPatternSearch";
-            } else if (param.equals("geometricsearch")) {
-                localSearchName = "GeometricSearch";
-            } else if (param.equals("latticesearch")) {
-                localSearchName = "LatticeSearch";
-            }
-        }
-        LocalSearch localSearch = LocalSearch.instantiate(localSearchName);
+        // instantiate local search from command line, using default (set by the constant SEARCH_NAME) if none supplied
+        LocalSearch localSearch = new ArgsParser(Quadratic.class, args).parseSearchParam(SEARCH_NAME);
 
         // set up the termination policy
         TerminationPolicy terminationPolicy = TerminationPolicy.createMaxEvaluationsTerminationPolicy(MAX_EVALUATIONS);

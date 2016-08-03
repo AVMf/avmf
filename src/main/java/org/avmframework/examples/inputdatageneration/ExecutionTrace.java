@@ -98,7 +98,7 @@ public class ExecutionTrace {
     }
 
     public List<BranchExection> getBranchExecutions() {
-        return new LinkedList<BranchExection>(branchExecutions);
+        return new LinkedList<>(branchExecutions);
     }
 
     public BranchExection getBranchExecution(int index) {

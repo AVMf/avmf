@@ -13,11 +13,11 @@ public class ControlDependenceChain {
 
     public DivergencePoint getDivergencePoint(ExecutionTrace trace) {
         int traceIndex = 0;
-        for (BranchExection node : trace.getBranchExecutions()) {
+        for (BranchExection branchExection : trace.getBranchExecutions()) {
             int chainIndex = 0;
             for (Branch branch : branches) {
-                if (node.getBranch().getID() == branch.getID()) {
-                    if (node.getBranch().getOutcome() != branch.getOutcome()) {
+                if (branchExection.getBranch().getID() == branch.getID()) {
+                    if (branchExection.getBranch().getEdge() != branch.getEdge()) {
                         return new DivergencePoint(traceIndex, chainIndex);
                     }
                 }
