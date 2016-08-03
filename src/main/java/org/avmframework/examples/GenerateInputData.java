@@ -20,11 +20,12 @@ public class GenerateInputData {
 
     // HOW TO RUN:
     //
-    // java class org.avmframework.examples.GenerateInputData testobject branch [search]
+    // USAGE: java class org.avmframework.examples.GenerateInputData testobject branch [search]
     //   where:
-    //     - testobject is one of "calendar", "line", "triangle"
-    //     - branch is of the form X(T|F) where X is a branching node number (e.g., "5T")
-    //     - search (optional) is one of "IteratedPatternSearch", "GeometricSearch", "LatticeSearch"
+    //     - testobject is a test object to generate data for (e.g., "Calendar", "Line" or "Triangle")
+    //     - branch is a branch ID of the form X(T|F) where X is a branching node number (e.g., "5T")
+    //     - [search] is an optional parameter denoting which search to use
+    //       (e.g., "IteratedPatternSearch", "GeometricSearch" or "LatticeSearch")
 
     // CHANGE THE FOLLOWING CONSTANTS TO EXPLORE THEIR EFFECT ON THE SEARCH:
     // - search constants
