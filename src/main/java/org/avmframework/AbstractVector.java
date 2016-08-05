@@ -5,6 +5,12 @@ import org.avmframework.variable.Variable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Provides basic functionality for vectors optimized by the AVM --- both the main vector or variables that have a
+ * vector-based representation, such as {@link org.avmframework.variable.StringVariable}
+ * @author Phil McMinn
+ *
+ */
 public abstract class AbstractVector {
 
     protected List<Variable> variables = new ArrayList<>();
