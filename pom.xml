@@ -9,6 +9,10 @@
   <name>avmf</name>
   <url>http://avmframework.org</url>
 
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>g
+
   <build>
     <plugins>
       <plugin>
