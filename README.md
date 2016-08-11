@@ -8,7 +8,7 @@ AVM<i>f</i> was designed to enable researchers and practitioners understand the 
 
 To download AVM<i>f</i> you will need to clone the AVM<i>f</i> project repository using either a graphical Git client or by running the following command at the prompt of your terminal window:
 
-	 `git clone https://github.com/AVMf/avmf.git`
+`git clone https://github.com/AVMf/avmf.git`
 
 Then, to run the examples provided with AVM<i>f</i>, you will need to build AVM<i>f</i> from its source code by following the instructions in the next section.
 
