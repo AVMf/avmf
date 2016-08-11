@@ -13,16 +13,32 @@ import java.util.List;
  */
 public abstract class AbstractVector {
 
+    /**
+     * The variables in this vector.
+     */
     protected List<Variable> variables = new ArrayList<>();
 
+    /**
+     * Returns the variable at the index supplied.
+     * @param index The index of the variable.
+     * @return The variable at the index.
+     */
     public Variable getVariable(int index) {
         return variables.get(index);
     }
 
+    /**
+     * Returns the number of variables in the vector.
+     * @return The number of variables in the vector.
+     */
     public int size() {
         return variables.size();
     }
 
+    /**
+     * Produces a copy of the vector where all the variables are deep copied.
+     * @param copy A copy of the vector.
+     */
     protected void deepCopyVariables(AbstractVector copy) {
         copy.variables.clear();
         for (Variable var : variables) {
