@@ -4,21 +4,13 @@ AVM<i>f</i> is a framework and Java implementation of the Alternating Variable M
 
 AVM<i>f</i> was designed to enable researchers and practitioners understand the algorithms behind the AVM and use it in their projects, and is freely available for use under the MIT licence. More information can be found on the framework's website: <http://avmframework.org>
 
-## Downloading and Installing
+## Downloading, Installing and Building
 
-The AVM<i>f</i> project has been implemented using Maven, a build automation tool for projects programmed in the Java
-programming language. If you wish to build the AVM<i>f</i> tool from its source code, then you will first need to install
-Maven on your workstation. If you have already installed Maven, then please go directly to the next section. Otherwise,
-follow the installation guidelines at https://maven.apache.org/install.html.
-
-Following the installation of Maven:
-
-1. Clone the AVM<i>f</i> project repository using either a graphical Git client or by running the following command at the
-	 prompt of your terminal window:
+To download AVM<i>f</i> you will need to clone the AVM<i>f</i> project repository using either a graphical Git client or by running the following command at the prompt of your terminal window:
 
 	 `git clone https://github.com/AVMf/avmf.git`
 
-2. To run the examples provided with AVM<i>f</i>, you will need to build AVM<i>f</i> from its source code by following the instructions in the next section.
+Then, to run the examples provided with AVM<i>f</i>, you will need to build AVM<i>f</i> from its source code by following the instructions in the next section.
 
 ### Building
 
@@ -28,8 +20,6 @@ generating the Java archive (JAR) from inside the IDE. Instructions are presente
 Eclipse (https://www.eclipse.org/downloads/) and IntelliJ (https://www.jetbrains.com/idea/download/). However, if you
 would prefer to build the project using the command line in an appropriate terminal emulator, then instructions to do so
 are also provided.
-
-#### Java Version
 
 AVM<i>f</i> has been implemented to run using Java Development Kit (JDK) 7 or 8, which can be downloaded from
 http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html and
@@ -58,6 +48,8 @@ your operating system or your integrated development environments to accomplish 
 6. A JAR file called `avmf-1.0-jar-with-dependencies.jar` should have been created in the `target` directory of AVM<i>f</i>'s main directory; if this JAR file does not exist, then the installation with IntelliJ failed and you will not yet be able to use AVM<i>f</i>. Please try these steps again or, alternatively, try another IDE or the command-line-based approach.
 
 #### Building at the Command Line
+
+If you wish to build the AVMf tool from the command line, then you will first need to install Maven on your workstation. If you have already installed Maven, then please go directly to the next section. Otherwise, follow the installation guidelines at <https://maven.apache.org/install.html>. Following this:
 
 1. Navigate to the root directory containing of your installation of AVM<i>f</i>.
 2. Type the following command to build the tool: `mvn package`
@@ -97,7 +89,7 @@ java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.All
 If you have any problems with building, installing, or executing AVM<i>f</i>, then please feel free to create an issue
 associated with this Git repository using the "Issues" link at the top of this site. The contributors to the repository will do all that they can to resolve your issue and ensure that the entire tool works well in your development environment and for your web site.
 
-If you find that AVM<i>f</i> works well, then we also encourage you to "star" and "watch" the project. We would also love to know that you are using the framework. Please drop Phil McMinn an email – p.mcminn@sheffield.ac.uk. Unless you would prefer not to, we will record your contact details to keep you updated with developments regarding the framework.
+If you find that AVM<i>f</i> works well, then we also encourage you to "star" and "watch" the project. We would also love to know that you are using the framework. Please drop [Phil McMinn](http://philmcminn.staff.shef.ac.uk) an email. Unless you would prefer not to, we will record your contact details to keep you updated with developments regarding the framework.
 
 Thank you for your interest in the framework.
 
