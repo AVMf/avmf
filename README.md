@@ -1,21 +1,17 @@
 # Welcome to the AVMFramework (AVM<i>f</i>)
 
-AVM<i>f</i> is a framework and Java implementation of the Alternating Variable Method (AVM), a heuristic local search algorithm, originally applied to automatic test input generation by Korel (1990).
+AVM<i>f</i> is a framework and Java implementation of the Alternating Variable Method (AVM), a heuristic local search algorithm that has been applied to the automation of several important software engineering problems, such as test data generation.
 
-It has since been extended to handle fixed point numbers (Harman and McMinn, 2007) and strings (McMinn et al., 2015), and enhanced with different local search algorithm that are proven to be faster under certain conditions (Kempka et al., 2015).
+AVM<i>f</i> was designed to enable researchers and practitioners understand the algorithms behind the AVM and use it in their projects, and is freely available for use under the MIT licence. More information can be found on the framework's website: <http://avmframework.org>
 
-AVM<i>f</i> was designed to enable researchers and practitioners understand the algorithms behind the AVM and use it in their projects, and is freely available for use under the MIT licence.
-
-It is further described in the SSBSE 2016 paper _"AVMf: An Open-Source Framework and Implementation of the Alternating Variable Method"_ (McMinn and Kapfhammer, 2016), which is <a href="http://philmcminn.staff.shef.ac.uk/publications/c43.html">available to read and download online</a>. 
-
-## Installing Maven
+## Downloading and Installing
 
 The AVM<i>f</i> project has been implemented using Maven, a build automation tool for projects programmed in the Java
 programming language. If you wish to build the AVM<i>f</i> tool from its source code, then you will first need to install
 Maven on your workstation. If you have already installed Maven, then please go directly to the next section. Otherwise,
 follow the installation guidelines at https://maven.apache.org/install.html.
 
-## Downloading and Installing
+Following the installation of Maven:
 
 1. Clone the AVM<i>f</i> project repository using either a graphical Git client or by running the following command at the
 	 prompt of your terminal window:
@@ -24,7 +20,7 @@ follow the installation guidelines at https://maven.apache.org/install.html.
 
 2. To run the examples provided with AVM<i>f</i>, you will need to build AVM<i>f</i> from its source code by following the instructions in the next section.
 
-### Installing
+### Building
 
 As AVM<i>f</i> has been implemented as a Maven project using the Java programming language, the easiest method of
 generating the executable tool involves importing the project into an integrated development environment (IDE) and
@@ -43,7 +39,7 @@ to install it correctly. After downloading and installing the JDK, you are also 
 1.8) as the chosen Java Development Kit for the AVM<i>f</i> project. Please follow the instructions provided by either
 your operating system or your integrated development environments to accomplish this task.
 
-#### Installation with Eclipse
+#### Building with Eclipse
 
 1. Select 'File' &rarr; 'Import'.
 2. From the project options, select 'Maven' &rarr; 'Existing Maven Projects'.
@@ -52,7 +48,7 @@ your operating system or your integrated development environments to accomplish 
 5. To generate the JAR file, select 'Run' &rarr; 'Run As' &rarr; 'maven install'.
 6. A JAR file called `avmf-1.0-jar-with-dependencies.jar` should have been created in the `target` directory of AVM<i>f</i>'s main directory; if this JAR file does not exist, then the installation with Eclipse failed and you will not yet be able to use AVM<i>f</i>. Please try these steps again or, alternatively, try another IDE or the command-line-based approach.
 
-#### Installation with IntelliJ
+#### Building with IntelliJ
 
 1. Select 'File' &rarr; 'Open'.
 2. Navigate to the root directory of your installation of AVM<i>f</i>.
@@ -61,7 +57,7 @@ your operating system or your integrated development environments to accomplish 
 5. Select the AVM<i>f</i> project and click 'package'.
 6. A JAR file called `avmf-1.0-jar-with-dependencies.jar` should have been created in the `target` directory of AVM<i>f</i>'s main directory; if this JAR file does not exist, then the installation with IntelliJ failed and you will not yet be able to use AVM<i>f</i>. Please try these steps again or, alternatively, try another IDE or the command-line-based approach.
 
-#### Installation at the Command Line
+#### Building at the Command Line
 
 1. Navigate to the root directory containing of your installation of AVM<i>f</i>.
 2. Type the following command to build the tool: `mvn package`
@@ -107,25 +103,3 @@ Thank you for your interest in the framework.
 
 ## Acknowlegements
 We would like to thank Joseph Kempka and Dirk Sudholt for an initial implementation of Geometric and Lattice search that we used to test and validate the corresponding implementation in AVM<i>f</i> against.
-
-## References
-
-- Phil McMinn and Gregory M. Kapfhammer.  
-AVMf: An Open-Source Framework and Implementation of the Alternating Variable Method.  
-International Symposium on Search-Based Software Engineering (SSBSE 2016), To Appear.  
-<a href="http://philmcminn.staff.shef.ac.uk/publications/c43.html">Available to read and download online.</a>
-
-- Phil McMinn, Chris J. Wright and Gregory M. Kapfhammer.  
-The Effectiveness of Test Coverage Criteria for Relational Database Schema Integrity Constraints.  
-ACM Transactions on Software Engineering and Methodology, vol. 25, no. 1, pp. 8:1–8:49, 2015.  
-<a href="http://philmcminn.staff.shef.ac.uk/publications/j18.html">Available to read and download online.</a>
-
-- Joseph Kempka, Phil McMinn and Dirk Sudholt.  
-Design and Analysis of Different Alternating Variable Searches for Search-Based Software Testing.  
-Theoretical Computer Science, vol. 605, pp. 1–20, 2015.  
-<a href="http://philmcminn.staff.shef.ac.uk/publications/j17.html">Available to read and download online.</a>
-
-- Mark Harman and Phil McMinn.  
-A Theoretical and Empirical Analysis of Evolutionary Testing and Hill Climbing for Structural Test Data Generation.  
-International Symposium on Software Testing and Analysis (ISSTA 2007), pp. 73–83, 2007.  
-<a href="http://philmcminn.staff.shef.ac.uk/publications/j8.html">Available to read and download online.</a>
