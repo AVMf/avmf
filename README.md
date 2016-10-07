@@ -58,7 +58,12 @@ If you wish to build the AVMf tool from the command line, then you will first ne
 
 ## Running the Provided Examples
 
-AVM<i>f</i> includes various examples of the AVM optimizing different problems. `Quadratic` finds the roots of a quadratic equation. `AllZeros` optimizes a vector of initially arbitrary integer values to zeros. `String` optimizes an initially random string to some desired target string.
+AVM<i>f</i> includes various examples of the AVM optimizing different problems. 
+
+### Simple Optimization Problems
+The `org.avmframework.examples` package contains three examples of the AVMf applied to simple optimization problems.
+
+`Quadratic` finds the roots of a quadratic equation. `AllZeros` optimizes a vector of initially arbitrary integer values to zeros. `StringOptimization` optimizes an initially random string to some desired target string.
 
 If you have already installed and built AVM<i>f</i> as detailed in the previous sections, you can run these examples from the command line as follows:
 
@@ -74,7 +79,7 @@ java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.All
 java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.StringOptimization
 ``
 
-In each of these examples, the AVM is configured to use "Iterated Pattern Search", as initially described by Korel (1990). To use "Geometric" or "Lattice" search instead, as defined by Kempka et al. (2015), provide the option "GeometricSearch" or "LatticeSearch" to one of the above commands as follows:
+In each of these examples, the AVM is configured to use "Iterated Pattern Search", as initially described by Korel (1990). To use "Geometric" or "Lattice" search instead, as defined by Kempka et al. (2015), provide the option `GeometricSearch` or `LatticeSearch` to one of the above commands as follows:
 
 ``
 java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.AllZeros GeometricSearch
@@ -83,6 +88,33 @@ java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.All
 ``
 java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.AllZeros LatticeSearch
 ``
+### Test Data Generation
+
+The `GenerateInputData` class in the `org.avmframework.examples` package shows how the AVMf may be applied to generating input data for Java methods. The `org.avmframework.examples.inputdatageneration` package contains three test objects, `Calendar`, `Line`, and `Triangle`.
+
+`Calendar` has a method that tries to find the number of days between two dates, supplied as integers. `Line` contains a method that determines whether two lines, represented as integers, intersect. Finally, `Triangle` is the "Hello World" of test generation examples --- the classic triangle classification problem.
+
+The `GenerateInputData` class can be used to generate input data for each of these three methods with the following usage:
+
+``
+java class org.avmframework.examples.GenerateInputData testobject branch [search]
+``
+
+where "testobject" is one of `Calendar`, `Line` or `Triangle`, branch is a branch ID to generate test data for, and search is the variable search to use (i.e., `GeometricSearch` or `LatticeSearch`, as `IteratedPatternSearch` is the default).
+
+A branch ID is a number of a decision point in the test object code followed by "T" or "F" to denote whether the true or false outcome is required. For example, to generate input data to execute the first branch as true in the "Calendar" example, the following command would be used:
+
+``
+java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.GenerateInputData Calendar 1T
+``
+
+`Calendar` has branch IDs ranging from 1T/F to 23T/F. `Line` has branch IDs ranging from 1T/F to 7T/F, while `Triangle` has branch IDs ranging from 1T/F to 8T/F.
+
+The number and mapping of branch IDs to code can be found by checking the code in the `CalendarBranchTargetObjectiveFunction`, `LineBranchTargetObjectiveFunction` and `TriangleBranchTargetObjectiveFunction` classes for the respective test object. Each class contains an instrumented version of the method under test, where the conditional expression is replaced by a method call. The first integer parameter to this method call is the branch ID. So in `CalendarBranchTargetObjectiveFunction`, the `if` statement
+
+``if (trace.lessThan(1, start_month, 1)) start_month = 1;``
+
+corresponds to the first branch. Generating data for branch "1T" will involve the `start_month = 1` code being executed. Generating data for the branch "1F" will instead trigger the false outcome of the conditional, and this code not being executed.
 
 ## Problems or Other Comments?
 
