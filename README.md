@@ -2,7 +2,7 @@
 
 AVM<i>f</i> is a framework and Java implementation of the Alternating Variable Method (AVM), a heuristic local search algorithm that has been applied to the automation of several important software engineering problems, such as test data generation.
 
-AVM<i>f</i> was designed to enable researchers and practitioners understand the algorithms behind the AVM and use it in their projects, and is freely available for use under the MIT licence. More information can be found on the framework's website: <http://avmframework.org>
+AVM<i>f</i> was designed to enable researchers and practitioners understand the algorithms behind the AVM and use it in their projects, and is freely available for use under the MIT license. More information can be found on the framework's website: <http://avmframework.org>
 
 ## Downloading, Installing and Building
 
