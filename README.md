@@ -8,7 +8,7 @@ AVM<i>f</i> was designed to enable researchers and practitioners understand the 
 
 To download AVM<i>f</i> you will need to clone the AVM<i>f</i> project repository using either a graphical Git client or by running the following command at the prompt of your terminal window:
 
-`git clone https://github.com/AVMf/avmf.git`
+``git clone https://github.com/AVMf/avmf.git``
 
 Then, to run the examples provided with AVM<i>f</i>, you will need to build AVM<i>f</i> from its source code by following the instructions in the next section.
 
@@ -67,27 +67,18 @@ The `org.avmframework.examples` package contains three examples of the AVMf appl
 
 If you have already installed and built AVM<i>f</i> as detailed in the previous sections, you can run these examples from the command line as follows:
 
-``
-java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.Quadratic
-``
+``java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.Quadratic``
 
-``
-java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.AllZeros
-``
+``java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.AllZeros``
 
-``
-java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.StringOptimization
-``
+``java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.StringOptimization``
 
 In each of these examples, the AVM is configured to use "Iterated Pattern Search", as initially described by Korel (1990). To use "Geometric" or "Lattice" search instead, as defined by Kempka et al. (2015), provide the option `GeometricSearch` or `LatticeSearch` to one of the above commands as follows:
 
-``
-java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.AllZeros GeometricSearch
-``
+``java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.AllZeros GeometricSearch``
 
-``
-java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.AllZeros LatticeSearch
-``
+``java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.AllZeros LatticeSearch``
+
 ### Test Data Generation
 
 The `GenerateInputData` class in the `org.avmframework.examples` package shows how the AVMf may be applied to generating input data for Java methods. The `org.avmframework.examples.inputdatageneration` package contains three test objects, `Calendar`, `Line`, and `Triangle`.
@@ -96,9 +87,7 @@ The `GenerateInputData` class in the `org.avmframework.examples` package shows h
 
 The `GenerateInputData` class can be used to generate input data for each of these three methods with the following usage:
 
-``
-java class org.avmframework.examples.GenerateInputData testobject branch [search]
-``
+``java class org.avmframework.examples.GenerateInputData testobject branch [search]``
 
 where `testobject` is one of `Calendar`, `Line` or `Triangle`, `branch` is a branch ID to generate test data for, and `search` is the variable search to use (i.e., `GeometricSearch` or `LatticeSearch`, as `IteratedPatternSearch` is the default).
 
