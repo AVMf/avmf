@@ -112,5 +112,5 @@ If you find that AVM<i>f</i> works well, then we also encourage you to "star" an
 
 Thank you for your interest in the framework.
 
-## Acknowlegements
+## Acknowledgments
 We would like to thank Joseph Kempka and Dirk Sudholt for an initial implementation of Geometric and Lattice search that we used to test and validate the corresponding implementation in AVM<i>f</i> against.
