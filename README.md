@@ -92,7 +92,7 @@ java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.All
 
 The `GenerateInputData` class in the `org.avmframework.examples` package shows how the AVMf may be applied to generating input data for Java methods. The `org.avmframework.examples.inputdatageneration` package contains three test objects, `Calendar`, `Line`, and `Triangle`.
 
-`Calendar` has a method that tries to find the number of days between two dates, supplied as integers. `Line` contains a method that determines whether two lines, represented as integers, intersect. Finally, `Triangle` is the "Hello World" of test generation examples --- the classic triangle classification problem.
+`Calendar` has a method that tries to find the number of days between two dates, supplied as integers. `Line` contains a method that determines whether two lines, represented as integers, intersect. Finally, `Triangle` is the "Hello World" of test generation examples – the classic triangle classification problem.
 
 The `GenerateInputData` class can be used to generate input data for each of these three methods with the following usage:
 
@@ -100,13 +100,11 @@ The `GenerateInputData` class can be used to generate input data for each of the
 java class org.avmframework.examples.GenerateInputData testobject branch [search]
 ``
 
-where "testobject" is one of `Calendar`, `Line` or `Triangle`, branch is a branch ID to generate test data for, and search is the variable search to use (i.e., `GeometricSearch` or `LatticeSearch`, as `IteratedPatternSearch` is the default).
+where `testobject` is one of `Calendar`, `Line` or `Triangle`, `branch` is a branch ID to generate test data for, and `search` is the variable search to use (i.e., `GeometricSearch` or `LatticeSearch`, as `IteratedPatternSearch` is the default).
 
-A branch ID is a number of a decision point in the test object code followed by "T" or "F" to denote whether the true or false outcome is required. For example, to generate input data to execute the first branch as true in the "Calendar" example, the following command would be used:
+The branch ID is the number of a decision point in the test object code followed by "T" or "F" to denote whether the true or false outcome is required. For example, to generate input data to execute the first branch as true in the "Calendar" example, the following command would be used:
 
-``
-java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.GenerateInputData Calendar 1T
-``
+``java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.GenerateInputData Calendar 1T``
 
 `Calendar` has branch IDs ranging from 1T/F to 23T/F. `Line` has branch IDs ranging from 1T/F to 7T/F, while `Triangle` has branch IDs ranging from 1T/F to 8T/F.
 
