@@ -208,7 +208,6 @@ public class AVM {
     private void progressivelyChangeVectorVariableSize(VectorVariable vectorVar,
                                                        ObjectiveValue current,
                                                        boolean increase) throws TerminationException {
-        int currentSize, nextSize = vectorVar.size();
         ObjectiveValue next = null;
 
         // try moves that increase the vector size
@@ -216,18 +215,14 @@ public class AVM {
             if (next != null) {
                 current = next;
             }
-            currentSize = nextSize;
 
             changeVectorVariableSize(vectorVar, increase);
 
             next = objFun.evaluate(vector);
-            nextSize = currentSize;
         } while (next.betterThan(current));
 
         // reverse the last move, if there was a change
-        if (nextSize > currentSize) {
-            changeVectorVariableSize(vectorVar, !increase);
-        }
+        changeVectorVariableSize(vectorVar, !increase);
     }
 
     /**
