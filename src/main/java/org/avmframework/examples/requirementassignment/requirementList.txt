@@ -1,0 +1,288 @@
+Id	Identifier	Description	Dependency	Importance
+0	_CD6UgC5eEeS9p6LIBlWIGA	Hydraulic system	3	6
+1	_PZapYCaEEeS0tfUgpGqGlg	Hydraulic power unit(HPU)	3	1
+2	_SALyICaWEeS0tfUgpGqGlg	provides a stable and clean supply of hydraulic fluid to the remotely operated subsea valves	1	6
+3	_cvnhUCwdEeSQFYYf79Ksag	analyze the time to prime the hydraulic system from a deprssureized state	1	1
+4	_pd0SQCwdEeSQFYYf79Ksag	opening and closing response times of the process valves under conditions of minimum and maximum process pressure;	3	2
+5	_4NOysCN6EeSuQOFGrs1zdQ	valve functionality	3	6
+6	_xB8vYCOIEeSuQOFGrs1zdQ	Actuation of valve actuators shall not cause alarms or unintended valve movement due to low supply pressure in the SCM	2	3
+7	_pUcGkCOHEeSuQOFGrs1zdQ	maintaining acceptable pressure values in the SCM during all modes of operation	1	7
+8	_eHy1cCkNEeSjObCA45V3CQ	The pressure should not drop below 150% of the highest latching pressure of any DCV	2	4
+9	_lfL2ICv0EeSQFYYf79Ksag	Shift time limitation	1	6
+10	_sVnicCv0EeSQFYYf79Ksag	The shift time portion of the overall response time for a single USV shall be 3 min or less	1	5
+11	_0rtqsCv0EeSQFYYf79Ksag	This shift time limitation may be waived if flow in the subsea well associated with the respective USV has already been stopped by other valves or flow control devices that have previously been closed or that are simultaneously responding to the commanded closure.	3	6
+12	_tIs-4CnIEeSZ88Ie2i6ozw	tolerate some contamination by seawater and solid particles	3	2
+13	_lJ7aMCwoEeSQFYYf79Ksag	Accumulators	2	5
+14	_n2l0wCwoEeSQFYYf79Ksag	The accumulators shall comply with ASME Boiler and Pressure Vessel Code, Section VIII, or BS 7201-1 and ISO 10945 or any other agreed pressure vessel or accumulator code or standard	3	1
+15	_FvpIICwpEeSQFYYf79Ksag	All surface-located accumulator systems shall have a pressure-relieving device to prevent over-pressurization.	2	4
+16	_IZdqECwpEeSQFYYf79Ksag	Nitrogen pre-charge pressure should be significantly lower than normal hydraulic operating pressure to maximize stored energy in case of a supply pump failure	1	1
+17	_Lr5EICwpEeSQFYYf79Ksag	Accumulator capacity  standard	2	2
+18	_PEuBICwpEeSQFYYf79Ksag	allow all valves on one subsea tree to be opened and closed without requiring recharge of the accumulators; to maintain sufficient subsea pressure to keep process valves open, if a failure of the HPU pumps occurs, for a period of 12 h neglecting all other methods of fluid energy storage, such as umbilical line expansion and subsea accumulation	3	2
+19	_VpZPECwpEeSQFYYf79Ksag	prevent short pump-run cycles, which would be detrimental to the life and reliability of the pumps	2	3
+20	_W4SrICwpEeSQFYYf79Ksag	prevent short pump-run cycles, which would be detrimental to the life and reliability of the pumps;	1	5
+21	_klNHECwpEeSQFYYf79Ksag	prevent short pump-run cycles, which would be detrimental to the life and reliability of the pumps;	1	1
+22	_EZtR8CwTEeSQFYYf79Ksag	have the appropriate level of access,with a minimum number of inherent interlocks	3	5
+23	_G3_5UCwTEeSQFYYf79Ksag	prevent SCSSV from opening unless PMV or PWV is closed	1	5
+24	_u9J0UCwTEeSQFYYf79Ksag	prevent SCSSV from closing unless PMV or PWV is closed	1	5
+25	_y7G3oCwTEeSQFYYf79Ksag	prevent the cross-over valve from opening unless PMV is closed	3	1
+26	_4nJ0cCwTEeSQFYYf79Ksag	prevent the PWV from opening unless choke is at preset positon	1	4
+27	_YMqCkCwUEeSQFYYf79Ksag	actuation indication	3	1
+28	_br-CECwUEeSQFYYf79Ksag	provide a surface indication of the actuation of a selected hydraulic function	2	1
+29	_hHDKsCwUEeSQFYYf79Ksag	be through the use of visual flow indicator,pressure transducers,prssure gaugeds,position-indication sensors, flow sensors or pressure sensors.	1	3
+30	_4MHF8C5-EeS9p6LIBlWIGA	Pumps	3	4
+31	_7q0ogC5-EeS9p6LIBlWIGA	Control devices shall be incorporated to shut off pumps upon occurrence of low fluid level in the supply reservoir.	1	5
+32	__p00sC5-EeS9p6LIBlWIGA	Control devices shall be incorporated to cycle pump(s) on and off to maintain pressure within operating limits	1	3
+33	_tZgpkC5_EeS9p6LIBlWIGA	Reservoirs	1	4
+34	_wYPEgC5_EeS9p6LIBlWIGA	The main reservoir should have a minimum capacity of 1,5 times the volume required to pressure charge the system including surface and subsea accumulators, umbilical and all valve operators and one full open and close cycle of chokes	1	3
+35	_0MOTgC5_EeS9p6LIBlWIGA	The hydraulic fluid reservoirs should be equipped with visual level indicators	2	3
+36	_4hY88C5_EeS9p6LIBlWIGA	The hydraulic fluid reservoirs should be equipped with visual level indicators	3	3
+37	_-5g8oC5_EeS9p6LIBlWIGA	Fluid reservoirs shall be made from non-corrosive material and should be equipped with circulating pumps and filters	3	1
+38	_JH0jsC6AEeS9p6LIBlWIGA	control and monitor	1	2
+39	_LM0hUC6AEeS9p6LIBlWIGA	The HPU is typically controlled locally, but may be controlled and monitored from the MCS	3	4
+40	_SV41wC6AEeS9p6LIBlWIGA	If primary control is from the MCS, provision shall be made for local control	3	2
+41	_XUQ0QC6AEeS9p6LIBlWIGA	Monitoring of filter clogging should be provided preferably using remote indication measures that provide operator alarms.	1	4
+42	_BJASMCnOEeSZ88Ie2i6ozw	prevention of hydraulic lock during emergency shutdown	3	4
+43	_RmVewCwoEeSQFYYf79Ksag	Redundancy should be provided on key components such as pumps and filters.	1	4
+44	_ZnZyMCwoEeSQFYYf79Ksag	Electrical equipment in the HPU shall be designed to an ingress protection rating appropriate for the sited environment	2	4
+45	_hQAiUCwoEeSQFYYf79Ksag	Electrical equipment in the HPU shall be designed to an ingress protection rating appropriate for the sited environment	1	1
+46	_M9yUYCwqEeSQFYYf79Ksag	The HPU is typically controlled locally,but may be controlled and monitored from the MCS	3	3
+47	_CfZ_ECwsEeSQFYYf79Ksag	Output fluid from the HPU shall satisfy a cleanliness requirement according to manufacturer's written specification, as defined in ISO 4406.	3	3
+48	_H5UrICjsEeSjObCA45V3CQ	subsea hydraulic distribution system	1	4
+49	_X3drIC6EEeS9p6LIBlWIGA	The subsea hydraulic distribution system distributes hydraulic power from the umbilical termination head to each well.	3	5
+50	_SKmtsCjsEeSjObCA45V3CQ	distribute hydraulic supplies from the umbilical terminations to the manifold valves	2	1
+51	_Sx2WACwwEeSQFYYf79Ksag	prevent pressure being trapped in critical tree-valve operators or other fail-closed safety systems in the event of inadvertent separation of hydraulic interfaces	2	1
+52	_ZNN28CwwEeSQFYYf79Ksag	employ self-sealing hydraulic couplings that minimise seawater ingress during subsea  connection/disconnection.	2	1
+53	_qidrgCwwEeSQFYYf79Ksag	allows retrieval, re-plumbing and replacement to isolate failed lines and activate spares, if available.	5	3
+54	_F0UsIC2PEeSG9ovBIYhu-g	polarize or key multifunction connection	1	4
+55	_Mr62EC2PEeSG9ovBIYhu-g	label for proper identification	6	2
+56	_LdUNwC23EeSwPMygg3dy8Q	Manifold electrical distribution cabling and jumper cables from umbilical termination to the SCM should be repairable or reconfigurable by the use of an ROV or a diver.	5	4
+57	_V79W4C23EeSwPMygg3dy8Q	If possible, electrical connectors should have orientation keys to prevent misconnection and consequential damage	5	5
+58	_j2EhUC23EeSwPMygg3dy8Q	Connection of electrical distribution cabling and electrical jumpers should be made by ROV or diver using simple tools, with minimum demand on rig/vessel time.	3	2
+59	_8LdosC6EEeS9p6LIBlWIGA	Multifunction connections	5	2
+60	_FQRREC6FEeS9p6LIBlWIGA	Multifunction connections should be polarized or keyed such that only one possible orientation is possible	1	3
+61	_IOZ2IC6FEeS9p6LIBlWIGA	Labelling for proper identification should be considered.	7	3
+62	_LLfSUC6FEeS9p6LIBlWIGA	Loads created during hydraulic coupler connection and disconnection which creates hydraulic lock, pressure intensification and vacuum shall be addressed when selecting the hydraulic couplers and the method of securing.	6	4
+63	_U4FQcCw1EeSQFYYf79Ksag	pipe,tubing and hoses requirements for hydraulic 	2	5
+64	_XvOcsCw1EeSQFYYf79Ksag	All pipe/tubing shall have a minimum 6 mm (1/4 in) nominal outside diameter.	7	2
+65	_v-xHYS2JEeSG9ovBIYhu-g	All pipe/tubing shall be supported and protected to minimize damage during testing, installation/removal and normal operation/ maintenance of the system	4	2
+66	_htz4UC2LEeSG9ovBIYhu-g	Allowable stresses in pipe/tubing shall be in accordance with ANSI/ASME B31.3 or any other agreed piping code or standard.	3	3
+67	_QnBt8C6FEeS9p6LIBlWIGA	Seachest compensation chamber:The capacity of each seachest/compensation chamber tied to the spring/boost side of the subsea-valve operators should be at least 125 % of the total swept volume for simultaneous actuation of all operators tied to the chamber	3	3
+68	_lW85oC6FEeS9p6LIBlWIGA	valve actuators overrid:  Design of the hydraulic system shall consider hydraulic lock and seawater ingress possibility in the event of manual valve override	1	3
+69	_1sPGAC6FEeS9p6LIBlWIGA	Subsea accumulators	5	3
+70	_3VtlQC6FEeS9p6LIBlWIGA	be installed in a manner that permits their removal and maintenance over the life of the system	1	2
+71	_patNgC6GEeS9p6LIBlWIGA	comply with ASME Boiler and Pressure Vessel Code, Section VIII, Division 1, and BS 7201-1 and ISO 10945, or the applicable code or regulation which applies	4	2
+72	_vdX6kC6GEeS9p6LIBlWIGA	Accumulator selection should consider minimizing gas pre-charge loss due to diffusion or leakage	1	5
+73	_y9jysC5YEeS9p6LIBlWIGA	control fluids	4	3
+74	_WprQ4C5ZEeS9p6LIBlWIGA	transmit,control and distribute hydraulic signals and enery from the surface HPU to the subsea control system	3	4
+75	_r4k3kC5ZEeS9p6LIBlWIGA	selection of control fluid  should be consider the maximum temperature and pressure to which the hydraulic fluid can be exposed in the well	4	5
+76	_ZD6pQC5aEeS9p6LIBlWIGA	All control fluids shall provide inhibitors to prevent corrosion, biological growth and to tolerate a degree of seawater ingress without having a significant effect upon performance and characteristics.	1	3
+77	_ql-KwC5aEeS9p6LIBlWIGA	fluid shrinkage during cool-down (SCSSV line)	3	5
+78	_C07pIC5bEeS9p6LIBlWIGA	venting and leakage	3	3
+79	_H3BqAC5bEeS9p6LIBlWIGA	external  venting and leakage shall not exceed local regulatory requirements	2	2
+80	_LTgX8C5bEeS9p6LIBlWIGA	internal leakage shall not exceed the control compoment manufacturer's written specifications	1	5
+81	_S-BMkC5bEeS9p6LIBlWIGA	Margins for leakage increase shall be allowed	2	3
+82	_HabqEC5aEeS9p6LIBlWIGA	Cleanliness Requirements	4	1
+83	_voELoC5aEeS9p6LIBlWIGA	should be prepared to a cleanliness level as defined in AS 4059 	2	4
+84	_42PycC5aEeS9p6LIBlWIGA	Achieve and maintain fluid cleanliness	3	4
+85	_uCxlACnJEeSZ88Ie2i6ozw	Seawater ingress	4	1
+86	_yS_uQCONEeSuQOFGrs1zdQ	minimize seawater ingress in alll operational scenarios,which must be guaranteed	4	4
+87	_BKKFkCnKEeSZ88Ie2i6ozw	be tolerant to seawater ingress and the potential corrosion that it can cause.	2	1
+88	_jTP0MC3PEeSwPMygg3dy8Q	Overpressure protection	5	4
+89	_K9ZSgCnQEeSZ88Ie2i6ozw	System pressure-relief (safety) valve settings shall not exceed design pressure.	5	3
+90	_OPIwECnQEeSZ88Ie2i6ozw	The setting of the primary relieving device shall not be greater than the design pressure	5	3
+91	_VTtfUC5gEeS9p6LIBlWIGA	Electrical system	5	1
+92	_ybIqQCaFEeS0tfUgpGqGlg	electrical power unit(EPU)	5	5
+93	_Mr5FYCwlEeSQFYYf79Ksag	may be installed as a separate system, or may be combined with the modem unit or the MCS	4	4
+94	_LVnTYCadEeS0tvUgpGqGlg	supplies electrical power at the desired voltage and frequency to the subsea users	4	2
+95	_HlsD0Cj0EeSjObCA45V3CQ	a large range of electrical load variations to allow flexibility regarding new wells	4	1
+96	_qxJGECnSEeSZ88Ie2i6ozw	should be supplied from  an UPS  to ensure continued operation in the absence of primary power for a minimum period of 30 min	1	2
+97	_Yj1ygCwfEeSQFYYf79Ksag	EPU analysis	4	2
+98	_6nYJUCwfEeSQFYYf79Ksag	voltage at SEM for maximum and minimum SEM power loads	3	3
+99	_8z2A4CwfEeSQFYYf79Ksag	voltages at SEM at maximum and minimum numbers of SCM on the subsea electrical distribution line	3	5
+100	_-llrUCwfEeSQFYYf79Ksag	voltages at SEM at minimum and maximum umbilical lengths	7	1
+101	_AGak4CwgEeSQFYYf79Ksag	voltages at SEM at redundant and non-redundant power distribution, if applicable	6	5
+102	_B-bPYCwgEeSQFYYf79Ksag	voltages at SEM at cable parameters for dry and wet umbilical insulations, if applicable	4	3
+103	_D_H70CwgEeSQFYYf79Ksag	voltages at SEM at the limits of cable parameters such as inductance, capacitance, resistance and conductance (noting that some parameters may change when subsea)	3	4
+104	_IBiBUCwgEeSQFYYf79Ksag	SEM component stress levels that should be maintained within acceptable limits for normal and degraded modes of operation	2	1
+105	_J8-aUCwgEeSQFYYf79Ksag	minimum and maximum subsea power requirements	2	3
+106	_LWZEUCwgEeSQFYYf79Ksag	maximum current load	2	4
+107	_QfJG0CwgEeSQFYYf79Ksag	power factors for full range of control system operating conditions	1	5
+108	_36xiwCaFEeS0tfUgpGqGlg	uninterruptible power supply(UPS)	5	3
+109	_YBHjYCaiEeS0tvUgpGqGlg	ensure safe and reliable elecrical power to the EPU,modem unit and the MCS	5	5
+110	_GSydMCnTEeSZ88Ie2i6ozw	include isolation and regulation to ensure a clean constant supply of electrical power	2	1
+111	_M7nRgCwnEeSQFYYf79Ksag	Each UPS shall have a capacity of 100% of the total load  ,and should be designed to include future planned expansion of the production control system.	4	3
+112	_PsTxUCnTEeSZ88Ie2i6ozw	the UPS shall have a THD figure of better than 3 % with no more than 60 % of the THD concentrated in the third harmonic.	5	3
+113	_cMO74CwnEeSQFYYf79Ksag	The UPS battery back-up shall be capable of running the system for at least 30 min after loss of host-facility power.	6	3
+114	_ozK28C6HEeS9p6LIBlWIGA	subsea electronic module	5	2
+115	_1cw0sC6HEeS9p6LIBlWIGA	be based on the use of one or more microprocessors and power supply units in order to obtain an acceptable level of reliability and flexibility in the design	2	4
+116	_5jDUoC6HEeS9p6LIBlWIGA	The SEM shall be protected against water intrusion	5	4
+117	_8uIJgC6HEeS9p6LIBlWIGA	The SEM should be designed with spare capacity for increase of capabilities like data processing, external and internal sensors and communication	5	3
+118	_CRsfwC6IEeS9p6LIBlWIGA	The SEM interface to sensors and DCVs should be limited to the minimum practical number of signal types and formats. International Standards should be adopted wherever possible	7	5
+119	_LlYRoC6IEeS9p6LIBlWIGA	The SEM can have capacity to temporarily store all relevant data gathered from the subsea production system	1	3
+120	_N2upMC6IEeS9p6LIBlWIGA	The SEM can be capable of performing sequenced monitoring operations and/or sequenced controlling based on one command from the MCS	1	3
+121	__FHssCwvEeSQFYYf79Ksag	subsea electircal distribution system	4	1
+122	_11jXECw1EeSQFYYf79Ksag	distribute electrical power and communication signals from the umbilical terminations to the subsea trees	5	6
+123	_CIipAC2yEeSwPMygg3dy8Q	keep voltage levels as low as practical in order to minimize electrical stresses on conductive connectors	5	6
+124	_ROrhsC2yEeSwPMygg3dy8Q	provide  electrical routing	4	4
+125	_Vxry0C2yEeSwPMygg3dy8Q	The number of electrical connectors in series shall be kept to a minimum	5	1
+126	_XLF1wC2yEeSwPMygg3dy8Q	should be redundant or include spares that can be configured to replace failed circuits	7	5
+127	_3LD80C53EeS9p6LIBlWIGA	provide completely redundant eletrical sysetm	3	4
+128	_WF-_EC6HEeS9p6LIBlWIGA	Prevention of electrical shock:All subsea systems to be serviced by divers shall be designed to protect divers from electrical shock hazards	2	1
+129	_uXoXUC6CEeS9p6LIBlWIGA	Chemical injection system	7	4
+130	_XNAQkCjsEeSjObCA45V3CQ	subsea chemical-injection distribution system	2	3
+131	_eLiqwCwzEeSQFYYf79Ksag	distribute chemical chemical supplies from the umbilical terminations to the injection points	2	2
+132	_oqqVACwzEeSQFYYf79Ksag	provide the means for supplying and bleeding fluid used in pressure testing and in equalization of pressure differential across flow-control devices	7	4
+133	_wrew0CwzEeSQFYYf79Ksag	support the removal of fluid from the well annulus for leak detection and during the normal warm-up of a well	3	2
+134	_R2PmAC54EeS9p6LIBlWIGA	The subsea chemical-distribution system and supply line should have redundancy consistent with the importance of the treatment chemical	2	4
+135	_ScHZwCw0EeSQFYYf79Ksag	pipe,tubing and hoses requirements for  chemical injection	5	6
+136	_WEDw0Cw0EeSQFYYf79Ksag	All pipe/tubing shall have a minimum 6 mm (1/4 in) nominal outside diameter	6	4
+137	_bIO1UCw0EeSQFYYf79Ksag	All pipe/tubing shall be supported and protected to minimize damage during testing, installation/removal and normal operation/maintenance of the system	5	3
+138	_coCbMCw0EeSQFYYf79Ksag	Allowable stresses in pipe/tubing shall be in conformance with ANSI/ASME B31.3 or any other agreed piping code or standard 	7	3
+139	_jPdKQCaFEeS0tfUgpGqGlg	chemical injection unit(CIU)	4	1
+140	_1IMLwCaYEeS0tfUgpGqGlg	provides single and/or mixed "cocktail" chemicals at constant regulated pressure or metered volumn	5	4
+141	_rUciICj7EeSjObCA45V3CQ	flexibility of possible chemical injection scenarios	2	5
+142	_fEVwgCj9EeSjObCA45V3CQ	downhole chemical injection	2	1
+143	_uQ93YCncEeSZ88Ie2i6ozw	The subsea chemical-distribution system and supply line should have redundancy consistent with the importance of the treatment chemical.	2	4
+144	_Rpq_QCwrEeSQFYYf79Ksag	For treatment chemicals that are delivered in specific rates,the CIU system should provide a means to vary and set the rate to meet the specified delivery rate	7	4
+145	_atkBoCwrEeSQFYYf79Ksag	The CIU should contain provisions for obtaining and maintaining the specified cleanliness requirement	5	2
+146	_yCPpECwrEeSQFYYf79Ksag	Control devices shall be incorporated to shut off chemical injection pumps upon occurrence of low fluid level in the supply reservoir.	3	3
+147	_F7h1wCwuEeSQFYYf79Ksag	Control devices shall be incorporated to cycle pump(s) on and off to maintain pressure within operating limits.	3	4
+148	_NwJooCwuEeSQFYYf79Ksag	The CIU is typically controlled locally, but may be controlled and monitored from the MCS	7	6
+149	_O6t58C6BEeS9p6LIBlWIGA	chemical injection pumps	1	6
+150	_S-LIUC6BEeS9p6LIBlWIGA	Control devices shall be incorporated to shut off chemical injection pumps upon occurrence of low fluid level in the supply reservoir	1	1
+151	_VEhJwC6BEeS9p6LIBlWIGA	Chemical injection pumps shall be fitted with isolation valves, a pressure-relief valve and a non-return valve at each pump discharge line.	9	4
+152	_yu2EoC6BEeS9p6LIBlWIGA	The pressure-relief device shall be installed at the output of all high-pressure pumps upstream of any blocking or isolation valves.	6	7
+153	_3DkCIC6BEeS9p6LIBlWIGA	Pump selection should give consideration to chemical injection fluid	3	5
+154	_8dBaIC6BEeS9p6LIBlWIGA	Reservoirs	8	1
+155	_B5cmkC6CEeS9p6LIBlWIGA	The chemical injection fluid reservoirs, if integral with the CIU, shall be equipped with visual level indicators	9	6
+156	_JVhWkC6CEeS9p6LIBlWIGA	The chemical injection fluid reservoirs, if integral with the CIU, should be designed to minimize build-up of contamination and facilitate flushing	2	3
+157	_OPbr0C6CEeS9p6LIBlWIGA	Fluid reservoirs shall be made from non-corrosive material	5	4
+158	_I_QOoC5hEeS9p6LIBlWIGA	Control system	3	4
+159	_mitqwCaFEeS0tfUgpGqGlg	master control station(MCS)	8	4
+160	_GuAEgCacEeS0tfUgpGqGlg	Tree valve control	9	3
+161	_pYi-cCwiEeSQFYYf79Ksag	sequenced operation of valves	6	7
+162	_MCph8CqiEeSbpYMrflG3NA	valve mode requirement	10	6
+163	_4xhaECqiEeSbpYMrflG3NA	primary control mode	6	2
+164	_MbseoCqjEeSbpYMrflG3NA	USV closing-time requirement using primary control mode,with the maximum response time not to exceed 10 min	4	1
+165	_T079ECqjEeSbpYMrflG3NA	For multiple-well installations, the USVs on all flowing wells shall close within the designated 10 min time allowance	6	1
+166	_83Y5kCweEeSQFYYf79Ksag	response time to close process valves in the event of a common close command, such as an ESD ventdown at the surface, venting off hydraulic control valves via supply lines;	1	3
+167	_FHHUECwfEeSQFYYf79Ksag	response time and pressure for multiple simultaneous choke operations;	7	3
+168	_sw0BQCqiEeSbpYMrflG3NA	contingency closure control mode	5	4
+169	_yQRtkCv1EeSQFYYf79Ksag	with this mode the system an execute the neccesary valve closures	9	4
+170	_9ohYMCv1EeSQFYYf79Ksag	this mode involves bleeding off supply hydraulic pressure,so the system shall reset in such a manner as to prevent the automatic reopening of the closed valves when supply pressure is restored	1	5
+171	_RH_ooCv2EeSQFYYf79Ksag	the SCSSVs should be the last valves to close	6	3
+172	_Jig6cCv1EeSQFYYf79Ksag	Failure of the boost system shall not prevent the fail-safe closure of the USV under the loss of hydraulic pressure.	1	6
+173	_LwkM8CwiEeSQFYYf79Ksag	respond to the host safety systems	1	4
+174	_QqRecSN9EeSuQOFGrs1zdQ	computational support and communication pathways without the need for changing the subsea umbilical system and the accosciated distribution system	10	2
+175	_APkRMCj8EeSjObCA45V3CQ	reconfigurates of lines 	10	2
+176	_MGjVMCkbEeSjObCA45V3CQ	makes plan for possible subsea chemical injection system add on	7	5
+177	_Qiu7cCwiEeSQFYYf79Ksag	provide effective operational interface	6	4
+178	_OtH6YCkREeSjObCA45V3CQ	allows for increased scope with respect to number of wells	1	7
+179	_hdB5YCwiEeSQFYYf79Ksag	executing a safety shutdown	4	5
+180	_ARJBEE30EeSrhOP0QMvu1g	workover	5	1
+181	_dWZlwCwjEeSQFYYf79Ksag	interface with remote shutdown system on drilling or workover vessel	10	2
+182	_Qq6WICwZEeSQFYYf79Ksag	safety isolation during workover,which makes the production control system shall be capable of being positively disabled from the operation of tree control functions while a workover control system is in use on that tree.	9	5
+183	_t4eGYCwiEeSQFYYf79Ksag	software interlocks	10	7
+184	_8OLXYE3yEeSrhOP0QMvu1g	subsea well and manifold control	9	3
+185	_HGmiwCwjEeSQFYYf79Ksag	process-control interconnections with host facility	1	2
+186	_WmG9sCwjEeSQFYYf79Ksag	remote communication to offsite control centre	6	5
+187	_iorXsCwjEeSQFYYf79Ksag	rate of change of pressure analogue(s) for rudimentary leak detection	7	3
+188	_oiK6oCwjEeSQFYYf79Ksag	hydrate detection by pressure/temperature curve comparison	4	1
+189	_sVeNICwjEeSQFYYf79Ksag	flowrate control by detection of choke position and pressure sensors up- and downstream of choke	5	3
+190	_G7XQYCnkEeSZ88Ie2i6ozw	data collection,storage,analysis and presentation	6	2
+191	_P6hjwCnkEeSZ88Ie2i6ozw	provide sufficient data-readback information to operate the system safely and to react promptly to conditions requiring PSDs	9	6
+192	_ccGN8CnkEeSZ88Ie2i6ozw	provide ESD capability	2	4
+193	_Li2gUCkdEeSjObCA45V3CQ	display and warn of out-of-limit(fault)conditons	10	7
+194	_nmcnUCwlEeSQFYYf79Ksag	monitor EPU paramenters	9	7
+195	_Hc73wCwmEeSQFYYf79Ksag	input voltage	2	3
+196	_Iv_bECwmEeSQFYYf79Ksag	input current	6	2
+197	_OItMMCwmEeSQFYYf79Ksag	umbilical voltages/currents	5	3
+198	_PtZ5ICwmEeSQFYYf79Ksag	overvoltage and overcurrent alarms	1	3
+199	_RO6vMCwmEeSQFYYf79Ksag	lin insulation	5	2
+200	_l-4XICwmEeSQFYYf79Ksag	moitor modem unit parameter	6	3
+201	_kzsg8CwnEeSQFYYf79Ksag	monitor  the UPS parameters	4	1
+202	_rUU8YCwnEeSQFYYf79Ksag	UPS output frequency	6	5
+203	_t-AUYCwnEeSQFYYf79Ksag	UPS bypass mode	8	4
+204	_1LqN4CwnEeSQFYYf79Ksag	UPS on-line mode	5	6
+205	_2fIA4CwnEeSQFYYf79Ksag	UPS failure	10	1
+206	_k4_wUCwqEeSQFYYf79Ksag	monitor the HPU parameters	2	6
+207	_or1v0CwqEeSQFYYf79Ksag	non-regulated supply pressure(s)	7	6
+208	_rjVhYCwqEeSQFYYf79Ksag	regulated supply pressure(s)	8	1
+209	_scKm0CwqEeSQFYYf79Ksag	fluid levels	9	6
+210	_tF6HYCwqEeSQFYYf79Ksag	pump status	4	2
+211	_2Rz2QCwqEeSQFYYf79Ksag	delivery flowrates	8	3
+212	_23MbQCwqEeSQFYYf79Ksag	return flow	3	4
+213	_5RX-sCwqEeSQFYYf79Ksag	filter status	2	5
+214	_6fbtQCwqEeSQFYYf79Ksag	filter status	9	5
+215	_0qR68CwuEeSQFYYf79Ksag	monitor the CIU parameters	8	2
+216	_88g24CwuEeSQFYYf79Ksag	regulated supply pressure(s)	6	4
+217	__SeosCwuEeSQFYYf79Ksag	fluid levels	4	4
+218	_DnfhICwvEeSQFYYf79Ksag	pump status	10	2
+219	_EqvG0CwvEeSQFYYf79Ksag	filter status	10	7
+220	_Jk8XACwvEeSQFYYf79Ksag	delivery flowrate	6	7
+221	_eaKlUCwiEeSQFYYf79Ksag	display operating status	4	7
+222	_qMZuQCaFEeS0tfUgpGqGlg	distributed control system(DCS)	6	2
+223	_zeXxcCacEeS0tvUgpGqGlg	with a decentralized configuration,containing application software required to control and monitor the subsea prodcution system and associated topside equipment such as the HPU and EPU.	3	6
+224	_VEc5kCj1EeSjObCA45V3CQ	subsea intervention tasks	4	2
+225	_3I-qsCj8EeSjObCA45V3CQ	downhole instrumentation system interfaces	6	1
+226	_GPQGQCj9EeSjObCA45V3CQ	flexibility regarding interface toward downhole instrumentation systems	2	2
+227	_K1AwcCj9EeSjObCA45V3CQ	describe the impact on production control system at an outline level during system design	1	4
+228	_js2SACnUEeSZ88Ie2i6ozw	retrieve failed portions of the distribution network whilst the redundant and operational parts are in operation	6	5
+229	_yEeuoCw0EeSQFYYf79Ksag	distribute electircal/optical communications signals from the umbilical terminations to the control modules of the subsea production control system	7	5
+230	_-qgxMCaFEeS0tfUgpGqGlg	subsea control module(SCM)	2	2
+231	_zrotMCajEeS0tvUgpGqGlg	upon command from MCS,directs hydraulic fluid to operate subsea valves	1	2
+232	_fjnR8Cm3EeSZ88Ie2i6ozw	requirements of pressure rating  changing from sender to receiver	4	6
+233	_qAkkkCweEeSQFYYf79Ksag	stability of opened control valves	8	2
+234	_t6rCoCweEeSQFYYf79Ksag	stability of opened control and process valves to pressure transients caused by operation of other control and process valves	4	4
+235	_zqFcgCweEeSQFYYf79Ksag	stability of opened downhole control and safety valves to pressure transients caused by operation of other safety or IWCS valves	4	4
+236	_cJDXMCakEeS0tvUgpGqGlg	gathers information from the subsea control system	7	6
+237	_BV2MgCjrEeSjObCA45V3CQ	transmits the information to the topside facility	9	2
+238	_Dq_c8CkBEeSjObCA45V3CQ	increased scope with respect to control/instrumentation functionality	4	5
+239	_rp204SN-EeSuQOFGrs1zdQ	be retrieved and retrofitted to accommodate the introduction of smart well systems at a future date	8	1
+240	_IsopgCkPEeSjObCA45V3CQ	subsea intervention tasks	2	7
+241	_MmG90CkBEeSjObCA45V3CQ	interface toward subsea separation/subsea boosting systems,without extensive marin operations or modifications related to an existing system. 	4	5
+242	_XLWkgCnNEeSZ88Ie2i6ozw	pressure compensation of the SCM itself, for retrieval or deployment, when not connected to the christmas tree	4	6
+243	_ZzqKgC5iEeS9p6LIBlWIGA	Performance	3	2
+244	_jmSiMC5iEeS9p6LIBlWIGA	provide for individual or multiple operation of all remotely controlled subsea valves	1	6
+245	_KsbYwC56EeS9p6LIBlWIGA	provide sufficient data-readback information to operate the system safely and to react promptly to conditions requiring PSDs	9	3
+246	_UgQDQC56EeS9p6LIBlWIGA	provide ESD capability that ensures the subsea system will shutdown production safely within the time specified by this part of ISO 13628 or by applicable regulatory authorities for all production scenarios, including simultaneous drilling, completion and workover operations	3	6
+247	_91j0AC55EeS9p6LIBlWIGA	Required reliability of the subsea control system should be optimized to result in maximum benefit 	1	6
+248	_atxVcC56EeS9p6LIBlWIGA	Subsea control systems shall be designed to render the production system to a fail-safe status upon loss of hydraulic power	4	5
+249	_1jydQCaFEeS0tfUgpGqGlg	modem Unit	2	6
+250	_lvJbYC5-EeS9p6LIBlWIGA	include filters and isolation transformers	8	6
+251	_nYuG4CafEeS0tvUgpGqGlg	modulates and demodulates communication signals for transmission to and from the applicable subsea users	5	3
+252	_ZnGiICwmEeSQFYYf79Ksag	may be connected to a MCS,or alternatively, may interface directly with the host facility DCS via a communication interface unit	4	5
+253	_EI2pMCaGEeS0tfUgpGqGlg	subsea and downhole sensors	5	2
+254	_sZ8IYCjsEeSjObCA45V3CQ	provide data to help monitor operation of the subsea production system	7	3
+255	_WdMIUE37EeSrhOP0QMvu1g	pressure transducer	2	4
+256	_GsiWME3_EeSrhOP0QMvu1g	locate on a subsea,manifold,etc	1	6
+257	_RUInAE3_EeSrhOP0QMvu1g	operates using the force-balance technique	6	1
+258	_ZHAtcE3_EeSrhOP0QMvu1g	withstand high pressures	1	2
+259	_sLHQgE3_EeSrhOP0QMvu1g	achieves accurary of +/-0.15%	1	1
+260	_Zf980E37EeSrhOP0QMvu1g	Temperature transducer	4	7
+261	_3FzccE3_EeSrhOP0QMvu1g	operates by measuring the output of a thermocouple	7	4
+262	_EEUhUE4AEeSrhOP0QMvu1g	should be close to the process fluid as possible	5	5
+263	_xL5moE37EeSrhOP0QMvu1g	Combined pressure and temperature transducer	3	3
+264	_O32VUE4AEeSrhOP0QMvu1g	combine pressure and temperature elements into one package	5	3
+265	_cRNjIE4AEeSrhOP0QMvu1g	Sand detector	7	1
+266	_fBX9oE4AEeSrhOP0QMvu1g	monitoring the noise generated by sand impoackts on a solid suface or by measuring the erosion damage of a target inserted in to the flow	7	2
+267	_i6mR8E4AEeSrhOP0QMvu1g	manage long-term damage of pipe/flowline	5	3
+268	_0r3GYE37EeSrhOP0QMvu1g	choke position indicator	7	7
+269	_5vKBIE37EeSrhOP0QMvu1g	downhole pressure temperature transducer	1	1
+270	_NAZ4sCaGEeS0tfUgpGqGlg	flying lead	6	4
+271	_ZihhACjtEeSjObCA45V3CQ	transfer electircal power and communications signals,hydraulic power,and/or chemicals to the subsea components of the subsea production system.	5	6
+272	_KRxIMCaGEeS0tfUgpGqGlg	control buoy	7	2
+273	_A0y6YC58EeS9p6LIBlWIGA	connected to the subsea components of the subsea porduction system via an electrical/fibre optic /hydraulic control umbilical	4	6
+274	_MqwkYCjtEeSjObCA45V3CQ	communicate with the surface production facility via umbilical,acoustic ,radio or satallite links or a combination thereof	7	2
+275	_8IdEICaFEeS0tfUgpGqGlg	umbilical	1	4
+276	__hesECaeEeS0tvUgpGqGlg	transfer electrical power	5	4
+277	_gc3dICkSEeSjObCA45V3CQ	transfer hydraulic power	1	3
+278	_Z-XM0CaaEeS0tfUgpGqGlg	supplies chemicals to the injection points of the subsea prodcution system	6	4
+279	_zw2Z0CaiEeS0tvUgpGqGlg	transfer  communication signals,via power cable,signal cable or fibre optic	5	1
+280	_3xG-gCj4EeSjObCA45V3CQ	increased scope with respect to number of umbilicals	2	2
+281	_OdaXUCj5EeSjObCA45V3CQ	connection mode 	3	2
+282	_VjOjcCj5EeSjObCA45V3CQ	serial connctions	5	6
+283	_ZCs7ACj5EeSjObCA45V3CQ	parallel connections	5	4
+284	___HesCndEeSZ88Ie2i6ozw	The number of spares in the umbilical should be specified based on the redundancy needed and relative impact on umbilical design	1	7
+285	_4PZ5cCwsEeSQFYYf79Ksag	Output fluid from the umbilicals shall satisfy a cleanliness requirement according to manufacturer's written specification, as defined in ISO 4406.	6	6
+286	_4p7qMC5ZEeS9p6LIBlWIGA	Overpressure protection	3	5
