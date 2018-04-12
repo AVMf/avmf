@@ -52,7 +52,8 @@ public class TestCasePrioritization {
     	TestSuiteCoverage tsCoverage = new TestSuiteCoverage();
         List<TestCase> prioritizedTestSuite = new ArrayList<TestCase>();
     	
-        // sample file that contains the test suite information 
+        // sample file that contains the test suite information consisting of 150 test cases
+        // each test case consists of key attributes such as id, execution time, apis covered
         String file = "src/main/java/org/avmframework/examples/testoptimization/originalTestSuite.txt";      
         originalTestSuite = readTestSuite(file, originalTestSuite, tsCoverage);
         
@@ -82,10 +83,15 @@ public class TestCasePrioritization {
         Monitor monitor = avm.search(vector, objFun);
 
        prioritizedTestSuite = orderTestCases (monitor, originalTestSuite);
-        System.out.println("The prioritized test cases are represented by ID as follow");
-        for (TestCase testCase:prioritizedTestSuite)
-        	  System.out.print(testCase.getId() + "  ");
-        System.out.print("\n");  
+       // this shows how the test cases in the test suite need to be ordered for maximum effectiveness with minimum cost
+        System.out.println("The prioritized test cases from higher to lower important test cases are represented by ID as follows: ");
+        System.out.print("\n");
+        for (int i=0; i< prioritizedTestSuite.size();i++){
+        	System.out.print(prioritizedTestSuite.get(i).getId());
+			if ((i + 1) < prioritizedTestSuite.size())
+				System.out.print(", ");
+        }
+        System.out.print("\n"); 
         // output the results
         System.out.println("Best solution: " + monitor.getBestVector());
         System.out.println("Best objective value: " + monitor.getBestObjVal());
@@ -96,7 +102,7 @@ public class TestCasePrioritization {
         System.out.println("Running time: " + monitor.getRunningTime() + "ms");
     }
     
-    // read the file and populate the test case
+    // read the file, populate the test cases and add it to an array
     private static List<TestCase> readTestSuite(String file, List<TestCase> testSuite, TestSuiteCoverage tsCoverage){
     	try {
 			BufferedReader in = new BufferedReader(new FileReader(file));
@@ -139,7 +145,7 @@ public class TestCasePrioritization {
     }
     
     
-    // final solution
+    // final solution to be returned
 	protected static List<TestCase> orderTestCases(Monitor monitor,
 			List<TestCase> originalTestSuite) {
 		List<TestCase> orderedTestSuite = new ArrayList<TestCase>();
@@ -151,7 +157,7 @@ public class TestCasePrioritization {
 			double num = Double.parseDouble(monitor.getBestVector()
 					.getVariable(i).toString());
 			while (numVariables.contains(num)) {
-				num += 0.09;	// to make unique
+				num += 0.09;	// to make unique variable values
 			}
 			numVariables.add(num);
 			numVariablesHash.put(num, originalTestSuite.get(i));
@@ -163,7 +169,6 @@ public class TestCasePrioritization {
 			TestCase tempCase = numVariablesHash.get(numVariables.get(j));
 			orderedTestSuite.add(tempCase);
 		}
-
 		return orderedTestSuite;
 	}
     

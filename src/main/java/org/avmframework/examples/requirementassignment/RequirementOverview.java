@@ -1,5 +1,8 @@
 package org.avmframework.examples.requirementassignment;
 
+// a class to know the range of dependencies, importances, 
+//and complexity of the requirements
+
 public class RequirementOverview {
 	private double minDep = 1;
 	private double maxDep = 1;

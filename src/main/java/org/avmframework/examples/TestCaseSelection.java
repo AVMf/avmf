@@ -55,7 +55,8 @@ public class TestCaseSelection {
     	TestSuiteCoverage tsCoverage = new TestSuiteCoverage();
         List<TestCase> selectedTestSuite = new ArrayList<TestCase>();
     	
-        // sample file that contains the test suite information 
+        // sample file that contains the test suite information consisting of 150 test cases
+        // each test case consists of key attributes such as id, execution time, apis covered 
         String file = "src/main/java/org/avmframework/examples/testoptimization/originalTestSuite.txt";      
         originalTestSuite = readTestSuite(file, originalTestSuite, tsCoverage);
         
@@ -85,12 +86,18 @@ public class TestCaseSelection {
         Monitor monitor = avm.search(vector, objFun);
 
         selectedTestSuite = selectTestCases (monitor, originalTestSuite);
-        System.out.println("The selected test cases within time budget are represented by ID as follow");
-        for (TestCase testCase:selectedTestSuite)
-        	  System.out.print(testCase.getId() + "  ");
+        System.out.println("We are interested to get the selected test cases within time budget, and they"
+        		+ " are represented by ID as follows");
+              
+        for (int i=0; i< selectedTestSuite.size();i++){
+        	System.out.print(selectedTestSuite.get(i).getId());
+			if ((i + 1) < selectedTestSuite.size())
+				System.out.print(", ");
+        }
         System.out.print("\n");  
+        
         // output the results
-        System.out.println("Best solution: " + monitor.getBestVector());
+        System.out.println("Best solutions vector values: " + monitor.getBestVector());
         System.out.println("Best objective value: " + monitor.getBestObjVal());
         System.out.println(
                 "Number of objective function evaluations: " + monitor.getNumEvaluations() +
@@ -100,7 +107,7 @@ public class TestCaseSelection {
     }
     
     
-    // read file and popualte the test cases
+    // read file and populate the test cases
     private static List<TestCase> readTestSuite(String file, List<TestCase> testSuite, TestSuiteCoverage tsCoverage){
     	try {
 			BufferedReader in = new BufferedReader(new FileReader(file));
@@ -144,7 +151,7 @@ public class TestCaseSelection {
     	return testSuite;
     }
     
-    // final solution
+    // final solution to be returned
     protected static List<TestCase> selectTestCases( Monitor monitor, List<TestCase> originalTestSuite){
 		List<TestCase> selectedTestSuite = new ArrayList<TestCase>();
 		

@@ -8,7 +8,7 @@ import org.avmframework.variable.IntegerVariable;
 public class TestObject {
 	static final int INIT = 0, MIN = -1;
 
-	// -1 means the requirement is not assigned to any stakeholder
+	// The value -1 means the requirement is not assigned to any stakeholder
 	// set up the vector to be optimized
 	public Vector setUpVector(int size, int numStakeholder) {
 		Vector vector = new Vector();
