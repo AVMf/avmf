@@ -1,0 +1,62 @@
+State {Idle}; activecall {activecall == 0}; videoquality {videoquality == 0}
+State {Connected_1}; activecall {activecall == 1}; videoquality {videoquality == 3}
+State {NotFull}; activecall {activecall == 2}; videoquality {videoquality == 3}
+State {Full}; activecall {activecall == 3}; videoquality {videoquality == 3}
+State {new5}; activecall {activecall == 3}; videoquality {videoquality == 2}
+State {new6}; activecall {activecall == 2}; videoquality {videoquality == 2}
+State {new7}; activecall {activecall == 1}; videoquality {videoquality == 0}
+Transition
+  Source_State {Idle}
+  Target_State {Connected_1}
+  trigger {dial}
+  PacketLoss {PacketLoss == 0.0}, PacketDelay {PacketDelay == 0.0}, PacketDuplication {PacketDuplication == 0.0}, PacketCorruption {PacketDelay == 0.0}
+Transition
+  Source_State {Connected_1}
+  Target_State {Idle}
+  trigger {disconnect}
+  PacketLoss {PacketLoss == 0.0}, PacketDelay {PacketDelay == 0.0}, PacketDuplication {PacketDuplication == 0.0}, PacketCorruption {PacketDelay == 0.0}
+Transition
+  Source_State {Connected_1}
+  Target_State {NotFull}
+  trigger {dial}
+  PacketLoss {PacketLoss == 0.0}, PacketDelay {PacketDelay == 0.0}, PacketDuplication {PacketDuplication == 0.0}, PacketCorruption {PacketDelay == 0.0}
+Transition
+  Source_State {NotFull}
+  Target_State {Connected_1}
+  trigger {disconnect}
+  PacketLoss {PacketLoss == 0.0}, PacketDelay {PacketDelay == 0.0}, PacketDuplication {PacketDuplication == 0.0}, PacketCorruption {PacketDelay == 0.0}
+Transition
+  Source_State {NotFull}
+  Target_State {Full}
+  trigger {dial}
+  PacketLoss {PacketLoss == 0.0}, PacketDelay {PacketDelay == 0.0}, PacketDuplication {PacketDuplication == 0.0}, PacketCorruption {PacketDelay == 0.0}
+Transition
+  Source_State {Full}
+  Target_State {NotFull}
+  trigger {disconnect}
+  PacketLoss {PacketLoss == 0.0}, PacketDelay {PacketDelay == 0.0}, PacketDuplication {PacketDuplication == 0.0}, PacketCorruption {PacketDelay == 0.0}
+Transition
+  Source_State {Full}
+  Target_State {new5}
+  trigger {null}
+  PacketLoss {PacketLoss == 38.6}, PacketDelay {PacketDelay == 30.7}, PacketDuplication {PacketDuplication == 54.8}, PacketCorruption {PacketDelay == 30.7}
+Transition
+  Source_State {Full}
+  Target_State {new6}
+  trigger {disconnect}
+  PacketLoss {PacketLoss == 71.5}, PacketDelay {PacketDelay == 37.6}, PacketDuplication {PacketDuplication == 6.6}, PacketCorruption {PacketDelay == 37.6}
+Transition
+  Source_State {NotFull}
+  Target_State {new6}
+  trigger {null}
+  PacketLoss {PacketLoss == 71.5}, PacketDelay {PacketDelay == 30.0}, PacketDuplication {PacketDuplication == 3.3}, PacketCorruption {PacketDelay == 30.0}
+Transition
+  Source_State {NotFull}
+  Target_State {new7}
+  trigger {disconnect}
+  PacketLoss {PacketLoss == 76.3}, PacketDelay {PacketDelay == 84.7}, PacketDuplication {PacketDuplication == 88.1}, PacketCorruption {PacketDelay == 84.7}
+Transition
+  Source_State {Connected_1}
+  Target_State {Connected_1}
+  trigger {null}
+  PacketLoss {PacketLoss == 81.5}, PacketDelay {PacketDelay == 46.8}, PacketDuplication {PacketDuplication == 29.4}, PacketCorruption {PacketDelay == 46.8}
