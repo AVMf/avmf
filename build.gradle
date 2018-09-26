@@ -1,0 +1,68 @@
+// available commands:
+// "gradle check": run checkstyle to assess code quality
+// "gradle clean": clean the project of all derived files
+// "gradle build": create the bytecode from the source code
+// "gradle run": run the program and produce output
+
+plugins {
+    id "java"
+}
+
+// declare the repositories that are used to meet dependencies
+repositories {
+  mavenLocal()
+  jcenter()
+  mavenCentral()
+}
+
+// specify the use of the gradle version
+wrapper {
+  gradleVersion = '4.9'
+}
+
+// declare values to place in the manifest file in the JAR
+jar {
+  manifest {
+    attributes(
+        'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
+        'Main-Class': 'labtwo.ComputeMoonDistance'
+        )
+  }
+}
+
+// adds the dependencies needed to compile/run the repository
+dependencies {
+  
+  // for junit
+  compile 'junit:junit:4.12'
+  //testCompile
+
+  // for commons-math3
+  compile 'commons-math:commons-math:3.2'
+  //testCompile
+
+  // for commons-lang3
+  compile 'commons-lang:commons-lang:3.0'
+  //testCompile
+
+  // have a single testCompile down here for the repository or one after each compile?
+
+  // need anything else in this section?
+
+}
+
+// give the name of the application to run with "gradle run" command
+apply plugin: 'application'
+mainClassName = 'labtwo.ComputeMoonDistance'
+
+// perform checkstyle checking with the "gradle check" command
+apply plugin: 'checkstyle'
+checkstyle.toolVersion = '8.1'
+checkstyle {
+  ignoreFailures = false
+  maxWarnings = 0
+  maxErrors = 0
+  configFile = new File(rootDir, "config/checkstyle/google_checks.xml")
+}
+
+// need anything else in this file?
