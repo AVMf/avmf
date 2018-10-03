@@ -15,24 +15,9 @@ repositories {
   mavenCentral()
 }
 
-// specify the use of the gradle version
-wrapper {
-  gradleVersion = '4.9'
-}
-
-// declare values to place in the manifest file in the JAR
-jar {
-  manifest {
-    attributes(
-        'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
-        'Main-Class': 'labtwo.ComputeMoonDistance'
-        )
-  }
-}
-
 // adds the dependencies needed to compile/run the repository
 dependencies {
-  
+
   // for junit
   compile 'junit:junit:4.12'
   //testCompile
@@ -47,13 +32,26 @@ dependencies {
 
   // have a single testCompile down here for the repository or one after each compile?
 
-  // need anything else in this section?
+}
 
+// specify the use of the gradle version
+wrapper {
+  gradleVersion = '4.9'
+}
+
+// declare values to place in the manifest file in the JAR
+jar {
+  manifest {
+    attributes(
+        'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
+         'Main-Class': 'org.avmframework.AVM' // not entirely sure of equivalent to labtwo.ComputeMoonDistance
+        )
+  }
 }
 
 // give the name of the application to run with "gradle run" command
 apply plugin: 'application'
-mainClassName = 'labtwo.ComputeMoonDistance'
+mainClassName = 'org.avmframework.AVM' // not entirely sure of equivalent to labtwo.ComputeMoonDistance
 
 // perform checkstyle checking with the "gradle check" command
 apply plugin: 'checkstyle'
