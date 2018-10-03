@@ -23,11 +23,11 @@ dependencies {
   //testCompile
 
   // for commons-math3
-  compile 'commons-math:commons-math:3.2'
+  compile 'org.apache.commons:commons-math3:3.2'
   //testCompile
 
   // for commons-lang3
-  compile 'commons-lang:commons-lang:3.0'
+  compile 'org.apache.commons:commons-lang3:3.0'
   //testCompile
 
   // have a single testCompile down here for the repository or one after each compile?
@@ -37,6 +37,11 @@ dependencies {
 // specify the use of the gradle version
 wrapper {
   gradleVersion = '4.9'
+}
+
+sourceSets {
+  main.java.srcDir "src/main"
+  test.java.srcDir "src/test"
 }
 
 // declare values to place in the manifest file in the JAR
