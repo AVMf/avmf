@@ -2,69 +2,69 @@ package org.avmframework.objective;
 
 public class NumericObjectiveValue extends ObjectiveValue<NumericObjectiveValue> {
 
-    protected double value;
-    protected boolean higherIsBetter;
+  protected double value;
+  protected boolean higherIsBetter;
 
-    protected boolean haveOptimum = false;
-    protected double optimum;
+  protected boolean haveOptimum = false;
+  protected double optimum;
 
-    public NumericObjectiveValue(double value, boolean higherIsBetter) {
-        this.value = value;
-        this.higherIsBetter = higherIsBetter;
+  public NumericObjectiveValue(double value, boolean higherIsBetter) {
+    this.value = value;
+    this.higherIsBetter = higherIsBetter;
+  }
+
+  public NumericObjectiveValue(double value, boolean higherIsBetter, double optimum) {
+    this(value, higherIsBetter);
+    this.haveOptimum = true;
+    this.optimum = optimum;
+  }
+
+  public double getValue() {
+    return value;
+  }
+
+  @Override
+  public boolean isOptimal() {
+    if (!haveOptimum) {
+      return false;
     }
 
-    public NumericObjectiveValue(double value, boolean higherIsBetter, double optimum) {
-        this(value, higherIsBetter);
-        this.haveOptimum = true;
-        this.optimum = optimum;
+    if (higherIsBetter) {
+      return value >= optimum;
+    } else {
+      return value <= optimum;
     }
+  }
 
-    public double getValue() {
-        return value;
+  @Override
+  public int compareTo(NumericObjectiveValue other) {
+    if (value == other.value) {
+      return 0;
+    } else if (value < other.value) {
+      return higherIsBetter ? -1 : 1;
+    } else {
+      return higherIsBetter ? 1 : -1;
     }
+  }
 
-    @Override
-    public boolean isOptimal() {
-        if (!haveOptimum) {
-            return false;
-        }
+  @Override
+  public String toString() {
+    return "" + getValue();
+  }
 
-        if (higherIsBetter) {
-            return value >= optimum;
-        } else {
-            return value <= optimum;
-        }
-    }
+  public static NumericObjectiveValue HigherIsBetterObjectiveValue(double value) {
+    return new NumericObjectiveValue(value, true);
+  }
 
-    @Override
-    public int compareTo(NumericObjectiveValue other) {
-        if (value == other.value) {
-            return 0;
-        } else if (value < other.value) {
-            return higherIsBetter ? -1 : 1;
-        } else {
-            return higherIsBetter ? 1 : -1;
-        }
-    }
+  public static NumericObjectiveValue HigherIsBetterObjectiveValue(double value, double optimum) {
+    return new NumericObjectiveValue(value, true, optimum);
+  }
 
-    @Override
-    public String toString() {
-        return "" + getValue();
-    }
+  public static NumericObjectiveValue LowerIsBetterObjectiveValue(double value) {
+    return new NumericObjectiveValue(value, false);
+  }
 
-    public static NumericObjectiveValue HigherIsBetterObjectiveValue(double value) {
-        return new NumericObjectiveValue(value, true);
-    }
-
-    public static NumericObjectiveValue HigherIsBetterObjectiveValue(double value, double optimum) {
-        return new NumericObjectiveValue(value, true, optimum);
-    }
-
-    public static NumericObjectiveValue LowerIsBetterObjectiveValue(double value) {
-        return new NumericObjectiveValue(value, false);
-    }
-
-    public static NumericObjectiveValue LowerIsBetterObjectiveValue(double value, double optimum) {
-        return new NumericObjectiveValue(value, false, optimum);
-    }
+  public static NumericObjectiveValue LowerIsBetterObjectiveValue(double value, double optimum) {
+    return new NumericObjectiveValue(value, false, optimum);
+  }
 }

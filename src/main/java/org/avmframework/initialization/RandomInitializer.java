@@ -5,14 +5,14 @@ import org.avmframework.Vector;
 
 public class RandomInitializer extends Initializer {
 
-    protected RandomGenerator rg;
+  protected RandomGenerator rg;
 
-    public RandomInitializer(RandomGenerator rg) {
-        this.rg = rg;
-    }
+  public RandomInitializer(RandomGenerator rg) {
+    this.rg = rg;
+  }
 
-    @Override
-    public void initialize(Vector vector) {
-        vector.setVariablesToRandom(rg);
-    }
+  @Override
+  public void initialize(Vector vector) {
+    vector.setVariablesToRandom(rg);
+  }
 }

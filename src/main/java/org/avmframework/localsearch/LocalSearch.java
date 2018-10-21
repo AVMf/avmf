@@ -7,27 +7,28 @@ import org.avmframework.variable.AtomicVariable;
 
 public abstract class LocalSearch {
 
-    protected AtomicVariable var;
-    protected Vector vector;
-    protected ObjectiveFunction objFun;
+  protected AtomicVariable var;
+  protected Vector vector;
+  protected ObjectiveFunction objFun;
 
-    public void search(AtomicVariable var, Vector vector, ObjectiveFunction objFun) throws TerminationException {
-        this.var = var;
-        this.objFun = objFun;
-        this.vector = vector;
+  public void search(AtomicVariable var, Vector vector, ObjectiveFunction objFun)
+      throws TerminationException {
+    this.var = var;
+    this.objFun = objFun;
+    this.vector = vector;
 
-        performSearch();
+    performSearch();
+  }
+
+  protected abstract void performSearch() throws TerminationException;
+
+  public static LocalSearch instantiate(String name) {
+    try {
+      String localSearchClassName = "org.avmframework.localsearch." + name;
+      Class<?> localSearchClass = Class.forName(localSearchClassName);
+      return (LocalSearch) localSearchClass.newInstance();
+    } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+      throw new RuntimeException("Unable to instantiate search \"" + name + "\"");
     }
-
-    protected abstract void performSearch() throws TerminationException;
-
-    public static LocalSearch instantiate(String name) {
-        try {
-            String localSearchClassName = "org.avmframework.localsearch." + name;
-            Class<?> localSearchClass = Class.forName(localSearchClassName);
-            return (LocalSearch) localSearchClass.newInstance();
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
-            throw new RuntimeException("Unable to instantiate search \"" + name + "\"");
-        }
-    }
+  }
 }

@@ -1,4 +1,3 @@
 package org.avmframework;
 
-public class TerminationException extends Exception {
-}
+public class TerminationException extends Exception {}

@@ -4,9 +4,9 @@ import org.apache.commons.math3.random.RandomGenerator;
 
 public interface Variable {
 
-    void setValueToInitial();
+  void setValueToInitial();
 
-    void setValueToRandom(RandomGenerator randomGenerator);
+  void setValueToRandom(RandomGenerator randomGenerator);
 
-    Variable deepCopy();
+  Variable deepCopy();
 }

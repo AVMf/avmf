@@ -4,21 +4,25 @@ import org.avmframework.Vector;
 
 public abstract class TestObject {
 
-    public abstract Vector getVector();
+  public abstract Vector getVector();
 
-    public abstract BranchTargetObjectiveFunction getObjectiveFunction(Branch target);
+  public abstract BranchTargetObjectiveFunction getObjectiveFunction(Branch target);
 
-    public abstract int getNumBranchingNodes();
+  public abstract int getNumBranchingNodes();
 
-    public static TestObject instantiate(String name) {
-        String testObjectClassName = "org.avmframework.examples.inputdatageneration." +
-                name.toLowerCase() + "." + name + "TestObject";
+  public static TestObject instantiate(String name) {
+    String testObjectClassName =
+        "org.avmframework.examples.inputdatageneration."
+            + name.toLowerCase()
+            + "."
+            + name
+            + "TestObject";
 
-        try {
-            Class<?> testObjectClass = Class.forName(testObjectClassName);
-            return (TestObject) testObjectClass.newInstance();
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
-            throw new RuntimeException("Unable to instantiate test object \"" + name + "\"");
-        }
+    try {
+      Class<?> testObjectClass = Class.forName(testObjectClassName);
+      return (TestObject) testObjectClass.newInstance();
+    } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+      throw new RuntimeException("Unable to instantiate test object \"" + name + "\"");
     }
+  }
 }

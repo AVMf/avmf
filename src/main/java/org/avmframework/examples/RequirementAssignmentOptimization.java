@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.apache.commons.math3.random.MersenneTwister;
 import org.apache.commons.math3.random.RandomGenerator;
 import org.avmframework.AVM;
@@ -35,170 +34,165 @@ import org.avmframework.variable.Variable;
 
 public class RequirementAssignmentOptimization {
 
-	// HOW TO RUN:
-	//
-	// java class org.avmframework.examples.AllZeros [search]
-	// where:
-	// - [search] is an optional parameter denoting which search to use
-	// (e.g., "IteratedPatternSearch", "GeometricSearch" or "LatticeSearch")
+  // HOW TO RUN:
+  //
+  // java class org.avmframework.examples.AllZeros [search]
+  // where:
+  // - [search] is an optional parameter denoting which search to use
+  // (e.g., "IteratedPatternSearch", "GeometricSearch" or "LatticeSearch")
 
-	// CHANGE THE FOLLOWING CONSTANTS TO EXPLORE THEIR EFFECT ON THE SEARCH:
+  // CHANGE THE FOLLOWING CONSTANTS TO EXPLORE THEIR EFFECT ON THE SEARCH:
 
-	// - search constants
-	static final String SEARCH_NAME = "IteratedPatternSearch"; // can also be
-																// set at the
-																// command line
-	static final int MAX_EVALUATIONS = 200000;
-	static final int NUM_STAKEHOLDER = 10; // number of stakeholders to
-											// distribute requirements
+  // - search constants
+  static final String SEARCH_NAME = "IteratedPatternSearch"; // can also be
+  // set at the
+  // command line
+  static final int MAX_EVALUATIONS = 200000;
+  static final int NUM_STAKEHOLDER = 10; // number of stakeholders to
+  // distribute requirements
 
-	public static void main(String[] args) {
-		List<Requirement> reqList = new ArrayList<Requirement>();
-		RequirementOverview reqOverview = new RequirementOverview();
-		List<TestCase> selectedTestSuite = new ArrayList<TestCase>();
+  public static void main(String[] args) {
+    List<Requirement> reqList = new ArrayList<Requirement>();
+    RequirementOverview reqOverview = new RequirementOverview();
+    List<TestCase> selectedTestSuite = new ArrayList<TestCase>();
 
-		// list of 287 requirements in simplified text file with key attributes,
-		// such as id, identifier, description
-		String file = "src/main/java/org/avmframework/examples/requirementassignment/requirementList.txt";
-		// list of requirements
-		reqList = readReqList(file, reqList, reqOverview);
+    // list of 287 requirements in simplified text file with key attributes,
+    // such as id, identifier, description
+    String file =
+        "src/main/java/org/avmframework/examples/requirementassignment/requirementList.txt";
+    // list of requirements
+    reqList = readReqList(file, reqList, reqOverview);
 
-		// instantiate the test object using command line parameters
-		TestObject testObject = new TestObject();
+    // instantiate the test object using command line parameters
+    TestObject testObject = new TestObject();
 
-		// instantiate local search from command line, using default (set by the
-		// constant SEARCH_NAME) if none supplied
-		LocalSearch localSearch = new ArgsParser(
-				RequirementAssignmentOptimization.class, args)
-				.parseSearchParam(SEARCH_NAME);
+    // instantiate local search from command line, using default (set by the
+    // constant SEARCH_NAME) if none supplied
+    LocalSearch localSearch =
+        new ArgsParser(RequirementAssignmentOptimization.class, args).parseSearchParam(SEARCH_NAME);
 
-		// set up the objective function
-		ObjectiveFunction objFun = testObject.getObjectiveFunction(reqList,
-				reqOverview);
+    // set up the objective function
+    ObjectiveFunction objFun = testObject.getObjectiveFunction(reqList, reqOverview);
 
-		// set up the vector
-		Vector vector = testObject.setUpVector(reqList.size(), NUM_STAKEHOLDER);
+    // set up the vector
+    Vector vector = testObject.setUpVector(reqList.size(), NUM_STAKEHOLDER);
 
-		// set up the termination policy
-		TerminationPolicy terminationPolicy = TerminationPolicy
-				.createMaxEvaluationsTerminationPolicy(MAX_EVALUATIONS);
+    // set up the termination policy
+    TerminationPolicy terminationPolicy =
+        TerminationPolicy.createMaxEvaluationsTerminationPolicy(MAX_EVALUATIONS);
 
-		// set up random initialization of vectors
-		RandomGenerator randomGenerator = new MersenneTwister();
-		Initializer initializer = new RandomInitializer(randomGenerator);
+    // set up random initialization of vectors
+    RandomGenerator randomGenerator = new MersenneTwister();
+    Initializer initializer = new RandomInitializer(randomGenerator);
 
-		// set up the AVM
-		AVM avm = new AVM(localSearch, terminationPolicy, initializer);
+    // set up the AVM
+    AVM avm = new AVM(localSearch, terminationPolicy, initializer);
 
-		// perform the search
-		Monitor monitor = avm.search(vector, objFun);
+    // perform the search
+    Monitor monitor = avm.search(vector, objFun);
 
-		// output the results
-		Map<String, List<Requirement>> reqMap = optimizedReq(monitor, reqList);
-		System.out
-				.println("The 287 requirements (represented by ids) are added to the" + NUM_STAKEHOLDER 
-						+ " stakeholders as follow:");
-		for (Map.Entry<String, List<Requirement>> entry : reqMap.entrySet()) {
-			System.out.print("Stakeholder  " + entry.getKey() + ":   ");
-			for (int i = 0; i < entry.getValue().size(); i++) {
-				System.out.print(entry.getValue().get(i).getId());
-				if (i + 1 < entry.getValue().size())
-					System.out.print(", ");
-			}
-			System.out.print("\n");
-		}
-		System.out.print("\n");
-		System.out.println("Best solution: " + monitor.getBestVector());
-		System.out.println("Best objective value: " + monitor.getBestObjVal());
-		System.out.println("Number of objective function evaluations: "
-				+ monitor.getNumEvaluations() + " (unique: "
-				+ monitor.getNumUniqueEvaluations() + ")");
-		System.out.println("Running time: " + monitor.getRunningTime() + "ms");
-	}
+    // output the results
+    Map<String, List<Requirement>> reqMap = optimizedReq(monitor, reqList);
+    System.out.println(
+        "The 287 requirements (represented by ids) are added to the"
+            + NUM_STAKEHOLDER
+            + " stakeholders as follow:");
+    for (Map.Entry<String, List<Requirement>> entry : reqMap.entrySet()) {
+      System.out.print("Stakeholder  " + entry.getKey() + ":   ");
+      for (int i = 0; i < entry.getValue().size(); i++) {
+        System.out.print(entry.getValue().get(i).getId());
+        if (i + 1 < entry.getValue().size()) System.out.print(", ");
+      }
+      System.out.print("\n");
+    }
+    System.out.print("\n");
+    System.out.println("Best solution: " + monitor.getBestVector());
+    System.out.println("Best objective value: " + monitor.getBestObjVal());
+    System.out.println(
+        "Number of objective function evaluations: "
+            + monitor.getNumEvaluations()
+            + " (unique: "
+            + monitor.getNumUniqueEvaluations()
+            + ")");
+    System.out.println("Running time: " + monitor.getRunningTime() + "ms");
+  }
 
-	// read the requirement file and populate the requirement list
-	private static List<Requirement> readReqList(String file,
-			List<Requirement> reqList, RequirementOverview reqOverview) {
-		try {
-			BufferedReader in = new BufferedReader(new FileReader(file));
-			String str;
-			int counter = 0;
-			while ((str = in.readLine()) != null) {
-				if (counter == 0) { // the first row contains the column names
-					counter++;
-					continue;
-				} else {
-					String[] details = str.split("\t");
+  // read the requirement file and populate the requirement list
+  private static List<Requirement> readReqList(
+      String file, List<Requirement> reqList, RequirementOverview reqOverview) {
+    try {
+      BufferedReader in = new BufferedReader(new FileReader(file));
+      String str;
+      int counter = 0;
+      while ((str = in.readLine()) != null) {
+        if (counter == 0) { // the first row contains the column names
+          counter++;
+          continue;
+        } else {
+          String[] details = str.split("\t");
 
-					Requirement req = new Requirement();
+          Requirement req = new Requirement();
 
-					req.setId(details[0]);
-					req.setIdentifier(details[1]);
-					req.setDescription(details[2]);
-					req.setComplexity(computeComplexity(details[2]));
-					req.setDependency(Double.parseDouble(details[3]));
-					req.setImportance(Double.parseDouble(details[4]));
+          req.setId(details[0]);
+          req.setIdentifier(details[1]);
+          req.setDescription(details[2]);
+          req.setComplexity(computeComplexity(details[2]));
+          req.setDependency(Double.parseDouble(details[3]));
+          req.setImportance(Double.parseDouble(details[4]));
 
-					reqList.add(req);
-					reqOverview = computeMinMax(reqOverview,
-							req.getComplexity(), req.getDependency(),
-							req.getImportance());
-				}
-			}
-			in.close();
-		} catch (IOException e) {
-		}
-		return reqList;
-	}
+          reqList.add(req);
+          reqOverview =
+              computeMinMax(
+                  reqOverview, req.getComplexity(), req.getDependency(), req.getImportance());
+        }
+      }
+      in.close();
+    } catch (IOException e) {
+    }
+    return reqList;
+  }
 
-	// calculate the complexity of requirement based on their description
-	public static double computeComplexity(String description) {
-		int sentences = description.split(".").length + 1;
-		int words = description.split(" ").length;
-		double complexity = words / sentences;
-		return complexity;
-	}
+  // calculate the complexity of requirement based on their description
+  public static double computeComplexity(String description) {
+    int sentences = description.split(".").length + 1;
+    int words = description.split(" ").length;
+    double complexity = words / sentences;
+    return complexity;
+  }
 
-	public static RequirementOverview computeMinMax(
-			RequirementOverview reqOverview, double comp, double dep, double imp) {
-		if (reqOverview.getMinComp() > comp)
-			reqOverview.setMinComp(comp);
-		if (reqOverview.getMaxComp() < comp)
-			reqOverview.setMaxComp(comp);
+  public static RequirementOverview computeMinMax(
+      RequirementOverview reqOverview, double comp, double dep, double imp) {
+    if (reqOverview.getMinComp() > comp) reqOverview.setMinComp(comp);
+    if (reqOverview.getMaxComp() < comp) reqOverview.setMaxComp(comp);
 
-		if (reqOverview.getMinDep() > dep)
-			reqOverview.setMinDep(dep);
-		if (reqOverview.getMaxDep() < dep)
-			reqOverview.setMaxDep(dep);
+    if (reqOverview.getMinDep() > dep) reqOverview.setMinDep(dep);
+    if (reqOverview.getMaxDep() < dep) reqOverview.setMaxDep(dep);
 
-		if (reqOverview.getMinImp() > imp)
-			reqOverview.setMinImp(imp);
-		if (reqOverview.getMaxImp() < imp)
-			reqOverview.setMaxImp(imp);
+    if (reqOverview.getMinImp() > imp) reqOverview.setMinImp(imp);
+    if (reqOverview.getMaxImp() < imp) reqOverview.setMaxImp(imp);
 
-		return reqOverview;
-	}
+    return reqOverview;
+  }
 
-	// final solution
-	protected static Map<String, List<Requirement>> optimizedReq(
-			Monitor monitor, List<Requirement> req) {
-		Map<String, List<Requirement>> reqMap = new HashMap<String, List<Requirement>>();
+  // final solution
+  protected static Map<String, List<Requirement>> optimizedReq(
+      Monitor monitor, List<Requirement> req) {
+    Map<String, List<Requirement>> reqMap = new HashMap<String, List<Requirement>>();
 
-		for (int i = 0; i < monitor.getBestVector().size(); i++) {
-			Variable var = monitor.getBestVector().getVariable(i);
-			List<Requirement> tempReq = new ArrayList<Requirement>();
-			// value less than 0 means the requirement is not assigned to any
-			// stakeholder
-			if (Integer.parseInt(var.toString()) >= 0) {
+    for (int i = 0; i < monitor.getBestVector().size(); i++) {
+      Variable var = monitor.getBestVector().getVariable(i);
+      List<Requirement> tempReq = new ArrayList<Requirement>();
+      // value less than 0 means the requirement is not assigned to any
+      // stakeholder
+      if (Integer.parseInt(var.toString()) >= 0) {
 
-				if (reqMap.containsKey(var.toString())) {
-					tempReq = reqMap.get(var.toString());
-				}
-				tempReq.add(req.get(i));
-			}
-			reqMap.put(var.toString(), tempReq);
-		}
-		return reqMap;
-	}
-
+        if (reqMap.containsKey(var.toString())) {
+          tempReq = reqMap.get(var.toString());
+        }
+        tempReq.add(req.get(i));
+      }
+      reqMap.put(var.toString(), tempReq);
+    }
+    return reqMap;
+  }
 }

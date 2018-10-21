@@ -1,24 +1,24 @@
 package org.avmframework.examples.inputdatageneration;
 
 public class BranchExection {
-    protected Branch branch;
-    protected double distanceToAlternative;
+  protected Branch branch;
+  protected double distanceToAlternative;
 
-    public BranchExection(int id, boolean outcome, double distanceToAlternative) {
-        branch = new Branch(id, outcome);
-        this.distanceToAlternative = distanceToAlternative;
-    }
+  public BranchExection(int id, boolean outcome, double distanceToAlternative) {
+    branch = new Branch(id, outcome);
+    this.distanceToAlternative = distanceToAlternative;
+  }
 
-    public Branch getBranch() {
-        return branch;
-    }
+  public Branch getBranch() {
+    return branch;
+  }
 
-    public double getDistanceToAlternative() {
-        return distanceToAlternative;
-    }
+  public double getDistanceToAlternative() {
+    return distanceToAlternative;
+  }
 
-    @Override
-    public String toString() {
-        return branch.toString() + "(" + distanceToAlternative + ")";
-    }
+  @Override
+  public String toString() {
+    return branch.toString() + "(" + distanceToAlternative + ")";
+  }
 }

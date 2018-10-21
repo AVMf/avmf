@@ -5,31 +5,31 @@ import java.util.List;
 
 public class ControlDependenceChain {
 
-    protected List<Branch> branches = new LinkedList<>();
+  protected List<Branch> branches = new LinkedList<>();
 
-    public ControlDependenceChain(List<Branch> branches) {
-        this.branches.addAll(branches);
-    }
+  public ControlDependenceChain(List<Branch> branches) {
+    this.branches.addAll(branches);
+  }
 
-    public DivergencePoint getDivergencePoint(ExecutionTrace trace) {
-        int traceIndex = 0;
-        for (BranchExection branchExection : trace.getBranchExecutions()) {
-            int chainIndex = 0;
-            for (Branch branch : branches) {
-                if (branchExection.getBranch().getID() == branch.getID()) {
-                    if (branchExection.getBranch().getEdge() != branch.getEdge()) {
-                        return new DivergencePoint(traceIndex, chainIndex);
-                    }
-                }
-                chainIndex ++;
-            }
-            traceIndex ++;
+  public DivergencePoint getDivergencePoint(ExecutionTrace trace) {
+    int traceIndex = 0;
+    for (BranchExection branchExection : trace.getBranchExecutions()) {
+      int chainIndex = 0;
+      for (Branch branch : branches) {
+        if (branchExection.getBranch().getID() == branch.getID()) {
+          if (branchExection.getBranch().getEdge() != branch.getEdge()) {
+            return new DivergencePoint(traceIndex, chainIndex);
+          }
         }
-        return null;
+        chainIndex++;
+      }
+      traceIndex++;
     }
+    return null;
+  }
 
-    @Override
-    public String toString() {
-        return branches.toString();
-    }
+  @Override
+  public String toString() {
+    return branches.toString();
+  }
 }
