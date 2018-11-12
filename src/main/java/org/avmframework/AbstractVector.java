@@ -1,8 +1,9 @@
 package org.avmframework;
 
+import org.avmframework.variable.Variable;
+
 import java.util.ArrayList;
 import java.util.List;
-import org.avmframework.variable.Variable;
 
 /**
  * Provides basic functionality for vectors optimized by the AVM --- both the main vector or
@@ -48,11 +49,11 @@ public abstract class AbstractVector {
   }
 
   @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (!(o instanceof AbstractVector)) return false;
+  public boolean equals(Object obj) {
+    if (this == obj) return true;
+    if (!(obj instanceof AbstractVector)) return false;
 
-    AbstractVector that = (AbstractVector) o;
+    AbstractVector that = (AbstractVector) obj;
 
     return variables != null ? variables.equals(that.variables) : that.variables == null;
   }

@@ -1,9 +1,10 @@
 package org.avmframework.examples.util;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import org.avmframework.localsearch.LocalSearch;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class ArgsParser {
 
@@ -62,8 +63,8 @@ public class ArgsParser {
     LocalSearch search = null;
     try {
       search = LocalSearch.instantiate(searchName);
-    } catch (Exception e) {
-      error(e.getMessage());
+    } catch (Exception exception) {
+      error(exception.getMessage());
     }
 
     return search;

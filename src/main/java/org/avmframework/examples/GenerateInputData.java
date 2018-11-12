@@ -76,10 +76,10 @@ public class GenerateInputData {
   }
 
   static class GenerateInputDataArgsParser extends ArgsParser {
-    static final int TEST_OBJECT_PARAM_INDEX = 0,
-        BRANCH_PARAM_INDEX = 1,
-        SEARCH_PARAM_INDEX = 2,
-        MIN_NUM_ARGS = 2;
+    static final int TEST_OBJECT_PARAM_INDEX = 0;
+    static final int BRANCH_PARAM_INDEX = 1;
+    static final int SEARCH_PARAM_INDEX = 2;
+    static final int MIN_NUM_ARGS = 2;
 
     GenerateInputDataArgsParser(String[] args) {
       super(GenerateInputData.class, args);
@@ -120,8 +120,8 @@ public class GenerateInputData {
 
         try {
           branch = Branch.instantiate(suppliedParam, testObject);
-        } catch (Exception e) {
-          error(e.getMessage());
+        } catch (Exception exception) {
+          error(exception.getMessage());
         }
       } else {
         wrongNumberOfArgumentsError();

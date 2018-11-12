@@ -1,12 +1,13 @@
 package org.avmframework.localsearch;
 
-import static org.avmframework.localsearch.IntegerFibonacciNumbers.fibonacci;
-import static org.avmframework.localsearch.IntegerFibonacciNumbers.positionOfSmallestFibonacciNumberGreaterOrEqualTo;
+import org.avmframework.TerminationException;
+import org.avmframework.objective.ObjectiveValue;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.avmframework.TerminationException;
-import org.avmframework.objective.ObjectiveValue;
+
+import static org.avmframework.localsearch.IntegerFibonacciNumbers.fibonacci;
+import static org.avmframework.localsearch.IntegerFibonacciNumbers.positionOfSmallestFibonacciNumberGreaterOrEqualTo;
 
 public class LatticeSearch extends PatternThenEliminationSearch {
 
@@ -16,17 +17,17 @@ public class LatticeSearch extends PatternThenEliminationSearch {
     super(accelerationFactor);
   }
 
-  protected void performEliminationSearch(int l, int r) throws TerminationException {
+  protected void performEliminationSearch(int left, int right) throws TerminationException {
 
-    int interval = r - l + 2;
-    int n = positionOfSmallestFibonacciNumberGreaterOrEqualTo(interval);
+    int interval = right - left + 2;
+    int num = positionOfSmallestFibonacciNumberGreaterOrEqualTo(interval);
 
-    while (n > 3) {
+    while (num > 3) {
 
-      int mid = l + fibonacci(n - 2) - 1;
-      int midRight = l + fibonacci(n - 1) - 1;
+      int mid = left + fibonacci(num - 2) - 1;
+      int midRight = left + fibonacci(num - 1) - 1;
 
-      if (midRight <= r) {
+      if (midRight <= right) {
 
         var.setValue(mid);
         ObjectiveValue midObjVal = objFun.evaluate(vector);
@@ -35,14 +36,14 @@ public class LatticeSearch extends PatternThenEliminationSearch {
         ObjectiveValue midRightObjVal = objFun.evaluate(vector);
 
         if (midObjVal.worseThan(midRightObjVal)) {
-          l = mid + 1;
+          left = mid + 1;
         }
       }
 
-      n--;
+      num--;
     }
 
-    var.setValue(l);
+    var.setValue(left);
   }
 }
 

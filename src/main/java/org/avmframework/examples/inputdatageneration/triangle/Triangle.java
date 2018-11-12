@@ -9,36 +9,36 @@ public class Triangle {
     ISOSCELES;
   }
 
-  public static TriangleType classify(int a, int b, int c) {
+  public static TriangleType classify(int num1, int num2, int num3) {
     TriangleType type;
 
-    if (a > b) {
-      int t = a;
-      a = b;
-      b = t;
+    if (num1 > num2) {
+      int temp = num1;
+      num1 = num2;
+      num2 = temp;
     }
-    if (a > c) {
-      int t = a;
-      a = c;
-      c = t;
+    if (num1 > num3) {
+      int temp = num1;
+      num1 = num3;
+      num3 = temp;
     }
-    if (b > c) {
-      int t = b;
-      b = c;
-      c = t;
+    if (num2 > num3) {
+      int temp = num2;
+      num2 = num3;
+      num3 = temp;
     }
-    if (a + b <= c) {
+    if (num1 + num2 <= num3) {
       type = TriangleType.NOT_A_TRIANGLE;
     } else {
       type = TriangleType.SCALENE;
-      if (a == b) {
-        if (b == c) {
+      if (num1 == num2) {
+        if (num2 == num3) {
           type = TriangleType.EQUILATERAL;
         }
       } else {
-        if (a == b) {
+        if (num1 == num2) {
           type = TriangleType.ISOSCELES;
-        } else if (b == c) {
+        } else if (num2 == num3) {
           type = TriangleType.ISOSCELES;
         }
       }

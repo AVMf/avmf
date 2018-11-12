@@ -5,7 +5,9 @@ import org.avmframework.Vector;
 import org.avmframework.variable.FixedPointVariable;
 
 public class PrioritizationObject {
-  static final int INIT = 0, MIN = 0, MAX = 1;
+  static final int INIT = 0;
+  static final int MIN = 0;
+  static final int MAX = 1;
 
   // set up the vector to be optimized
   public Vector setUpVector(int size) {
@@ -17,7 +19,7 @@ public class PrioritizationObject {
   }
 
   public PrioritizationObjectiveFunction getObjectiveFunction(
-      List<TestCase> testSuite, TestSuiteCoverage tsCoverage) {
-    return new PrioritizationObjectiveFunction(testSuite, tsCoverage);
+      List<TestCase> testSuite, TestSuiteCoverage transitionStateCoverage) {
+    return new PrioritizationObjectiveFunction(testSuite, transitionStateCoverage);
   }
 }

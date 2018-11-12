@@ -1,12 +1,5 @@
 package org.avmframework.examples;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import org.apache.commons.math3.random.MersenneTwister;
 import org.apache.commons.math3.random.RandomGenerator;
 import org.avmframework.AVM;
@@ -23,6 +16,14 @@ import org.avmframework.initialization.RandomInitializer;
 import org.avmframework.localsearch.LocalSearch;
 import org.avmframework.objective.ObjectiveFunction;
 import org.avmframework.variable.Variable;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /* This example shows requirement assignment optimization problem.
  * The requirements need to be optimally assigned to the different stakeholders.
@@ -48,7 +49,7 @@ public class RequirementAssignmentOptimization {
   // set at the
   // command line
   static final int MAX_EVALUATIONS = 200000;
-  static final int NUM_STAKEHOLDER = 10; // number of stakeholders to
+  static final int NUMBEROFSTAKEHOLDERS = 10; // number of stakeholders to
   // distribute requirements
 
   public static void main(String[] args) {
@@ -75,7 +76,7 @@ public class RequirementAssignmentOptimization {
     ObjectiveFunction objFun = testObject.getObjectiveFunction(reqList, reqOverview);
 
     // set up the vector
-    Vector vector = testObject.setUpVector(reqList.size(), NUM_STAKEHOLDER);
+    Vector vector = testObject.setUpVector(reqList.size(), NUMBEROFSTAKEHOLDERS);
 
     // set up the termination policy
     TerminationPolicy terminationPolicy =
@@ -95,7 +96,7 @@ public class RequirementAssignmentOptimization {
     Map<String, List<Requirement>> reqMap = optimizedReq(monitor, reqList);
     System.out.println(
         "The 287 requirements (represented by ids) are added to the"
-            + NUM_STAKEHOLDER
+            + NUMBEROFSTAKEHOLDERS
             + " stakeholders as follow:");
     for (Map.Entry<String, List<Requirement>> entry : reqMap.entrySet()) {
       System.out.print("Stakeholder  " + entry.getKey() + ":   ");
@@ -147,7 +148,7 @@ public class RequirementAssignmentOptimization {
         }
       }
       in.close();
-    } catch (IOException e) {
+    } catch (IOException exception) {
     }
     return reqList;
   }

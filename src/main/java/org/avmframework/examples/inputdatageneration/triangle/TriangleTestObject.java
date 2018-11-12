@@ -9,7 +9,9 @@ import org.avmframework.variable.IntegerVariable;
 public class TriangleTestObject extends TestObject {
 
   static final int NUM_BRANCHING_NODES = 8;
-  static final int INITIAL_VALUE = 0, MIN = 0, MAX = 1000;
+  static final int INITIAL_VALUE = 0;
+  static final int MIN = 0;
+  static final int MAX = 1000;
 
   @Override
   public Vector getVector() {

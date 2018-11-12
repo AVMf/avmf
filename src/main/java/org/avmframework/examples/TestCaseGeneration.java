@@ -1,5 +1,22 @@
 package org.avmframework.examples;
 
+import org.apache.commons.math3.random.MersenneTwister;
+import org.apache.commons.math3.random.RandomGenerator;
+import org.avmframework.AVM;
+import org.avmframework.Monitor;
+import org.avmframework.TerminationPolicy;
+import org.avmframework.Vector;
+import org.avmframework.examples.testoptimization.behaviourpair.GenerationObject;
+import org.avmframework.examples.testoptimization.behaviourpair.Solution;
+import org.avmframework.examples.testoptimization.behaviourpair.State;
+import org.avmframework.examples.testoptimization.behaviourpair.StateMachine;
+import org.avmframework.examples.testoptimization.behaviourpair.Transition;
+import org.avmframework.examples.testoptimization.behaviourpair.ValueSet;
+import org.avmframework.examples.util.ArgsParser;
+import org.avmframework.initialization.Initializer;
+import org.avmframework.initialization.RandomInitializer;
+import org.avmframework.localsearch.LocalSearch;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -7,30 +24,28 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import org.apache.commons.math3.random.MersenneTwister;
-import org.apache.commons.math3.random.RandomGenerator;
-import org.avmframework.AVM;
-import org.avmframework.Monitor;
-import org.avmframework.TerminationPolicy;
-import org.avmframework.Vector;
-import org.avmframework.examples.testoptimization.problem_BehaviourPairGen.*;
-import org.avmframework.examples.util.*;
-import org.avmframework.initialization.Initializer;
-import org.avmframework.initialization.RandomInitializer;
-import org.avmframework.localsearch.LocalSearch;
 
 /* This example shows generation problem termed as "test case generation".
- * Test cases in this context are abstract based on a simplified standard UML state machine diagram.
- * Test cases here represent behaviors (named as BehaviourPair in the program) in the state machine, and these behaviors haven't haven't been validated.
- * To generate new test cases, we need the existing test cases generated previously (read from file 03BehaviourPairs-1.0.txt),
- * and the already known behaviors (as the transitions with network environment conditions stored in state machine, and state machine is read from 02StateMachine-1.0.txt).
- * Test cases or BehaviourPairs are encoded as Solutions, and a Solution dosen't have actually difference with Vector defined by AVMf,
- * So, we transform Solution to Vector, and implement AVMf (except the function ReadBehaviourPairsFromFile).
+ * Test cases in this context are abstract based on a simplified standard UML
+ * state machine diagram.
+ * Test cases here represent behaviors (named as BehaviourPair in the program)
+ * in the state machine, and these behaviors haven't haven't been validated.
+ * To generate new test cases, we need the existing test cases generated
+ * previously (read from file 03BehaviourPairs-1.0.txt), and the already known
+ * behaviors (as the transitions with network environment conditions stored in
+ * state machine, and state machine is read from 02StateMachine-1.0.txt).
+ * Test cases or BehaviourPairs are encoded as Solutions, and a Solution dosen't
+ * have actually difference with Vector defined by AVMf,
+ * So, we transform Solution to Vector, and implement AVMf (except the function
+ * readBehaviourPairsFromFile).
  *
- * As mentioned before, test cases here represent possible behaviors used to explore unknown system behaviors.
+ * As mentioned before, test cases here represent possible behaviors used to
+ * explore unknown system behaviors.
  * Test case generation involves two objectives:
- *  1. maximize the similarity between the test cases and the known behaviors (transitions with network conditions in State Machine);
- *  2. maximize the diversity among the test cases representing generated possible system behaviors.
+ *  1. maximize the similarity between the test cases and the known behaviors
+ *  (transitions with network conditions in State Machine);
+ *  2. maximize the diversity among the test cases representing generated
+ *  possible system behaviors.
  */
 
 public class TestCaseGeneration {
@@ -51,21 +66,21 @@ public class TestCaseGeneration {
   public static void main(String args[]) {
 
     // Problem Define
-    GenerationObject p = new GenerationObject();
+    GenerationObject problem = new GenerationObject();
     // Set State Machine
-    StateMachine s =
-        ReadStateMachineFromFile(
+    StateMachine stateMachine =
+        readStateMachineFromFile(
             "src/main/java/org/avmframework/examples/testoptimization/problem_BehaviourPairGen/02StateMachine-1.0.txt");
-    p.setexistingstatemachine(s);
+    problem.setexistingstatemachine(stateMachine);
     // Set Constraints
-    p.setConstraints();
+    problem.setConstraints();
     // Initial Set of generated possible behaviors
-    p.InitialSetOfExistingTestCases();
-    List<Solution> l =
-        ReadBehaviourPairsFromFile(
+    problem.initialSetOfExistingTestCases();
+    List<Solution> list =
+        readBehaviourPairsFromFile(
             "src/main/java/org/avmframework/examples/testoptimization/problem_BehaviourPairGen/03BehaviourPairs-1.0.txt",
-            s);
-    p.setSolutionsOfExistingTestCases(l);
+            stateMachine);
+    problem.setSolutionsOfExistingTestCases(list);
 
     // set up the termination policy
     TerminationPolicy terminationPolicy =
@@ -83,10 +98,10 @@ public class TestCaseGeneration {
     // set up the AVM
     AVM avm = new AVM(localSearch, terminationPolicy, initializer);
 
-    Vector vector = p.setUpVector(9);
+    Vector vector = problem.setUpVector(9);
 
     // perform the search
-    Monitor monitor = avm.search(vector, p);
+    Monitor monitor = avm.search(vector, problem);
 
     System.out.println("Fitness value: " + monitor.getBestObjVal());
     System.out.println("Running time: " + monitor.getRunningTime());
@@ -94,7 +109,7 @@ public class TestCaseGeneration {
     Vector bv = monitor.getBestVector();
     System.out.print(
         "Source state: "
-            + s.getallstates().get(Integer.parseInt(bv.getVariable(0).toString())).getStateName()
+            + stateMachine.getAllStates().get(Integer.parseInt(bv.getVariable(0).toString())).getStateName()
             + "; Target State-activeacll: "
             + Integer.parseInt(bv.getVariable(1).toString())
             + "; Target State-videoquality: "
@@ -113,14 +128,14 @@ public class TestCaseGeneration {
   }
 
   // Read generated test cases (BehaviourPairs) from file
-  public static List<Solution> ReadBehaviourPairsFromFile(String fileName, StateMachine sm) {
+  public static List<Solution> readBehaviourPairsFromFile(String fileName, StateMachine sm) {
 
     File file = new File(fileName);
     BufferedReader reader = null;
 
     // BehaviourPair bp = new BehaviourPair();
-    List<Solution> ExistingBP = new ArrayList<Solution>();
-    Solution tempBP = null;
+    List<Solution> existingBehaviourPair = new ArrayList<Solution>();
+    Solution tempBehaviourPair = null;
 
     try {
 
@@ -133,35 +148,35 @@ public class TestCaseGeneration {
 
         if (tempString.startsWith("BP")) {
           // do nothing or read the NO. of BP
-          tempBP = new Solution();
+          tempBehaviourPair = new Solution();
         } else if (tempString.startsWith("  Source_State")) {
           System.out.println("===== Read One Behaviour Pair: read the source state =====");
 
-          String[] src_SourceState = tempString.split(" \\{");
-          String sourceStateName = src_SourceState[1].substring(0, src_SourceState[1].length() - 1);
+          String[] srcSourceState = tempString.split(" \\{");
+          String sourceStateName = srcSourceState[1].substring(0, srcSourceState[1].length() - 1);
           System.out.println("----- Source State Name: " + sourceStateName + " -----");
-          tempBP.addsolutionmember("SourceState", sm.getStateNO(sourceStateName));
+          tempBehaviourPair.addSolutionMember("SourceState", sm.getStateNO(sourceStateName));
         } else if (tempString.startsWith("  Target_State")) {
           System.out.println("===== Read One Behaviour Pair: read the target state =====");
 
-          String[] src_TargetState = tempString.split(" \\{\\}; ");
-          // String targetStateName = src_TargetState[1].substring(0, src_TargetState[1].length() -
+          String[] srcTargetState = tempString.split(" \\{\\}; ");
+          // String targetStateName = srcTargetState[1].substring(0, srcTargetState[1].length() -
           // 1);
           // System.out.println("----- Target State Name: " + targetStateName + " -----");
-          // tempBP.addsolutionmember("", o);
+          // tempBehaviourPair.addSolutionMember("", o);
 
-          String[] src_TS_v = src_TargetState[1].split("; ");
-          String[] src_ac = src_TS_v[0].split(" \\{");
-          String src_ac_con = src_ac[1].substring(0, src_ac[1].length() - 1);
-          String[] src_ac_v = src_ac_con.split("== ");
-          int ac_v = Integer.parseInt(src_ac_v[1]);
-          String[] src_vc = src_TS_v[1].split(" \\{");
-          String src_vc_con = src_vc[1].substring(0, src_vc[1].length() - 1);
-          String[] src_vc_v = src_vc_con.split("== ");
-          int vc_v = Integer.parseInt(src_vc_v[1]);
+          String[] srcTargetStateV = srcTargetState[1].split("; ");
+          String[] srcActiveCall = srcTargetStateV[0].split(" \\{");
+          String srcActiveCallCon = srcActiveCall[1].substring(0, srcActiveCall[1].length() - 1);
+          String[] srcActiveCallV = srcActiveCallCon.split("== ");
+          int activeCallV = Integer.parseInt(srcActiveCallV[1]);
+          String[] srcVideoQuality = srcTargetStateV[1].split(" \\{");
+          String srcVideoQualityCon = srcVideoQuality[1].substring(0, srcVideoQuality[1].length() - 1);
+          String[] srcVideoQualityV = srcVideoQualityCon.split("== ");
+          int videoQualityV = Integer.parseInt(srcVideoQualityV[1]);
 
-          tempBP.addsolutionmember("activecall", ac_v);
-          tempBP.addsolutionmember("videoquality", vc_v);
+          tempBehaviourPair.addSolutionMember("activecall", activeCallV);
+          tempBehaviourPair.addSolutionMember("videoquality", videoQualityV);
 
         } else if (tempString.startsWith("  trigger")) {
           System.out.println("===== Read One Behaviour Pair: read the trigger =====");
@@ -169,88 +184,90 @@ public class TestCaseGeneration {
           String[] trigger = tempString.split(" \\{");
           String triggerName = trigger[1].substring(0, trigger[1].length() - 1);
           System.out.println("----- Trigger Name: " + triggerName + " -----");
-          int useroperation_BP;
+          int userOperationBehaviourPair;
           if (triggerName.equals("null")) {
-            useroperation_BP = 0;
+            userOperationBehaviourPair = 0;
           } else if (triggerName.equals("dial")) {
-            useroperation_BP = 1;
+            userOperationBehaviourPair = 1;
           } else if (triggerName.equals("disconnect")) {
-            useroperation_BP = 2;
+            userOperationBehaviourPair = 2;
           } else {
-            useroperation_BP = -1;
+            userOperationBehaviourPair = -1;
             System.out.println("***** Warning: calculate triggers! *****");
           }
-          tempBP.addsolutionmember("UserOperation", useroperation_BP);
+          tempBehaviourPair.addSolutionMember("UserOperation", userOperationBehaviourPair);
         } else if (tempString.startsWith("  PacketLoss")) {
 
           System.out.println("===== Read One Behaviour Pair: read the network environment =====");
 
-          HashMap<String, ValueSet> guardcondition = new HashMap<String, ValueSet>();
+          HashMap<String, ValueSet> guardCondition = new HashMap<String, ValueSet>();
 
-          String tempString_networkenvironment = tempString.substring(2);
+          String tempStringNetworkEnvironment = tempString.substring(2);
 
-          String[] src_networkenvironment = tempString_networkenvironment.split(", ");
+          String[] srcNetworkEnvironment = tempStringNetworkEnvironment.split(", ");
 
-          int i_NEvar = 0;
+          int iNetworkEnvironmentVar = 0;
 
-          for (; i_NEvar <= src_networkenvironment.length - 1; ) {
+          for (; iNetworkEnvironmentVar <= srcNetworkEnvironment.length - 1; ) {
 
-            String[] NEvar_with_constraints = src_networkenvironment[i_NEvar].split(" \\{");
+            String[] networkEnvironmentVarWithConstraints =
+                srcNetworkEnvironment[iNetworkEnvironmentVar].split(" \\{");
 
-            String NEvar_constraints =
-                NEvar_with_constraints[1].substring(0, NEvar_with_constraints[1].length() - 1);
+            String networkEnvironmentVarConstraints =
+                networkEnvironmentVarWithConstraints[1].substring(0, networkEnvironmentVarWithConstraints[1].length() - 1);
 
-            String[] src_constraintValue = NEvar_constraints.split(" == ");
+            String[] srcConstraintValue =
+                networkEnvironmentVarConstraints.split(" == ");
 
-            tempBP.addsolutionmember(
-                src_constraintValue[0], Double.parseDouble(src_constraintValue[1]));
+            tempBehaviourPair.addSolutionMember(
+                srcConstraintValue[0], Double.parseDouble(srcConstraintValue[1]));
 
             System.out.println(
                 "----- Guard Condition: "
-                    + src_constraintValue[0]
+                    + srcConstraintValue[0]
                     + ", "
-                    + tempBP.getsolution().get(src_constraintValue[0])
+                    + tempBehaviourPair.getsolution().get(srcConstraintValue[0])
                     + " -----");
 
-            i_NEvar = i_NEvar + 1;
+            iNetworkEnvironmentVar = iNetworkEnvironmentVar + 1;
           }
           // Add guard condition to transition, then add transition to state machine.
 
-          ExistingBP.add(tempBP);
-          Solution.printSolution(tempBP);
+          existingBehaviourPair.add(tempBehaviourPair);
+          Solution.printSolution(tempBehaviourPair);
 
-          tempBP = null;
+          tempBehaviourPair = null;
 
         } else {
           System.out.println("***** Error: Line Label Unknown! *****");
         }
       }
 
-      System.out.println("BP List Length: " + ExistingBP.size());
+      System.out.println("BP List Length: " + existingBehaviourPair.size());
 
       reader.close();
 
-    } catch (IOException e) {
-      e.printStackTrace();
+    } catch (IOException exception0) {
+      exception0.printStackTrace();
     } finally {
       if (reader != null) {
         try {
           reader.close();
-        } catch (IOException e1) {
+        } catch (IOException exception1) {
         }
       }
     }
-    return ExistingBP;
+    return existingBehaviourPair;
   }
 
   // Read State Machine from file
-  public static StateMachine ReadStateMachineFromFile(String fileName) {
+  public static StateMachine readStateMachineFromFile(String fileName) {
 
     File file = new File(fileName);
     BufferedReader reader = null;
 
-    StateMachine S = new StateMachine();
-    Transition t = null;
+    StateMachine stateMachine = new StateMachine();
+    Transition transition = null;
     State sourceState = null;
     State targetState = null;
 
@@ -260,11 +277,11 @@ public class TestCaseGeneration {
       String tempString = null;
 
       boolean inTransition = false;
-      int initial_label = 0; // Used to tag the start state
+      int initialLabel = 0; // Used to tag the start state
 
       while ((tempString = reader.readLine()) != null) {
 
-        initial_label++;
+        initialLabel++;
 
         System.out.println(tempString);
 
@@ -280,8 +297,7 @@ public class TestCaseGeneration {
               return null;
             }
 
-            String stateName = srcs[1].substring(1, srcs[1].length() - 2);
-            HashMap<String, ValueSet> vs = new HashMap<String, ValueSet>();
+            HashMap<String, ValueSet> valueSet = new HashMap<String, ValueSet>();
 
             srcs = null;
             srcs = tempString.split("; ");
@@ -291,37 +307,38 @@ public class TestCaseGeneration {
               return null;
             }
 
-            int i_var = 1;
+            int iVar = 1;
 
-            for (; i_var <= srcs.length - 1; ) {
+            for (; iVar <= srcs.length - 1; ) {
 
-              String[] var_with_constraints = srcs[i_var].split(" \\{");
+              String[] varWithConstraints = srcs[iVar].split(" \\{");
 
-              String var_constraints =
-                  var_with_constraints[1].substring(0, var_with_constraints[1].length() - 1);
-              System.out.println("Constraint:" + var_constraints);
-              ValueSet valueset_temp = new ValueSet();
-              String[] constraints_of_one_var = var_constraints.split(", ");
-              for (int i_constraint = 0;
-                  i_constraint < constraints_of_one_var.length;
-                  i_constraint++) {
-                valueset_temp.AddConstriantsForValueSet(constraints_of_one_var[i_constraint]);
+              String varConstraints =
+                  varWithConstraints[1].substring(0, varWithConstraints[1].length() - 1);
+              System.out.println("Constraint:" + varConstraints);
+              ValueSet valueSetTemp = new ValueSet();
+              String[] constraintsOfOneVar = varConstraints.split(", ");
+              for (int iConstraint = 0;
+                  iConstraint < constraintsOfOneVar.length;
+                  iConstraint++) {
+                valueSetTemp.addConstriantsForValueSet(constraintsOfOneVar[iConstraint]);
               }
 
-              vs.put(var_with_constraints[0], valueset_temp);
+              valueSet.put(varWithConstraints[0], valueSetTemp);
 
-              i_var = i_var + 1;
+              iVar = iVar + 1;
             }
 
-            State tempState = new State(stateName, vs);
+            String stateName = srcs[1].substring(1, srcs[1].length() - 2);
+            State tempState = new State(stateName, valueSet);
 
-            if (initial_label == 1) {
+            if (initialLabel == 1) {
               System.out.println("----- Add start state. -----");
-              S.setstartstate(tempState);
-              S.addonestate(tempState);
+              stateMachine.setStartState(tempState);
+              stateMachine.addOneState(tempState);
             } else {
               System.out.println("----- Add one state. -----");
-              S.addonestate(tempState);
+              stateMachine.addOneState(tempState);
             }
 
           } else if (srcs[0].equals("Transition")) {
@@ -337,82 +354,84 @@ public class TestCaseGeneration {
           if (tempString.startsWith("  Source_State")) {
             System.out.println("===== Read One Transition: read the source state =====");
 
-            String[] src_SourceState = tempString.split(" \\{");
+            String[] srcSourceState = tempString.split(" \\{");
             String sourceStateName =
-                src_SourceState[1].substring(0, src_SourceState[1].length() - 1);
+                srcSourceState[1].substring(0, srcSourceState[1].length() - 1);
             System.out.println("----- Source State Name: " + sourceStateName + " -----");
-            sourceState = S.getState(sourceStateName);
+            sourceState = stateMachine.getState(sourceStateName);
 
           } else if (tempString.startsWith("  Target_State")) {
             System.out.println("===== Read One Transition: read the target state =====");
 
-            String[] src_TargetState = tempString.split(" \\{");
+            String[] srcTargetState = tempString.split(" \\{");
             String targetStateName =
-                src_TargetState[1].substring(0, src_TargetState[1].length() - 1);
+                srcTargetState[1].substring(0, srcTargetState[1].length() - 1);
             System.out.println("----- Target State Name: " + targetStateName + " -----");
-            targetState = S.getState(targetStateName);
+            targetState = stateMachine.getState(targetStateName);
 
-            t = new Transition(sourceState, targetState);
-            sourceState.addoutTransition(t);
-            targetState.addinTransition(t);
+            transition = new Transition(sourceState, targetState);
+            sourceState.addOutTransition(transition);
+            targetState.addInTransition(transition);
           } else if (tempString.startsWith("  trigger")) {
             System.out.println("===== Read One Transition: read the trigger =====");
 
-            String[] src_Trigger = tempString.split(" \\{");
-            String trigger = src_Trigger[1].substring(0, src_Trigger[1].length() - 1);
+            String[] srcTrigger = tempString.split(" \\{");
+            String trigger = srcTrigger[1].substring(0, srcTrigger[1].length() - 1);
             System.out.println("----- Trigger Name: " + trigger + " -----");
 
-            t.addTriggers(trigger);
+            transition.addTriggers(trigger);
           } else if (tempString.startsWith("  PacketLoss")) {
             System.out.println("===== Read One Transition: read the network environment =====");
 
-            HashMap<String, ValueSet> guardcondition = new HashMap<String, ValueSet>();
+            HashMap<String, ValueSet> guardCondition = new HashMap<String, ValueSet>();
 
-            String tempString_networkenvironment = tempString.substring(2);
+            String tempStringNetworkEnvironment = tempString.substring(2);
 
-            String[] src_networkenvironment = tempString_networkenvironment.split(", ");
+            String[] srcNetworkEnvironment = tempStringNetworkEnvironment.split(", ");
 
-            int i_NEvar = 0;
+            int iNetworkEnvironmentVar = 0;
 
-            for (; i_NEvar <= src_networkenvironment.length - 1; ) {
+            for (; iNetworkEnvironmentVar <= srcNetworkEnvironment.length - 1; ) {
 
-              String[] NEvar_with_constraints = src_networkenvironment[i_NEvar].split(" \\{");
+              String[] networkEnvironmentVarWithConstraints =
+                  srcNetworkEnvironment[iNetworkEnvironmentVar].split(" \\{");
 
-              String NEvar_constraints =
-                  NEvar_with_constraints[1].substring(0, NEvar_with_constraints[1].length() - 1);
+              String networkEnvironmentVarConstraints =
+                  networkEnvironmentVarWithConstraints[1].substring(0, networkEnvironmentVarWithConstraints[1].length() - 1);
 
-              ValueSet valueset_temp = new ValueSet();
-              String[] constraints_of_one_NEvar = NEvar_constraints.split(", ");
+              ValueSet valueSetTemp = new ValueSet();
+              String[] constraintsOfOneNetworkEnvironmentVar =
+                  networkEnvironmentVarConstraints.split(", ");
 
-              for (int i_constraint = 0;
-                  i_constraint < constraints_of_one_NEvar.length;
-                  i_constraint++) {
-                valueset_temp.AddConstriantsForValueSet(constraints_of_one_NEvar[i_constraint]);
+              for (int iConstraint = 0;
+                  iConstraint < constraintsOfOneNetworkEnvironmentVar.length;
+                  iConstraint++) {
+                valueSetTemp.addConstriantsForValueSet(constraintsOfOneNetworkEnvironmentVar[iConstraint]);
               }
 
-              guardcondition.put(NEvar_with_constraints[0], valueset_temp);
+              guardCondition.put(networkEnvironmentVarWithConstraints[0], valueSetTemp);
               System.out.println(
                   "----- Guard Condition: "
-                      + NEvar_with_constraints[0]
+                      + networkEnvironmentVarWithConstraints[0]
                       + ", "
-                      + valueset_temp.getValueSet().get(0)
+                      + valueSetTemp.getValueSet().get(0)
                       + " -----");
 
-              t.setConditions(guardcondition);
+              transition.setConditions(guardCondition);
 
-              i_NEvar = i_NEvar + 1;
+              iNetworkEnvironmentVar = iNetworkEnvironmentVar + 1;
             }
             // Add guard condition to transition, then add transition to state machine.
 
             // System.out.println("Corrup: " + NECorrupValue + ", len: " + l_NE_C);
             // t.getNetworkEnvironment().setPacketLoss(Double.parseDouble(NECorrupValue));
 
-            S.addonetransition(t);
+            stateMachine.addOneTransition(transition);
 
             inTransition = false;
             sourceState = null;
             targetState = null;
-            t = null;
+            transition = null;
           } else {
             System.out.println("***** Error: Line Label Unknown! *****");
           }
@@ -420,17 +439,17 @@ public class TestCaseGeneration {
       }
       reader.close();
 
-    } catch (IOException e) {
-      e.printStackTrace();
+    } catch (IOException exception0) {
+      exception0.printStackTrace();
     } finally {
       if (reader != null) {
         try {
           reader.close();
-        } catch (IOException e1) {
+        } catch (IOException exception1) {
         }
       }
     }
 
-    return S;
+    return stateMachine;
   }
 }

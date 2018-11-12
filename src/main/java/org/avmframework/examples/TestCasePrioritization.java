@@ -1,13 +1,5 @@
 package org.avmframework.examples;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import org.apache.commons.math3.random.MersenneTwister;
 import org.apache.commons.math3.random.RandomGenerator;
 import org.avmframework.AVM;
@@ -23,9 +15,20 @@ import org.avmframework.initialization.RandomInitializer;
 import org.avmframework.localsearch.LocalSearch;
 import org.avmframework.objective.ObjectiveFunction;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /* This example shows prioritization problem termed as "test case prioritization".
- * It involves three objectives: maximize coverage, maximize fault detection, and minimize execution time.
- * The weights for the objectives and their definition are provided in the class "PrioritizationObjectiveFunction".
+ * It involves three objectives: maximize coverage, maximize fault detection,
+ * and minimize execution time.
+ * The weights for the objectives and their definition are provided in the class
+ * "PrioritizationObjectiveFunction".
  * More objectives can be added as described in the paper below:
  * https://link.springer.com/chapter/10.1007/978-3-319-47443-4_11
  */
@@ -47,13 +50,13 @@ public class TestCasePrioritization {
 
   public static void main(String[] args) {
     List<TestCase> originalTestSuite = new ArrayList<TestCase>();
-    TestSuiteCoverage tsCoverage = new TestSuiteCoverage();
+    TestSuiteCoverage transitionStateCoverage = new TestSuiteCoverage();
     List<TestCase> prioritizedTestSuite = new ArrayList<TestCase>();
 
     // sample file that contains the test suite information consisting of 150 test cases
     // each test case consists of key attributes such as id, execution time, apis covered
     String file = "src/main/java/org/avmframework/examples/testoptimization/originalTestSuite.txt";
-    originalTestSuite = readTestSuite(file, originalTestSuite, tsCoverage);
+    originalTestSuite = readTestSuite(file, originalTestSuite, transitionStateCoverage);
 
     // instantiate the test object using command line parameters
     PrioritizationObject testObject = new PrioritizationObject();
@@ -64,7 +67,8 @@ public class TestCasePrioritization {
         new ArgsParser(TestCasePrioritization.class, args).parseSearchParam(SEARCH_NAME);
 
     // set up the objective function
-    ObjectiveFunction objFun = testObject.getObjectiveFunction(originalTestSuite, tsCoverage);
+    ObjectiveFunction objFun = testObject.getObjectiveFunction(
+        originalTestSuite, transitionStateCoverage);
 
     // set up the vector
     Vector vector = testObject.setUpVector(originalTestSuite.size());
@@ -108,7 +112,7 @@ public class TestCasePrioritization {
 
   // read the file, populate the test cases and add it to an array
   private static List<TestCase> readTestSuite(
-      String file, List<TestCase> testSuite, TestSuiteCoverage tsCoverage) {
+      String file, List<TestCase> testSuite, TestSuiteCoverage transitionStateCoverage) {
     try {
       BufferedReader in = new BufferedReader(new FileReader(file));
       String str;
@@ -127,7 +131,7 @@ public class TestCasePrioritization {
           List<String> apiList = new ArrayList<String>();
           for (int i = 0; i < apiCovered.length; i++) {
             apiList.add(apiCovered[i].trim());
-            tsCoverage.coverage.add(apiCovered[i].trim());
+            transitionStateCoverage.coverage.add(apiCovered[i].trim());
           }
           testCase.setApiCovered(apiList);
           testCase.setTime(Integer.parseInt(details[2]));
@@ -138,12 +142,12 @@ public class TestCasePrioritization {
 
           testSuite.add(testCase);
 
-          tsCoverage.executionTime += testCase.getTime();
-          tsCoverage.faultDetection += testCase.getFaultDetection();
+          transitionStateCoverage.executionTime += testCase.getTime();
+          transitionStateCoverage.faultDetection += testCase.getFaultDetection();
         }
       }
       in.close();
-    } catch (IOException e) {
+    } catch (IOException exception) {
     }
     return testSuite;
   }

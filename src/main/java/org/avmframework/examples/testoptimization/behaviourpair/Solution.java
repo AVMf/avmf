@@ -1,6 +1,8 @@
-package org.avmframework.examples.testoptimization.problem_BehaviourPairGen;
+package org.avmframework.examples.testoptimization.behaviourpair;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public class Solution {
 
@@ -22,13 +24,13 @@ public class Solution {
     this.solutionlength = len;
   }
 
-  public void addsolutionmember(String membername, Object o) {
-    this.solution.put(membername, o);
+  public void addSolutionMember(String membername, Object obj) {
+    this.solution.put(membername, obj);
     this.solutionlength++;
   }
 
-  public void addsolutionmemberWithoutChangeLength(String membername, Object o) {
-    this.solution.put(membername, o);
+  public void addSolutionMemberWithoutChangeLength(String membername, Object obj) {
+    this.solution.put(membername, obj);
   }
 
   public void emptysolution() {
@@ -40,9 +42,9 @@ public class Solution {
     return this.solution;
   }
 
-  public static void printSolution(Solution v) {
+  public static void printSolution(Solution sol) {
     String printstring = "Solution -";
-    Iterator iter = v.getsolution().entrySet().iterator();
+    Iterator iter = sol.getsolution().entrySet().iterator();
     while (iter.hasNext()) {
       Map.Entry entry = (Map.Entry) iter.next();
       String key = (String) entry.getKey();

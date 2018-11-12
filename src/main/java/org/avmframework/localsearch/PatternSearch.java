@@ -10,7 +10,9 @@ public class PatternSearch extends LocalSearch {
   protected int accelerationFactor = ACCELERATION_FACTOR_DEFAULT;
 
   protected ObjectiveValue initial, last, next;
-  protected int k, x, dir;
+  protected int modifier;
+  protected int num;
+  protected int dir;
 
   public PatternSearch() {}
 
@@ -27,18 +29,18 @@ public class PatternSearch extends LocalSearch {
 
   protected void initialize() throws TerminationException {
     initial = objFun.evaluate(vector);
-    k = 1;
-    x = var.getValue();
+    modifier = 1;
+    num = var.getValue();
     dir = 0;
   }
 
   protected boolean establishDirection() throws TerminationException {
     // evaluate left move
-    var.setValue(x - k);
+    var.setValue(num - modifier);
     ObjectiveValue left = objFun.evaluate(vector);
 
     // evaluate right move
-    var.setValue(x + k);
+    var.setValue(num + modifier);
     ObjectiveValue right = objFun.evaluate(vector);
 
     // find the best direction
@@ -52,9 +54,9 @@ public class PatternSearch extends LocalSearch {
       dir = 0;
     }
 
-    // set x and the variable according to the best edge
-    x += dir * k;
-    var.setValue(x);
+    // set num and the variable according to the best edge
+    num += dir * modifier;
+    var.setValue(num);
 
     // set last and next objective values
     last = initial;
@@ -75,17 +77,17 @@ public class PatternSearch extends LocalSearch {
       last = next;
 
       // make the pattern move
-      k *= accelerationFactor;
-      x += k * dir;
-      var.setValue(x);
+      modifier *= accelerationFactor;
+      num += modifier * dir;
+      var.setValue(num);
 
       // evaluate the move
       next = objFun.evaluate(vector);
 
-      // if no better, reset x and the variable
+      // if no better, reset num and the variable
       if (!next.betterThan(last)) {
-        x -= k * dir;
-        var.setValue(x);
+        num -= modifier * dir;
+        var.setValue(num);
       }
     }
   }

@@ -1,9 +1,10 @@
 package org.avmframework;
 
-import java.util.ArrayList;
-import java.util.List;
 import org.apache.commons.math3.random.RandomGenerator;
 import org.avmframework.variable.Variable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Vector extends AbstractVector {
 

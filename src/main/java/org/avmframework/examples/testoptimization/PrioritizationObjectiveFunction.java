@@ -1,5 +1,10 @@
 package org.avmframework.examples.testoptimization;
 
+import org.avmframework.Vector;
+import org.avmframework.objective.NumericObjectiveValue;
+import org.avmframework.objective.ObjectiveFunction;
+import org.avmframework.objective.ObjectiveValue;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -7,37 +12,37 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import org.avmframework.Vector;
-import org.avmframework.objective.NumericObjectiveValue;
-import org.avmframework.objective.ObjectiveFunction;
-import org.avmframework.objective.ObjectiveValue;
 
 /* This example shows prioritization problem termed as "test case prioritization"
  * It involves three objectives: maximize coverage (objCoverage),
- * maximize fault detection (objFDC) and minimize execution time (objTime)
+ * maximize fault detection (objFaultDetectionCoverage) and minimize execution time (objTime)
  * More objectives can be as provided as described in the paper below:
  * https://link.springer.com/chapter/10.1007/978-3-319-47443-4_11
  */
 
 /* Description the three objectives are provided below:
  * objCoverage measures the coverage of unique APIs for the prioritized test cases
- * objFDC measures the faults found by the prioritized test cases within a specified time period (e.g., one week in the past)
+ * objFaultDetectionCoverage measures the faults found by the prioritized test cases within a
+ * specified time period (e.g., one week in the past)
  * objTime measures the execution time
- * We aim to maximize objCoverage and objFDC, and minimize objTime
+ * We aim to maximize objCoverage and objFaultDetectionCoverage, and minimize objTime
  */
 
 public class PrioritizationObjectiveFunction extends ObjectiveFunction {
   private List<TestCase> originalTestSuite = new ArrayList<TestCase>();
-  private TestSuiteCoverage tsCoverage = new TestSuiteCoverage();
+  private TestSuiteCoverage transitionStateCoverage = new TestSuiteCoverage();
 
   // assign weights for the three objectives
   // we assume that each objective has equal weight in this context
   // the weights can be modified if some objective is more important than the others
-  final double WEIGHT_COVERAGE = 0.333, WEIGHT_FAULT_DETECTION = 0.333, WEIGHT_TIME = 0.333;
+  final double WEIGHT_COVERAGE = 0.333;
+  final double WEIGHT_FAULT_DETECTION = 0.333;
+  final double WEIGHT_TIME = 0.333;
 
-  public PrioritizationObjectiveFunction(List<TestCase> testSuite, TestSuiteCoverage tsCoverage) {
+  public PrioritizationObjectiveFunction(
+      List<TestCase> testSuite, TestSuiteCoverage transitionStateCoverage) {
     this.originalTestSuite = testSuite;
-    this.tsCoverage = tsCoverage;
+    this.transitionStateCoverage = transitionStateCoverage;
   }
 
   // The employed prioritization strategy is referred to as STIPI, which is search-based test case
@@ -62,7 +67,7 @@ public class PrioritizationObjectiveFunction extends ObjectiveFunction {
 
         coveredCoverageSet.addAll(testCase.getApiCovered());
       } else { // each test case appearing later are penalized with respect to the test case
-               // appearing earlier
+        // appearing earlier
         int beforeCoverage = coveredCoverageSet.size();
         coveredCoverageSet.addAll(testCase.getApiCovered());
         // to get the number of unique apis covered by this test case
@@ -79,21 +84,20 @@ public class PrioritizationObjectiveFunction extends ObjectiveFunction {
                 * ((double) (orderedTestSuite.size() - i) / orderedTestSuite.size());
       }
     }
-    double objCoverage, objFDC, objTime;
-    double fitness;
+    double objCoverage, objFaultDetectionCoverage, objTime;
 
     // divide by maximum of all the test cases in the test suite
-    objCoverage = coverageCal / tsCoverage.getCoverage().size();
-    objFDC = fdcCal / tsCoverage.getFaultDetection();
-    objTime = timeCalc / tsCoverage.getExecutionTime();
+    objCoverage = coverageCal / transitionStateCoverage.getCoverage().size();
+    objFaultDetectionCoverage = fdcCal / transitionStateCoverage.getFaultDetection();
+    objTime = timeCalc / transitionStateCoverage.getExecutionTime();
 
     // subtract 1 for minimization, 1 is not subtracted for objTime because minimum time is better
-    fitness =
+    double fitness =
         (1 - objCoverage) * this.WEIGHT_COVERAGE
-            + (1 - objFDC) * this.WEIGHT_FAULT_DETECTION
+            + (1 - objFaultDetectionCoverage) * this.WEIGHT_FAULT_DETECTION
             + objTime * this.WEIGHT_TIME;
 
-    return NumericObjectiveValue.LowerIsBetterObjectiveValue(fitness, 0);
+    return NumericObjectiveValue.lowerIsBetterObjectiveValue(fitness, 0);
   }
 
   // prioritize test cases based on the values of the vector

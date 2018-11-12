@@ -44,7 +44,7 @@ public class StringOptimization {
           protected ObjectiveValue computeObjectiveValue(Vector vector) {
             String string = ((StringVariable) vector.getVariable(0)).asString();
             double distance = stringEqualsDistance(string, TARGET_STRING);
-            return NumericObjectiveValue.LowerIsBetterObjectiveValue(distance, 0);
+            return NumericObjectiveValue.lowerIsBetterObjectiveValue(distance, 0);
           }
 
           protected double stringEqualsDistance(String str, String target) {

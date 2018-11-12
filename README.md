@@ -99,9 +99,9 @@ The branch ID is the number of a decision point in the test object code followed
 
 The number and mapping of branch IDs to code can be found by checking the code in the `CalendarBranchTargetObjectiveFunction`, `LineBranchTargetObjectiveFunction` and `TriangleBranchTargetObjectiveFunction` classes for the respective test object. Each class contains an instrumented version of the method under test, where the conditional expression is replaced by a method call. The first integer parameter to this method call is the branch ID. So in `CalendarBranchTargetObjectiveFunction`, the `if` statement
 
-``if (trace.lessThan(1, start_month, 1)) start_month = 1;``
+``if (trace.lessThan(1, startMonth, 1)) startMonth = 1;``
 
-corresponds to the first branch. Generating data for branch "1T" will involve the `start_month = 1` code being executed. Generating data for the branch "1F" will instead trigger the false outcome of the conditional, and this code not being executed.
+corresponds to the first branch. Generating data for branch "1T" will involve the `startMonth = 1` code being executed. Generating data for the branch "1F" will instead trigger the false outcome of the conditional, and this code not being executed.
 
 ## Problems or Other Comments?
 

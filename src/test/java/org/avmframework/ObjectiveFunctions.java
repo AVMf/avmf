@@ -13,7 +13,7 @@ public class ObjectiveFunctions {
         new ObjectiveFunction() {
           @Override
           protected ObjectiveValue computeObjectiveValue(Vector vector) {
-            return NumericObjectiveValue.HigherIsBetterObjectiveValue(1.0);
+            return NumericObjectiveValue.higherIsBetterObjectiveValue(1.0);
           }
         };
     return objFun;
@@ -27,7 +27,7 @@ public class ObjectiveFunctions {
         for (Variable var : vector.getVariables()) {
           distance += Math.abs(((IntegerVariable) var).getValue());
         }
-        return NumericObjectiveValue.LowerIsBetterObjectiveValue(distance, 0);
+        return NumericObjectiveValue.lowerIsBetterObjectiveValue(distance, 0);
       }
     };
   }

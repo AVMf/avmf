@@ -5,7 +5,9 @@ import org.apache.commons.math3.random.RandomGenerator;
 public class StringVariable extends VectorVariable {
 
   protected int maxSize;
-  protected char charInitialValue, charMin, charMax;
+  protected char charInitialValue;
+  protected char charMin;
+  protected char charMax;
 
   protected String initialValue;
 
@@ -75,12 +77,12 @@ public class StringVariable extends VectorVariable {
   }
 
   @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-    if (!super.equals(o)) return false;
+  public boolean equals(Object obj) {
+    if (this == obj) return true;
+    if (obj == null || getClass() != obj.getClass()) return false;
+    if (!super.equals(obj)) return false;
 
-    StringVariable that = (StringVariable) o;
+    StringVariable that = (StringVariable) obj;
 
     if (maxSize != that.maxSize) return false;
     if (charInitialValue != that.charInitialValue) return false;

@@ -5,7 +5,8 @@ import org.avmframework.Vector;
 import org.avmframework.variable.IntegerVariable;
 
 public class TestObject {
-  static final int INIT = 0, MIN = -1;
+  static final int INIT = 0; 
+  static final int MIN = -1;
 
   // The value -1 means the requirement is not assigned to any stakeholder
   // set up the vector to be optimized

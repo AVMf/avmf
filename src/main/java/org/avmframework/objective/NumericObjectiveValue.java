@@ -52,19 +52,19 @@ public class NumericObjectiveValue extends ObjectiveValue<NumericObjectiveValue>
     return "" + getValue();
   }
 
-  public static NumericObjectiveValue HigherIsBetterObjectiveValue(double value) {
+  public static NumericObjectiveValue higherIsBetterObjectiveValue(double value) {
     return new NumericObjectiveValue(value, true);
   }
 
-  public static NumericObjectiveValue HigherIsBetterObjectiveValue(double value, double optimum) {
+  public static NumericObjectiveValue higherIsBetterObjectiveValue(double value, double optimum) {
     return new NumericObjectiveValue(value, true, optimum);
   }
 
-  public static NumericObjectiveValue LowerIsBetterObjectiveValue(double value) {
+  public static NumericObjectiveValue lowerIsBetterObjectiveValue(double value) {
     return new NumericObjectiveValue(value, false);
   }
 
-  public static NumericObjectiveValue LowerIsBetterObjectiveValue(double value, double optimum) {
+  public static NumericObjectiveValue lowerIsBetterObjectiveValue(double value, double optimum) {
     return new NumericObjectiveValue(value, false, optimum);
   }
 }

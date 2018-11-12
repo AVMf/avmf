@@ -108,7 +108,7 @@ public class AVM {
         restarter.initialize(vector);
       }
 
-    } catch (TerminationException e) {
+    } catch (TerminationException exception) {
       // the search has ended
       monitor.observeTermination();
     }

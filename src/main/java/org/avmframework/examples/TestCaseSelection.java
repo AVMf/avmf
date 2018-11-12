@@ -1,10 +1,5 @@
 package org.avmframework.examples;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import org.apache.commons.math3.random.MersenneTwister;
 import org.apache.commons.math3.random.RandomGenerator;
 import org.avmframework.AVM;
@@ -20,6 +15,12 @@ import org.avmframework.initialization.RandomInitializer;
 import org.avmframework.localsearch.LocalSearch;
 import org.avmframework.objective.ObjectiveFunction;
 import org.avmframework.variable.Variable;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /* This example shows selection problem termed as "test case selection".
  * It involves two objectives: maximize coverage and  fault detection.
@@ -45,13 +46,13 @@ public class TestCaseSelection {
 
   public static void main(String[] args) {
     List<TestCase> originalTestSuite = new ArrayList<TestCase>();
-    TestSuiteCoverage tsCoverage = new TestSuiteCoverage();
+    TestSuiteCoverage transitionStateCoverage = new TestSuiteCoverage();
     List<TestCase> selectedTestSuite = new ArrayList<TestCase>();
 
     // sample file that contains the test suite information consisting of 150 test cases
     // each test case consists of key attributes such as id, execution time, apis covered
     String file = "src/main/java/org/avmframework/examples/testoptimization/originalTestSuite.txt";
-    originalTestSuite = readTestSuite(file, originalTestSuite, tsCoverage);
+    originalTestSuite = readTestSuite(file, originalTestSuite, transitionStateCoverage);
 
     // instantiate the test object using command line parameters
     SelectionObject testObject = new SelectionObject();
@@ -62,7 +63,7 @@ public class TestCaseSelection {
         new ArgsParser(TestCaseSelection.class, args).parseSearchParam(SEARCH_NAME);
 
     // set up the objective function
-    ObjectiveFunction objFun = testObject.getObjectiveFunction(originalTestSuite, tsCoverage);
+    ObjectiveFunction objFun = testObject.getObjectiveFunction(originalTestSuite, transitionStateCoverage);
 
     // set up the vector
     Vector vector = testObject.setUpVector(originalTestSuite.size());
@@ -106,7 +107,7 @@ public class TestCaseSelection {
 
   // read file and populate the test cases
   private static List<TestCase> readTestSuite(
-      String file, List<TestCase> testSuite, TestSuiteCoverage tsCoverage) {
+      String file, List<TestCase> testSuite, TestSuiteCoverage transitionStateCoverage) {
     try {
       BufferedReader in = new BufferedReader(new FileReader(file));
       String str;
@@ -126,7 +127,7 @@ public class TestCaseSelection {
           for (int i = 0; i < apiCovered.length; i++) {
             apiList.add(apiCovered[i].trim());
             // calculate the overall coverage of the test suite
-            tsCoverage.coverage.add(apiCovered[i].trim());
+            transitionStateCoverage.coverage.add(apiCovered[i].trim());
           }
           testCase.setApiCovered(apiList);
           testCase.setTime(Integer.parseInt(details[2]));
@@ -138,12 +139,12 @@ public class TestCaseSelection {
           testSuite.add(testCase);
 
           // calculate the overall coverage of the test suite
-          tsCoverage.executionTime += testCase.getTime();
-          tsCoverage.faultDetection += testCase.getFaultDetection();
+          transitionStateCoverage.executionTime += testCase.getTime();
+          transitionStateCoverage.faultDetection += testCase.getFaultDetection();
         }
       }
       in.close();
-    } catch (IOException e) {
+    } catch (IOException exception) {
     }
     return testSuite;
   }
@@ -153,11 +154,11 @@ public class TestCaseSelection {
       Monitor monitor, List<TestCase> originalTestSuite) {
     List<TestCase> selectedTestSuite = new ArrayList<TestCase>();
 
-    int i = 0;
+    int count = 0;
     for (Variable variable : monitor.getBestVector().getVariables()) {
       int num = Integer.parseInt(variable.toString());
-      if (num > 0) selectedTestSuite.add(originalTestSuite.get(i));
-      i++;
+      if (num > 0) selectedTestSuite.add(originalTestSuite.get(count));
+      count++;
     }
     return selectedTestSuite;
   }

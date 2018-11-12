@@ -1,4 +1,4 @@
-package org.avmframework.examples.testoptimization.problem_BehaviourPairGen;
+package org.avmframework.examples.testoptimization.behaviourpair;
 
 import java.util.*;
 

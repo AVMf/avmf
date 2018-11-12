@@ -53,39 +53,39 @@ public class TriangleBranchTargetObjectiveFunction extends BranchTargetObjective
     return ((IntegerVariable) vector.getVariable(index)).asInt();
   }
 
-  private Triangle.TriangleType classify(int a, int b, int c) {
+  private Triangle.TriangleType classify(int num1, int num2, int num3) {
     Triangle.TriangleType type;
 
-    if (trace.greaterThan(1, a, b)) {
-      int t = a;
-      a = b;
-      b = t;
+    if (trace.greaterThan(1, num1, num2)) {
+      int temp = num1;
+      num1 = num2;
+      num2 = temp;
     }
 
-    if (trace.greaterThan(2, a, c)) {
-      int t = a;
-      a = c;
-      c = t;
+    if (trace.greaterThan(2, num1, num2)) {
+      int temp = num1;
+      num1 = num3;
+      num3 = temp;
     }
 
-    if (trace.greaterThan(3, b, c)) {
-      int t = b;
-      b = c;
-      c = t;
+    if (trace.greaterThan(3, num2, num3)) {
+      int temp = num2;
+      num2 = num3;
+      num3 = temp;
     }
 
-    if (trace.lessThanOrEquals(4, a + b, c)) {
+    if (trace.lessThanOrEquals(4, num1 + num2, num3)) {
       type = Triangle.TriangleType.NOT_A_TRIANGLE;
     } else {
       type = Triangle.TriangleType.SCALENE;
-      if (trace.equals(5, a, b)) {
-        if (trace.equals(6, b, c)) {
+      if (trace.equals(5, num1, num2)) {
+        if (trace.equals(6, num2, num3)) {
           type = Triangle.TriangleType.EQUILATERAL;
         }
       } else {
-        if (trace.equals(7, a, b)) {
+        if (trace.equals(7, num1, num2)) {
           type = Triangle.TriangleType.ISOSCELES;
-        } else if (trace.equals(8, b, c)) {
+        } else if (trace.equals(8, num2, num3)) {
           type = Triangle.TriangleType.ISOSCELES;
         }
       }

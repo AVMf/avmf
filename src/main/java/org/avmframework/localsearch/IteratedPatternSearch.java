@@ -12,7 +12,8 @@ public class IteratedPatternSearch extends PatternSearch {
   }
 
   protected void performSearch() throws TerminationException {
-    ObjectiveValue next = objFun.evaluate(vector), last;
+    ObjectiveValue next = objFun.evaluate(vector);
+    ObjectiveValue last;
 
     do {
       initialize();

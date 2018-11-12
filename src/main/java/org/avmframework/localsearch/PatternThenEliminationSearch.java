@@ -19,14 +19,14 @@ public abstract class PatternThenEliminationSearch extends PatternSearch {
   }
 
   protected void eliminationSearch() throws TerminationException {
-    int xPrev = x - (k * dir / accelerationFactor);
-    int xNext = x + (k * dir);
+    int numPrev = num - (modifier * dir / accelerationFactor);
+    int numNext = num + (modifier * dir);
 
-    int l = Math.min(xPrev, xNext);
-    int r = Math.max(xPrev, xNext);
+    int left = Math.min(numPrev, numNext);
+    int right = Math.max(numPrev, numNext);
 
-    performEliminationSearch(l, r);
+    performEliminationSearch(left, right);
   }
 
-  protected abstract void performEliminationSearch(int l, int r) throws TerminationException;
+  protected abstract void performEliminationSearch(int left, int right) throws TerminationException;
 }

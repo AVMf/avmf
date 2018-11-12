@@ -27,7 +27,7 @@ public abstract class LocalSearch {
       String localSearchClassName = "org.avmframework.localsearch." + name;
       Class<?> localSearchClass = Class.forName(localSearchClassName);
       return (LocalSearch) localSearchClass.newInstance();
-    } catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+    } catch (ClassNotFoundException | InstantiationException | IllegalAccessException exception) {
       throw new RuntimeException("Unable to instantiate search \"" + name + "\"");
     }
   }

@@ -1,7 +1,10 @@
 package org.avmframework.examples.inputdatageneration.line;
 
 import org.avmframework.Vector;
-import org.avmframework.examples.inputdatageneration.*;
+import org.avmframework.examples.inputdatageneration.Branch;
+import org.avmframework.examples.inputdatageneration.BranchTargetObjectiveFunction;
+import org.avmframework.examples.inputdatageneration.ControlDependenceChain;
+import org.avmframework.examples.inputdatageneration.ControlDependencies;
 import org.avmframework.variable.FixedPointVariable;
 
 public class LineBranchTargetObjectiveFunction extends BranchTargetObjectiveFunction {
@@ -55,19 +58,19 @@ public class LineBranchTargetObjectiveFunction extends BranchTargetObjectiveFunc
     return ((FixedPointVariable) vector.getVariable(index)).asDouble();
   }
 
-  protected boolean intersect(Line a, Line b) {
-    double ua_t = (b.x2 - b.x1) * (a.y1 - b.y1) - (b.y2 - b.y1) * (a.x1 - b.x1);
-    double ub_t = (a.x2 - a.x1) * (a.y1 - b.y1) - (a.y2 - a.y1) * (a.x1 - b.x1);
-    double u_b = (b.y2 - b.y1) * (a.x2 - a.x1) - (b.x2 - b.x1) * (a.y2 - a.y1);
+  protected boolean intersect(Line line1, Line line2) {
+    double u1t = (line2.x2 - line2.x1) * (line1.y1 - line2.y1) - (line2.y2 - line2.y1) * (line1.x1 - line2.x1);
+    double u2t = (line1.x2 - line1.x1) * (line1.y1 - line2.y1) - (line1.y2 - line1.y1) * (line1.x1 - line2.x1);
+    double u2 = (line2.y2 - line2.y1) * (line1.x2 - line1.x1) - (line2.x2 - line2.x1) * (line1.y2 - line1.y1);
 
-    if (trace.notEquals(1, u_b, 0)) {
-      double ua = ua_t / u_b;
-      double ub = ub_t / u_b;
+    if (trace.notEquals(1, u2, 0)) {
+      double u1 = u1t / u2;
+      double u02 = u2t / u2;
 
-      if (trace.lessThanOrEquals(2, 0, ua)) {
-        if (trace.lessThanOrEquals(3, ua, 1)) {
-          if (trace.lessThanOrEquals(4, 0, ub)) {
-            if (trace.lessThanOrEquals(5, ub, 1)) {
+      if (trace.lessThanOrEquals(2, 0, u1)) {
+        if (trace.lessThanOrEquals(3, u1, 1)) {
+          if (trace.lessThanOrEquals(4, 0, u02)) {
+            if (trace.lessThanOrEquals(5, u02, 1)) {
               return true;
             }
           }
@@ -76,11 +79,11 @@ public class LineBranchTargetObjectiveFunction extends BranchTargetObjectiveFunc
       return false;
 
     } else {
-      if (trace.equals(6, ua_t, 0)) {
+      if (trace.equals(6, u1t, 0)) {
         return true;
       }
 
-      if (trace.equals(7, ub_t, 0)) {
+      if (trace.equals(7, u2t, 0)) {
         return true;
       }
 

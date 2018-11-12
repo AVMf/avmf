@@ -16,7 +16,7 @@ public class ControlDependenceChain {
     for (BranchExection branchExection : trace.getBranchExecutions()) {
       int chainIndex = 0;
       for (Branch branch : branches) {
-        if (branchExection.getBranch().getID() == branch.getID()) {
+        if (branchExection.getBranch().getId() == branch.getId()) {
           if (branchExection.getBranch().getEdge() != branch.getEdge()) {
             return new DivergencePoint(traceIndex, chainIndex);
           }

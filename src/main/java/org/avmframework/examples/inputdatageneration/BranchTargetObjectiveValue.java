@@ -18,8 +18,8 @@ public class BranchTargetObjectiveValue extends ObjectiveValue {
   }
 
   @Override
-  public int compareTo(Object o) {
-    BranchTargetObjectiveValue other = (BranchTargetObjectiveValue) o;
+  public int compareTo(Object obj) {
+    BranchTargetObjectiveValue other = (BranchTargetObjectiveValue) obj;
     if (approachLevel < other.approachLevel) {
       return 1;
     } else if (approachLevel > other.approachLevel) {

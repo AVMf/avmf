@@ -27,11 +27,15 @@ public class Quadratic {
   // CHANGE THE FOLLOWING CONSTANTS TO EXPLORE THEIR EFFECT ON THE SEARCH:
 
   // - problem constants
-  static final int A = 4, B = 10, C = 6;
+  static final int A = 4;
+  static final int B = 10;
+  static final int C = 6;
 
   // - vector constants
   static final int PRECISION = 1;
-  static final double INITIAL_VALUE = 0.0, MIN = -100000.0, MAX = 100000.0;
+  static final double INITIAL_VALUE = 0.0;
+  static final double MIN = -100000.0;
+  static final double MAX = 100000.0;
 
   // - search constants
   static final String SEARCH_NAME = "IteratedPatternSearch"; // can also be set at the command line
@@ -44,10 +48,10 @@ public class Quadratic {
         new ObjectiveFunction() {
           @Override
           protected ObjectiveValue computeObjectiveValue(Vector vector) {
-            double x = ((FixedPointVariable) vector.getVariable(0)).asDouble();
-            double y = (A * x * x) + (B * x) + C;
-            double distance = Math.abs(y);
-            return NumericObjectiveValue.LowerIsBetterObjectiveValue(distance, 0);
+            double num1 = ((FixedPointVariable) vector.getVariable(0)).asDouble();
+            double num2 = (A * num1 * num1) + (B * num1) + C;
+            double distance = Math.abs(num2);
+            return NumericObjectiveValue.lowerIsBetterObjectiveValue(distance, 0);
           }
         };
 

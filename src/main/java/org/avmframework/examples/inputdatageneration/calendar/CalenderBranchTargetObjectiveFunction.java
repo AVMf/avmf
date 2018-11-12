@@ -108,80 +108,79 @@ public class CalenderBranchTargetObjectiveFunction extends BranchTargetObjective
   }
 
   public int daysBetween(
-      int start_month, int start_day, int start_year, int end_month, int end_day, int end_year) {
+      int startMonth, int startDay, int startYear, int endMonth, int endDay, int endYear) {
     int days = 0;
 
     // sanitize month inputs
-    if (trace.lessThan(1, start_month, 1)) start_month = 1;
-    if (trace.lessThan(2, end_month, 1)) end_month = 1;
-    if (trace.greaterThan(3, start_month, 12)) start_month = 12;
-    if (trace.greaterThan(4, end_month, 12)) end_month = 12;
+    if (trace.lessThan(1, startMonth, 1)) startMonth = 1;
+    if (trace.lessThan(2, endMonth, 1)) endMonth = 1;
+    if (trace.greaterThan(3, startMonth, 12)) startMonth = 12;
+    if (trace.greaterThan(4, endMonth, 12)) endMonth = 12;
 
     // sanitize day inputs
-    if (trace.lessThan(5, start_day, 1)) start_day = 1;
-    if (trace.lessThan(6, end_day, 1)) end_day = 1;
-    if (trace.greaterThan(7, start_day, monthDays(start_month, start_year)))
-      start_day = monthDays(start_month, start_year);
-    if (trace.greaterThan(8, end_day, monthDays(end_month, end_year)))
-      end_day = monthDays(end_month, end_year);
+    if (trace.lessThan(5, startDay, 1)) startDay = 1;
+    if (trace.lessThan(6, endDay, 1)) endDay = 1;
+    if (trace.greaterThan(7, startDay, monthDays(startMonth, startYear)))
+      startDay = monthDays(startMonth, startYear);
+    if (trace.greaterThan(8, endDay, monthDays(endMonth, endYear)))
+      endDay = monthDays(endMonth, endYear);
 
     // swap dates if start date before end date
     boolean swapDates = false;
-    if (trace.lessThan(9, end_year, start_year)) {
+    if (trace.lessThan(9, endYear, startYear)) {
       swapDates = true;
     }
-    if (trace.equals(10, end_year, start_year)) {
-      if (trace.lessThan(11, end_month, start_month)) {
+    if (trace.equals(10, endYear, startYear)) {
+      if (trace.lessThan(11, endMonth, startMonth)) {
         swapDates = true;
       }
     }
-    if (trace.equals(12, end_year, start_year)) {
-      if (trace.equals(13, end_month, start_month)) {
-        if (trace.lessThan(14, end_day, start_day)) {
+    if (trace.equals(12, endYear, startYear)) {
+      if (trace.equals(13, endMonth, startMonth)) {
+        if (trace.lessThan(14, endDay, startDay)) {
           swapDates = true;
         }
       }
     }
     if (trace.isTrue(15, swapDates)) {
-      int t = end_month;
-      end_month = start_month;
-      start_month = t;
-      t = end_day;
-      end_day = start_day;
-      start_day = t;
-      t = end_year;
-      end_year = start_year;
-      start_year = t;
+      int temp = endMonth;
+      endMonth = startMonth;
+      startMonth = temp;
+      temp = endDay;
+      endDay = startDay;
+      startDay = temp;
+      temp = endYear;
+      endYear = startYear;
+      startYear = temp;
     }
 
     // calculate days
-    if (trace.equals(16, start_month, end_month)) {
-      if (trace.equals(17, start_year, end_year)) {
-        days = end_day - start_day;
+    if (trace.equals(16, startMonth, endMonth)) {
+      if (trace.equals(17, startYear, endYear)) {
+        days = endDay - startDay;
       }
     } else {
-      days += monthDays(start_month, start_year) - start_day;
-      days += end_day;
-      if (trace.equals(18, start_year, end_year)) {
-        int month = start_month + 1;
-        while (trace.lessThan(19, month, end_month)) {
-          days += monthDays(month, start_year);
+      days += monthDays(startMonth, startYear) - startDay;
+      days += endDay;
+      if (trace.equals(18, startYear, endYear)) {
+        int month = startMonth + 1;
+        while (trace.lessThan(19, month, endMonth)) {
+          days += monthDays(month, startYear);
           month++;
         }
       } else {
-        int year;
-        int month = start_month + 1;
+        int month = startMonth + 1;
         while (trace.lessThanOrEquals(20, month, 12)) {
-          days += monthDays(month, start_year);
+          days += monthDays(month, startYear);
           month++;
         }
         month = 1;
-        while (trace.lessThan(21, month, end_month)) {
-          days += monthDays(month, end_year);
+        while (trace.lessThan(21, month, endMonth)) {
+          days += monthDays(month, endYear);
           month++;
         }
-        year = start_year + 1;
-        while (trace.lessThan(22, year, end_year)) {
+        int year = startYear + 1;
+        while (trace.lessThan(22, year, endYear)) {
           days += 365;
           if (trace.isTrue(23, isLeapYear(year))) days++;
           year++;

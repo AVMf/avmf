@@ -1,4 +1,4 @@
-package org.avmframework.examples.testoptimization.problem_BehaviourPairGen;
+package org.avmframework.examples.testoptimization.behaviourpair;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,42 +21,42 @@ public class State {
    */
   private String stateLabel;
 
-  private HashMap<String, ValueSet> systemVariables_ValueSet;
+  private HashMap<String, ValueSet> systemVariablesValueSet;
 
   private String stateName; // 0.state name
 
-  // private HashMap<String, Double> system_variables_double;
-  // private HashMap<String, Integer> system_variables_int;
-  private HashMap<String, Object> system_variables; // 1.system variables
+  // private HashMap<String, Double> systemVariables_double;
+  // private HashMap<String, Integer> systemVariables_int;
+  private HashMap<String, Object> systemVariables; // 1.system variables
 
-  private List<Transition> in_transitions; // 2.in-transitions
-  private List<Transition> out_transitions; // 3.out-transitions
+  private List<Transition> inTransitions; // 2.in-transitions
+  private List<Transition> outTransitions; // 3.out-transitions
 
   // private NetworkEnvironment networkenvironment;
   // 4.network environment, this part exists in transitions!
 
-  /** Construct methods */
+  /** Construct methods. */
   public State() {
-    this.system_variables = new HashMap<String, Object>();
-    this.in_transitions = new ArrayList<Transition>();
-    this.out_transitions = new ArrayList<Transition>();
+    this.systemVariables = new HashMap<String, Object>();
+    this.inTransitions = new ArrayList<Transition>();
+    this.outTransitions = new ArrayList<Transition>();
 
     this.stateLabel = "PredictedState";
   }
 
   public State(HashMap<String, Object> variables, String name) {
-    this.system_variables = variables;
-    this.in_transitions = new ArrayList<Transition>();
-    this.out_transitions = new ArrayList<Transition>();
+    this.systemVariables = variables;
+    this.inTransitions = new ArrayList<Transition>();
+    this.outTransitions = new ArrayList<Transition>();
     this.stateName = name;
 
     this.stateLabel = "PredictedState";
   }
 
   public State(String name, HashMap<String, ValueSet> variables) {
-    this.systemVariables_ValueSet = variables;
-    this.in_transitions = new ArrayList<Transition>();
-    this.out_transitions = new ArrayList<Transition>();
+    this.systemVariablesValueSet = variables;
+    this.inTransitions = new ArrayList<Transition>();
+    this.outTransitions = new ArrayList<Transition>();
     this.stateName = name;
 
     this.stateLabel = "StateMachineState";
@@ -66,19 +66,19 @@ public class State {
    * Equal method: Only compare the variables' value between the two states Assume that the two
    * states' number of variables are totally same.
    */
-  public boolean isequal(State s) {
+  public boolean isequal(State state) {
 
     // if this.stateLabel
 
-    if (this.getSystemVariables().size() == s.getSystemVariables().size()) {
-      HashMap<String, Object> vals = this.system_variables;
+    if (this.getSystemVariables().size() == state.getSystemVariables().size()) {
+      HashMap<String, Object> vals = this.systemVariables;
       Iterator it = vals.entrySet().iterator();
       while (it.hasNext()) {
         Map.Entry<String, Object> entry = (Map.Entry<String, Object>) it.next();
         String key = entry.getKey();
         Object val = entry.getValue(); // need to test whether it is right!o==o.
-        if (s.getSystemVariables().get(key) != null) {
-          if (s.getSystemVariables().get(key) == val) {
+        if (state.getSystemVariables().get(key) != null) {
+          if (state.getSystemVariables().get(key) == val) {
             // do nothing
           } else {
             return false;
@@ -93,19 +93,19 @@ public class State {
     return true;
   }
 
-  public boolean isequal_ValueSet(State s) {
+  public boolean isEqualValueSet(State state) {
 
     // if this.stateLabel
 
-    if (this.getSystemVariables_ValueSet().size() == s.getSystemVariables_ValueSet().size()) {
-      HashMap<String, ValueSet> vals = this.systemVariables_ValueSet;
+    if (this.getSystemVariablesValueSet().size() == state.getSystemVariablesValueSet().size()) {
+      HashMap<String, ValueSet> vals = this.systemVariablesValueSet;
       Iterator it = vals.entrySet().iterator();
       while (it.hasNext()) {
         Map.Entry<String, ValueSet> entry = (Map.Entry<String, ValueSet>) it.next();
         String key = entry.getKey();
         ValueSet val = entry.getValue(); // need to test whether it is right!o==o.
-        if (s.getSystemVariables_ValueSet().get(key) != null) {
-          if (s.getSystemVariables_ValueSet().get(key).isequal(val)) {
+        if (state.getSystemVariablesValueSet().get(key) != null) {
+          if (state.getSystemVariablesValueSet().get(key).isequal(val)) {
             // do nothing
           } else {
             return false;
@@ -125,45 +125,47 @@ public class State {
   // the new state == one state :: 2
   // the new state belong to one state :: 1
   // the new state != && not belong to One state :: 0
+
   public int checkRelationshipBetweenTwoStates(State newState) {
 
     List<Integer> checkR = new ArrayList<Integer>();
 
-    if (this.getSystemVariables_ValueSet().size()
-        == newState.getSystemVariables_ValueSet().size()) {
+    if (this.getSystemVariablesValueSet().size()
+        == newState.getSystemVariablesValueSet().size()) {
 
-      HashMap<String, ValueSet> vals = this.systemVariables_ValueSet;
+      HashMap<String, ValueSet> vals = this.systemVariablesValueSet;
       Iterator it = vals.entrySet().iterator();
       while (it.hasNext()) {
         Map.Entry<String, ValueSet> entry = (Map.Entry<String, ValueSet>) it.next();
         String key = entry.getKey();
         ValueSet val = entry.getValue(); // need to test whether it is right!o==o.
-        if (newState.getSystemVariables_ValueSet().get(key) != null) {
-          int c = checkValueSetRelationship(newState.getSystemVariables_ValueSet().get(key), val);
-          checkR.add(c);
+        if (newState.getSystemVariablesValueSet().get(key) != null) {
+          int check = checkValueSetRelationship(
+              newState.getSystemVariablesValueSet().get(key), val);
+          checkR.add(check);
         } else {
           System.out.println("======= Warning: wrong state check! =========");
           return -1;
         }
       }
 
-      int l_cr = checkR.size();
-      int tag_0 = 0;
-      int tag_1 = 0;
-      int tag_2 = 0;
-      for (int i = 0; i < l_cr; i++) {
+      int lcr = checkR.size();
+      int tag0 = 0;
+      int tag1 = 0;
+      int tag2 = 0;
+      for (int i = 0; i < lcr; i++) {
         if (checkR.get(i) == 0) {
-          tag_0++;
+          tag0++;
         } else if (checkR.get(i) == 1) {
-          tag_1++;
+          tag1++;
         } else if (checkR.get(i) == 2) {
-          tag_2++;
+          tag2++;
         }
       }
 
-      if (tag_0 == 0) {
-        if (tag_1 == 0) {
-          if (tag_2 == 0) {
+      if (tag0 == 0) {
+        if (tag1 == 0) {
+          if (tag2 == 0) {
             System.out.println("======= Warning: check error! =========");
             return -1;
           } else {
@@ -184,14 +186,14 @@ public class State {
 
   public int checkValueSetRelationship(ValueSet v1, ValueSet v2) {
 
-    int l_v1 = v1.getValueSet().size();
-    int l_v2 = v2.getValueSet().size();
+    int lengthValues1 = v1.getValueSet().size();
+    int lengthValues2 = v2.getValueSet().size();
     // v1 should be the new state's variable
     // v2 should be the existing state's variable
 
     int checkResult = -1;
 
-    if (l_v1 == 1 && l_v2 == 1) {
+    if (lengthValues1 == 1 && lengthValues2 == 1) {
 
       String con0 = v1.getValueSet().get(0);
       String con1 = v2.getValueSet().get(0);
@@ -211,9 +213,9 @@ public class State {
 
       } else {
         // checkResult = -1
-        System.out.println("Warning: Illegel!");
+        System.out.println("Warning: Illegal!");
       }
-    } else if (l_v1 == 1 && l_v2 == 2) { // ex. a < x <b
+    } else if (lengthValues1 == 1 && lengthValues2 == 2) { // ex. a < x <b
 
       String con00 = v1.getValueSet().get(0);
       String con10 = v2.getValueSet().get(0);
@@ -230,7 +232,7 @@ public class State {
       if (srcs00[1].equals("==")) {
         temp00 = Integer.parseInt(srcs00[2]);
       } else {
-        System.out.println("Warning: Illegel!");
+        System.out.println("Warning: Illegal!");
       }
 
       if ((srcs10[1].equals("<") || srcs10[1].equals("<="))
@@ -242,7 +244,7 @@ public class State {
         temp11 = Integer.parseInt(srcs11[2]);
         temp10 = Integer.parseInt(srcs10[2]);
       } else {
-        System.out.println("Warning: Illegel!");
+        System.out.println("Warning: Illegal!");
       }
 
       if (temp11 > temp00 && temp10 < temp00) {
@@ -252,26 +254,26 @@ public class State {
       }
 
     } else {
-      System.out.println("=== Warning: illegel! ===");
+      System.out.println("=== Warning: illegal! ===");
     }
 
     return checkResult;
   }
 
-  /** Transition Get and Set this class's members Methods */
-  public void addinTransition(Transition t) {
-    this.in_transitions.add(t);
+  /** Transition Get and Set this class's members Methods. */
+  public void addInTransition(Transition transition) {
+    this.inTransitions.add(transition);
   }
 
-  public boolean removeinTransition(Transition t) {
-    if (this.in_transitions.isEmpty()) {
+  public boolean removeinTransition(Transition transition) {
+    if (this.inTransitions.isEmpty()) {
       return false;
     } else {
-      int len = this.in_transitions.size();
+      int len = this.inTransitions.size();
       for (int i = 0; i < len; i++) {
-        if (this.in_transitions.get(i).isequal(t)) {
-          this.in_transitions.remove(i);
-          System.out.println("number of transitions:" + len + ", " + this.in_transitions.size());
+        if (this.inTransitions.get(i).isequal(transition)) {
+          this.inTransitions.remove(i);
+          System.out.println("number of transitions:" + len + ", " + this.inTransitions.size());
         }
       }
       return true;
@@ -279,22 +281,22 @@ public class State {
   }
 
   public List<Transition> getinTransitions() {
-    return this.in_transitions;
+    return this.inTransitions;
   }
 
-  public void addoutTransition(Transition t) {
-    this.out_transitions.add(t);
+  public void addOutTransition(Transition transition) {
+    this.outTransitions.add(transition);
   }
 
-  public boolean removeoutTransition(Transition t) {
-    if (this.out_transitions.isEmpty()) {
+  public boolean removeoutTransition(Transition transition) {
+    if (this.outTransitions.isEmpty()) {
       return false;
     } else {
-      int len = this.out_transitions.size();
+      int len = this.outTransitions.size();
       for (int i = 0; i < len; i++) {
-        if (this.out_transitions.get(i).isequal(t)) {
-          this.out_transitions.remove(i);
-          System.out.println("number of transitions:" + len + ", " + this.out_transitions.size());
+        if (this.outTransitions.get(i).isequal(transition)) {
+          this.outTransitions.remove(i);
+          System.out.println("number of transitions:" + len + ", " + this.outTransitions.size());
         }
       }
       return true;
@@ -302,10 +304,10 @@ public class State {
   }
 
   public List<Transition> getoutTransitions() {
-    return this.out_transitions;
+    return this.outTransitions;
   }
 
-  /** System Variables - Object Get and Set this class's members Methods */
+  /** System Variables - Object Get and Set this class's members Methods. */
   public void setSystemVariables(HashMap<String, Object> variables) {
     Iterator it = variables.entrySet().iterator();
     while (it.hasNext()) {
@@ -317,16 +319,16 @@ public class State {
   }
 
   public void setOneSystemVariable(Object value, String variablename) {
-    this.system_variables.put(variablename, value);
+    this.systemVariables.put(variablename, value);
   }
 
   public HashMap<String, Object> getSystemVariables() {
-    return this.system_variables;
+    return this.systemVariables;
     // It is better to have a new variable as the returned result.
   }
 
-  public HashMap<String, ValueSet> getSystemVariables_ValueSet() {
-    return this.systemVariables_ValueSet;
+  public HashMap<String, ValueSet> getSystemVariablesValueSet() {
+    return this.systemVariablesValueSet;
   }
   /**
    * System Variables - ValueSet Get and Set this class's members Methods
@@ -334,7 +336,7 @@ public class State {
    * <p>The related method is written in StateMachine.
    */
 
-  /** StateName Get and Set this class's members Methods */
+  /** StateName Get and Set this class's members Methods. */
   public String getStateName() {
     return this.stateName;
   }

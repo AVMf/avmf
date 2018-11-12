@@ -1,7 +1,8 @@
 package org.avmframework.examples.inputdatageneration;
 
 public class Branch {
-  public static String TRUE = "T", FALSE = "F";
+  public static String TRUE = "T";
+  public static String FALSE = "F";
 
   protected int node;
   protected boolean edge;
@@ -11,7 +12,7 @@ public class Branch {
     this.edge = edge;
   }
 
-  public int getID() {
+  public int getId() {
     return node;
   }
 
@@ -20,11 +21,11 @@ public class Branch {
   }
 
   @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (!(o instanceof Branch)) return false;
+  public boolean equals(Object obj) {
+    if (this == obj) return true;
+    if (!(obj instanceof Branch)) return false;
 
-    Branch branch = (Branch) o;
+    Branch branch = (Branch) obj;
 
     if (node != branch.node) return false;
     return edge == branch.edge;
@@ -78,7 +79,7 @@ public class Branch {
 
           return new Branch(node, edge);
 
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException exception) {
           throw new RuntimeException("Branch node \"" + nodeString + "\" not recognized");
         }
       } else {

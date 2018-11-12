@@ -53,11 +53,11 @@ public abstract class AtomicVariable implements Variable {
   }
 
   @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
+  public boolean equals(Object obj) {
+    if (this == obj) return true;
+    if (obj == null || getClass() != obj.getClass()) return false;
 
-    AtomicVariable that = (AtomicVariable) o;
+    AtomicVariable that = (AtomicVariable) obj;
 
     if (min != that.min) return false;
     if (max != that.max) return false;

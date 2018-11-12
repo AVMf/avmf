@@ -29,7 +29,9 @@ public class AllZeros {
 
   // - vector constants
   static final int NUM_VARS = 10;
-  static final int INIT = 0, MIN = -100000, MAX = 100000;
+  static final int INIT = 0;
+  static final int MIN = -100000;
+  static final int MAX = 100000;
 
   // - search constants
   static final String SEARCH_NAME = "IteratedPatternSearch"; // can also be set at the command line
@@ -46,7 +48,7 @@ public class AllZeros {
             for (Variable var : vector.getVariables()) {
               distance += Math.abs(((IntegerVariable) var).getValue());
             }
-            return NumericObjectiveValue.LowerIsBetterObjectiveValue(distance, 0);
+            return NumericObjectiveValue.lowerIsBetterObjectiveValue(distance, 0);
           }
         };
 
