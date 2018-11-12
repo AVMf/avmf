@@ -35,10 +35,14 @@ public class NetworkEnvironment {
   public static NetworkEnvironment deltaNetworkEnvironment(
       NetworkEnvironment networkEnvironmentSource, NetworkEnvironment networkEnvironmentTarget) {
     NetworkEnvironment delta = new NetworkEnvironment();
-    delta.setPacketLoss(networkEnvironmentTarget.getPacketLoss() - networkEnvironmentSource.getPacketLoss());
-    delta.setPacketDelay(networkEnvironmentTarget.getPacketDelay() - networkEnvironmentSource.getPacketDelay());
-    delta.setPacketDuplication(networkEnvironmentTarget.getPacketDuplication() - networkEnvironmentSource.getPacketDuplication());
-    delta.setPacketCorruption(networkEnvironmentTarget.getPacketCorruption() - networkEnvironmentSource.getPacketCorruption());
+    delta.setPacketLoss(networkEnvironmentTarget.getPacketLoss()
+        - networkEnvironmentSource.getPacketLoss());
+    delta.setPacketDelay(networkEnvironmentTarget.getPacketDelay()
+        - networkEnvironmentSource.getPacketDelay());
+    delta.setPacketDuplication(networkEnvironmentTarget.getPacketDuplication()
+        - networkEnvironmentSource.getPacketDuplication());
+    delta.setPacketCorruption(networkEnvironmentTarget.getPacketCorruption()
+        - networkEnvironmentSource.getPacketCorruption());
     return delta;
   }
 

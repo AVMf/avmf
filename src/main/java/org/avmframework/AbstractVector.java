@@ -50,8 +50,12 @@ public abstract class AbstractVector {
 
   @Override
   public boolean equals(Object obj) {
-    if (this == obj) return true;
-    if (!(obj instanceof AbstractVector)) return false;
+    if (this == obj) {
+      return true;
+    }
+    if (!(obj instanceof AbstractVector)) {
+      return false;
+    }
 
     AbstractVector that = (AbstractVector) obj;
 

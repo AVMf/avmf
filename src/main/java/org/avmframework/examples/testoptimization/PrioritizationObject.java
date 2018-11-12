@@ -1,8 +1,9 @@
 package org.avmframework.examples.testoptimization;
 
-import java.util.List;
 import org.avmframework.Vector;
 import org.avmframework.variable.FixedPointVariable;
+
+import java.util.List;
 
 public class PrioritizationObject {
   static final int INIT = 0;

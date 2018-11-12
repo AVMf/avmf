@@ -1,8 +1,9 @@
 package org.avmframework.examples.requirementassignment;
 
-import java.util.List;
 import org.avmframework.Vector;
 import org.avmframework.variable.IntegerVariable;
+
+import java.util.List;
 
 public class TestObject {
   static final int INIT = 0; 

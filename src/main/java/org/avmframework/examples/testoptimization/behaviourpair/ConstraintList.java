@@ -1,6 +1,8 @@
 package org.avmframework.examples.testoptimization.behaviourpair;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class ConstraintList {
 

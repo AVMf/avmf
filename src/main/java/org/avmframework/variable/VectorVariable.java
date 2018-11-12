@@ -41,9 +41,15 @@ public abstract class VectorVariable extends AbstractVector implements Variable 
 
   @Override
   public boolean equals(Object obj) {
-    if (this == obj) return true;
-    if (!(obj instanceof VectorVariable)) return false;
-    if (!super.equals(obj)) return false;
+    if (this == obj) {
+      return true;
+    }
+    if (!(obj instanceof VectorVariable)) {
+      return false;
+    }
+    if (!super.equals(obj)) {
+      return false;
+    }
 
     VectorVariable that = (VectorVariable) obj;
 

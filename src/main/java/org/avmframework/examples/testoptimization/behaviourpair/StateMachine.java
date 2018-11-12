@@ -84,7 +84,9 @@ public class StateMachine {
     int length = this.transitions.size();
 
     for (int i = 0; i < length; i++) {
-      if (this.transitions.get(i).isequalTriggerAndCondition(transition)) break;
+      if (this.transitions.get(i).isequalTriggerAndCondition(transition)) {
+        break;
+      }
     }
 
     return checkResult;

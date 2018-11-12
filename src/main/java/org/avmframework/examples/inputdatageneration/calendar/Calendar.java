@@ -7,7 +7,7 @@ public class Calendar {
   }
 
   public static int monthDays(int month, int year) {
-    int monthDays[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    int[] monthDays = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
     return month == 2 && isLeapYear(year) ? 29 : monthDays[month - 1];
   }
 
@@ -16,17 +16,32 @@ public class Calendar {
     int days = 0;
 
     // sanitize month inputs
-    if (startMonth < 1) startMonth = 1;
-    if (endMonth < 1) endMonth = 1;
-    if (startMonth > 12) startMonth = 12;
-    if (endMonth > 12) endMonth = 12;
+    if (startMonth < 1) {
+      startMonth = 1;
+    }
+    if (endMonth < 1) {
+      endMonth = 1;
+    }
+    if (startMonth > 12) {
+      startMonth = 12;
+    }
+    if (endMonth > 12) {
+      endMonth = 12;
+    }
 
     // sanitize day inputs
-    if (startDay < 1) startDay = 1;
-    if (endDay < 1) endDay = 1;
-    if (startDay > monthDays(startMonth, startYear))
+    if (startDay < 1) {
+      startDay = 1;
+    }
+    if (endDay < 1) {
+      endDay = 1;
+    }
+    if (startDay > monthDays(startMonth, startYear)) {
       startDay = monthDays(startMonth, startYear);
-    if (endDay > monthDays(endMonth, endYear)) endDay = monthDays(endMonth, endYear);
+    }
+    if (endDay > monthDays(endMonth, endYear)) {
+      endDay = monthDays(endMonth, endYear);
+    }
 
     // swap dates if start date before end date
     boolean swapDates = false;
@@ -85,7 +100,9 @@ public class Calendar {
         int year = startYear + 1;
         while (year < endYear) {
           days += 365;
-          if (isLeapYear(year)) days++;
+          if (isLeapYear(year)) {
+            days++;
+          }
           year++;
         }
       }

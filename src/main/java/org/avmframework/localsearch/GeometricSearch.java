@@ -11,9 +11,9 @@ public class GeometricSearch extends PatternThenEliminationSearch {
     super(accelerationFactor);
   }
 
-  protected void performEliminationSearch(int l, int r) throws TerminationException {
-    while (l < r) {
-      int mid = (int) Math.floor((l + r) / 2.0);
+  protected void performEliminationSearch(int left, int right) throws TerminationException {
+    while (left < right) {
+      int mid = (int) Math.floor((left + right) / 2.0);
       int midRight = mid + 1;
 
       var.setValue(mid);
@@ -23,12 +23,12 @@ public class GeometricSearch extends PatternThenEliminationSearch {
       ObjectiveValue midRightObjVal = objFun.evaluate(vector);
 
       if (midObjVal.betterThan(midRightObjVal)) {
-        r = mid;
+        right = mid;
       } else {
-        l = midRight;
+        left = midRight;
       }
     }
 
-    var.setValue(l);
+    var.setValue(left);
   }
 }

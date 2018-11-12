@@ -102,8 +102,8 @@ public class GenerateInputData {
 
         try {
           testObject = TestObject.instantiate(testObjectName);
-        } catch (Exception e) {
-          error(e.getMessage());
+        } catch (Exception exception) {
+          error(exception.getMessage());
         }
 
       } else {

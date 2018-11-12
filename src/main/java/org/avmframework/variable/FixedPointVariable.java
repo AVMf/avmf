@@ -29,9 +29,15 @@ public class FixedPointVariable extends AtomicVariable {
 
   @Override
   public boolean equals(Object obj) {
-    if (this == obj) return true;
-    if (!(obj instanceof FixedPointVariable)) return false;
-    if (!super.equals(obj)) return false;
+    if (this == obj) {
+      return true;
+    }
+    if (!(obj instanceof FixedPointVariable)) {
+      return false;
+    }
+    if (!super.equals(obj)) {
+      return false;
+    }
 
     FixedPointVariable that = (FixedPointVariable) obj;
 

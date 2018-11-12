@@ -16,9 +16,12 @@ public class Line {
 
   public boolean intersect(Line line1, Line line2) {
 
-    double u1t = (line2.x2 - line2.x1) * (line1.y1 - line2.y1) - (line2.y2 - line2.y1) * (line1.x1 - line2.x1);
-    double u2t = (line1.x2 - line1.x1) * (line1.y1 - line2.y1) - (line1.y2 - line1.y1) * (line1.x1 - line2.x1);
-    double u2 = (line2.y2 - line2.y1) * (line1.x2 - line1.x1) - (line2.x2 - line2.x1) * (line1.y2 - line1.y1);
+    double u1t = (line2.x2 - line2.x1) * (line1.y1 - line2.y1)
+        - (line2.y2 - line2.y1) * (line1.x1 - line2.x1);
+    double u2t = (line1.x2 - line1.x1) * (line1.y1 - line2.y1)
+        - (line1.y2 - line1.y1) * (line1.x1 - line2.x1);
+    double u2 = (line2.y2 - line2.y1) * (line1.x2 - line1.x1)
+        - (line2.x2 - line2.x1) * (line1.y2 - line1.y1);
 
     if (u2 != 0) {
       double u1 = u1t / u2;

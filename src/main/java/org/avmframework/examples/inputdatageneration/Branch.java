@@ -22,12 +22,18 @@ public class Branch {
 
   @Override
   public boolean equals(Object obj) {
-    if (this == obj) return true;
-    if (!(obj instanceof Branch)) return false;
+    if (this == obj) {
+      return true;
+    }
+    if (!(obj instanceof Branch)) {
+      return false;
+    }
 
     Branch branch = (Branch) obj;
 
-    if (node != branch.node) return false;
+    if (node != branch.node) {
+      return false;
+    }
     return edge == branch.edge;
   }
 

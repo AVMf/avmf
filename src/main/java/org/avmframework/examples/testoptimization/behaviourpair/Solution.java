@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class Solution {
 
-  /** Parse One Behaviour Pair to One Solution */
+  /** Parse One Behaviour Pair to One Solution. */
   private HashMap<String, Object> solution;
 
   private int solutionlength;

@@ -95,7 +95,9 @@ public class TestCasePrioritization {
     System.out.print("\n");
     for (int i = 0; i < prioritizedTestSuite.size(); i++) {
       System.out.print(prioritizedTestSuite.get(i).getId());
-      if ((i + 1) < prioritizedTestSuite.size()) System.out.print(", ");
+      if ((i + 1) < prioritizedTestSuite.size()) {
+        System.out.print(", ");
+      }
     }
     System.out.print("\n");
     // output the results

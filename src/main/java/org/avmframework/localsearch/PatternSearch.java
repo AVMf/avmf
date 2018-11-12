@@ -9,7 +9,9 @@ public class PatternSearch extends LocalSearch {
 
   protected int accelerationFactor = ACCELERATION_FACTOR_DEFAULT;
 
-  protected ObjectiveValue initial, last, next;
+  protected ObjectiveValue initial;
+  protected ObjectiveValue last;
+  protected ObjectiveValue next;
   protected int modifier;
   protected int num;
   protected int dir;

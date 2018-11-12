@@ -24,8 +24,10 @@ import java.util.List;
 
 /* This example shows selection problem termed as "test case selection".
  * It involves two objectives: maximize coverage and  fault detection.
- * The execution time of the selected test case must be less than or equal to the defined time budget.
- * The weights for the objectives and their definition are provided in the class "SelectionObjectiveFunction".
+ * The execution time of the selected test case must be less than or equal to
+ * the defined time budget.
+ * The weights for the objectives and their definition are provided in the class
+ * "SelectionObjectiveFunction".
  * More objectives can be added as described in the paper below:
  * http://dl.acm.org/citation.cfm?id=2908850
  */
@@ -63,7 +65,8 @@ public class TestCaseSelection {
         new ArgsParser(TestCaseSelection.class, args).parseSearchParam(SEARCH_NAME);
 
     // set up the objective function
-    ObjectiveFunction objFun = testObject.getObjectiveFunction(originalTestSuite, transitionStateCoverage);
+    ObjectiveFunction objFun = testObject.getObjectiveFunction(
+        originalTestSuite, transitionStateCoverage);
 
     // set up the vector
     Vector vector = testObject.setUpVector(originalTestSuite.size());
@@ -89,7 +92,9 @@ public class TestCaseSelection {
 
     for (int i = 0; i < selectedTestSuite.size(); i++) {
       System.out.print(selectedTestSuite.get(i).getId());
-      if ((i + 1) < selectedTestSuite.size()) System.out.print(", ");
+      if ((i + 1) < selectedTestSuite.size()) {
+        System.out.print(", ");
+      }
     }
     System.out.print("\n");
 
@@ -157,7 +162,9 @@ public class TestCaseSelection {
     int count = 0;
     for (Variable variable : monitor.getBestVector().getVariables()) {
       int num = Integer.parseInt(variable.toString());
-      if (num > 0) selectedTestSuite.add(originalTestSuite.get(count));
+      if (num > 0) {
+        selectedTestSuite.add(originalTestSuite.get(count));
+      }
       count++;
     }
     return selectedTestSuite;

@@ -56,9 +56,9 @@ public class RequirementObjectiveFunction extends ObjectiveFunction {
     double owlDiffAvg = 0.0;
 
     int assignedNumber = 0;
-    int fmst[] = new int[NUMBEROFSTAKEHOLDERS];
-    double wl[] = new double[NUMBEROFSTAKEHOLDERS];
-    int number[] = new int[NUMBEROFSTAKEHOLDERS];
+    int[] fmst = new int[NUMBEROFSTAKEHOLDERS];
+    double[] wl = new double[NUMBEROFSTAKEHOLDERS];
+    int[] number = new int[NUMBEROFSTAKEHOLDERS];
 
     // initial setup
     for (int i = 0; i < NUMBEROFSTAKEHOLDERS; i++) {
@@ -93,8 +93,9 @@ public class RequirementObjectiveFunction extends ObjectiveFunction {
 
     double famAvg = 0.0;
     double totalFm = 0.0;
-    for (int i = 0; i < fmst.length; i++) totalFm += (fmst[i] - MINFAMILIARITY)
-      / (MAXFAMILIARITY - MINFAMILIARITY);
+    for (int i = 0; i < fmst.length; i++) {
+      totalFm += (fmst[i] - MINFAMILIARITY) / (MAXFAMILIARITY - MINFAMILIARITY);
+    }
     famAvg = totalFm / assignedNumber;
 
     for (int i = 0; i < wl.length; i++) {
@@ -103,11 +104,16 @@ public class RequirementObjectiveFunction extends ObjectiveFunction {
       }
     }
 
-    for (int i = 0; i < NUMBEROFSTAKEHOLDERS - 1; i++)
-      for (int j = i + 1; j < NUMBEROFSTAKEHOLDERS; j++) owlDiffAvg += Math.abs(wl[i] - wl[j]);
+    for (int i = 0; i < NUMBEROFSTAKEHOLDERS - 1; i++) {
+      for (int j = i + 1; j < NUMBEROFSTAKEHOLDERS; j++) {
+        owlDiffAvg += Math.abs(wl[i] - wl[j]);
+      }
+    }
     owlDiffAvg = owlDiffAvg / (NUMBEROFSTAKEHOLDERS * (NUMBEROFSTAKEHOLDERS - 1));
 
-    double objAssignedDis, objFamAvg, objOWLDiffAvg;
+    double objAssignedDis;
+    double objFamAvg;
+    double objOWLDiffAvg;
 
     objAssignedDis = numFormat(assignedDis);
     objFamAvg = numFormat(famAvg);

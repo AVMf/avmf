@@ -112,18 +112,32 @@ public class CalenderBranchTargetObjectiveFunction extends BranchTargetObjective
     int days = 0;
 
     // sanitize month inputs
-    if (trace.lessThan(1, startMonth, 1)) startMonth = 1;
-    if (trace.lessThan(2, endMonth, 1)) endMonth = 1;
-    if (trace.greaterThan(3, startMonth, 12)) startMonth = 12;
-    if (trace.greaterThan(4, endMonth, 12)) endMonth = 12;
+    if (trace.lessThan(1, startMonth, 1)) {
+      startMonth = 1;
+    }
+    if (trace.lessThan(2, endMonth, 1)) {
+      endMonth = 1;
+    }
+    if (trace.greaterThan(3, startMonth, 12)) {
+      startMonth = 12;
+    }
+    if (trace.greaterThan(4, endMonth, 12)) {
+      endMonth = 12;
+    }
 
     // sanitize day inputs
-    if (trace.lessThan(5, startDay, 1)) startDay = 1;
-    if (trace.lessThan(6, endDay, 1)) endDay = 1;
-    if (trace.greaterThan(7, startDay, monthDays(startMonth, startYear)))
+    if (trace.lessThan(5, startDay, 1)) {
+      startDay = 1;
+    }
+    if (trace.lessThan(6, endDay, 1)) {
+      endDay = 1;
+    }
+    if (trace.greaterThan(7, startDay, monthDays(startMonth, startYear))) {
       startDay = monthDays(startMonth, startYear);
-    if (trace.greaterThan(8, endDay, monthDays(endMonth, endYear)))
+    }
+    if (trace.greaterThan(8, endDay, monthDays(endMonth, endYear))) {
       endDay = monthDays(endMonth, endYear);
+    }
 
     // swap dates if start date before end date
     boolean swapDates = false;
@@ -182,7 +196,9 @@ public class CalenderBranchTargetObjectiveFunction extends BranchTargetObjective
         int year = startYear + 1;
         while (trace.lessThan(22, year, endYear)) {
           days += 365;
-          if (trace.isTrue(23, isLeapYear(year))) days++;
+          if (trace.isTrue(23, isLeapYear(year))) {
+            days++;
+          }
           year++;
         }
       }

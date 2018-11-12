@@ -1,10 +1,11 @@
 package org.avmframework.objective;
 
-import java.util.HashMap;
-import java.util.Map;
 import org.avmframework.Monitor;
 import org.avmframework.TerminationException;
 import org.avmframework.Vector;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public abstract class ObjectiveFunction {
 

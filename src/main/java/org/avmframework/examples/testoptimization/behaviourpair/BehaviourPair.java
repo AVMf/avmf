@@ -24,7 +24,7 @@ public class BehaviourPair {
   // transition - gc's concrete value - network environment
   private NetworkEnvironment networkEnvironmentVariables;
 
-  /** Construct methods */
+  /** Construct methods. */
   public BehaviourPair() {
     this.sourceState = new State();
     this.targetState = new State();
@@ -43,7 +43,7 @@ public class BehaviourPair {
     this.networkEnvironmentVariables = networkEnvironment;
   }
 
-  /** Parser to BPair list from a state machine */
+  /** Parser to BPair list from a state machine. */
   public static List<BehaviourPair> stateMachineParser(StateMachine stateMachine) {
 
     List<BehaviourPair> behaviourPairs = new ArrayList<BehaviourPair>();
@@ -60,13 +60,14 @@ public class BehaviourPair {
       NetworkEnvironment networkEnvironment = null
       //= new NetworkEnvironment(transition)
       ;
-      BehaviourPair behaviourPair = new BehaviourPair(source, transition, target, networkEnvironment);
+      BehaviourPair behaviourPair = new BehaviourPair(
+          source, transition, target, networkEnvironment);
       behaviourPairs.add(behaviourPair);
     }*/
     return behaviourPairs;
   }
 
-  /** Set and Get this class's members Methods */
+  /** Set and Get this class's members Methods. */
   public State getSourceState() {
     return this.sourceState;
   }

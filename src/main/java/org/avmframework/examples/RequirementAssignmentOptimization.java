@@ -102,7 +102,9 @@ public class RequirementAssignmentOptimization {
       System.out.print("Stakeholder  " + entry.getKey() + ":   ");
       for (int i = 0; i < entry.getValue().size(); i++) {
         System.out.print(entry.getValue().get(i).getId());
-        if (i + 1 < entry.getValue().size()) System.out.print(", ");
+        if (i + 1 < entry.getValue().size()) {
+          System.out.print(", ");
+        }
       }
       System.out.print("\n");
     }
@@ -163,14 +165,26 @@ public class RequirementAssignmentOptimization {
 
   public static RequirementOverview computeMinMax(
       RequirementOverview reqOverview, double comp, double dep, double imp) {
-    if (reqOverview.getMinComp() > comp) reqOverview.setMinComp(comp);
-    if (reqOverview.getMaxComp() < comp) reqOverview.setMaxComp(comp);
+    if (reqOverview.getMinComp() > comp) {
+      reqOverview.setMinComp(comp);
+    }
+    if (reqOverview.getMaxComp() < comp) {
+      reqOverview.setMaxComp(comp);
+    }
 
-    if (reqOverview.getMinDep() > dep) reqOverview.setMinDep(dep);
-    if (reqOverview.getMaxDep() < dep) reqOverview.setMaxDep(dep);
+    if (reqOverview.getMinDep() > dep) {
+      reqOverview.setMinDep(dep);
+    }
+    if (reqOverview.getMaxDep() < dep) {
+      reqOverview.setMaxDep(dep);
+    }
 
-    if (reqOverview.getMinImp() > imp) reqOverview.setMinImp(imp);
-    if (reqOverview.getMaxImp() < imp) reqOverview.setMaxImp(imp);
+    if (reqOverview.getMinImp() > imp) {
+      reqOverview.setMinImp(imp);
+    }
+    if (reqOverview.getMaxImp() < imp) {
+      reqOverview.setMaxImp(imp);
+    }
 
     return reqOverview;
   }

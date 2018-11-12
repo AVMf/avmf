@@ -23,6 +23,7 @@ public class IteratedPatternSearch extends PatternSearch {
 
       last = next;
       next = objFun.evaluate(vector);
-    } while (next.betterThan(last));
+    }
+    while (next.betterThan(last));
   }
 }

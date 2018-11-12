@@ -223,7 +223,8 @@ public class AVM {
       changeVectorVariableSize(vectorVar, increase);
 
       next = objFun.evaluate(vector);
-    } while (next.betterThan(current));
+    }
+    while (next.betterThan(current));
 
     // reverse the last move, if there was a change
     changeVectorVariableSize(vectorVar, !increase);

@@ -12,15 +12,18 @@ import java.util.List;
 import java.util.Set;
 
 /* This example shows selection problem termed as "test case selection".
- * It involves two objectives: maximize coverage (objCoverage) and  fault detection (objFaultDetectionCoverage).
- * The execution time of the selected test case must be less than or equal to the defined time budget.
+ * It involves two objectives: maximize coverage (objCoverage) and
+ * fault detection (objFaultDetectionCoverage).
+ * The execution time of the selected test case must be less than or equal to
+ * the defined time budget.
  * More objectives can be as provided as described in the paper below:
  * http://dl.acm.org/citation.cfm?id=2908850
  */
 
 /* Description the three objectives are provided below:
  * objCoverage measures the coverage of unique APIs for each test case
- * objFaultDetectionCoverage measures the faults found by each test case within a specified time period (e.g., one week in the past)
+ * objFaultDetectionCoverage measures the faults found by each test case within
+ * a specified time period (e.g., one week in the past)
  * We aim to maximize objCoverage and objFaultDetectionCoverage
  */
 
@@ -41,7 +44,8 @@ public class SelectionObjectiveFunction extends ObjectiveFunction {
   // with values >0.5
   final double TIME_BUDGET = 40;
 
-  public SelectionObjectiveFunction(List<TestCase> testSuite, TestSuiteCoverage transitionStateCoverage) {
+  public SelectionObjectiveFunction(
+      List<TestCase> testSuite, TestSuiteCoverage transitionStateCoverage) {
     this.originalTestSuite = testSuite;
     this.transitionStateCoverage = transitionStateCoverage;
   }
@@ -70,8 +74,11 @@ public class SelectionObjectiveFunction extends ObjectiveFunction {
       objFaultDetectionCoverage = fdc / transitionStateCoverage.getFaultDetection();
       // subtract 1 for minimization
       fitness =
-          (1 - objCoverage) * this.WEIGHT_COVERAGE + (1 - objFaultDetectionCoverage) * this.WEIGHT_FAULT_DETECION;
-    } else fitness = 1; // this solution is bad since it exceeds the alloted time budget
+          (1 - objCoverage) * this.WEIGHT_COVERAGE
+          + (1 - objFaultDetectionCoverage) * this.WEIGHT_FAULT_DETECION;
+    } else {
+      fitness = 1; // this solution is bad since it exceeds the alloted time budget
+    }
 
     return NumericObjectiveValue.lowerIsBetterObjectiveValue(fitness, 0);
   }
@@ -83,8 +90,9 @@ public class SelectionObjectiveFunction extends ObjectiveFunction {
     int count = 0;
     for (Variable variable : vector.getVariables()) {
       int num = Integer.parseInt(variable.toString());
-      if (num > 0) // select test case if value is 1
-      selectedTestSuite.add(this.originalTestSuite.get(count));
+      if (num > 0) {
+        selectedTestSuite.add(this.originalTestSuite.get(count));
+      }
       count++;
     }
 

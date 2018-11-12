@@ -78,16 +78,30 @@ public class StringVariable extends VectorVariable {
 
   @Override
   public boolean equals(Object obj) {
-    if (this == obj) return true;
-    if (obj == null || getClass() != obj.getClass()) return false;
-    if (!super.equals(obj)) return false;
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null || getClass() != obj.getClass()) {
+      return false;
+    }
+    if (!super.equals(obj)) {
+      return false;
+    }
 
     StringVariable that = (StringVariable) obj;
 
-    if (maxSize != that.maxSize) return false;
-    if (charInitialValue != that.charInitialValue) return false;
-    if (charMin != that.charMin) return false;
-    if (charMax != that.charMax) return false;
+    if (maxSize != that.maxSize) {
+      return false;
+    }
+    if (charInitialValue != that.charInitialValue) {
+      return false;
+    }
+    if (charMin != that.charMin) {
+      return false;
+    }
+    if (charMax != that.charMax) {
+      return false;
+    }
 
     return initialValue.equals(that.initialValue);
   }

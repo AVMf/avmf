@@ -63,14 +63,14 @@ public class TestCaseGeneration {
   static final String SEARCH_NAME = "IteratedPatternSearch"; // can also be set at the command line
   static final int MAX_EVALUATIONS = 200000;
 
-  public static void main(String args[]) {
+  public static void main(String[] args) {
 
     // Problem Define
     GenerationObject problem = new GenerationObject();
     // Set State Machine
     StateMachine stateMachine =
         readStateMachineFromFile(
-            "src/main/java/org/avmframework/examples/testoptimization/problem_BehaviourPairGen/02StateMachine-1.0.txt");
+            "src/main/java/org/avmframework/examples/testoptimization/behaviourpair/02StateMachine-1.0.txt");
     problem.setexistingstatemachine(stateMachine);
     // Set Constraints
     problem.setConstraints();
@@ -78,7 +78,7 @@ public class TestCaseGeneration {
     problem.initialSetOfExistingTestCases();
     List<Solution> list =
         readBehaviourPairsFromFile(
-            "src/main/java/org/avmframework/examples/testoptimization/problem_BehaviourPairGen/03BehaviourPairs-1.0.txt",
+            "src/main/java/org/avmframework/examples/testoptimization/behaviourpair/03BehaviourPairs-1.0.txt",
             stateMachine);
     problem.setSolutionsOfExistingTestCases(list);
 
@@ -109,7 +109,8 @@ public class TestCaseGeneration {
     Vector bv = monitor.getBestVector();
     System.out.print(
         "Source state: "
-            + stateMachine.getAllStates().get(Integer.parseInt(bv.getVariable(0).toString())).getStateName()
+            + stateMachine.getAllStates().get(
+                Integer.parseInt(bv.getVariable(0).toString())).getStateName()
             + "; Target State-activeacll: "
             + Integer.parseInt(bv.getVariable(1).toString())
             + "; Target State-videoquality: "
@@ -171,7 +172,8 @@ public class TestCaseGeneration {
           String[] srcActiveCallV = srcActiveCallCon.split("== ");
           int activeCallV = Integer.parseInt(srcActiveCallV[1]);
           String[] srcVideoQuality = srcTargetStateV[1].split(" \\{");
-          String srcVideoQualityCon = srcVideoQuality[1].substring(0, srcVideoQuality[1].length() - 1);
+          String srcVideoQualityCon = srcVideoQuality[1]
+              .substring(0, srcVideoQuality[1].length() - 1);
           String[] srcVideoQualityV = srcVideoQualityCon.split("== ");
           int videoQualityV = Integer.parseInt(srcVideoQualityV[1]);
 
@@ -214,7 +216,8 @@ public class TestCaseGeneration {
                 srcNetworkEnvironment[iNetworkEnvironmentVar].split(" \\{");
 
             String networkEnvironmentVarConstraints =
-                networkEnvironmentVarWithConstraints[1].substring(0, networkEnvironmentVarWithConstraints[1].length() - 1);
+                networkEnvironmentVarWithConstraints[1].substring(
+                    0, networkEnvironmentVarWithConstraints[1].length() - 1);
 
             String[] srcConstraintValue =
                 networkEnvironmentVarConstraints.split(" == ");
@@ -397,7 +400,8 @@ public class TestCaseGeneration {
                   srcNetworkEnvironment[iNetworkEnvironmentVar].split(" \\{");
 
               String networkEnvironmentVarConstraints =
-                  networkEnvironmentVarWithConstraints[1].substring(0, networkEnvironmentVarWithConstraints[1].length() - 1);
+                  networkEnvironmentVarWithConstraints[1].substring(
+                      0, networkEnvironmentVarWithConstraints[1].length() - 1);
 
               ValueSet valueSetTemp = new ValueSet();
               String[] constraintsOfOneNetworkEnvironmentVar =
@@ -406,7 +410,8 @@ public class TestCaseGeneration {
               for (int iConstraint = 0;
                   iConstraint < constraintsOfOneNetworkEnvironmentVar.length;
                   iConstraint++) {
-                valueSetTemp.addConstriantsForValueSet(constraintsOfOneNetworkEnvironmentVar[iConstraint]);
+                valueSetTemp.addConstriantsForValueSet(
+                    constraintsOfOneNetworkEnvironmentVar[iConstraint]);
               }
 
               guardCondition.put(networkEnvironmentVarWithConstraints[0], valueSetTemp);
