@@ -49,7 +49,7 @@ public class RequirementAssignmentOptimization {
   // set at the
   // command line
   static final int MAX_EVALUATIONS = 200000;
-  static final int NUMBEROFSTAKEHOLDERS = 10; // number of stakeholders to
+  static final int numberOfStakeholders = 10; // number of stakeholders to
   // distribute requirements
 
   public static void main(String[] args) {
@@ -76,7 +76,7 @@ public class RequirementAssignmentOptimization {
     ObjectiveFunction objFun = testObject.getObjectiveFunction(reqList, reqOverview);
 
     // set up the vector
-    Vector vector = testObject.setUpVector(reqList.size(), NUMBEROFSTAKEHOLDERS);
+    Vector vector = testObject.setUpVector(reqList.size(), numberOfStakeholders);
 
     // set up the termination policy
     TerminationPolicy terminationPolicy =
@@ -96,7 +96,7 @@ public class RequirementAssignmentOptimization {
     Map<String, List<Requirement>> reqMap = optimizedReq(monitor, reqList);
     System.out.println(
         "The 287 requirements (represented by ids) are added to the"
-            + NUMBEROFSTAKEHOLDERS
+            + numberOfStakeholders
             + " stakeholders as follow:");
     for (Map.Entry<String, List<Requirement>> entry : reqMap.entrySet()) {
       System.out.print("Stakeholder  " + entry.getKey() + ":   ");
@@ -151,6 +151,7 @@ public class RequirementAssignmentOptimization {
       }
       in.close();
     } catch (IOException exception) {
+      // nothing to catch
     }
     return reqList;
   }

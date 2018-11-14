@@ -33,7 +33,7 @@ public class StateMachine {
   }
 
   /**
-   * Need more methods!
+   * Need more methods.
    *
    * <p>How to add transitions when build a state machine!
    */
@@ -49,17 +49,17 @@ public class StateMachine {
     return state;
   }
 
-  public int getStateNO(String stateName) {
+  public int getStateNumber(String stateName) {
 
-    int stateNO = -1;
+    int stateNumber = -1;
 
     int length = this.getAllStates().size();
     for (int i = 0; i < length; i++) {
       if (stateName.equals(this.getAllStates().get(i).getStateName())) {
-        stateNO = i;
+        stateNumber = i;
       }
     }
-    return stateNO;
+    return stateNumber;
   }
 
   // Check whether a state is a new state ----- 2016.1026

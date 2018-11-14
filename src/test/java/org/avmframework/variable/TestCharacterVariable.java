@@ -8,7 +8,7 @@ public class TestCharacterVariable {
 
   @Test
   public void testAsChar() {
-    CharacterVariable charVar = CharacterVariable.createPrintableASCIICharacterVariable('a');
+    CharacterVariable charVar = CharacterVariable.createPrintableAsciiCharacterVariable('a');
     assertEquals(97, charVar.getValue());
     assertEquals('a', charVar.asChar());
   }

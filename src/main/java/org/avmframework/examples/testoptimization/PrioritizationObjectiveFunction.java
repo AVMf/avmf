@@ -35,9 +35,9 @@ public class PrioritizationObjectiveFunction extends ObjectiveFunction {
   // assign weights for the three objectives
   // we assume that each objective has equal weight in this context
   // the weights can be modified if some objective is more important than the others
-  final double WEIGHT_COVERAGE = 0.333;
-  final double WEIGHT_FAULT_DETECTION = 0.333;
-  final double WEIGHT_TIME = 0.333;
+  final double weightCoverage = 0.333;
+  final double weightFaultDetection = 0.333;
+  final double weightTime = 0.333;
 
   public PrioritizationObjectiveFunction(
       List<TestCase> testSuite, TestSuiteCoverage transitionStateCoverage) {
@@ -53,7 +53,9 @@ public class PrioritizationObjectiveFunction extends ObjectiveFunction {
     // order the test cases based on their values
     orderedTestSuite = orderTestCases(vector);
 
-    double coverageCal = 0, fdcCal = 0, timeCalc = 0;
+    double coverageCal = 0;
+    double fdcCal = 0;
+    double timeCalc = 0;
     Set<String> coveredCoverageSet = new HashSet<String>(); // set is created for unique coverage
     for (int i = 0; i < orderedTestSuite.size(); i++) {
       TestCase testCase = orderedTestSuite.get(i);
@@ -84,7 +86,9 @@ public class PrioritizationObjectiveFunction extends ObjectiveFunction {
                 * ((double) (orderedTestSuite.size() - i) / orderedTestSuite.size());
       }
     }
-    double objCoverage, objFaultDetectionCoverage, objTime;
+    double objCoverage;
+    double objFaultDetectionCoverage;
+    double objTime;
 
     // divide by maximum of all the test cases in the test suite
     objCoverage = coverageCal / transitionStateCoverage.getCoverage().size();
@@ -93,9 +97,9 @@ public class PrioritizationObjectiveFunction extends ObjectiveFunction {
 
     // subtract 1 for minimization, 1 is not subtracted for objTime because minimum time is better
     double fitness =
-        (1 - objCoverage) * this.WEIGHT_COVERAGE
-            + (1 - objFaultDetectionCoverage) * this.WEIGHT_FAULT_DETECTION
-            + objTime * this.WEIGHT_TIME;
+        (1 - objCoverage) * this.weightCoverage
+            + (1 - objFaultDetectionCoverage) * this.weightFaultDetection
+            + objTime * this.weightTime;
 
     return NumericObjectiveValue.lowerIsBetterObjectiveValue(fitness, 0);
   }

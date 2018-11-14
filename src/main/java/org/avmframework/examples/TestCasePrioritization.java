@@ -91,7 +91,8 @@ public class TestCasePrioritization {
     // this shows how the test cases in the test suite need to be ordered for maximum effectiveness
     // with minimum cost
     System.out.println(
-        "The prioritized test cases from higher to lower important test cases are represented by ID as follows: ");
+        "The prioritized test cases from higher to lower important test cases "
+        + "are represented by ID as follows: ");
     System.out.print("\n");
     for (int i = 0; i < prioritizedTestSuite.size(); i++) {
       System.out.print(prioritizedTestSuite.get(i).getId());
@@ -150,6 +151,7 @@ public class TestCasePrioritization {
       }
       in.close();
     } catch (IOException exception) {
+      // nothing to catch
     }
     return testSuite;
   }

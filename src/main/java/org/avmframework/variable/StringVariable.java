@@ -11,7 +11,7 @@ public class StringVariable extends VectorVariable {
 
   protected String initialValue;
 
-  public static StringVariable createPrintableASCIICharacterVariable(
+  public static StringVariable createPrintableAsciiCharacterVariable(
       String initialValue, int maxSize, char charInitialValue) {
     return new StringVariable(
         initialValue,

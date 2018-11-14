@@ -34,15 +34,15 @@ public class SelectionObjectiveFunction extends ObjectiveFunction {
   // assign weights for the two objectives
   // we assume that each objective has equal weight in this context
   // the weights can be modified if some objective is more important than the others
-  final double WEIGHT_COVERAGE = 0.5;
-  final double WEIGHT_FAULT_DETECION = 0.5;
+  final double weightCoverage = 0.5;
+  final double weightFaultDetection = 0.5;
 
   // 40% time of test suite is taken as time budget
   // If you want to have very low time budget, you can modify the values of the vector to be real
   // numbers
   // between for example 0 and 1 and modify function "selectTestCases" to select all the test cases
   // with values >0.5
-  final double TIME_BUDGET = 40;
+  final double timeBudget = 40;
 
   public SelectionObjectiveFunction(
       List<TestCase> testSuite, TestSuiteCoverage transitionStateCoverage) {
@@ -67,15 +67,15 @@ public class SelectionObjectiveFunction extends ObjectiveFunction {
     }
     double fitness;
     // convert time budget from percentage to real number
-    if (executionTime <= (transitionStateCoverage.getExecutionTime() * TIME_BUDGET / 100)) {
+    if (executionTime <= (transitionStateCoverage.getExecutionTime() * timeBudget / 100)) {
       double objCoverage;
       double objFaultDetectionCoverage;
       objCoverage = coveredCoverageSet.size() / transitionStateCoverage.getCoverage().size();
       objFaultDetectionCoverage = fdc / transitionStateCoverage.getFaultDetection();
       // subtract 1 for minimization
       fitness =
-          (1 - objCoverage) * this.WEIGHT_COVERAGE
-          + (1 - objFaultDetectionCoverage) * this.WEIGHT_FAULT_DETECION;
+          (1 - objCoverage) * this.weightCoverage
+          + (1 - objFaultDetectionCoverage) * this.weightFaultDetection;
     } else {
       fitness = 1; // this solution is bad since it exceeds the alloted time budget
     }

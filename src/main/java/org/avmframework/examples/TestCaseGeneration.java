@@ -68,18 +68,17 @@ public class TestCaseGeneration {
     // Problem Define
     GenerationObject problem = new GenerationObject();
     // Set State Machine
-    StateMachine stateMachine =
-        readStateMachineFromFile(
-            "src/main/java/org/avmframework/examples/testoptimization/behaviourpair/02StateMachine-1.0.txt");
+    StateMachine stateMachine = readStateMachineFromFile(
+        "src/main/java/org/avmframework/examples/testoptimization/"
+        + "behaviourpair/02StateMachine-1.0.txt");
     problem.setexistingstatemachine(stateMachine);
     // Set Constraints
     problem.setConstraints();
     // Initial Set of generated possible behaviors
     problem.initialSetOfExistingTestCases();
-    List<Solution> list =
-        readBehaviourPairsFromFile(
-            "src/main/java/org/avmframework/examples/testoptimization/behaviourpair/03BehaviourPairs-1.0.txt",
-            stateMachine);
+    List<Solution> list = readBehaviourPairsFromFile(
+        "src/main/java/org/avmframework/examples/testoptimization/"
+        + "behaviourpair/03BehaviourPairs-1.0.txt", stateMachine);
     problem.setSolutionsOfExistingTestCases(list);
 
     // set up the termination policy
@@ -156,7 +155,7 @@ public class TestCaseGeneration {
           String[] srcSourceState = tempString.split(" \\{");
           String sourceStateName = srcSourceState[1].substring(0, srcSourceState[1].length() - 1);
           System.out.println("----- Source State Name: " + sourceStateName + " -----");
-          tempBehaviourPair.addSolutionMember("SourceState", sm.getStateNO(sourceStateName));
+          tempBehaviourPair.addSolutionMember("SourceState", sm.getStateNumber(sourceStateName));
         } else if (tempString.startsWith("  Target_State")) {
           System.out.println("===== Read One Behaviour Pair: read the target state =====");
 
@@ -208,12 +207,12 @@ public class TestCaseGeneration {
 
           String[] srcNetworkEnvironment = tempStringNetworkEnvironment.split(", ");
 
-          int iNetworkEnvironmentVar = 0;
+          int integerNetworkEnvironmentVar = 0;
 
-          for (; iNetworkEnvironmentVar <= srcNetworkEnvironment.length - 1; ) {
+          for (; integerNetworkEnvironmentVar <= srcNetworkEnvironment.length - 1; ) {
 
             String[] networkEnvironmentVarWithConstraints =
-                srcNetworkEnvironment[iNetworkEnvironmentVar].split(" \\{");
+                srcNetworkEnvironment[integerNetworkEnvironmentVar].split(" \\{");
 
             String networkEnvironmentVarConstraints =
                 networkEnvironmentVarWithConstraints[1].substring(
@@ -232,7 +231,7 @@ public class TestCaseGeneration {
                     + tempBehaviourPair.getsolution().get(srcConstraintValue[0])
                     + " -----");
 
-            iNetworkEnvironmentVar = iNetworkEnvironmentVar + 1;
+            integerNetworkEnvironmentVar = integerNetworkEnvironmentVar + 1;
           }
           // Add guard condition to transition, then add transition to state machine.
 
@@ -257,6 +256,7 @@ public class TestCaseGeneration {
         try {
           reader.close();
         } catch (IOException exception1) {
+          // nothing to catch
         }
       }
     }
@@ -310,26 +310,26 @@ public class TestCaseGeneration {
               return null;
             }
 
-            int iVar = 1;
+            int integerVar = 1;
 
-            for (; iVar <= srcs.length - 1; ) {
+            for (; integerVar <= srcs.length - 1; ) {
 
-              String[] varWithConstraints = srcs[iVar].split(" \\{");
+              String[] varWithConstraints = srcs[integerVar].split(" \\{");
 
               String varConstraints =
                   varWithConstraints[1].substring(0, varWithConstraints[1].length() - 1);
               System.out.println("Constraint:" + varConstraints);
               ValueSet valueSetTemp = new ValueSet();
               String[] constraintsOfOneVar = varConstraints.split(", ");
-              for (int iConstraint = 0;
-                  iConstraint < constraintsOfOneVar.length;
-                  iConstraint++) {
-                valueSetTemp.addConstriantsForValueSet(constraintsOfOneVar[iConstraint]);
+              for (int integerConstraint = 0;
+                  integerConstraint < constraintsOfOneVar.length;
+                  integerConstraint++) {
+                valueSetTemp.addConstriantsForValueSet(constraintsOfOneVar[integerConstraint]);
               }
 
               valueSet.put(varWithConstraints[0], valueSetTemp);
 
-              iVar = iVar + 1;
+              integerVar = integerVar + 1;
             }
 
             String stateName = srcs[1].substring(1, srcs[1].length() - 2);
@@ -392,12 +392,12 @@ public class TestCaseGeneration {
 
             String[] srcNetworkEnvironment = tempStringNetworkEnvironment.split(", ");
 
-            int iNetworkEnvironmentVar = 0;
+            int integerNetworkEnvironmentVar = 0;
 
-            for (; iNetworkEnvironmentVar <= srcNetworkEnvironment.length - 1; ) {
+            for (; integerNetworkEnvironmentVar <= srcNetworkEnvironment.length - 1; ) {
 
               String[] networkEnvironmentVarWithConstraints =
-                  srcNetworkEnvironment[iNetworkEnvironmentVar].split(" \\{");
+                  srcNetworkEnvironment[integerNetworkEnvironmentVar].split(" \\{");
 
               String networkEnvironmentVarConstraints =
                   networkEnvironmentVarWithConstraints[1].substring(
@@ -407,11 +407,11 @@ public class TestCaseGeneration {
               String[] constraintsOfOneNetworkEnvironmentVar =
                   networkEnvironmentVarConstraints.split(", ");
 
-              for (int iConstraint = 0;
-                  iConstraint < constraintsOfOneNetworkEnvironmentVar.length;
-                  iConstraint++) {
+              for (int integerConstraint = 0;
+                  integerConstraint < constraintsOfOneNetworkEnvironmentVar.length;
+                  integerConstraint++) {
                 valueSetTemp.addConstriantsForValueSet(
-                    constraintsOfOneNetworkEnvironmentVar[iConstraint]);
+                    constraintsOfOneNetworkEnvironmentVar[integerConstraint]);
               }
 
               guardCondition.put(networkEnvironmentVarWithConstraints[0], valueSetTemp);
@@ -424,7 +424,7 @@ public class TestCaseGeneration {
 
               transition.setConditions(guardCondition);
 
-              iNetworkEnvironmentVar = iNetworkEnvironmentVar + 1;
+              integerNetworkEnvironmentVar = integerNetworkEnvironmentVar + 1;
             }
             // Add guard condition to transition, then add transition to state machine.
 
@@ -451,6 +451,7 @@ public class TestCaseGeneration {
         try {
           reader.close();
         } catch (IOException exception1) {
+          // nothing to catch
         }
       }
     }

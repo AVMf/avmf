@@ -207,7 +207,8 @@ public class AVM {
    * @param current The current objective value of the overall vector before moves are attempted.
    * @param increase Denotes whether to increase (value is true) or decrease (value is false) the
    *     size of vectorVar.
-   * @throws TerminationException
+   * @throws TerminationException Terminates the method if the next ObjectiveValue
+   *     doesn't exist (null)
    */
   private void progressivelyChangeVectorVariableSize(
       VectorVariable vectorVar, ObjectiveValue current, boolean increase)

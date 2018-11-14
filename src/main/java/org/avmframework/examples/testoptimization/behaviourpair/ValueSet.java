@@ -64,7 +64,7 @@ public class ValueSet {
 
   /**
    * type: 0-INTEGER_CATEGORICAL_TYPE 1-DOUBLE_CATEGORICAL_TYPE(impossible type)
-   * 2-INTEGER_NUMERICAL_TYPE 3-DOUBLE_NUMERICAL_TYPE
+   * 2-INTEGER_NUMERICAL_TYPE 3-DOUBLE_NUMERICAL_TYPE.
    */
   public static void calculateConstraints() {}
 

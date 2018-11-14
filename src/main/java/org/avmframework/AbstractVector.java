@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Provides basic functionality for vectors optimized by the AVM --- both the main vector or
  * variables that have a vector-based representation, such as {@link
- * org.avmframework.variable.StringVariable}
+ * org.avmframework.variable.StringVariable}.
  *
  * @author Phil McMinn
  */

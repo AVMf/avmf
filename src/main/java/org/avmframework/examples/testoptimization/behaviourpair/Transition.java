@@ -58,20 +58,20 @@ public class Transition {
       Transition transition, NetworkEnvironment networkEnvironment) {
 
     String delay = "PacketDelay == ";
-    double vDelay = networkEnvironment.getPacketDelay();
-    delay = delay + vDelay;
+    double varDelay = networkEnvironment.getPacketDelay();
+    delay = delay + varDelay;
 
     String loss = "PacketLoss == ";
-    double vLoss = networkEnvironment.getPacketLoss();
-    loss = loss + vLoss;
+    double varLoss = networkEnvironment.getPacketLoss();
+    loss = loss + varLoss;
 
     String corrupt = "PacketCorruption == ";
-    double vCorrupt = networkEnvironment.getPacketCorruption();
-    corrupt = corrupt + vCorrupt;
+    double varCorrupt = networkEnvironment.getPacketCorruption();
+    corrupt = corrupt + varCorrupt;
 
     String duplicate = "PacketDuplication == ";
-    double vDuplicate = networkEnvironment.getPacketDuplication();
-    duplicate = duplicate + vDuplicate;
+    double varDuplicate = networkEnvironment.getPacketDuplication();
+    duplicate = duplicate + varDuplicate;
 
     transition.addTriggers(delay);
     transition.addTriggers(loss);
@@ -80,27 +80,27 @@ public class Transition {
   }
 
   /**
-   * ABANDONED! Functional Methods setTransitionByNetworkEnvironment: actually set the guard
+   * ABANDONED. Functional Methods setTransitionByNetworkEnvironment: actually set the guard.
    * conditions
    */
   public static void setTransitionByNetworkEnvironment(
       Transition transition, NetworkEnvironment networkEnvironment) {
     /*
     String delay = "PacketDelay == ";
-    double vDelay = networkEnvironment.getPacketDelay();
-    delay = delay + vDelay;
+    double varDelay = networkEnvironment.getPacketDelay();
+    delay = delay + varDelay;
 
     String loss = "PacketLoss == ";
-    double vLoss = networkEnvironment.getPacketLoss();
-    loss = loss + vLoss;
+    double varLoss = networkEnvironment.getPacketLoss();
+    loss = loss + varLoss;
 
     String corrupt = "PacketCorruption == ";
-    double vCorrupt = networkEnvironment.getPacketCorruption();
-    corrupt = corrupt + vCorrupt;
+    double varCorrupt = networkEnvironment.getPacketCorruption();
+    corrupt = corrupt + varCorrupt;
 
     String duplicate = "PacketDuplication == ";
-    double vDuplicate = networkEnvironment.getPacketDuplication();
-    duplicate = duplicate + vDuplicate;
+    double varDuplicate = networkEnvironment.getPacketDuplication();
+    duplicate = duplicate + varDuplicate;
 
     transition.addConditions(delay);
     transition.addConditions(loss);

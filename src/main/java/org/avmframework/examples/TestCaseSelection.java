@@ -150,6 +150,7 @@ public class TestCaseSelection {
       }
       in.close();
     } catch (IOException exception) {
+      // nothing to catch
     }
     return testSuite;
   }

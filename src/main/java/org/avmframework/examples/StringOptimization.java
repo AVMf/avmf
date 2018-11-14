@@ -1,6 +1,6 @@
 package org.avmframework.examples;
 
-import static org.avmframework.variable.StringVariable.createPrintableASCIICharacterVariable;
+import static org.avmframework.variable.StringVariable.createPrintableAsciiCharacterVariable;
 
 import org.apache.commons.math3.random.MersenneTwister;
 import org.apache.commons.math3.random.RandomGenerator;
@@ -63,7 +63,7 @@ public class StringOptimization {
 
     // set up the string variable to be optimized
     StringVariable strVar =
-        createPrintableASCIICharacterVariable("Nothing related to the target string", 50, ' ');
+        createPrintableAsciiCharacterVariable("Nothing related to the target string", 50, ' ');
 
     // set up the vector to be optimized
     Vector vector = new Vector();

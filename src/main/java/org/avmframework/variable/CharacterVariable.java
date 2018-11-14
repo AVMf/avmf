@@ -5,7 +5,7 @@ public class CharacterVariable extends AtomicVariable {
   public static final char MIN_PRINTABLE_ASCII = 32;
   public static final char MAX_PRINTABLE_ASCII = 126;
 
-  public static CharacterVariable createPrintableASCIICharacterVariable(char initialValue) {
+  public static CharacterVariable createPrintableAsciiCharacterVariable(char initialValue) {
     return new CharacterVariable(initialValue, MIN_PRINTABLE_ASCII, MAX_PRINTABLE_ASCII);
   }
 

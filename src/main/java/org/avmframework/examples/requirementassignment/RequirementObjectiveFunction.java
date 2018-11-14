@@ -14,7 +14,7 @@ import java.util.List;
  * It involves three objectives: maximize the number of requirements  assigned
  * to the stakeholders (ASSIGN), maximize familarity between each requirement
  * and stakeholder (FAM), and minimize the workload between different
- * stakeholders (OWL)
+ * stakeholders (OWL (Web Ontology Language))
  * Other objectives can be assigned as described in the paper
  * https://link.springer.com/article/10.1007/s10664-015-9418-0
  */
@@ -38,13 +38,13 @@ public class RequirementObjectiveFunction extends ObjectiveFunction {
   // assign weights for the three objectives
   // we assume that each objective has equal weight in this context
   // the weights can be modified if some objective is more important than the others
-  final double WEIGHTASSIGNEDDIS = 0.333;
-  final double WEIGHTFAMAVG = 0.333;
-  final double WEIGHTWLDIFF = 0.333;
+  final double weightAssignedDis = 0.333;
+  final double weightFamAvg = 0.333;
+  final double weightWlDiff = 0.333;
 
-  final int NUMBEROFSTAKEHOLDERS = 10; // number of stakeholders to distribute requirements
-  final int MINFAMILIARITY = 1; // familiarity of the requirements (minimum)
-  final int MAXFAMILIARITY = 10; // familiarity of the requirements (maximum)
+  final int numberOfStakeholders = 10; // number of stakeholders to distribute requirements
+  final int minFamiliarity = 1; // familiarity of the requirements (minimum)
+  final int maxFamiliarity = 10; // familiarity of the requirements (maximum)
 
   public RequirementObjectiveFunction(List<Requirement> reqList, RequirementOverview reqOverview) {
     this.reqList = reqList;
@@ -53,15 +53,15 @@ public class RequirementObjectiveFunction extends ObjectiveFunction {
 
   public ObjectiveValue computeObjectiveValue(Vector vector) {
     double assignedDis = 0.0;
-    double owlDiffAvg = 0.0;
+    double webOntologyLanguageDiffAvg = 0.0;
 
     int assignedNumber = 0;
-    int[] fmst = new int[NUMBEROFSTAKEHOLDERS];
-    double[] wl = new double[NUMBEROFSTAKEHOLDERS];
-    int[] number = new int[NUMBEROFSTAKEHOLDERS];
+    int[] fmst = new int[numberOfStakeholders];
+    double[] wl = new double[numberOfStakeholders];
+    int[] number = new int[numberOfStakeholders];
 
     // initial setup
-    for (int i = 0; i < NUMBEROFSTAKEHOLDERS; i++) {
+    for (int i = 0; i < numberOfStakeholders; i++) {
       fmst[i] = 0;
       wl[i] = 0;
       number[i] = 0;
@@ -94,7 +94,7 @@ public class RequirementObjectiveFunction extends ObjectiveFunction {
     double famAvg = 0.0;
     double totalFm = 0.0;
     for (int i = 0; i < fmst.length; i++) {
-      totalFm += (fmst[i] - MINFAMILIARITY) / (MAXFAMILIARITY - MINFAMILIARITY);
+      totalFm += (fmst[i] - minFamiliarity) / (maxFamiliarity - minFamiliarity);
     }
     famAvg = totalFm / assignedNumber;
 
@@ -104,26 +104,27 @@ public class RequirementObjectiveFunction extends ObjectiveFunction {
       }
     }
 
-    for (int i = 0; i < NUMBEROFSTAKEHOLDERS - 1; i++) {
-      for (int j = i + 1; j < NUMBEROFSTAKEHOLDERS; j++) {
-        owlDiffAvg += Math.abs(wl[i] - wl[j]);
+    for (int i = 0; i < numberOfStakeholders - 1; i++) {
+      for (int j = i + 1; j < numberOfStakeholders; j++) {
+        webOntologyLanguageDiffAvg += Math.abs(wl[i] - wl[j]);
       }
     }
-    owlDiffAvg = owlDiffAvg / (NUMBEROFSTAKEHOLDERS * (NUMBEROFSTAKEHOLDERS - 1));
+    webOntologyLanguageDiffAvg = webOntologyLanguageDiffAvg
+        / (numberOfStakeholders * (numberOfStakeholders - 1));
 
     double objAssignedDis;
     double objFamAvg;
-    double objOWLDiffAvg;
+    double objWebOntologyLanguageDiffAvg;
 
     objAssignedDis = numFormat(assignedDis);
     objFamAvg = numFormat(famAvg);
-    objOWLDiffAvg = numFormat(owlDiffAvg);
+    objWebOntologyLanguageDiffAvg = numFormat(webOntologyLanguageDiffAvg);
 
     // fitness need to be minimized so we subtract 1 from objAssignedDis and objFamAvg
     double fitness =
-        (1 - objAssignedDis) * this.WEIGHTASSIGNEDDIS
-            + (1 - objFamAvg) * this.WEIGHTFAMAVG
-            + (objOWLDiffAvg) * this.WEIGHTWLDIFF;
+        (1 - objAssignedDis) * this.weightAssignedDis
+            + (1 - objFamAvg) * this.weightFamAvg
+            + (objWebOntologyLanguageDiffAvg) * this.weightWlDiff;
     return NumericObjectiveValue.lowerIsBetterObjectiveValue(fitness, 0);
   }
 
