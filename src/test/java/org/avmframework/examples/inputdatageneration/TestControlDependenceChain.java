@@ -7,7 +7,7 @@ import org.junit.Test;
 public class TestControlDependenceChain {
 
   @Test
-  public void TestDivergence() {
+  public void testDivergence() {
     ExampleControlDependencies example = new ExampleControlDependencies();
 
     ControlDependenceChain depChain = example.getControlDependenceChain(new Branch(5, true));

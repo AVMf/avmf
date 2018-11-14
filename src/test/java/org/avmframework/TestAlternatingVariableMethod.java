@@ -1,6 +1,6 @@
 package org.avmframework;
 
-import static org.avmframework.AVMs.anyAVM;
+import static org.avmframework.AlternatingVariableMethods.anyAlternatingVariableMethod;
 import static org.avmframework.ObjectiveFunctions.allZeros;
 import static org.avmframework.ObjectiveFunctions.flat;
 import static org.avmframework.Vectors.emptyVector;
@@ -13,11 +13,11 @@ import org.avmframework.objective.ObjectiveFunction;
 import org.avmframework.variable.AtomicVariable;
 import org.junit.Test;
 
-public class TestAVM {
+public class TestAlternatingVariableMethod {
 
   @Test(expected = EmptyVectorException.class)
   public void testUsingEmptyVector() {
-    anyAVM().search(emptyVector(), flat());
+    anyAlternatingVariableMethod().search(emptyVector(), flat());
   }
 
   @Test
@@ -31,8 +31,8 @@ public class TestAVM {
           protected void performSearch() throws TerminationException {}
         };
 
-    AVM avm =
-        new AVM(
+    AlternatingVariableMethod avm =
+        new AlternatingVariableMethod(
             mockLocalSearch,
             TerminationPolicy.createMaxRestartsTerminationPolicy(0),
             new DefaultInitializer());
@@ -62,8 +62,8 @@ public class TestAVM {
           }
         };
 
-    AVM avm =
-        new AVM(
+    AlternatingVariableMethod avm =
+        new AlternatingVariableMethod(
             mockLocalSearch,
             TerminationPolicy.createMaxRestartsTerminationPolicy(0),
             new DefaultInitializer());

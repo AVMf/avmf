@@ -31,7 +31,7 @@ public class TestIntegerFibonacciNumbers {
     boolean failed = true;
     try {
       fibonacci(maxPosition());
-    } catch (IntegerFibonacciNumberException e) {
+    } catch (IntegerFibonacciNumberException exception) {
       failed = false;
     }
     assertFalse("Fibonacci number " + maxPosition() + " should not exist", failed);

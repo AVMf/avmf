@@ -19,7 +19,7 @@ repositories {
 dependencies {
 
   // for junit
-  compile 'junit:junit:4.12'
+  compile 'junit:junit:4.9'
 
   // for commons-math3
   compile 'org.apache.commons:commons-math3:3.2'
