@@ -4,7 +4,7 @@ import static org.avmframework.variable.StringVariable.createPrintableAsciiChara
 
 import org.apache.commons.math3.random.MersenneTwister;
 import org.apache.commons.math3.random.RandomGenerator;
-import org.avmframework.AVM;
+import org.avmframework.AlternatingVariableMethod;
 import org.avmframework.Monitor;
 import org.avmframework.TerminationPolicy;
 import org.avmframework.Vector;
@@ -82,8 +82,9 @@ public class StringOptimization {
     RandomGenerator randomGenerator = new MersenneTwister();
     Initializer initializer = new RandomInitializer(randomGenerator);
 
-    // set up the AVM
-    AVM avm = new AVM(localSearch, terminationPolicy, initializer);
+    // set up the AlternatingVariableMethod
+    AlternatingVariableMethod avm = new AlternatingVariableMethod(
+        localSearch, terminationPolicy, initializer);
 
     // perform the search
     Monitor monitor = avm.search(vector, objFun);

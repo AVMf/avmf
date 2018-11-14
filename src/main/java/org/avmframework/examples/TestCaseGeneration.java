@@ -2,7 +2,7 @@ package org.avmframework.examples;
 
 import org.apache.commons.math3.random.MersenneTwister;
 import org.apache.commons.math3.random.RandomGenerator;
-import org.avmframework.AVM;
+import org.avmframework.AlternatingVariableMethod;
 import org.avmframework.Monitor;
 import org.avmframework.TerminationPolicy;
 import org.avmframework.Vector;
@@ -94,8 +94,9 @@ public class TestCaseGeneration {
     LocalSearch localSearch =
         new ArgsParser(TestCaseGeneration.class, args).parseSearchParam(SEARCH_NAME);
 
-    // set up the AVM
-    AVM avm = new AVM(localSearch, terminationPolicy, initializer);
+    // set up the AlternatingVariableMethod
+    AlternatingVariableMethod avm = new AlternatingVariableMethod(
+        localSearch, terminationPolicy, initializer);
 
     Vector vector = problem.setUpVector(9);
 

@@ -13,7 +13,7 @@ import org.avmframework.variable.VectorVariable;
  *
  * @author Phil McMinn
  */
-public class AVM {
+public class AlternatingVariableMethod {
 
   /** The local search to be used by this AVM instance. */
   protected LocalSearch localSearch;
@@ -47,7 +47,8 @@ public class AVM {
    * @param initializer The initializer to be used to initialize variables at the start <i>and</i>
    *     to restart the search.
    */
-  public AVM(LocalSearch localSearch, TerminationPolicy tp, Initializer initializer) {
+  public AlternatingVariableMethod(
+      LocalSearch localSearch, TerminationPolicy tp, Initializer initializer) {
     this(localSearch, tp, initializer, initializer);
   }
 
@@ -60,7 +61,7 @@ public class AVM {
    *     search.
    * @param restarter The initializer to be used to initialize variables when restarting the search.
    */
-  public AVM(
+  public AlternatingVariableMethod(
       LocalSearch localSearch,
       TerminationPolicy tp,
       Initializer initializer,
