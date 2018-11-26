@@ -3,6 +3,8 @@
 // "gradle clean": clean the project of all derived files
 // "gradle build": create the bytecode from the source code
 // "gradle run": run the program and produce output
+// "gradle cleanTest": clean the JUnit test suite of derived files
+// "gradle test": run the JUnit test suite and produce report
 
 plugins {
     id "java"
@@ -27,6 +29,13 @@ dependencies {
   // for commons-lang3
   compile 'org.apache.commons:commons-lang3:3.0'
 
+}
+
+// always produce diagnostic output when running the test suite
+test {
+  testLogging {
+    events "passed", "skipped", "failed", "standardOut", "standardError"
+  }
 }
 
 // specify the use of the gradle version
