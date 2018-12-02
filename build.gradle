@@ -71,5 +71,3 @@ checkstyle {
   maxErrors = 0
   configFile = new File(rootDir, "config/checkstyle/google_checks.xml")
 }
-
-// need anything else in this file?
