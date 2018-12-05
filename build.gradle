@@ -2,7 +2,7 @@
 // "gradle check": run checkstyle to assess code quality
 // "gradle clean": clean the project of all derived files
 // "gradle build": create the bytecode from the source code
-// "gradle run": run the program and produce output
+// "gradle runSPECIFICTASK": run the program and produce output
 // "gradle cleanTest": clean the JUnit test suite of derived files
 // "gradle test": run the JUnit test suite and produce report
 
@@ -19,16 +19,9 @@ repositories {
 
 // adds the dependencies needed to compile/run the repository
 dependencies {
-
-  // for junit
   compile 'junit:junit:4.9'
-
-  // for commons-math3
   compile 'org.apache.commons:commons-math3:3.2'
-
-  // for commons-lang3
   compile 'org.apache.commons:commons-lang3:3.0'
-
 }
 
 // always produce diagnostic output when running the test suite
@@ -48,19 +41,38 @@ sourceSets {
   test.java.srcDir "src/test"
 }
 
-// declare values to place in the manifest file in the JAR
-jar {
-  manifest {
-    attributes(
-        'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
-         'Main-Class': 'org.avmframework.AlternatingVariableMethod' // might only be one of a few
-        )
-  }
+// run : runAllZeros
+task(runAllZeros, dependsOn: "classes", type: JavaExec) {
+    group = "Examples"
+    description = "Run the org.avmframework.examples.AllZeros program"
+    main = "org.avmframework.examples.AllZeros"
+    classpath = sourceSets.main.runtimeClasspath
 }
 
-// give the name of the application to run with "gradle run" command
-apply plugin: 'application'
-mainClassName = 'org.avmframework.AlternatingVariableMethod' // might only be one of a few
+// run : runQuadratic
+task(runQuadratic, dependsOn: "classes", type: JavaExec) {
+    group = "Examples"
+    description = "Run the org.avmframework.examples.Quadratic program"
+    main = "org.avmframework.examples.Quadratic"
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+// run : runStringOptimization
+task(runStringOptimization, dependsOn: "classes", type: JavaExec) {
+    group = "Examples"
+    description = "Run the org.avmframework.examples.StringOptimization program"
+    main = "org.avmframework.examples.StringOptimization"
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+// run : runValueSet
+task(runValueSet, dependsOn: "classes", type: JavaExec) {
+    group = "Examples"
+    description = "Run the org.avmframework.examples.testoptimization.behaviourpair.ValueSet program"
+    main = "org.avmframework.examples.testoptimization.behaviourpair.ValueSet"
+    classpath = sourceSets.main.runtimeClasspath
+}
+
 
 // perform checkstyle checking with the "gradle check" command
 apply plugin: 'checkstyle'
