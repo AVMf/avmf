@@ -29,7 +29,7 @@ to install it correctly. After downloading and installing the JDK, you are also 
 1.8) as the chosen Java Development Kit for the AVM<i>f</i> project. Please follow the instructions provided by either
 your operating system or your integrated development environments to accomplish this task.
 
-#### Building with Eclipse
+#### Building with Eclipse with Maven
 
 1. Select 'File' &rarr; 'Import'.
 2. From the project options, select 'Maven' &rarr; 'Existing Maven Projects'.
@@ -38,7 +38,7 @@ your operating system or your integrated development environments to accomplish 
 5. To generate the JAR file, select 'Run' &rarr; 'Run As' &rarr; 'maven install'.
 6. A JAR file called `avmf-1.0-jar-with-dependencies.jar` should have been created in the `target` directory of AVM<i>f</i>'s main directory; if this JAR file does not exist, then the installation with Eclipse failed and you will not yet be able to use AVM<i>f</i>. Please try these steps again or, alternatively, try another IDE or the command-line-based approach.
 
-#### Building with IntelliJ
+#### Building with IntelliJ with Maven
 
 1. Select 'File' &rarr; 'Open'.
 2. Navigate to the root directory of your installation of AVM<i>f</i>.
@@ -47,18 +47,28 @@ your operating system or your integrated development environments to accomplish 
 5. Select the AVM<i>f</i> project and click 'package'.
 6. A JAR file called `avmf-1.0-jar-with-dependencies.jar` should have been created in the `target` directory of AVM<i>f</i>'s main directory; if this JAR file does not exist, then the installation with IntelliJ failed and you will not yet be able to use AVM<i>f</i>. Please try these steps again or, alternatively, try another IDE or the command-line-based approach.
 
-#### Building at the Command Line
+#### Building at the Command Line with Maven
 
-If you wish to build the AVMf tool from the command line, then you will first need to install Maven on your workstation. If you have already installed Maven, then please go directly to the next section. Otherwise, follow the installation guidelines at <https://maven.apache.org/install.html>. Following this:
+If you wish to build the AVMf tool from the command line with Maven, then you will first need to install Maven on your workstation. If you have already installed Maven, then please go directly to the next section. Otherwise, follow the installation guidelines at <https://maven.apache.org/install.html>. Following this:
 
 1. Navigate to the root directory containing of your installation of AVM<i>f</i>.
 2. Type the following command to build the tool: `mvn package`
 3. Maven will build the project from scratch, downloading all the required dependencies for the project automatically.
-6. A JAR file called `avmf-1.0-jar-with-dependencies.jar` should have been created in the `target` directory of AVM<i>f</i>'s main directory; if this JAR file does not exist, then the installation with the command line failed and you will not yet be able to use AVM<i>f</i>. Please try these steps again or, alternatively, try one of the methods that uses an IDE.
+4. A JAR file called `avmf-1.0-jar-with-dependencies.jar` should have been created in the `target` directory of AVM<i>f</i>'s main directory; if this JAR file does not exist, then the installation with the command line and Maven failed and you will not yet be able to use AVM<i>f</i>. Please try these steps again or, alternatively, try one of the methods that uses an IDE or Gradle.
+
+#### Building at the Command Line with Gradle
+
+If you wish to build the AVMf tool from the command line with Gradle, then you will first need to install Gradle on your workstation. If you have already installed Gradle, then please go directly to the next section. Otherwise, follow the installation guidlines at <https://gradle.org/install/>. Following this:
+
+1. Navigate to the root directory containing your installation of AVM<i>f<i>.
+2. Type the following command to build the tool: `gradle build`
+3. Gradle will build the project from scratch, downloading all the required dependencies for the project automatically.
+4. A folder called `build` should have been created within the root directory of AVM<i>f<i>; if this folder does not exist, then the installation with the command line and Gradle failed and you will not yet be able to use AVM<i>f<i>. Please ensure that Gradle is using an up to date version with the command 'gradle -version'. Please try these steps again or, alternatively, try one of the methods that uses Maven.
+
 
 ## Running the Provided Examples
 
-AVM<i>f</i> includes various examples of the AVM optimizing different problems. 
+AVM<i>f</i> includes various examples of the AVM optimizing different problems.
 
 ### Simple Optimization Problems
 The `org.avmframework.examples` package contains three examples of the AVMf applied to simple optimization problems.
@@ -78,6 +88,21 @@ In each of these examples, the AVM is configured to use "Iterated Pattern Search
 ``java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.AllZeros GeometricSearch``
 
 ``java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.AllZeros LatticeSearch``
+
+### Running with Gradle
+If you installed and built AVM<i>f<i> as detailed in the previous sections with Gradle, you can run these examples from the command line as follows:
+
+``gradle runQuadratic``
+
+``gradle runAllZeros``
+
+``gradle runStringOptimization``
+
+In each of these examples, the AVM is configured to use "Iterated Pattern Search", as initially described by Korel (1990). To use "Geometric" or "Lattice" search instead, as defined by Kempka et al. (2015), provide the option `GeometricSearch` or `LatticeSearch` to one of the above commands as follows:
+
+``gradle runQuadratic --args='GeometricSearch'``
+
+``gradle runQuadratic --args='LatticeSearch'``
 
 ### Test Data Generation
 

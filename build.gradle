@@ -65,15 +65,6 @@ task(runStringOptimization, dependsOn: "classes", type: JavaExec) {
     classpath = sourceSets.main.runtimeClasspath
 }
 
-// run : runValueSet
-task(runValueSet, dependsOn: "classes", type: JavaExec) {
-    group = "Examples"
-    description = "Run the org.avmframework.examples.testoptimization.behaviourpair.ValueSet program"
-    main = "org.avmframework.examples.testoptimization.behaviourpair.ValueSet"
-    classpath = sourceSets.main.runtimeClasspath
-}
-
-
 // perform checkstyle checking with the "gradle check" command
 apply plugin: 'checkstyle'
 checkstyle.toolVersion = '8.1'
