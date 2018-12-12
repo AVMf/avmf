@@ -60,10 +60,10 @@ If you wish to build the AVMf tool from the command line with Maven, then you wi
 
 If you wish to build the AVMf tool from the command line with Gradle, then you will first need to install Gradle on your workstation. If you have already installed Gradle, then please go directly to the next section. Otherwise, follow the installation guidlines at <https://gradle.org/install/>. Following this:
 
-1. Navigate to the root directory containing your installation of AVM<i>f<i>.
+1. Navigate to the root directory containing your installation of AVM<i>f</i>.
 2. Type the following command to build the tool: `gradle build`
 3. Gradle will build the project from scratch, downloading all the required dependencies for the project automatically.
-4. A folder called `build` should have been created within the root directory of AVM<i>f<i>; if this folder does not exist, then the installation with the command line and Gradle failed and you will not yet be able to use AVM<i>f<i>. Please ensure that Gradle is using an up to date version with the command 'gradle -version'. Please try these steps again or, alternatively, try one of the methods that uses Maven.
+4. A folder called `build` should have been created within the root directory of AVM<i>f</i>; if this folder does not exist, then the installation with the command line and Gradle failed and you will not yet be able to use AVM<i>f</i>. Please ensure that Gradle is using an up to date version with the command 'gradle -version'. Please try these steps again or, alternatively, try one of the methods that uses Maven.
 
 
 ## Running the Provided Examples
@@ -90,7 +90,7 @@ In each of these examples, the AVM is configured to use "Iterated Pattern Search
 ``java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.AllZeros LatticeSearch``
 
 ### Running with Gradle
-If you installed and built AVM<i>f<i> as detailed in the previous sections with Gradle, you can run these examples from the command line as follows:
+If you installed and built AVM<i>f</i> as detailed in the previous sections with Gradle, you can run these examples from the command line as follows:
 
 ``gradle runQuadratic``
 
