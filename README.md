@@ -104,6 +104,33 @@ In each of these examples, the AVM is configured to use "Iterated Pattern Search
 
 ``gradle runQuadratic --args='LatticeSearch'``
 
+#### Sample Outputs
+The kinds of outputs you should expect from running these various programs will be similar to the following for the appropriate program:
+
+`Quadratic`:
+```**> Task :runQuadratic**
+Best solution: -1.5
+Best objective value: 0.0
+Number of objective function evaluations: 75 (unique: 75)
+Running time: 2ms
+```
+
+`AllZeros`:
+```**> Task :runAllZeros**
+Best solution: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+Best objective value: 0.0
+Number of objective function evaluations: 761 (unique: 602)
+Running time: 9ms
+```
+
+`StringOptimization`:
+```**> Task :runStringOptimization**
+Best solution: "Alternating Variable Method"
+Best objective value: 0.0
+Number of objective function evaluations: 876 (unique: 404)
+Running time: 16ms
+```
+
 ### Test Data Generation
 
 The `GenerateInputData` class in the `org.avmframework.examples` package shows how the AVMf may be applied to generating input data for Java methods. The `org.avmframework.examples.inputdatageneration` package contains three test objects, `Calendar`, `Line`, and `Triangle`.
