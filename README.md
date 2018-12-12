@@ -90,7 +90,7 @@ In each of these examples, the AVM is configured to use "Iterated Pattern Search
 ``java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.AllZeros LatticeSearch``
 
 ### Running with Gradle
-If you installed and built AVM<i>f</i> as detailed in the previous sections with Gradle, you can run these examples from the command line as follows:
+If you have already installed and built AVM<i>f</i> as detailed in the previous sections with Gradle, you can run these examples from the command line as follows:
 
 ``gradle runQuadratic``
 
