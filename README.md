@@ -63,7 +63,7 @@ If you wish to build the AVMf tool from the command line with Gradle, then you w
 1. Navigate to the root directory containing your installation of AVM<i>f</i>.
 2. Type the following command to build the tool: `gradle build`
 3. Gradle will build the project from scratch, downloading all the required dependencies for the project automatically.
-4. A folder called `build` should have been created within the root directory of AVM<i>f</i>; if this folder does not exist, then the installation with the command line and Gradle failed and you will not yet be able to use AVM<i>f</i>. Please ensure that Gradle is using an up to date version with the command 'gradle -version'. Please try these steps again or, alternatively, try one of the methods that uses Maven.
+4. A folder called `build` should have been created within the root directory of AVM<i>f</i>; if this folder does not exist, then the installation with the command line and Gradle failed and you will not yet be able to use AVM<i>f</i>. Please ensure that Gradle is using an up to date version with the command `gradle -version`. Please try these steps again or, alternatively, try one of the methods that uses Maven.
 
 
 ## Running the Provided Examples
@@ -108,7 +108,8 @@ In each of these examples, the AVM is configured to use "Iterated Pattern Search
 The kinds of outputs you should expect from running these various programs will be similar to the following for the appropriate program:
 
 `Quadratic`:
-```**> Task :runQuadratic**
+```
+**> Task :runQuadratic**
 Best solution: -1.5
 Best objective value: 0.0
 Number of objective function evaluations: 75 (unique: 75)
@@ -116,7 +117,8 @@ Running time: 2ms
 ```
 
 `AllZeros`:
-```**> Task :runAllZeros**
+```
+**> Task :runAllZeros**
 Best solution: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 Best objective value: 0.0
 Number of objective function evaluations: 761 (unique: 602)
@@ -124,7 +126,8 @@ Running time: 9ms
 ```
 
 `StringOptimization`:
-```**> Task :runStringOptimization**
+```
+**> Task :runStringOptimization**
 Best solution: "Alternating Variable Method"
 Best objective value: 0.0
 Number of objective function evaluations: 876 (unique: 404)
