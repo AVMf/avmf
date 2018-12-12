@@ -109,7 +109,7 @@ The kinds of outputs you should expect from running these various programs will 
 
 `Quadratic`:
 ```
-**> Task :runQuadratic**
+<b>> Task :runQuadratic</b>
 Best solution: -1.5
 Best objective value: 0.0
 Number of objective function evaluations: 75 (unique: 75)
@@ -118,7 +118,7 @@ Running time: 2ms
 
 `AllZeros`:
 ```
-**> Task :runAllZeros**
+<b>> Task :runAllZeros</b>
 Best solution: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 Best objective value: 0.0
 Number of objective function evaluations: 761 (unique: 602)
@@ -127,7 +127,7 @@ Running time: 9ms
 
 `StringOptimization`:
 ```
-**> Task :runStringOptimization**
+<b>> Task :runStringOptimization</b>
 Best solution: "Alternating Variable Method"
 Best objective value: 0.0
 Number of objective function evaluations: 876 (unique: 404)
