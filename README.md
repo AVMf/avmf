@@ -158,6 +158,10 @@ The number and mapping of branch IDs to code can be found by checking the code i
 
 corresponds to the first branch. Generating data for branch "1T" will involve the `startMonth = 1` code being executed. Generating data for the branch "1F" will instead trigger the false outcome of the conditional, and this code not being executed.
 
+## Contributing
+
+The [CONTRIBUTING.md](CONTRIBUTING.md) file should be adhered to at all times while making any contributions to the project.
+
 ## Problems or Other Comments?
 
 If you have any problems with building, installing, or executing AVM<i>f</i>, then please feel free to create an issue
