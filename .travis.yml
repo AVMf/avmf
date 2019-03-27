@@ -1,0 +1,22 @@
+# use Java and non-root
+language: Java
+jdk: oraclejdk8
+
+
+# install the Markdown linting program called mdl
+before_install:
+  - gem install mdl
+
+
+# run checks on the README file with mdl and proselint
+# run checks on a student's Java code through gradle and GatorGrader
+# run checks on a student's Markdown writing through GatorGrader
+# note: "gradle grade" will install GatorGrader and run all checks
+script:
+  # lint the assignment's documentation
+  - mdl README.md
+  - proselint README.md
+  - gradle --version
+  - gradle clean
+  - gradle check
+  - gradle build
