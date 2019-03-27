@@ -9,9 +9,8 @@ before_install:
 
 
 # run checks on the README file with mdl and proselint
-# run checks on a student's Java code through gradle and GatorGrader
-# run checks on a student's Markdown writing through GatorGrader
-# note: "gradle grade" will install GatorGrader and run all checks
+# "gradle build" will build the tool
+# "gradle run.." will run the examples
 script:
   # lint the assignment's documentation
   - mdl README.md
