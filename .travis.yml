@@ -11,7 +11,12 @@ before_install:
 
 # run checks on the README file with mdl and proselint
 # "gradle build" will build the tool
-# "gradle run.." will run the examples
+# "gradle check": run checkstyle to assess code quality
+# "gradle clean": clean the project of all derived files
+# "gradle build": create the bytecode from the source code
+# "gradle runSPECIFICTASK": run the program and produce output
+# "gradle cleanTest": clean the JUnit test suite of derived files
+# "gradle test": run the JUnit test suite and produce report
 script:
   # lint the assignment's documentation
   - mdl README.md
