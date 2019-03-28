@@ -2,46 +2,52 @@ package org.avmframework.examples.inputdatageneration.line;
 
 public class Line {
 
-    double x1, y1, x2, y2;
+  double x1;
+  double y1;
+  double x2;
+  double y2;
 
-    public Line(double x1, double y1, double x2, double y2) {
-        this.x1 = x1;
-        this.y1 = y1;
-        this.x2 = x2;
-        this.y2 = y2;
-    }
+  public Line(double x1, double y1, double x2, double y2) {
+    this.x1 = x1;
+    this.y1 = y1;
+    this.x2 = x2;
+    this.y2 = y2;
+  }
 
-    public boolean intersect(Line a, Line b) {
+  public boolean intersect(Line line1, Line line2) {
 
-        double ua_t = (b.x2 - b.x1) * (a.y1 - b.y1) - (b.y2 - b.y1) * (a.x1 - b.x1);
-        double ub_t = (a.x2 - a.x1) * (a.y1 - b.y1) - (a.y2 - a.y1) * (a.x1 - b.x1);
-        double u_b = (b.y2 - b.y1) * (a.x2 - a.x1) - (b.x2 - b.x1) * (a.y2 - a.y1);
+    double u1t = (line2.x2 - line2.x1) * (line1.y1 - line2.y1)
+        - (line2.y2 - line2.y1) * (line1.x1 - line2.x1);
+    double u2t = (line1.x2 - line1.x1) * (line1.y1 - line2.y1)
+        - (line1.y2 - line1.y1) * (line1.x1 - line2.x1);
+    double u2 = (line2.y2 - line2.y1) * (line1.x2 - line1.x1)
+        - (line2.x2 - line2.x1) * (line1.y2 - line1.y1);
 
-        if (u_b != 0) {
-            double ua = ua_t / u_b;
-            double ub = ub_t / u_b;
+    if (u2 != 0) {
+      double u1 = u1t / u2;
+      double u02 = u2t / u2;
 
-            if (0 <= ua) {
-                if (ua <= 1) {
-                    if (0 <= ub) {
-                        if (ub <= 1) {
-                            return true;
-                        }
-                    }
-                }
+      if (0 <= u1) {
+        if (u1 <= 1) {
+          if (0 <= u02) {
+            if (u02 <= 1) {
+              return true;
             }
-            return false;
-
-        } else {
-            if (ua_t == 0) {
-                return true;
-            }
-
-            if (ub_t == 0) {
-                return true;
-            }
-
-            return false;
+          }
         }
+      }
+      return false;
+
+    } else {
+      if (u1t == 0) {
+        return true;
+      }
+
+      if (u2t == 0) {
+        return true;
+      }
+
+      return false;
     }
+  }
 }

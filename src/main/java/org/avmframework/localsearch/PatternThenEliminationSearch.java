@@ -4,30 +4,29 @@ import org.avmframework.TerminationException;
 
 public abstract class PatternThenEliminationSearch extends PatternSearch {
 
-    public PatternThenEliminationSearch() {
+  public PatternThenEliminationSearch() {}
+
+  public PatternThenEliminationSearch(int accelerationFactor) {
+    super(accelerationFactor);
+  }
+
+  protected void performSearch() throws TerminationException {
+    initialize();
+    if (establishDirection()) {
+      patternSearch();
+      eliminationSearch();
     }
+  }
 
-    public PatternThenEliminationSearch(int accelerationFactor) {
-        super(accelerationFactor);
-    }
+  protected void eliminationSearch() throws TerminationException {
+    int numPrev = num - (modifier * dir / accelerationFactor);
+    int numNext = num + (modifier * dir);
 
-    protected void performSearch() throws TerminationException {
-        initialize();
-        if (establishDirection()) {
-            patternSearch();
-            eliminationSearch();
-        }
-    }
+    int left = Math.min(numPrev, numNext);
+    int right = Math.max(numPrev, numNext);
 
-    protected void eliminationSearch() throws TerminationException {
-        int xPrev = x - (k * dir / accelerationFactor);
-        int xNext = x + (k * dir);
+    performEliminationSearch(left, right);
+  }
 
-        int l = Math.min(xPrev, xNext);
-        int r = Math.max(xPrev, xNext);
-
-        performEliminationSearch(l, r);
-    }
-
-    protected abstract void performEliminationSearch(int l, int r) throws TerminationException;
+  protected abstract void performEliminationSearch(int left, int right) throws TerminationException;
 }
