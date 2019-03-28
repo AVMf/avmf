@@ -1,0 +1,36 @@
+# use Java and non-root
+language: Java
+jdk: oraclejdk8
+
+
+
+# install the Markdown linting program called mdl
+before_install:
+  - gem install mdl
+
+
+# run checks on the README file with mdl and proselint
+# "gradle build" will build the tool
+# "gradle check": run checkstyle to assess code quality
+# "gradle clean": clean the project of all derived files
+# "gradle build": create the bytecode from the source code
+# "gradle runSPECIFICTASK": run the program and produce output
+# "gradle cleanTest": clean the JUnit test suite of derived files
+# "gradle test": run the JUnit test suite and produce report
+script:
+  # lint the assignment's documentation
+  - mdl README.md
+  - proselint README.md
+  - gradle --version
+  - gradle clean
+  - gradle check
+  - gradle build
+  - gradle runQuadratic
+  - gradle runAllZeros
+  - gradle runStringOptimization
+  - gradle runQuadratic --args='GeometricSearch'
+  - gradle runQuadratic --args='LatticeSearch'
+  - gradle jacocoTestReport
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)

@@ -7,7 +7,8 @@
 // "gradle test": run the JUnit test suite and produce report
 
 plugins {
-    id "java"
+    id 'java'
+    id 'jacoco'
 }
 
 // declare the repositories that are used to meet dependencies
@@ -36,9 +37,22 @@ wrapper {
   gradleVersion = '4.9'
 }
 
+jacoco {
+  toolVersion = "0.8.3"
+  reportsDir = file("$buildDir/customJacocoReportDir")
+}
+
 sourceSets {
   main.java.srcDir "src/main"
   test.java.srcDir "src/test"
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        csv.enabled true
+        html.destination file("${buildDir}/jacocoHtml")
+    }
 }
 
 // run : runAllZeros
