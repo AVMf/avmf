@@ -63,6 +63,14 @@ task(runAllZeros, dependsOn: "classes", type: JavaExec) {
     classpath = sourceSets.main.runtimeClasspath
 }
 
+// run : runOneMax
+task(runOneMax, dependsOn: "classes", type: JavaExec) {
+    group = "Examples"
+    description = "Run the org.avmframework.examples.OneMax program"
+    main = "org.avmframework.examples.OneMax"
+    classpath = sourceSets.main.runtimeClasspath
+}
+
 // run : runQuadratic
 task(runQuadratic, dependsOn: "classes", type: JavaExec) {
     group = "Examples"

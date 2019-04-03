@@ -27,6 +27,7 @@ script:
   - gradle build
   - gradle runQuadratic
   - gradle runAllZeros
+  - gradle runOneMax
   - gradle runStringOptimization
   - gradle runQuadratic --args='GeometricSearch'
   - gradle runQuadratic --args='LatticeSearch'
