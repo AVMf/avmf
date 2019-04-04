@@ -4,8 +4,8 @@ import org.junit.Test;
 
 public class TestTrace {
 
-    @Test
-    public void testNotEquals() {
-        // TODO
-    }
+  @Test
+  public void testNotEquals() {
+    // TODO
+  }
 }

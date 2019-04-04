@@ -19,7 +19,7 @@ generating the executable tool involves importing the project into an integrated
 generating the Java archive (JAR) from inside the IDE. Instructions are presented for doing this using two common IDEs:
 [Eclipse](https://www.eclipse.org/downloads/) and [IntelliJ](https://www.jetbrains.com/idea/download/). However, if you
 would prefer to build the project using the command line in an appropriate terminal emulator, then instructions to do so
-are also provided.
+are also provided. Alternatively, Gradle can also be used to build the project using the command line of the terminal.
 
 AVM*f* has been implemented to run using Java Development Kit (JDK) 7 or 8, which can be downloaded from
 http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html and
@@ -29,7 +29,7 @@ to install it correctly. After downloading and installing the JDK, you are also 
 1.8) as the chosen Java Development Kit for the AVM*f* project. Please follow the instructions provided by either
 your operating system or your integrated development environments to accomplish this task.
 
-#### Building with Eclipse
+#### Building with Eclipse & Maven
 
 1. Select 'File' &rarr; 'Import'.
 2. From the project options, select 'Maven' &rarr; 'Existing Maven Projects'.
@@ -38,7 +38,7 @@ your operating system or your integrated development environments to accomplish 
 5. To generate the JAR file, select 'Run' &rarr; 'Run As' &rarr; 'maven install'.
 6. A JAR file called `avmf-1.0-jar-with-dependencies.jar` should have been created in the `target` directory of AVM*f*'s main directory; if this JAR file does not exist, then the installation with Eclipse failed and you will not yet be able to use AVM*f*. Please try these steps again or, alternatively, try another IDE or the command-line-based approach.
 
-#### Building with IntelliJ
+#### Building with IntelliJ & Maven
 
 1. Select 'File' &rarr; 'Open'.
 2. Navigate to the root directory of your installation of AVM*f*.
@@ -47,18 +47,28 @@ your operating system or your integrated development environments to accomplish 
 5. Select the AVM*f* project and click 'package'.
 6. A JAR file called `avmf-1.0-jar-with-dependencies.jar` should have been created in the `target` directory of AVM*f*'s main directory; if this JAR file does not exist, then the installation with IntelliJ failed and you will not yet be able to use AVM*f*. Please try these steps again or, alternatively, try another IDE or the command-line-based approach.
 
-#### Building at the Command Line
+#### Building at the Command Line with Maven
 
 If you wish to build the AVMf tool from the command line, then you will first need to install Maven on your workstation. If you have already installed Maven, then please go directly to the next section. Otherwise, follow the [installation guidelines](https://maven.apache.org/install.html). Following this:
 
 1. Navigate to the root directory containing of your installation of AVM*f*.
 2. Type the following command to build the tool: `mvn package`
 3. Maven will build the project from scratch, downloading all the required dependencies for the project automatically.
-6. A JAR file called `avmf-1.0-jar-with-dependencies.jar` should have been created in the `target` directory of AVM*f*'s main directory; if this JAR file does not exist, then the installation with the command line failed and you will not yet be able to use AVM*f*. Please try these steps again or, alternatively, try one of the methods that uses an IDE.
+4. A JAR file called `avmf-1.0-jar-with-dependencies.jar` should have been created in the `target` directory of AVM<i>f</i>'s main directory; if this JAR file does not exist, then the installation with the command line and Maven failed and you will not yet be able to use AVM<i>f</i>. Please try these steps again or, alternatively, try one of the methods that uses an IDE or Gradle.
+
+#### Building at the Command Line with Gradle
+
+If you wish to build the AVMf tool from the command line with Gradle, then you will first need to install Gradle on your workstation. If you have already installed Gradle, then please go directly to the next section. Otherwise, follow the installation guidlines at <https://gradle.org/install/>. Following this:
+
+1. Navigate to the root directory containing your installation of AVM<i>f</i>.
+2. Type the following command to build the tool: `gradle build`
+3. Gradle will build the project from scratch, downloading all the required dependencies for the project automatically.
+4. A folder called `build` should have been created within the root directory of AVM<i>f</i>; if this folder does not exist, then the installation with the command line and Gradle failed and you will not yet be able to use AVM<i>f</i>. Please ensure that Gradle is using an up to date version with the command `gradle -version`. Please try these steps again or, alternatively, try one of the methods that uses Maven.
+
 
 ## Running the Provided Examples
 
-AVM*f* includes various examples of the AVM optimizing different problems.
+AVM<i>f</i> includes various examples of the AVM optimizing different problems.
 
 ### Simple Optimization Problems
 The `org.avmframework.examples` package contains three examples of the AVMf applied to simple optimization problems.
@@ -78,6 +88,51 @@ In each of these examples, the AVM is configured to use "Iterated Pattern Search
 ``java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.AllZeros GeometricSearch``
 
 ``java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.AllZeros LatticeSearch``
+
+### Running with Gradle
+If you have already installed and built AVM<i>f</i> as detailed in the previous sections with Gradle, you can run these examples from the command line as follows:
+
+``gradle runQuadratic``
+
+``gradle runAllZeros``
+
+``gradle runStringOptimization``
+
+In each of these examples, the AVM is configured to use "Iterated Pattern Search", as initially described by Korel (1990). To use "Geometric" or "Lattice" search instead, as defined by Kempka et al. (2015), provide the option `GeometricSearch` or `LatticeSearch` to one of the above commands as follows:
+
+``gradle runQuadratic --args='GeometricSearch'``
+
+``gradle runQuadratic --args='LatticeSearch'``
+
+#### Sample Outputs
+The kinds of outputs you should expect from running these various programs will be similar to the following for the appropriate program:
+
+`Quadratic`:
+<pre>
+<b>> Task :runQuadratic</b>
+Best solution: -1.5
+Best objective value: 0.0
+Number of objective function evaluations: 75 (unique: 75)
+Running time: 2ms
+</pre>
+
+`AllZeros`:
+<pre>
+<b>> Task :runAllZeros</b>
+Best solution: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+Best objective value: 0.0
+Number of objective function evaluations: 761 (unique: 602)
+Running time: 9ms
+</pre>
+
+`StringOptimization`:
+<pre>
+<b>> Task :runStringOptimization</b>
+Best solution: "Alternating Variable Method"
+Best objective value: 0.0
+Number of objective function evaluations: 876 (unique: 404)
+Running time: 16ms
+</pre>
 
 ### Test Data Generation
 
@@ -99,9 +154,13 @@ The branch ID is the number of a decision point in the test object code followed
 
 The number and mapping of branch IDs to code can be found by checking the code in the `CalendarBranchTargetObjectiveFunction`, `LineBranchTargetObjectiveFunction` and `TriangleBranchTargetObjectiveFunction` classes for the respective test object. Each class contains an instrumented version of the method under test, where the conditional expression is replaced by a method call. The first integer parameter to this method call is the branch ID. So in `CalendarBranchTargetObjectiveFunction`, the `if` statement
 
-``if (trace.lessThan(1, start_month, 1)) start_month = 1;``
+``if (trace.lessThan(1, startMonth, 1)) startMonth = 1;``
 
-corresponds to the first branch. Generating data for branch "1T" will involve the `start_month = 1` code being executed. Generating data for the branch "1F" will instead trigger the false outcome of the conditional, and this code not being executed.
+corresponds to the first branch. Generating data for branch "1T" will involve the `startMonth = 1` code being executed. Generating data for the branch "1F" will instead trigger the false outcome of the conditional, and this code not being executed.
+
+## Contributing
+
+The [CONTRIBUTING.md](CONTRIBUTING.md) file should be adhered to at all times while making any contributions to the project.
 
 ## Problems or Other Comments?
 
