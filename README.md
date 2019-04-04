@@ -1,9 +1,30 @@
+<p align="center">
+    <img src="http://avmframework.org/images/avmf.png" alt="AVMf Logo" height="50%" width="50%")>
+</p>
+
 # Welcome to the AVMFramework (AVM<i>f</i>)
 
 [![Build Status](https://travis-ci.com/AVMf/avmf.svg?branch=master)](https://travis-ci.com/AVMf/avmf)
 [![codecov](https://codecov.io/gh/AVMf/avmf/branch/master/graph/badge.svg)](https://codecov.io/gh/AVMf/avmf)
 
 AVM<i>f</i> is a framework and Java implementation of the Alternating Variable Method (AVM), a heuristic local search algorithm that has been applied to the automation of several important software engineering problems, such as test data generation.
+
+The list of the tool's features includes (but is not limited to) the following:
+- Generating:
+  - Of test data for C-style programs (e.g., <b>IGUANA</b>, <b>AUSTIN</b>)
+  - Of Java test suits with <b>EvoSuite</b>
+  - Of relational DB data with <b>SchemaAnalyst</b>
+- Decision ordering for software product lines
+- Balancing workload in requirements assignment
+- Solving reliability-redundancy-allocation problems
+- Test case selection and test suite prioritization
+- Combined with dynamic symbolic execution in Microsoft’s Pex tool
+
+The list of key improvements to the algorithm:
+- New variable search algorithms (`Geometric Search`, `Lattice Search`)
+- New representation (working with not only integers, but also with fixed-point numbers and strings)
+- Configuring an AVM search (choosing the search method, search break parameter (i.e. `TerminationPolicy`), two `Initializer` objects for initial and all subsequent initializations of a vector with values)
+- Reporting (every search method returns `Monitor` object with statistics regarding the search)
 
 AVM<i>f</i> was designed to enable researchers and practitioners understand the algorithms behind the AVM and use it in their projects, and is freely available for use under the MIT license. More information can be found on the framework's website: <http://avmframework.org>
 
