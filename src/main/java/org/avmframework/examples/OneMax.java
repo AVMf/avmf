@@ -48,7 +48,7 @@ public class OneMax {
             for (Variable var : vector.getVariables()) {
               distance += Math.abs(((IntegerVariable) var).getValue());
             }
-            return NumericObjectiveValue.lowerIsBetterObjectiveValue(distance, 1);
+            return NumericObjectiveValue.lowerIsBetterObjectiveValue(distance, 0);
           }
         };
 
