@@ -15,7 +15,9 @@ To download AVM*f* you will need to clone the AVM*f* project repository using
 either a graphical Git client or by running the following command at the prompt
 of your terminal window:
 
-``git clone https://github.com/AVMf/avmf.git``
+```
+git clone https://github.com/AVMf/avmf.git
+```
 
 Then, to run the examples provided with AVM*f*, you will need to build AVM*f*
 from its source code by following the instructions in the next section.
@@ -48,7 +50,11 @@ or your integrated development environments to accomplish this task.
 3. Select the root directory of your downloaded copy of AVM*f*.
 4. Click 'Finish' to complete the import.
 5. To generate the JAR file, select 'Run' &rarr; 'Run As' &rarr; 'maven install'.
-6. A JAR file called `avmf-1.0-jar-with-dependencies.jar` should have been created in the `target` directory of AVM*f*'s main directory; if this JAR file does not exist, then the installation with Eclipse failed and you will not yet be able to use AVM*f*. Please try these steps again or, alternatively, try another IDE or the command-line-based approach.
+6. A JAR file called `avmf-1.0-jar-with-dependencies.jar` should have been created
+in the `target` directory of AVM*f*'s main directory; if this JAR file does not
+exist, then the installation with Eclipse failed and you will not yet be able to
+use AVM*f*. Please try these steps again or, alternatively, try another IDE or
+the command-line-based approach.
 
 #### Building with IntelliJ & Maven
 
@@ -57,7 +63,11 @@ or your integrated development environments to accomplish this task.
 3. Select the 'pom.xml' file and click 'Finish'.
 4. Open the Maven Projects toolbar using 'View' &rarr; 'Tool Windows' &rarr; 'Maven Projects'.
 5. Select the AVM*f* project and click 'package'.
-6. A JAR file called `avmf-1.0-jar-with-dependencies.jar` should have been created in the `target` directory of AVM*f*'s main directory; if this JAR file does not exist, then the installation with IntelliJ failed and you will not yet be able to use AVM*f*. Please try these steps again or, alternatively, try another IDE or the command-line-based approach.
+6. A JAR file called `avmf-1.0-jar-with-dependencies.jar` should have been
+created in the `target` directory of AVM*f*'s main directory; if this JAR file
+does not exist, then the installation with IntelliJ failed and you will not yet
+be able to use AVM*f*. Please try these steps again or, alternatively, try another
+IDE or the command-line-based approach.
 
 #### Building at the Command Line with Maven
 
@@ -68,8 +78,13 @@ then please go directly to the next section. Otherwise, follow the
 
 1. Navigate to the root directory containing of your installation of AVM*f*.
 2. Type the following command to build the tool: `mvn package`
-3. Maven will build the project from scratch, downloading all the required dependencies for the project automatically.
-4. A JAR file called `avmf-1.0-jar-with-dependencies.jar` should have been created in the `target` directory of AVM*f*'s main directory; if this JAR file does not exist, then the installation with the command line and Maven failed and you will not yet be able to use AVM*f*. Please try these steps again or, alternatively, try one of the methods that uses an IDE or Gradle.
+3. Maven will build the project from scratch, downloading all the required
+dependencies for the project automatically.
+4. A JAR file called `avmf-1.0-jar-with-dependencies.jar` should have been created
+in the `target` directory of AVM*f*'s main directory; if this JAR file does not
+exist, then the installation with the command line and Maven failed and you will
+not yet be able to use AVM*f*. Please try these steps again or, alternatively,
+try one of the methods that uses an IDE or Gradle.
 
 #### Building at the Command Line with Gradle
 
@@ -89,12 +104,12 @@ that Gradle is using an up to date version with the command `gradle -version`.
 Please try these steps again or, alternatively, try one of the methods that
 uses Maven.
 
-
 ## Running the Provided Examples
 
 AVM*f* includes various examples of the AVM optimizing different problems.
 
 ### Simple Optimization Problems
+
 The `org.avmframework.examples` package contains three examples of the AVMf
 applied to simple optimization problems.
 
@@ -105,70 +120,95 @@ optimizes an initially random string to some desired target string.
 If you have already installed and built AVM*f* as detailed in the previous
 sections, you can run these examples from the command line as follows:
 
-``java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.Quadratic``
+```
+java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.Quadratic
+```
 
-``java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.AllZeros``
+```
+java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.AllZeros
+```
 
-``java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.StringOptimization``
+```
+java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.StringOptimization
+```
 
 In each of these examples, the AVM is configured to use "Iterated Pattern
 Search", as initially described by Korel (1990). To use "Geometric" or "Lattice"
 search instead, as defined by Kempka et al. (2015), provide the option
 `GeometricSearch` or `LatticeSearch` to one of the above commands as follows:
 
-``java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.AllZeros GeometricSearch``
+```
+java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.AllZeros GeometricSearch
+```
 
-``java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.AllZeros LatticeSearch``
+```
+java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.AllZeros LatticeSearch
+```
 
 ### Running with Gradle
+
 If you have already installed and built AVM*f* as detailed in the previous
 sections with Gradle, you can run these examples from the command line as follows:
 
-``gradle runQuadratic``
+```
+gradle runQuadratic
+```
 
-``gradle runAllZeros``
+```
+gradle runAllZeros
+```
 
-``gradle runStringOptimization``
+```
+gradle runStringOptimization
+```
 
 In each of these examples, the AVM is configured to use "Iterated Pattern Search",
 as initially described by Korel (1990). To use "Geometric" or "Lattice" search
 instead, as defined by Kempka et al. (2015), provide the option `GeometricSearch`
 or `LatticeSearch` to one of the above commands as follows:
 
-``gradle runQuadratic --args='GeometricSearch'``
+```
+gradle runQuadratic --args='GeometricSearch'
+```
 
-``gradle runQuadratic --args='LatticeSearch'``
+```
+gradle runQuadratic --args='LatticeSearch'
+```
 
 #### Sample Outputs
+
 The kinds of outputs you should expect from running these various programs
 will be similar to the following for the appropriate program:
 
 `Quadratic`:
-<pre>
-<b>> Task :runQuadratic</b>
+
+```
+Task :runQuadratic
 Best solution: -1.5
 Best objective value: 0.0
 Number of objective function evaluations: 75 (unique: 75)
 Running time: 2ms
-</pre>
+```
 
 `AllZeros`:
-<pre>
-<b>> Task :runAllZeros</b>
+
+```
+Task :runAllZeros
 Best solution: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 Best objective value: 0.0
 Number of objective function evaluations: 761 (unique: 602)
 Running time: 9ms
-</pre>
+```
 
 `StringOptimization`:
-<pre>
-<b>> Task :runStringOptimization</b>
+
+```
+Task :runStringOptimization
 Best solution: "Alternating Variable Method"
 Best objective value: 0.0
 Number of objective function evaluations: 876 (unique: 404)
 Running time: 16ms
-</pre>
+```
 
 ### Test Data Generation
 
@@ -185,7 +225,9 @@ test generation examples – the classic triangle classification problem.
 The `GenerateInputData` class can be used to generate input data for each of
 these three methods with the following usage:
 
-``java class org.avmframework.examples.GenerateInputData testobject branch [search]``
+```
+java class org.avmframework.examples.GenerateInputData testobject branch [search]
+```
 
 where `testobject` is one of `Calendar`, `Line` or `Triangle`, `branch` is a
 branch ID to generate test data for, and `search` is the variable search to
@@ -197,19 +239,25 @@ by "T" or "F" to denote whether the true or false outcome is required. For examp
 to generate input data to execute the first branch as true in the "Calendar"
 example, the following command would be used:
 
-``java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.GenerateInputData Calendar 1T``
+```
+java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.GenerateInputData Calendar 1T
+```
 
 `Calendar` has branch IDs ranging from 1T/F to 23T/F. `Line` has branch IDs
 ranging from 1T/F to 7T/F, while `Triangle` has branch IDs ranging from 1T/F
 to 8T/F.
 
-The number and mapping of branch IDs to code can be found by checking the code in the `CalendarBranchTargetObjectiveFunction`, `LineBranchTargetObjectiveFunction` and `TriangleBranchTargetObjectiveFunction` classes for the respective test object.
+The number and mapping of branch IDs to code can be found by checking the code in
+the `CalendarBranchTargetObjectiveFunction`, `LineBranchTargetObjectiveFunction`
+and `TriangleBranchTargetObjectiveFunction` classes for the respective test object.
 Each class contains an instrumented version of the method under test, where the
 conditional expression is replaced by a method call. The first integer parameter
 to this method call is the branch ID. So in
 `CalendarBranchTargetObjectiveFunction`, the `if` statement
 
-``if (trace.lessThan(1, startMonth, 1)) startMonth = 1;``
+```
+if (trace.lessThan(1, startMonth, 1)) startMonth = 1;
+```
 
 corresponds to the first branch. Generating data for branch "1T" will involve
 the `startMonth = 1` code being executed. Generating data for the branch "1F"
@@ -221,7 +269,7 @@ being executed.
 The [CONTRIBUTING.md](CONTRIBUTING.md) file should be adhered to at all times
 while making any contributions to the project.
 
-## Problems or Other Comments?
+## Problems or Other Comments
 
 If you have any problems with building, installing, or executing AVM*f*, then
 please feel free to create an issue associated with this Git repository using
@@ -239,6 +287,7 @@ with developments regarding the framework.
 Thank you for your interest in the framework.
 
 ## Acknowledgments
+
 We would like to thank Joseph Kempka and Dirk Sudholt for an initial
 implementation of Geometric and Lattice search that we used to test and validate
 the corresponding implementation in AVM*f* against.
