@@ -22,7 +22,7 @@ before_install:
 script:
   # lint the assignment's documentation
   # - mdl README.md
-  - proselint README.md
+  # - proselint README.md
   - gradle --version
   - gradle clean
   - gradle check
