@@ -7,7 +7,7 @@ AVM<i>f</i> is a framework and Java implementation of the Alternating Variable M
 
 AVM<i>f</i> was designed to enable researchers and practitioners understand the algorithms behind the AVM and use it in their projects, and is freely available for use under the MIT license. More information can be found on the framework's website: <http://avmframework.org>
 
-## Downloading, Installing and Building
+## Downloading, Installing, and Building
 
 To download AVM<i>f</i> you will need to clone the AVM<i>f</i> project repository using either a graphical Git client or by running the following command at the prompt of your terminal window:
 
