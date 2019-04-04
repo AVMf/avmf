@@ -1,7 +1,7 @@
 # Welcome to the AVMFramework (AVM<i>f</i>)
 
-[![Build Status]()]()
-[![Code Coverage]()]()
+[![Build Status](https://travis-ci.com/AVMf/avmf.svg?branch=master)](https://travis-ci.com/AVMf/avmf)
+[![codecov](https://codecov.io/gh/AVMf/avmf/branch/master/graph/badge.svg)](https://codecov.io/gh/AVMf/avmf)
 
 AVM<i>f</i> is a framework and Java implementation of the Alternating Variable Method (AVM), a heuristic local search algorithm that has been applied to the automation of several important software engineering problems, such as test data generation.
 
