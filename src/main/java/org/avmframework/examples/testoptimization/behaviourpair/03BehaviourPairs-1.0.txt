@@ -1,0 +1,50 @@
+BP_0
+  Source_State {Full}
+  Target_State {}; activecall {activecall == 0}; videoquality {videoquality == 2}
+  trigger {null}
+  PacketLoss {PacketLoss == 38.6}, PacketDelay {PacketDelay == 30.7}, PacketDuplication {PacketDuplication == 54.8}, PacketCorruption {PacketCorruption == 55.2}
+BP_1
+  Source_State {Full}
+  Target_State {}; activecall {activecall == 1}; videoquality {videoquality == 1}
+  trigger {disconnect}
+  PacketLoss {PacketLoss == 71.5}, PacketDelay {PacketDelay == 37.6}, PacketDuplication {PacketDuplication == 6.6}, PacketCorruption {PacketCorruption == 15.3}
+BP_2
+  Source_State {Idle}
+  Target_State {}; activecall {activecall == 2}; videoquality {videoquality == 2}
+  trigger {null}
+  PacketLoss {PacketLoss == 44.4}, PacketDelay {PacketDelay == 13.2}, PacketDuplication {PacketDuplication == 44.1}, PacketCorruption {PacketCorruption == 30.7}
+BP_3
+  Source_State {Full}
+  Target_State {}; activecall {activecall == 3}; videoquality {videoquality == 1}
+  trigger {disconnect}
+  PacketLoss {PacketLoss == 4.3}, PacketDelay {PacketDelay == 20.2}, PacketDuplication {PacketDuplication == 74.3}, PacketCorruption {PacketCorruption == 40.6}
+BP_4
+  Source_State {NotFull}
+  Target_State {}; activecall {activecall == 1}; videoquality {videoquality == 0}
+  trigger {null}
+  PacketLoss {PacketLoss == 71.5}, PacketDelay {PacketDelay == 30.0}, PacketDuplication {PacketDuplication == 3.3}, PacketCorruption {PacketCorruption == 63.6}
+BP_5
+  Source_State {Idle}
+  Target_State {}; activecall {activecall == 3}; videoquality {videoquality == 2}
+  trigger {null}
+  PacketLoss {PacketLoss == 52.4}, PacketDelay {PacketDelay == 70.5}, PacketDuplication {PacketDuplication == 64.4}, PacketCorruption {PacketCorruption == 68.3}
+BP_6
+  Source_State {Idle}
+  Target_State {}; activecall {activecall == 3}; videoquality {videoquality == 2}
+  trigger {disconnect}
+  PacketLoss {PacketLoss == 15.8}, PacketDelay {PacketDelay == 39.3}, PacketDuplication {PacketDuplication == 46.5}, PacketCorruption {PacketCorruption == 48.0}
+BP_7
+  Source_State {NotFull}
+  Target_State {}; activecall {activecall == 0}; videoquality {videoquality == 0}
+  trigger {disconnect}
+  PacketLoss {PacketLoss == 76.3}, PacketDelay {PacketDelay == 84.7}, PacketDuplication {PacketDuplication == 88.1}, PacketCorruption {PacketCorruption == 87.3}
+BP_8
+  Source_State {Connected_1}
+  Target_State {}; activecall {activecall == 3}; videoquality {videoquality == 2}
+  trigger {null}
+  PacketLoss {PacketLoss == 81.5}, PacketDelay {PacketDelay == 46.8}, PacketDuplication {PacketDuplication == 29.4}, PacketCorruption {PacketCorruption == 95.7}
+BP_9
+  Source_State {NotFull}
+  Target_State {}; activecall {activecall == 0}; videoquality {videoquality == 3}
+  trigger {disconnect}
+  PacketLoss {PacketLoss == 22.4}, PacketDelay {PacketDelay == 33.6}, PacketDuplication {PacketDuplication == 30.2}, PacketCorruption {PacketCorruption == 6.2}

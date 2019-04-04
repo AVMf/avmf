@@ -8,29 +8,29 @@ import java.util.List;
 
 public class Vector extends AbstractVector {
 
-    public void addVariable(Variable variable) {
-        variables.add(variable);
-    }
+  public void addVariable(Variable variable) {
+    variables.add(variable);
+  }
 
-    public List<Variable> getVariables() {
-        return new ArrayList<>(variables);
-    }
+  public List<Variable> getVariables() {
+    return new ArrayList<>(variables);
+  }
 
-    public void setVariablesToInitial() {
-        for (Variable var : variables) {
-            var.setValueToInitial();
-        }
+  public void setVariablesToInitial() {
+    for (Variable var : variables) {
+      var.setValueToInitial();
     }
+  }
 
-    public void setVariablesToRandom(RandomGenerator rg) {
-        for (Variable var : variables) {
-            var.setValueToRandom(rg);
-        }
+  public void setVariablesToRandom(RandomGenerator rg) {
+    for (Variable var : variables) {
+      var.setValueToRandom(rg);
     }
+  }
 
-    public Vector deepCopy() {
-        Vector copy = new Vector();
-        deepCopyVariables(copy);
-        return copy;
-    }
+  public Vector deepCopy() {
+    Vector copy = new Vector();
+    deepCopyVariables(copy);
+    return copy;
+  }
 }

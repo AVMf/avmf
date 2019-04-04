@@ -1,0 +1,90 @@
+// available commands:
+// "gradle check": run checkstyle to assess code quality
+// "gradle clean": clean the project of all derived files
+// "gradle build": create the bytecode from the source code
+// "gradle runSPECIFICTASK": run the program and produce output
+// "gradle cleanTest": clean the JUnit test suite of derived files
+// "gradle test": run the JUnit test suite and produce report
+
+plugins {
+    id 'java'
+    id 'jacoco'
+}
+
+// declare the repositories that are used to meet dependencies
+repositories {
+  mavenLocal()
+  jcenter()
+  mavenCentral()
+}
+
+// adds the dependencies needed to compile/run the repository
+dependencies {
+  compile 'junit:junit:4.9'
+  compile 'org.apache.commons:commons-math3:3.2'
+  compile 'org.apache.commons:commons-lang3:3.0'
+}
+
+// always produce diagnostic output when running the test suite
+test {
+  testLogging {
+    events "passed", "skipped", "failed", "standardOut", "standardError"
+  }
+}
+
+// specify the use of the gradle version
+wrapper {
+  gradleVersion = '4.9'
+}
+
+jacoco {
+  toolVersion = "0.8.3"
+  reportsDir = file("$buildDir/customJacocoReportDir")
+}
+
+sourceSets {
+  main.java.srcDir "src/main"
+  test.java.srcDir "src/test"
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        csv.enabled true
+        html.destination file("${buildDir}/jacocoHtml")
+    }
+}
+
+// run : runAllZeros
+task(runAllZeros, dependsOn: "classes", type: JavaExec) {
+    group = "Examples"
+    description = "Run the org.avmframework.examples.AllZeros program"
+    main = "org.avmframework.examples.AllZeros"
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+// run : runQuadratic
+task(runQuadratic, dependsOn: "classes", type: JavaExec) {
+    group = "Examples"
+    description = "Run the org.avmframework.examples.Quadratic program"
+    main = "org.avmframework.examples.Quadratic"
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+// run : runStringOptimization
+task(runStringOptimization, dependsOn: "classes", type: JavaExec) {
+    group = "Examples"
+    description = "Run the org.avmframework.examples.StringOptimization program"
+    main = "org.avmframework.examples.StringOptimization"
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+// perform checkstyle checking with the "gradle check" command
+apply plugin: 'checkstyle'
+checkstyle.toolVersion = '8.1'
+checkstyle {
+  ignoreFailures = false
+  maxWarnings = 0
+  maxErrors = 0
+  configFile = new File(rootDir, "config/checkstyle/google_checks.xml")
+}
