@@ -35,8 +35,11 @@ emulator, then instructions to do so are also provided. Alternatively, Gradle
 can also be used to build the project using the command line of the terminal.
 
 AVM*f* has been implemented to run using Java Development Kit (JDK) 7 or 8, which
-can be downloaded from [Oracle JDK7](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html) and
-[Oracle JDK8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html), respectively. Instead of downloading the JDK from one of the aforementioned web
+can be downloaded from
+[JDK7](http://www.oracle.com/technetwork/java/javase/downloads/jdk7-downloads-1880260.html)
+and
+[JDK8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html),
+respectively. Instead of downloading the JDK from one of the aforementioned web
 sites, you can also use your operating system's package manager to install it
 correctly. After downloading and installing the JDK, you are also likely to have
 to set Java 1.7 (or, Java 1.8) as the chosen Java Development Kit for the AVM*f*
@@ -45,12 +48,12 @@ or your integrated development environments to accomplish this task.
 
 #### Building with Eclipse & Maven
 
-1. Select 'File' &rarr; 'Import'.
-2. From the project options, select 'Maven' &rarr; 'Existing Maven Projects'.
-3. Select the root directory of your downloaded copy of AVM*f*.
-4. Click 'Finish' to complete the import.
-5. To generate the JAR file, select 'Run' &rarr; 'Run As' &rarr; 'maven install'.
-6. A JAR file called `avmf-1.0-jar-with-dependencies.jar` should have been created
+1.Select 'File' &rarr; 'Import'.
+2.From the project options, select 'Maven' &rarr; 'Existing Maven Projects'.
+3.Select the root directory of your downloaded copy of AVM*f*.
+4.Click 'Finish' to complete the import.
+5.To generate the JAR file, select 'Run' &rarr; 'Run As' &rarr; 'maven install'.
+6.A JAR file called `avmf-1.0-jar-with-dependencies.jar` should have been created
 in the `target` directory of AVM*f*'s main directory; if this JAR file does not
 exist, then the installation with Eclipse failed and you will not yet be able to
 use AVM*f*. Please try these steps again or, alternatively, try another IDE or
@@ -58,12 +61,13 @@ the command-line-based approach.
 
 #### Building with IntelliJ & Maven
 
-1. Select 'File' &rarr; 'Open'.
-2. Navigate to the root directory of your installation of AVM*f*.
-3. Select the 'pom.xml' file and click 'Finish'.
-4. Open the Maven Projects toolbar using 'View' &rarr; 'Tool Windows' &rarr; 'Maven Projects'.
-5. Select the AVM*f* project and click 'package'.
-6. A JAR file called `avmf-1.0-jar-with-dependencies.jar` should have been
+1.Select 'File' &rarr; 'Open'.
+2.Navigate to the root directory of your installation of AVM*f*.
+3.Select the 'pom.xml' file and click 'Finish'.
+4.Open the Maven Projects toolbar using 'View' &rarr; 'Tool Windows'
+&rarr; 'Maven Projects'.
+5.Select the AVM*f* project and click 'package'.
+6.A JAR file called `avmf-1.0-jar-with-dependencies.jar` should have been
 created in the `target` directory of AVM*f*'s main directory; if this JAR file
 does not exist, then the installation with IntelliJ failed and you will not yet
 be able to use AVM*f*. Please try these steps again or, alternatively, try another
@@ -76,11 +80,11 @@ need to install Maven on your workstation. If you have already installed Maven,
 then please go directly to the next section. Otherwise, follow the
 [installation guidelines](https://maven.apache.org/install.html). Following this:
 
-1. Navigate to the root directory containing of your installation of AVM*f*.
-2. Type the following command to build the tool: `mvn package`
-3. Maven will build the project from scratch, downloading all the required
+1.Navigate to the root directory containing of your installation of AVM*f*.
+2.Type the following command to build the tool: `mvn package`
+3.Maven will build the project from scratch, downloading all the required
 dependencies for the project automatically.
-4. A JAR file called `avmf-1.0-jar-with-dependencies.jar` should have been created
+4.A JAR file called `avmf-1.0-jar-with-dependencies.jar` should have been created
 in the `target` directory of AVM*f*'s main directory; if this JAR file does not
 exist, then the installation with the command line and Maven failed and you will
 not yet be able to use AVM*f*. Please try these steps again or, alternatively,
@@ -93,11 +97,11 @@ will first need to install Gradle on your workstation. If you have already
 installed Gradle, then please go directly to the next section. Otherwise, follow
 the installation guidlines at <https://gradle.org/install/>. Following this:
 
-1. Navigate to the root directory containing your installation of AVM*f*.
-2. Type the following command to build the tool: `gradle build`
-3. Gradle will build the project from scratch, downloading all the required
+1.Navigate to the root directory containing your installation of AVM*f*.
+2.Type the following command to build the tool: `gradle build`
+3.Gradle will build the project from scratch, downloading all the required
 dependencies for the project automatically.
-4. A folder called `build` should have been created within the root directory
+4.A folder called `build` should have been created within the root directory
 of AVM*f*; if this folder does not exist, then the installation with the command
 line and Gradle failed and you will not yet be able to use AVM*f*. Please ensure
 that Gradle is using an up to date version with the command `gradle -version`.
@@ -138,11 +142,13 @@ search instead, as defined by Kempka et al. (2015), provide the option
 `GeometricSearch` or `LatticeSearch` to one of the above commands as follows:
 
 ```
-java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.AllZeros GeometricSearch
+java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.AllZeros
+GeometricSearch
 ```
 
 ```
-java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.AllZeros LatticeSearch
+java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.AllZeros
+LatticeSearch
 ```
 
 ### Running with Gradle
@@ -240,7 +246,8 @@ to generate input data to execute the first branch as true in the "Calendar"
 example, the following command would be used:
 
 ```
-java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.GenerateInputData Calendar 1T
+java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.
+GenerateInputData Calendar 1T
 ```
 
 `Calendar` has branch IDs ranging from 1T/F to 23T/F. `Line` has branch IDs
