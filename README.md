@@ -279,11 +279,10 @@ while making any contributions to the project.
 ## Problems or Other Comments
 
 If you have any problems with building, installing, or executing AVM*f*, then
-please feel free to create an issue associated with this Git repository using
-the "Issues" link at the top of this site. The contributors to the repository
-will do all that they can to resolve your issue and ensure that the entire tool
-works well in your development environment and for your your test data generation
-challenge.
+create an issue associated with this Git repository using the "Issues" link at
+the top of this site. The contributors to the repository will do all that they
+can to resolve your issue and ensure that the entire tool works well in your
+development environment and for your your test data generation challenge.
 
 If you find that AVM*f* works well, then we also encourage you to "star" and
 "watch" the project. We would also love to know that you are using the framework.
