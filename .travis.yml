@@ -53,6 +53,9 @@ script:
   - gradle runAllZeros
   - gradle runStringOptimization
   - gradle runQuadratic --args='GeometricSearch'
+  - gradle help --task :runQuadratic
+  - gradle runQuadratic --args='GeometricSearch' --scan
+  - gradle runQuadratic --args='GeometricSearch' --debug
   - gradle runQuadratic --args='LatticeSearch'
   - gradle jacocoTestReport
 
