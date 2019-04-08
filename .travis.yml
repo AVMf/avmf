@@ -9,6 +9,7 @@ jdk: oraclejdk8
 before_install:
   - gem install mdl
   # download gradle as a zip file
+  # gradle-5.3.1
   - wget https://services.gradle.org/distributions/gradle-5.3.1-all.zip
   - unzip -d $HOME gradle-5.3.1-all.zip
   # delete the downloaded file
