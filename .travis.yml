@@ -9,12 +9,12 @@ jdk: oraclejdk8
 before_install:
   - gem install mdl
   # download gradle as a zip file
-  - wget https://services.gradle.org/distributions/gradle-4.6-bin.zip
-  - unzip -d $HOME gradle-4.6-bin.zip
+  - wget https://services.gradle.org/distributions/gradle-5.3.1-all.zip
+  - unzip -d $HOME gradle-5.3.1-all.zip
   # delete the downloaded file
-  - rm -rf gradle-4.6-bin.zip
+  - rm -rf gradle-5.3.1-all.zip
   # add gradle bin to path at the beginning to ensure it overwrites old gradle
-  - export PATH="$HOME/gradle-4.6/bin:$PATH"
+  - export PATH="$HOME/gradle-5.3.1/bin:$PATH"
   # switch to Python 3.6.3 globally, install python dependencies
   - pyenv global 3.6.3
   - pip install --upgrade pip
@@ -53,9 +53,6 @@ script:
   - gradle runAllZeros
   - gradle runStringOptimization
   - gradle runQuadratic --args='GeometricSearch'
-  - gradle help --task :runQuadratic
-  - gradle runQuadratic --args='GeometricSearch' --scan
-  - gradle runQuadratic --args='GeometricSearch' --debug
   - gradle runQuadratic --args='LatticeSearch'
   - gradle jacocoTestReport
 
