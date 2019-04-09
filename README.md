@@ -98,7 +98,7 @@ try one of the methods that uses an IDE or Gradle.
 If you wish to build the AVMf tool from the command line with Gradle, then you
 will first need to install Gradle on your workstation. If you have already
 installed Gradle, then please go directly to the next section. Otherwise, follow
-the installation guidlines at <https://gradle.org/install/>. Following this:
+the installation guidelines at <https://gradle.org/install/>. Following this:
 
 1.Navigate to the root directory containing your installation of AVM*f*.
 2.Type the following command to build the tool: `gradle build`
@@ -121,7 +121,8 @@ The `org.avmframework.examples` package contains three examples of the AVMf
 applied to simple optimization problems.
 
 `Quadratic` finds the roots of a quadratic equation. `AllZeros` optimizes a
-vector of initially arbitrary integer values to zeros. `StringOptimization`
+vector of initially arbitrary integer values to zeros. `OneMax` optimizes a
+vector of initially arbitrary integer values to ones. `StringOptimization`
 optimizes an initially random string to some desired target string.
 
 If you have already installed and built AVM*f* as detailed in the previous
