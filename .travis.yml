@@ -2,6 +2,11 @@
 language: Java
 jdk: oraclejdk8
 
+# define a global variable for integrating with CodeCov.io
+env:
+  global:
+    - CODECOV_TOKEN="fb57b005-b6e1-4c5a-ae4c-5e30d6fdcac4"
+
 # install the Markdown linting program called mdl
 # ignore the virtualenv that Travis creates
 before_install:

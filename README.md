@@ -1,5 +1,8 @@
 # Welcome to the AVMFramework (AVM*f*)
 
+[![Build Status](https://travis-ci.com/AVMf/avmf.svg?branch=master)](https://travis-ci.com/AVMf/avmf)
+[![codecov](https://codecov.io/gh/AVMf/avmf/branch/master/graph/badge.svg)](https://codecov.io/gh/AVMf/avmf)
+
 AVM*f* is a framework and Java implementation of the Alternating Variable Method
 (AVM), a heuristic local search algorithm that has been applied to the automation
 of several important software engineering problems, such as test data generation.
@@ -9,7 +12,7 @@ algorithms behind the AVM and use it in their projects, and is freely available
 for use under the MIT license. More information can be found on the framework's
 [website](http://avmframework.org)
 
-## Downloading, Installing and Building
+## Downloading, Installing, and Building
 
 To download AVM*f* you will need to clone the AVM*f* project repository using
 either a graphical Git client or by running the following command at the prompt
