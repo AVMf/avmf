@@ -8,10 +8,10 @@ before_install:
   - gem install mdl
   # download gradle as a zip file
   # gradle-5.3.1
-  - wget https://services.gradle.org/distributions/gradle-5.3.1-all.zip
-  - unzip -d $HOME gradle-5.3.1-all.zip
+  - wget https://services.gradle.org/distributions/gradle-5.3.1-bin.zip
+  - unzip -d $HOME gradle-5.3.1-bin.zip
   # delete the downloaded file
-  - rm -rf gradle-5.3.1-all.zip
+  - rm -rf gradle-5.3.1-bin.zip
   # add gradle bin to path at the beginning to ensure it overwrites old gradle
   - export PATH="$HOME/gradle-5.3.1/bin:$PATH"
   # switch to Python 3.6.3 globally, install python dependencies
