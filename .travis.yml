@@ -2,6 +2,11 @@
 language: Java
 jdk: oraclejdk8
 
+# define a global variable for integrating with CodeCov.io
+env:
+  global:
+    - CODECOV_TOKEN="fb57b005-b6e1-4c5a-ae4c-5e30d6fdcac4"
+
 # install the Markdown linting program called mdl
 # ignore the virtualenv that Travis creates
 before_install:
@@ -42,8 +47,8 @@ cache:
 # "gradle test": run the JUnit test suite and produce report
 script:
   # lint the assignment's documentation
-  - mdl README.md
-  - proselint README.md
+  # - mdl README.md
+  # - proselint README.md
   - gradle --version
   - gradle clean
   - gradle check
@@ -52,8 +57,8 @@ script:
   - gradle runAllZeros
   - gradle runOneMax
   - gradle runStringOptimization
-  - gradle runQuadratic --args='GeometricSearch'
-  - gradle runQuadratic --args='LatticeSearch'
+  # - gradle runQuadratic --args='GeometricSearch'
+  # - gradle runQuadratic --args='LatticeSearch'
   - gradle jacocoTestReport
 
 after_success:
