@@ -117,7 +117,7 @@ AVM*f* includes various examples of the AVM optimizing different problems.
 
 ### Simple Optimization Problems
 
-The `org.avmframework.examples` package contains three examples of the AVMf
+The `org.avmframework.examples` package contains four examples of the AVMf
 applied to simple optimization problems.
 
 `Quadratic` finds the roots of a quadratic equation. `AllZeros` optimizes a
@@ -134,6 +134,10 @@ java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.Qua
 
 ```
 java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.AllZeros
+```
+
+```
+java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.OneMax
 ```
 
 ```
