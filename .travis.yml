@@ -17,6 +17,7 @@ before_install:
   # add gradle bin to path at the beginning to ensure it overwrites old gradle
   #- export PATH="$HOME/gradle-5.3.1/bin:$PATH"
   # switch to Python 3.6.3 globally, install python dependencies
+  - ./gradlew tasks
   - ./gradlew wrapper --gradle-version=5.3.1 --distribution-type=bin
   - pyenv global 3.6.3
   - pip install --upgrade pip
