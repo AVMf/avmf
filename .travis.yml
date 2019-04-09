@@ -2,8 +2,6 @@
 language: Java
 jdk: oraclejdk8
 
-
-
 # install the Markdown linting program called mdl
 # ignore the virtualenv that Travis creates
 before_install:
