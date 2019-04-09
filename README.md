@@ -213,6 +213,16 @@ Number of objective function evaluations: 761 (unique: 602)
 Running time: 9ms
 ```
 
+`OneMax`:
+
+```
+Task :runOneMax
+Best solution: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+Best objective value: 0.0
+Number of objective function evaluations: 829 (unique: 646)
+Running time: 8ms
+```
+
 `StringOptimization`:
 
 ```
