@@ -42,23 +42,9 @@ public class OneMax {
     // define the objective function
     ObjectiveFunction objFun =
         new ObjectiveFunction() {
-          //@Override
-          //protected ObjectiveValue computeObjectiveValue(Vector vector) {
-          //  int distance = 0;
-          //  int product = 0;
-          //  int sum = 0;
-          //  for (Variable var : vector.getVariables()) {
-          //    sum += Math.abs(((IntegerVariable) var).getValue());
-          //    product *= Math.abs(((IntegerVariable) var).getValue());
-          //  }
-            // product = product - 1;
-          //return NumericObjectiveValue.lowerIsBetterObjectiveValue(distance, 0);
-
           @Override
           protected ObjectiveValue computeObjectiveValue(Vector vector) {
             int distance = 0;
-            int product = 0;
-            int sum = 0;
             for (Variable var : vector.getVariables()) {
               distance += Math.abs(((IntegerVariable) var).getValue() - 1);
             }
