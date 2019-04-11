@@ -1,2 +1,0 @@
-rules "~MD029"
-rules "MD013", :code_blocks => false, :tables => false
