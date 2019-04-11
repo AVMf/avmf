@@ -58,9 +58,9 @@ or your integrated development environments to accomplish this task.
 5. To generate the JAR file, select 'Run' &rarr; 'Run As' &rarr; 'maven install'.
 6. A JAR file called `avmf-1.0-jar-with-dependencies.jar` should have been created
    in the `target` directory of AVM*f*'s main directory; if this JAR file does not
-   exist, then the installation with Eclipse failed and you will not yet be able to
-   use AVM*f*. Please try these steps again or, alternatively, try another IDE or
-   the command-line-based approach.
+   exist, then the installation with Eclipse failed and you will not yet be able
+   to use AVM*f*. Please try these steps again or, alternatively, try another
+   IDE or the command-line-based approach.
 
 #### Building with IntelliJ & Maven
 
@@ -68,7 +68,7 @@ or your integrated development environments to accomplish this task.
 2. Navigate to the root directory of your installation of AVM*f*.
 3. Select the 'pom.xml' file and click 'Finish'.
 4. Open the Maven Projects toolbar using 'View' &rarr; 'Tool Windows'
-&rarr; 'Maven Projects'.
+   &rarr; 'Maven Projects'.
 5. Select the AVM*f* project and click 'package'.
 6. A JAR file called `avmf-1.0-jar-with-dependencies.jar` should have been
    created in the `target` directory of AVM*f*'s main directory; if this JAR file
@@ -86,7 +86,7 @@ then please go directly to the next section. Otherwise, follow the
 1. Navigate to the root directory containing of your installation of AVM*f*.
 2. Type the following command to build the tool: `mvn package`
 3. Maven will build the project from scratch, downloading all the required
-dependencies for the project automatically.
+   dependencies for the project automatically.
 4. A JAR file called `avmf-1.0-jar-with-dependencies.jar` should have been created
    in the `target` directory of AVM*f*'s main directory; if this JAR file does not
    exist, then the installation with the command line and Maven failed and you will
@@ -103,7 +103,7 @@ the installation guidlines at <https://gradle.org/install/>. Following this:
 1. Navigate to the root directory containing your installation of AVM*f*.
 2. Type the following command to build the tool: `gradle build`
 3. Gradle will build the project from scratch, downloading all the required
-dependencies for the project automatically.
+   dependencies for the project automatically.
 4. A folder called `build` should have been created within the root directory
   of AVM*f*; if this folder does not exist, then the installation with the command
   line and Gradle failed and you will not yet be able to use AVM*f*. Please ensure
