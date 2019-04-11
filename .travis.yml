@@ -47,8 +47,8 @@ cache:
 # "gradle test": run the JUnit test suite and produce report
 script:
   # lint the assignment's documentation
-  # - mdl README.md
-  # - proselint README.md
+  - mdl README.md
+  - proselint README.md
   - gradle --version
   - gradle clean
   - gradle check
@@ -57,8 +57,8 @@ script:
   - gradle runAllZeros
   - gradle runOneMax
   - gradle runStringOptimization
-  # - gradle runQuadratic --args='GeometricSearch'
-  # - gradle runQuadratic --args='LatticeSearch'
+  - gradle runQuadratic --args='GeometricSearch'
+  - gradle runQuadratic --args='LatticeSearch'
   - gradle jacocoTestReport
 
 after_success:
