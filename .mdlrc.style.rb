@@ -1,2 +1,2 @@
 exclude_rule 'MD029'
-rule 'MD013', :code_blocks => false, :tables => false
+rule 'line_length', :code_blocks => false, :tables => false
