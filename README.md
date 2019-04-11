@@ -78,10 +78,11 @@ or your integrated development environments to accomplish this task.
 
 #### Building at the Command Line with Maven
 
-If you wish to build the AVMf tool from the command line, then you will first
-need to install Maven on your workstation. If you have already installed Maven,
-then please go directly to the next section. Otherwise, follow the
-[installation guidelines](https://maven.apache.org/install.html). Following this:
+If you wish to build the AVMf tool from the command line with Maven, then you
+will first need to install Maven on your workstation. If you have already
+installed Maven, then please go directly to the next section. Otherwise, please
+follow the [installation guidelines](https://maven.apache.org/install.html).
+Following this:
 
 1. Navigate to the root directory containing of your installation of AVM*f*.
 2. Type the following command to build the tool: `mvn package`
@@ -95,7 +96,7 @@ then please go directly to the next section. Otherwise, follow the
 
 #### Building at the Command Line with Gradle
 
-If you wish to build the AVMf tool from the command line with Gradle, then you
+If you wish to build the AVM*f* tool from the command line with Gradle, then you
 will first need to install Gradle on your workstation. If you have already
 installed Gradle, then please go directly to the next section. Otherwise, follow
 the installation guidlines at <https://gradle.org/install/>. Following this:
@@ -145,13 +146,11 @@ search instead, as defined by Kempka et al. (2015), provide the option
 `GeometricSearch` or `LatticeSearch` to one of the above commands as follows:
 
 ```
-java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.AllZeros
-GeometricSearch
+java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.AllZeros GeometricSearch
 ```
 
 ```
-java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.AllZeros
-LatticeSearch
+java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.AllZeros LatticeSearch
 ```
 
 ### Running with Gradle
@@ -249,8 +248,7 @@ to generate input data to execute the first branch as true in the "Calendar"
 example, the following command would be used:
 
 ```
-java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.
-GenerateInputData Calendar 1T
+java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.GenerateInputData Calendar 1T
 ```
 
 `Calendar` has branch IDs ranging from 1T/F to 23T/F. `Line` has branch IDs
