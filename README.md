@@ -99,7 +99,7 @@ Following this:
 If you wish to build the AVM*f* tool from the command line with Gradle, then you
 will first need to install Gradle on your workstation. If you have already
 installed Gradle, then please go directly to the next section. Otherwise, follow
-the installation guidlines at <https://gradle.org/install/>. Following this:
+the installation guidelines at <https://gradle.org/install/>. Following this:
 
 1. Navigate to the root directory containing your installation of AVM*f*.
 2. Type the following command to build the tool: `gradle build`
@@ -118,11 +118,12 @@ AVM*f* includes various examples of the AVM optimizing different problems.
 
 ### Simple Optimization Problems
 
-The `org.avmframework.examples` package contains three examples of the AVMf
+The `org.avmframework.examples` package contains four examples of the AVMf
 applied to simple optimization problems.
 
 `Quadratic` finds the roots of a quadratic equation. `AllZeros` optimizes a
-vector of initially arbitrary integer values to zeros. `StringOptimization`
+vector of initially arbitrary integer values to zeros. `OneMax` optimizes a
+vector of initially arbitrary integer values to ones. `StringOptimization`
 optimizes an initially random string to some desired target string.
 
 If you have already installed and built AVM*f* as detailed in the previous
@@ -134,6 +135,10 @@ java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.Qua
 
 ```
 java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.AllZeros
+```
+
+```
+java -cp target/avmf-1.0-jar-with-dependencies.jar org.avmframework.examples.OneMax
 ```
 
 ```
@@ -164,6 +169,10 @@ gradle runQuadratic
 
 ```
 gradle runAllZeros
+```
+
+```
+gradle runOneMax
 ```
 
 ```
@@ -206,6 +215,16 @@ Best solution: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 Best objective value: 0.0
 Number of objective function evaluations: 761 (unique: 602)
 Running time: 9ms
+```
+
+`OneMax`:
+
+```
+Task :runOneMax
+Best solution: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+Best objective value: 0.0
+Number of objective function evaluations: 829 (unique: 646)
+Running time: 8ms
 ```
 
 `StringOptimization`:
